@@ -189,7 +189,7 @@ export class SessionController {
       console.log("Host Address: " + session.hostAddress.value);
       console.log("IPV4 Address: " + ipv4);
     } else {
-      console.log("Session alresdy deleted?? " + ipv4);
+      console.log("Session already deleted?? " + ipv4);
       console.log(session);
     }
 
