@@ -22,4 +22,3 @@ export class WriteStatsRequest {
     [leaderboardId: string]: WriteStatsRequestLeaderboard
   }
 }
-

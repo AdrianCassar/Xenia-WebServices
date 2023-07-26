@@ -192,7 +192,7 @@ export class SessionController {
       console.log("Session alresdy deleted?? " + ipv4);
       console.log(session);
     }
-    
+
     if (session == undefined || session.hostAddress.value !== ipv4) return;
 
     await this.commandBus.execute(
@@ -278,8 +278,8 @@ export class SessionController {
       totalPlayers: players.length,
       machines,
     };
-  }  
-  
+  }
+
   @Post('/:sessionId/modify')
   @ApiParam({ name: 'titleId', example: '4D5307E6' })
   @ApiParam({ name: 'sessionId', example: 'B36B3FE8467CFAC7' })

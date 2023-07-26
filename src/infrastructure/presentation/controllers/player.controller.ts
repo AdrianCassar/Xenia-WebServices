@@ -23,7 +23,7 @@ import { FindPlayerSessionQuery } from 'src/application/queries/FindPlayerSessio
 
 // TODO
 /* This entire controller is all placeholder.
-  I haven't studied the xnet / player calls much and I am 
+  I haven't studied the xnet / player calls much and I am
   just filling the gaps with something limited, inefficient and insecure. */
 
 @ApiTags('Player')

@@ -32,7 +32,7 @@ export class XNetController {
     let ipv4 = splitIp[splitIp.length - 1];
 
     console.log("whoami was: " + ip);
-    
+
     if (ipv4 == "127.0.0.1" || ipv4.startsWith("192.168") || ipv4.startsWith("10")) {
       // Hi me! Who are you?
       const res = await axios.get("https://api.ipify.org/");
