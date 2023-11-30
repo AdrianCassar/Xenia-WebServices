@@ -1,0 +1,30 @@
+{
+    "connect": [
+        {
+            "info": "plasma",
+            "port": 18190,
+            "mappedTo": 18190
+        },
+        {
+            "info": "theater",
+            "port": 18195,
+            "mappedTo": 18195
+        },
+        {
+            "info": "messaging",
+            "port": 13505,
+            "mappedTo": 13505
+        },
+        {
+            "info": "Unknown",
+            "port": 80,
+            "mappedTo": 80
+        },
+        {
+            "info": "news",
+            "port": 81,
+            "mappedTo": 81
+        }
+    ]
+}
+

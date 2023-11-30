@@ -48,6 +48,7 @@ export default class SessionRepository implements ISessionRepository {
 
   public async deleteSessions(sessions: Session[]) {
     // Deletes all sessions based on IP this will cause two players on the same network to delete each others sessions.
+    // This method does not delete QoS data for the sessions.
     // This needs fixing!
     if (sessions.length > 0) {
       const hostAddress = sessions[0].hostAddress.value;

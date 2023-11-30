@@ -51,6 +51,35 @@ export class TitleController {
     );
   }
 
+  @Get('/services/:serviceId')
+  @ApiParam({ name: 'titleId', example: '4D5307E6' })
+  @ApiParam({ name: 'serviceId', example: '45410004' })
+  @Header('content-type', 'application/json')
+  async getTitleService(
+    @Param('titleId') titleId: string,
+    @Param('serviceId') serviceId: string,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const path = join(
+      process.cwd(),
+      'titles',
+      titleId.toUpperCase(),
+      "services",
+      `${serviceId}.json`
+    );
+
+    if (!existsSync(path)) return [];
+
+    const stats = await stat(path);
+
+    res.set('Content-Length', stats.size.toString());
+    return new StreamableFile(createReadStream(path)).setErrorHandler(
+      err => {
+        console.log(`Error requesting ${serviceId}.json: ` + err.message);
+      }
+    );
+  }
+
   @Get('/ports')
   @ApiParam({ name: 'titleId', example: '4D5307E6' })
   @Header('content-type', 'application/json')

@@ -30,7 +30,7 @@ export class XNetController {
 
     console.log("whoami was: " + ip);
     
-    if (ipv4 == "127.0.0.1" || ipv4.startsWith("192.168") || ipv4.startsWith("10")) {
+    if (ipv4 == "127.0.0.1" || ipv4.startsWith("192.168") || ipv4.split(".")[0] == "10") {
       // Hi me! Who are you?
       const res = await axios.get("https://api.ipify.org/");
       ipv4 = res.data;
@@ -54,7 +54,7 @@ export class XNetController {
       ipv4 = hostAddress;
     }
 
-    if (ipv4 == "127.0.0.1" || ipv4.startsWith("192.168") || ipv4.startsWith("10")) {
+    if (ipv4 == "127.0.0.1" || ipv4.startsWith("192.168") || ipv4.split(".")[0] == "10") {
       console.log("Resolving local IP");
 
       // Hi me! Who are you?
@@ -62,7 +62,8 @@ export class XNetController {
       ipv4 = res.data;
     }
 
-    // hmm two nulls
+    // title id and session id are required to delete QoS data.
+    // This needs fixing!
     await this.commandBus.execute(
       new DeleteSessionCommand(null, null, new IpAddress(ipv4)),
     );

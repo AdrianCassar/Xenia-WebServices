@@ -4,7 +4,7 @@ import SessionFlags from '../value-objects/SessionFlags';
 import SessionId from '../value-objects/SessionId';
 import TitleId from '../value-objects/TitleId';
 import Xuid from '../value-objects/Xuid';
-import crypto from 'crypto';
+import * as crypto from "crypto";
 
 interface SessionProps {
   id: SessionId;
@@ -69,8 +69,8 @@ export default class Session {
 
   static randomSessionId() {
     const bytesHex = crypto
-      .randomBytes(8)
-      .reduce((o, v) => o + ('00' + v.toString(16)).slice(-2), '');
+    .randomBytes(8)
+    .reduce((o, v) => o + ('00' + v.toString(16)).slice(-2), '');
 
     return bytesHex;
   }
@@ -82,6 +82,7 @@ export default class Session {
       hostAddress: props.hostAddress,
       macAddress: props.macAddress,
       port: props.port,
+      deleted: false,
     });
 
     props.session.props.migration = newSession.id;

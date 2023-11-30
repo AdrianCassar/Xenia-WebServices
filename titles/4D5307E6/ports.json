@@ -3,17 +3,17 @@
         {
             "info": "Game server port.",
             "port": 1000,
-            "mappedTo": 36010
+            "mappedTo": 8000
         },
         {
             "info": "Game server port.",
             "port": 1001,
-            "mappedTo": 36010
+            "mappedTo": 8000
         },
         {
             "info": "Game server port.",
             "port": 1002,
-            "mappedTo": 36010
+            "mappedTo": 8000
         }
     ],
     "bind": [

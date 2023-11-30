@@ -1,5 +1,7 @@
 title_name = "Halo 3"
 title_id = "4D5307E6" # MS-2022
+hash = "3FE73A3A9C3BD684" # v13.2
+#media_id = "2D357FF4" # Disc (Japan, Europe): http://redump.org/disc/9694
 
 [[patch]]
     name = "Network Matchmaking Force Search"

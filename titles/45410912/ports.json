@@ -1,5 +1,5 @@
 {
-    "bind": [
+  "bind": [
       {
         "info": "Client Port",
         "port": 27005,
@@ -25,5 +25,5 @@
         "port": 27028,
         "mappedTo": 27028
       }
-    ]
-  }
+  ]
+}
