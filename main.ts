@@ -2,6 +2,7 @@ import 'dotenv/config';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { XeniaModule } from './src/xenia.module';
+import * as requestIp from 'request-ip';
 import PresentationSettings from 'src/infrastructure/presentation/settings/PresentationSettings';
 import PersistanceSettings from 'src/infrastructure/persistance/settings/PersistanceSettings';
 
@@ -21,6 +22,7 @@ async function bootstrap() {
   }
 
   app.enableCors();
+  app.use(requestIp.mw());
 
   // Support Heroku
   const PORT = process.env.PORT || new PresentationSettings().get().port
