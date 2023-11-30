@@ -1,0 +1,71 @@
+{ 
+    "connect": [
+        {
+            "info": "Game server port.",
+            "port": 1000,
+            "mappedTo": 8080
+        },
+        {
+            "info": "Game server port.",
+            "port": 1001,
+            "mappedTo": 8080
+        },
+        {
+            "info": "Game server port.",
+            "port": 1002,
+            "mappedTo": 8080
+        },
+        {
+            "info": "Game server port.",
+            "port": 1003,
+            "mappedTo": 8080
+        },
+        {
+            "info": "Game server port.",
+            "port": 1004,
+            "mappedTo": 8080
+        },
+        {
+            "info": "Game server port.",
+            "port": 1005,
+            "mappedTo": 8080
+        },
+        {
+            "info": "Game server port.",
+            "port": 1006,
+            "mappedTo": 8080
+        },
+        {
+            "info": "Game server port.",
+            "port": 1007,
+            "mappedTo": 8080
+        },
+        {
+            "info": "Game server port.",
+            "port": 1008,
+            "mappedTo": 8080
+        },
+        {
+            "info": "Game server port.",
+            "port": 1009,
+            "mappedTo": 8080
+        },
+        {
+            "info": "Game server port.",
+            "port": 10010,
+            "mappedTo": 8080
+        }
+    ],
+    "bind": [
+        {
+            "info": "Player port 1.",
+            "port": 1000,
+            "mappedTo": 36002
+        },
+        {
+            "info": "Player port 2.",
+            "port": 1001,
+            "mappedTo": 36001
+        }
+    ]
+}

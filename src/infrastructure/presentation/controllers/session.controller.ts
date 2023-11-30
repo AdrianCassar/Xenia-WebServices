@@ -11,7 +11,6 @@ import {
   Ip,
 } from '@nestjs/common';
 import * as rawbody from 'raw-body';
-import * as requestIp from 'request-ip';
 import ILogger, { ILoggerSymbol } from '../../../ILogger';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
@@ -56,7 +55,7 @@ import { FindPlayerSessionQuery } from 'src/application/queries/FindPlayerSessio
 import axios from 'axios';
 import { MigrateSessionCommand } from 'src/application/commands/MigrateSessionCommand';
 import { MigrateSessionRequest } from '../requests/MigrateSessionRequest';
-import { GetIPAddress } from '../../../decorators/client-ip.decorator';
+import { RealIP } from 'nestjs-real-ip';
 
 @ApiTags('Sessions')
 @Controller('/title/:titleId/sessions')
@@ -165,16 +164,11 @@ export class SessionController {
   async deleteSession(
     @Param('titleId') titleId: string,
     @Param('sessionId') sessionId: string,
-    @GetIPAddress() IPAddress: string,
-    @Req() request: Request
+    @RealIP() ip: string,
   ) {
     const session = await this.queryBus.execute(
       new GetSessionQuery(new TitleId(titleId), new SessionId(sessionId)),
     );
-
-    // console.log("GetIPAddress: " + IPAddress); // Probably null!
-
-    const ip = requestIp.getClientIp(request);
 
     const splitIp = ip.split(':');
     let ipv4 = splitIp[splitIp.length - 1];
@@ -230,7 +224,7 @@ export class SessionController {
       openPrivateSlotsCount: session.openPrivateSlots,
       filledPublicSlotsCount: session.filledPublicSlots,
       filledPrivateSlotsCount: session.filledPrivateSlots,
-      players: session.players.map((xuid) => ({xuid: xuid.value})),
+      players: session.players.map((xuid) => ({ xuid: xuid.value })),
     };
   }
 

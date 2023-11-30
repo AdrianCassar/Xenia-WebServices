@@ -5,15 +5,14 @@ import {
   Inject,
   Post,
 } from '@nestjs/common';
-import * as requestIp from 'request-ip';
 import ILogger, { ILoggerSymbol } from '../../../ILogger';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
-import { Delete, Ip, Query } from '@nestjs/common/decorators';
+import { Delete, Query } from '@nestjs/common/decorators';
 import axios from 'axios';
-import { GetIPAddress } from '../../../decorators/client-ip.decorator';
 import IpAddress from 'src/domain/value-objects/IpAddress';
 import { DeleteSessionCommand } from 'src/application/commands/DeleteSessionCommand';
+import { RealIP } from 'nestjs-real-ip';
 
 @ApiTags('XNet')
 @Controller()
@@ -25,11 +24,7 @@ export class XNetController {
   ) {}
 
   @Get('/whoami')
-  async getClientAddress(@GetIPAddress() IPAddress : string, @Req() request: Request) {
-    // console.log(IPAddress); // Null??
-
-    const ip = requestIp.getClientIp(request);
-
+  async getClientAddress(@RealIP() ip : string) {
     const splitIp = ip.split(':');
     let ipv4 = splitIp[splitIp.length - 1];
 
@@ -49,11 +44,9 @@ export class XNetController {
   @Delete('/DeleteSessions')
   @ApiQuery({ name: "hostAddress", description: "Host IP Address", required: false})
   async deleteAllSessions(
-    @Req() request: Request,
-    @Query('hostAddress') hostAddress?: string
+    @RealIP() ip: string,
+    @Query('hostAddress') hostAddress?: string,
   ) {
-    const ip = requestIp.getClientIp(request);
-    
     const splitIp = ip.split(':');
     let ipv4 = splitIp[splitIp.length - 1];
 

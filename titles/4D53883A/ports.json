@@ -1,0 +1,31 @@
+{ 
+    "connect": [
+        {
+            "info": "Game server port.",
+            "port": 1000,
+            "mappedTo": 8080
+        },
+        {
+            "info": "Game server port.",
+            "port": 1001,
+            "mappedTo": 8080
+        },
+        {
+            "info": "Game server port.",
+            "port": 1002,
+            "mappedTo": 8080
+        }
+    ],
+    "bind": [
+        {
+            "info": "Player port 1.",
+            "port": 1000,
+            "mappedTo": 36002
+        },
+        {
+            "info": "Player port 2.",
+            "port": 1001,
+            "mappedTo": 36001
+        }
+    ]
+}
