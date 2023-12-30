@@ -14,7 +14,7 @@ interface LeaderboardProps {
 export interface LeaderboardUpdateProps {
   stats: {
     [statId: LeaderboardStatId['value']]: LeaderboardStat & {
-      method: 'min' | 'sum' | 'set';
+      method: 'min' | 'sum' | 'set' | 'max';
     };
   };
 }
@@ -41,11 +41,17 @@ export default class Leaderboard {
         };
       }
       this.props.stats[key].type = value.type;
+
       // Stats shouldn't always be added, for example there are timestamp stats.
       if (value.method == 'sum') this.props.stats[key].value += value.value;
       if (value.method == 'set') this.props.stats[key].value = value.value;
       if (value.method == 'min')
         this.props.stats[key].value = Math.min(
+          value.value,
+          this.props.stats[key].value,
+        );
+      if (value.method == 'max')
+        this.props.stats[key].value = Math.max(
           value.value,
           this.props.stats[key].value,
         );
