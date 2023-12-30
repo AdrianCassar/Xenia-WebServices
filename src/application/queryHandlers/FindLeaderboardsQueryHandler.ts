@@ -30,20 +30,39 @@ export class FindLeaderboardsQueryHandler
               leaderboardQuery.id,
               player,
             );
-            if (!leaderboard) return;
+            
             const stats: FindLeaderboardsResponse[0]['players'][0]['stats'] = [];
             const acceptedStatIds = leaderboardQuery.statisticIds.map(
               (stat) => stat.value,
             );
-            Object.entries(leaderboard.stats).forEach(([statId, stat]) => {
-              if (acceptedStatIds.includes(statId)) {
-                stats.push({
-                  id: parseInt(statId),
-                  type: stat.type,
-                  value: stat.value,
-                });
-              }
-            });
+
+            var foundStatIds: string[] = [];
+
+            if (leaderboard) {
+              foundStatIds = Object.keys(leaderboard.stats);
+
+              Object.entries(leaderboard.stats).forEach(([statId, stat]) => {
+                if (acceptedStatIds.includes(statId)) {
+                  stats.push({
+                    id: parseInt(statId),
+                    type: stat.type,
+                    value: stat.value,
+                  });
+                }
+              });
+            }
+
+            // add missing stats as null.
+            const missingStatIds = acceptedStatIds.filter(acceptedStatId => !foundStatIds.includes(acceptedStatId));
+            
+            missingStatIds.forEach(missingStatId => {
+              stats.push({
+                id: parseInt(missingStatId),
+                type: 255,
+                value: 0,
+              })
+            })
+
             leaderboardResponse.players.push({
               xuid: player.value,
               gamertag: '',
