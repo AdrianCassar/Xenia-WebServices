@@ -1,0 +1,249 @@
+{
+  "properties": {
+    "0x10000051": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 32
+    },
+    "0x10000052": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 32
+    },
+    "0x10000056": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 32
+    },
+    "0x10000057": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 32
+    },
+    "0x10000085": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 32
+    },
+    "0x10000086": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 32
+    },
+    "0x20000050": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 32
+    },
+    "0x10000044": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 43
+    },
+    "0x20000040": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 43
+    },
+    "0x20000088": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 43
+    },
+    "0x1000004b": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 43
+    },
+    "0x1000004c": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 43
+    },
+    "0x1000004d": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 43
+    },
+    "0x1000004e": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 43
+    },
+    "0x1000004f": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 43
+    },
+    "0x10000049": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 54
+    },
+    "0x10000080": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 54
+    },
+    "0x10000083": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 54
+    },
+    "0x10000084": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 54
+    },
+    "0x20000045": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 54
+    },
+    "0x1000007f": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 54
+    },
+    "0x10000059": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 65
+    },
+    "0x20000058": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 65
+    },
+    "0x1000005a": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 65
+    },
+    "0x1000005b": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 65
+    },
+    "0x1000005c": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 65
+    },
+    "0x10000061": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x10000070": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x10000071": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x10000072": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x10000073": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x10000074": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x10000075": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x10000076": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x10000077": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x10000078": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x10000079": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x10000081": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x10000082": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x2000005d": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x1000005e": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x1000007b": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x1000007a": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x1000006e": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x1000006f": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x1000006d": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x1000008a": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x1000008b": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    },
+    "0x00000000": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 77
+    }
+  }
+}

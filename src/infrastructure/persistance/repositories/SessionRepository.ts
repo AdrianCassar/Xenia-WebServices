@@ -1,26 +1,31 @@
 import { Model } from 'mongoose';
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { existsSync } from 'fs';
+import { unlink } from 'fs/promises';
+import { join } from 'path';
+import { SessionDocument } from '../models/SessionSchema';
 import ILogger, { ILoggerSymbol } from '../../../ILogger';
 import ISessionRepository from 'src/domain/repositories/ISessionRepository';
 import Session from 'src/domain/aggregates/Session';
 import SessionDomainMapper from '../mappers/SessionDomainMapper';
 import SessionPersistanceMapper from '../mappers/SessionPersistanceMapper';
-import { SessionDocument } from '../models/SessionSchema';
 import TitleId from 'src/domain/value-objects/TitleId';
 import SessionId from 'src/domain/value-objects/SessionId';
 import Xuid from 'src/domain/value-objects/Xuid';
 import IpAddress from 'src/domain/value-objects/IpAddress';
+import MacAddress from 'src/domain/value-objects/MacAddress';
 
 @Injectable()
 export default class SessionRepository implements ISessionRepository {
+  repository: any;
   constructor(
     @Inject(ILoggerSymbol) private readonly logger: ILogger,
     @InjectModel(Session.name)
     private SessionModel: Model<SessionDocument>,
     private readonly sessionDomainMapper: SessionDomainMapper,
     private readonly sessionPersistanceMapper: SessionPersistanceMapper,
-  ) {}
+  ) { }
 
   public async save(session: Session) {
     await this.SessionModel.findOneAndUpdate(
@@ -36,28 +41,43 @@ export default class SessionRepository implements ISessionRepository {
     );
   }
 
-  public async findSessionsByIP(ip: IpAddress) {
-    const sessions = await this.SessionModel.find(
-      {
-        hostAddress: ip.value.toString()
-      }
-    );
+  public async findSessionsByIPAndMac(ip: IpAddress, mac: MacAddress) {
+    const query: Record<string, string> = { hostAddress: ip.value.toString() };
 
+    if (mac) {
+      query.macAddress = mac.value.toString();
+    }
+
+    const sessions = await this.SessionModel.find(query);
     return sessions.map(this.sessionDomainMapper.mapToDomainModel);
   }
 
   public async deleteSessions(sessions: Session[]) {
-    // Deletes all sessions based on IP this will cause two players on the same network to delete each others sessions.
-    // This method does not delete QoS data for the sessions.
-    // This needs fixing!
-    if (sessions.length > 0) {
-      const hostAddress = sessions[0].hostAddress.value;
-      const deleteResult = await this.SessionModel.deleteMany( { "hostAddress" : hostAddress } );
-
-      console.log("Deleted " + deleteResult.deletedCount + " sessions from " + hostAddress);
-    } else {
+    if (sessions.length <= 0) {
       console.log("Sessions already deleted.");
+      return;
     }
+
+    const hostAddress = sessions[0].hostAddress.value;
+    const macAddress = sessions[0].macAddress.value;
+
+    sessions.forEach(async session => {
+      await this.SessionModel.deleteOne(session);
+
+      const qosPath = join(
+        process.cwd(),
+        'qos',
+        session.titleId.toString(),
+        session.id.value,
+      );
+
+      // Delete QoS data for the session.
+      if (existsSync(qosPath)) {
+        await unlink(qosPath);
+      }
+    });
+
+    console.log("Deleted " + sessions.length + " session(s) from " + hostAddress + " - " + macAddress);
   }
 
   public async findSession(titleId: TitleId, id: SessionId) {

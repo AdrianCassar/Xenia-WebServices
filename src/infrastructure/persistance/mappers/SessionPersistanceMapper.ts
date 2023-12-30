@@ -12,7 +12,7 @@ export default class SessionPersistanceMapper {
       flags: session.flags.value,
       publicSlotsCount: session.publicSlotsCount,
       privateSlotsCount: session.privateSlotsCount,
-      advertised: session.flags.advertised,
+      advertised: session.flags.isAdvertised,
       macAddress: session.macAddress.value,
       port: session.port,
       players: session.players.map((xuid) => xuid.value),

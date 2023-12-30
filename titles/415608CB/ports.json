@@ -1,24 +1,41 @@
 {
+    "connect": [
+      {
+        "info": "Server",
+        "port": 1020,
+        "mappedTo": 1020
+      },
+      {
+        "info": "Server",
+        "port": 1021,
+        "mappedTo": 1020
+      }
+    ],
     "bind": [
-        {
-            "info": "Unknown",
-            "port": 1000,
-            "mappedTo": 1000
-        },
-        {
-            "info": "Unknown",
-            "port": 1001,
-            "mappedTo": 1001
-        },
-        {
-            "info": "Unknown - Spec Ops",
-            "port": 1005,
-            "mappedTo": 1005
-        },
-        {
-            "info": "Unknown",
-            "port": 1013,
-            "mappedTo": 1013
-        }
+      {
+        "info": "Network port",
+        "port": 1000,
+        "mappedTo": 1000
+      },
+      {
+        "info": "Unknown",
+        "port": 1001,
+        "mappedTo": 1001
+      },
+      {
+        "info": "Unknown - Spec Ops",
+        "port": 1005,
+        "mappedTo": 1005
+      },
+      {
+        "info": "Unknown",
+        "port": 1013,
+        "mappedTo": 1013
+      },
+      {
+        "info": "Unknown",
+        "port": 31313,
+        "mappedTo": 31313
+      }
     ]
-}
+  }

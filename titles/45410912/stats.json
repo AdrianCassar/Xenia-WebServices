@@ -1,0 +1,64 @@
+{
+    "properties": {
+      "0x2000010f": {
+        "info": "Fastest Time - Portal Gun",
+        "method": "min",
+        "statId": 15
+      },
+      "0x20000110": {
+        "info": "Fewest Portals - Portal Gun",
+        "method": "min",
+        "statId": 16
+      },
+      "0x20000114": {
+        "info": "Fastest Time - Smooth Jazz",
+        "method": "min",
+        "statId": 20
+      },
+      "0x20000115": {
+        "info": "Fewest Portals - Smooth Jazz",
+        "method": "min",
+        "statId": 21
+      },
+      "0x20000119": {
+        "info": "Fastest Time - Cube Momentum",
+        "method": "min",
+        "statId": 25
+      },
+      "0x2000011a": {
+        "info": "Fewest Portals - Cube Momentum",
+        "method": "min",
+        "statId": 26
+      },
+      "0x2000011e": {
+        "info": "Fastest Time - Future Starter",
+        "method": "min",
+        "statId": 30
+      },
+      "0x2000011f": {
+        "info": "Fewest Portals - Future Starter",
+        "method": "min",
+        "statId": 31
+      },
+      "0x2000012d": {
+        "info": "Fastest Time - Incinerator",
+        "method": "min",
+        "statId": 45
+      },
+      "0x2000012e": {
+        "info": "Fewest Portals - Incinerator",
+        "method": "min",
+        "statId": 46
+      },
+      "0x20000137": {
+        "info": "Fastest Time - Laser Stairs",
+        "method": "min",
+        "statId": 55
+      },
+      "0x20000138": {
+        "info": "Fewest Portals - Laser Stairs",
+        "method": "min",
+        "statId": 56
+      }
+    }
+}

@@ -1,0 +1,26 @@
+title_name = "Grand Theft Auto V" # Five
+title_id = "545408A7" # TT-2215
+hash = "829BD9C4A5B1F3C0" # default.xex
+#media_id = "79E465C5"
+
+[[patch]]
+    name = "Fix Beta Crash"
+    desc = "This patch is a workaround for the protect_zero requirment. This patch will also get beta working on console, you may need to uninstall unsupported DLCs."
+    author = "Adrian, Byrom"
+    is_enabled = false
+
+    [[patch.be32]]
+        address = 0x82e4a424
+        value = 0x38600000
+
+    [[patch.be32]]
+        address = 0x82916cD8
+        value = 0x38600000
+
+    [[patch.be32]]
+        address = 0x83206c18
+        value = 0x60000000
+
+    [[patch.be32]]
+        address = 0x8272e3b4
+        value = 0x60000000

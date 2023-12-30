@@ -1,0 +1,114 @@
+{
+  "properties": {
+    "0x10000040": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 27
+    },
+    "0x10000041": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 27     
+    },
+    "0x20000010": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 27 
+    },
+   "0x20000042": {
+     "info": "Unknown",
+     "method": "sum",
+     "statId": 27 
+    },
+   "0x1000003f": {
+     "info": "Unknown",
+     "method": "sum",
+     "statId": 27
+    },
+    "0x10000040": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 28
+    },
+    "0x10000041": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 28
+    },
+    "0x20000010": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 28
+    },
+    "0x20000042": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 28
+    },
+    "0x1000003f": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 28
+    },
+   "0x10000040": {
+     "info": "Unknown",
+     "method": "sum",
+     "statId": 29
+    },
+   "0x10000041": {
+     "info": "Unknown",
+     "method": "sum",
+     "statId": 29
+    },
+   "0x20000010": {
+     "info": "Unknown",
+     "method": "sum",
+     "statId": 29
+    },
+   "0x20000042": {
+     "info": "Unknown",
+     "method": "sum",
+     "statId": 29
+              },
+   "0x1000003f": {
+     "info": "Unknown",
+     "method": "sum",
+     "statId": 29
+    },
+    "0x10000040": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 30
+    },
+    "0x10000041": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 30
+    },
+    "0x20000010": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 30
+    },
+    "0x20000042": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 30
+                },
+    "0x1000003f": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 30
+    },
+    "0x1000800a": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 30
+    },
+    "0x1000800b": {
+      "info": "Unknown",
+      "method": "sum",
+      "statId": 30
+    }
+  }
+}  

@@ -6,22 +6,22 @@
         "mappedTo": 27005
       },
       {
-        "info": "Host Port",
+        "info": "Server Port",
         "port": 27015,
         "mappedTo": 27015
       },
       {
-        "info": "Unknown",
+        "info": "x360systemlink",
         "port": 27026,
         "mappedTo": 27026
       },
       {
-        "info": "Unknown",
+        "info": "x360lobby",
         "port": 27027,
         "mappedTo": 27027
       },
       {
-        "info": "Unknown",
+        "info": "x360teamlink",
         "port": 27028,
         "mappedTo": 27028
       },

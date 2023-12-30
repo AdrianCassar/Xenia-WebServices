@@ -20,7 +20,7 @@ import { CreateSessionRequest } from '../requests/CreateSessionRequest';
 import { CreateSessionCommand } from 'src/application/commands/CreateSessionCommand';
 import SessionId from 'src/domain/value-objects/SessionId';
 import IpAddress from 'src/domain/value-objects/IpAddress';
-import SessionFlags from 'src/domain/value-objects/SessionFlags';
+import SessionFlags, { Flags } from 'src/domain/value-objects/SessionFlags';
 import { GetSessionQuery } from 'src/application/queries/GetSessionQuery';
 import { SessionSearchQuery } from 'src/application/queries/SessionSearchQuery';
 import SessionPresentationMapper from '../mappers/SessionPresentationMapper';
@@ -75,8 +75,10 @@ export class SessionController {
   ) {
     const flags = new SessionFlags(request.flags);
     let session: Session;
-    if (flags.isHost) {
+
+    if (flags.isHost || flags.value == Flags.STATS) {
       console.log('Host creating session: ' + request.sessionId);
+
       session = await this.commandBus.execute(
         new CreateSessionCommand(
           new TitleId(titleId),
@@ -90,6 +92,14 @@ export class SessionController {
         ),
       );
 
+      if (flags.value == Flags.STATS) {
+        console.log("Updating Stats.")
+      }
+  
+      if (flags.value == Flags.STATS + Flags.HOST) {
+        console.log("Updating Stats.")
+      }
+      
       try {
         const player = await this.queryBus.execute(new FindPlayerQuery(new IpAddress(request.hostAddress)));
         await this.commandBus.execute(new SetPlayerSessionIdCommand(player.xuid, new SessionId(request.sessionId)));
@@ -98,7 +108,7 @@ export class SessionController {
         console.log(session);
       }
     } else {
-      console.log('Peer joining session' + request.sessionId);
+      console.log('Peer joining session ' + request.sessionId);
 
       var sessionQuery = new GetSessionQuery(
         new TitleId(titleId),
@@ -183,7 +193,7 @@ export class SessionController {
       console.log("Host Address: " + session.hostAddress.value);
       console.log("IPV4 Address: " + ipv4);
     } else {
-      console.log("Session alresdy deleted?? " + ipv4);
+      console.log("Session already deleted? " + ipv4);
       console.log(session);
     }
     

@@ -11,19 +11,9 @@
         "mappedTo": 27015
       },
       {
-        "info": "SourceTV",
-        "port": 27020,
-        "mappedTo": 27020
-      },
-      {
         "info": "Matchmaking Port",
         "port": 27025,
         "mappedTo": 27025
-      },
-      {
-        "info": "Unknown",
-        "port": 27029,
-        "mappedTo": 27029
       },
       {
         "info": "Systemlink Port",

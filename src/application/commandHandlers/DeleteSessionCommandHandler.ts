@@ -5,8 +5,7 @@ import { unlink } from 'fs/promises';
 import { join } from 'path';
 import Session from 'src/domain/aggregates/Session';
 import ISessionRepository, { ISessionRepositorySymbol } from 'src/domain/repositories/ISessionRepository';
-import { CreateSessionCommand } from '../commands/CreateSessionCommand';
-import { DeleteSessionCommand } from '../commands/DeleteSessionCommand';
+import { DeleteSessionCommand, DeleteSessionsCommand } from '../commands/DeleteSessionCommand';
 
 @CommandHandler(DeleteSessionCommand)
 export class DeleteSessionCommandHandler
@@ -15,27 +14,15 @@ export class DeleteSessionCommandHandler
   constructor(
     @Inject(ISessionRepositorySymbol)
     private repository: ISessionRepository,
-  ) {}
+  ) { }
 
   async execute(command: DeleteSessionCommand) {
-    if (command.hostAddress) {
-      console.log("Deleting all sessions from " + command.hostAddress.value);
+    const session = await this.repository.findSession(
+      command.title,
+      command.sessionId,
+    );
 
-      const sessions = await this.repository.findSessionsByIP(
-        command.hostAddress
-      );
-
-      await this.repository.deleteSessions(sessions);
-    }
-
-    if (command.sessionId) {
-      const session = await this.repository.findSession(
-        command.title,
-        command.sessionId,
-      );
-
-      this.deleteSession(session);
-    }
+    this.deleteSession(session);
   }
 
   async deleteSession(session: Session) {
@@ -56,5 +43,32 @@ export class DeleteSessionCommandHandler
         console.log("Deleted session: " + session.id.value);
       }
     }
+  }
+}
+
+@CommandHandler(DeleteSessionsCommand)
+export class DeleteSessionsCommandHandler
+  implements ICommandHandler<DeleteSessionsCommand>
+{
+  constructor(
+    @Inject(ISessionRepositorySymbol)
+    private repository: ISessionRepository,
+  ) { }
+
+  async execute(command: DeleteSessionsCommand) {
+    let msg = "Deleting all session(s) from " + command.hostAddress.value;
+
+    if (command.macAddress) {
+      msg += " - " + command.macAddress.value.toString();
+    }
+
+    console.log(msg);
+
+    const sessions = await this.repository.findSessionsByIPAndMac(
+      command.hostAddress,
+      command.macAddress
+    );
+
+    await this.repository.deleteSessions(sessions);
   }
 }

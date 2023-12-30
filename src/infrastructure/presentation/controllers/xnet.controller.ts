@@ -7,11 +7,12 @@ import {
 } from '@nestjs/common';
 import ILogger, { ILoggerSymbol } from '../../../ILogger';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { ApiQuery, ApiTags } from '@nestjs/swagger';
-import { Delete, Query } from '@nestjs/common/decorators';
+import { ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { Delete, Param, Query } from '@nestjs/common/decorators';
 import axios from 'axios';
 import IpAddress from 'src/domain/value-objects/IpAddress';
-import { DeleteSessionCommand } from 'src/application/commands/DeleteSessionCommand';
+import MacAddress from 'src/domain/value-objects/MacAddress';
+import { DeleteSessionsCommand } from 'src/application/commands/DeleteSessionCommand';
 import { RealIP } from 'nestjs-real-ip';
 
 @ApiTags('XNet')
@@ -21,15 +22,15 @@ export class XNetController {
     @Inject(ILoggerSymbol) private readonly logger: ILogger,
     private readonly queryBus: QueryBus,
     private readonly commandBus: CommandBus,
-  ) {}
+  ) { }
 
   @Get('/whoami')
-  async getClientAddress(@RealIP() ip : string) {
+  async getClientAddress(@RealIP() ip: string) {
     const splitIp = ip.split(':');
     let ipv4 = splitIp[splitIp.length - 1];
 
     console.log("whoami was: " + ip);
-    
+
     if (ipv4 == "127.0.0.1" || ipv4.startsWith("192.168") || ipv4.split(".")[0] == "10") {
       // Hi me! Who are you?
       const res = await axios.get("https://api.ipify.org/");
@@ -41,11 +42,13 @@ export class XNetController {
     return { address: ipv4 };
   }
 
-  @Delete('/DeleteSessions')
-  @ApiQuery({ name: "hostAddress", description: "Host IP Address", required: false})
+  @Delete(['/DeleteSessions/:macAddress', '/DeleteSessions'])
+  @ApiQuery({ name: "hostAddress", description: "IP Address", required: false })
+  @ApiParam({ name: "macAddress", description: "Mac Address", required: true })
   async deleteAllSessions(
     @RealIP() ip: string,
     @Query('hostAddress') hostAddress?: string,
+    @Param('macAddress') macAddress?: string,
   ) {
     const splitIp = ip.split(':');
     let ipv4 = splitIp[splitIp.length - 1];
@@ -62,10 +65,16 @@ export class XNetController {
       ipv4 = res.data;
     }
 
-    // title id and session id are required to delete QoS data.
-    // This needs fixing!
+    let mac = null;
+
+    try {
+      mac = new MacAddress(macAddress);
+    } catch (err: unknown) {
+      console.log("Deleting sessions based on IP!");
+    }
+
     await this.commandBus.execute(
-      new DeleteSessionCommand(null, null, new IpAddress(ipv4)),
+      new DeleteSessionsCommand(new IpAddress(ipv4), mac),
     );
   }
 }
