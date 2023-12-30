@@ -13,8 +13,8 @@ import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
 import { join } from 'path';
 import { Response } from 'express';
-import { stat } from 'fs/promises';
-import { createReadStream, existsSync } from 'fs';
+import { readFile, stat } from 'fs/promises';
+import { existsSync } from 'fs';
 
 @ApiTags('Title')
 @Controller('/title/:titleId')
@@ -44,11 +44,10 @@ export class TitleController {
     const stats = await stat(path);
 
     res.set('Content-Length', stats.size.toString());
-    return new StreamableFile(createReadStream(path)).setErrorHandler(
-      err => {
-        console.log("Error requesting servers.json: " + err.message);
-      }
-    );
+
+    const file = await readFile(path);
+
+    return file.toString('utf8');
   }
 
   @Get('/services/:serviceId')
@@ -73,11 +72,10 @@ export class TitleController {
     const stats = await stat(path);
 
     res.set('Content-Length', stats.size.toString());
-    return new StreamableFile(createReadStream(path)).setErrorHandler(
-      err => {
-        console.log(`Error requesting ${serviceId}.json: ` + err.message);
-      }
-    );
+
+    const file = await readFile(path);
+
+    return file.toString('utf8');
   }
 
   @Get('/ports')
@@ -99,13 +97,9 @@ export class TitleController {
     const stats = await stat(path);
 
     res.set('Content-Length', stats.size.toString());
-    var ports = new StreamableFile(createReadStream(path))
-    .setErrorHandler(
-      err => {
-        console.log("Error requesting ports.json: " + err.message);
-      }
-    );
 
-    return ports;
+    const file = await readFile(path);
+
+    return file.toString('utf8');
   }
 }
