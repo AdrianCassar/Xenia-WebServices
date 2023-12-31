@@ -5,6 +5,7 @@ import { Session, SessionSchema } from 'src/infrastructure/persistance/models/Se
 import { PersistanceModule } from 'src/infrastructure/persistance/persistance.module';
 import { CreatePlayerCommandHandler } from './commandHandlers/CreatePlayerCommandHandler';
 import { CreateSessionCommandHandler } from './commandHandlers/CreateSessionCommandHandler';
+import { AddSessionContextCommandHandler } from './commandHandlers/AddSessionContextCommandHandler';
 import { DeleteSessionCommandHandler, DeleteSessionsCommandHandler } from './commandHandlers/DeleteSessionCommandHandler';
 import { JoinSessionCommandHandler } from './commandHandlers/JoinSessionCommandHandler';
 import { LeaveSessionCommandHandler } from './commandHandlers/LeaveSessionCommandHandler';
@@ -39,6 +40,7 @@ export const commandHandlers = [
   SetPlayerSessionIdCommandHandler,
   UpdateLeaderboardCommandHandler,
   MigrateSessionCommandHandler,
+  AddSessionContextCommandHandler,
 ];
 
 @Module({

@@ -17,6 +17,7 @@ interface SessionProps {
   port: number;
   players: Xuid[];
   deleted: boolean;
+  context: Map<string, number>;
   migration?: SessionId;
 }
 
@@ -44,6 +45,10 @@ interface CreateMigrationProps {
   port: number;
 }
 
+interface ContextProps {
+  context: Map<number, {contextId: number, value: number}>;
+}
+
 interface JoinProps {
   xuids: Xuid[];
 }
@@ -64,6 +69,7 @@ export default class Session {
       ...props,
       players: [],
       deleted: false,
+      context: new Map<string, number>(),
     });
   }
 
@@ -88,6 +94,12 @@ export default class Session {
     props.session.props.migration = newSession.id;
 
     return newSession;
+  }
+
+  public addContext(props: ContextProps) {
+    props.context.forEach((entry) => {
+      this.props.context.set(entry.contextId.toString(16), entry.value);
+    })
   }
 
   public modify(props: ModifyProps) {
@@ -172,5 +184,9 @@ export default class Session {
 
   get migration() {
     return this.props.migration;
+  }
+
+  get context() {
+    return this.props.context;
   }
 }

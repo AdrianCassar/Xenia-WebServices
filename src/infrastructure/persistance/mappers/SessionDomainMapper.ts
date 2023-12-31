@@ -25,6 +25,7 @@ export default class SessionDomainMapper {
       port: session.port,
       players: session.players.map((xuid) => new Xuid(xuid)),
       deleted: session.deleted,
+      context: session.context,
       migration: session.migration
         ? new SessionId(session.migration)
         : undefined,

@@ -27,6 +27,8 @@ export class Session {
   players: string[];
   @Prop({ required: true, default: false })
   deleted: boolean;
+  @Prop({ required: true })
+  context: Map<string, number>;
   @Prop({ required: false })
   migration: string;
 
