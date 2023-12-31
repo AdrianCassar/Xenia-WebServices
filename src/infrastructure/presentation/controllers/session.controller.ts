@@ -45,9 +45,9 @@ import { FindPlayerQuery } from 'src/application/queries/FindPlayerQuery';
 import { SetPlayerSessionIdCommand } from 'src/application/commands/SetPlayerSessionIdCommand';
 import Session from 'src/domain/aggregates/Session';
 import { Request, Response } from 'express';
-import { mkdir, stat, writeFile } from 'fs/promises';
+import { readFile, mkdir, stat, writeFile } from 'fs/promises';
 import { join } from 'path';
-import { createReadStream, existsSync, readFileSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 import { UpdateLeaderboardCommand } from 'src/application/commands/UpdateLeaderboardCommand';
 import LeaderboardId from 'src/domain/value-objects/LeaderboardId';
 import { WriteStatsRequest } from '../requests/WriteStatsRequest';
@@ -398,11 +398,8 @@ export class SessionController {
     if (!stats.isFile()) throw new NotFoundException();
 
     res.set('Content-Length', stats.size.toString());
-    return new StreamableFile(createReadStream(path)).setErrorHandler(
-      err => {
-        console.log("Error requesting qos: " + err.message);
-      }
-    );
+    const file = await readFile(path);
+    return file.toString('utf8');
   }
 
   @Post('/:sessionId/context')
