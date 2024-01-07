@@ -390,6 +390,7 @@ export class SessionController {
 
     if (!existsSync(path)) {
       res.set('Content-Length', '0');
+      res.sendStatus(204);
       return;
     }
 
@@ -398,7 +399,7 @@ export class SessionController {
     if (!stats.isFile()) throw new NotFoundException();
     res.set('Content-Length', stats.size.toString());
     const stream = createReadStream(path);
-    return stream.pipe(res);
+    stream.pipe(res);
   }
 
   @Post('/:sessionId/context')
