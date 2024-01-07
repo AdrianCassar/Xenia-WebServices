@@ -47,7 +47,7 @@ import Session from 'src/domain/aggregates/Session';
 import { Request, Response } from 'express';
 import { readFile, mkdir, stat, writeFile } from 'fs/promises';
 import { join } from 'path';
-import { existsSync, readFileSync } from 'fs';
+import { existsSync, readFileSync, createReadStream } from 'fs';
 import { UpdateLeaderboardCommand } from 'src/application/commands/UpdateLeaderboardCommand';
 import LeaderboardId from 'src/domain/value-objects/LeaderboardId';
 import { WriteStatsRequest } from '../requests/WriteStatsRequest';
@@ -384,7 +384,7 @@ export class SessionController {
   async qosDownload(
     @Param('titleId') titleId: string,
     @Param('sessionId') sessionId: string,
-    @Res({ passthrough: true }) res: Response,
+    @Res() res: Response,
   ) {
     const path = join(process.cwd(), 'qos', titleId, sessionId);
 
@@ -396,10 +396,9 @@ export class SessionController {
     const stats = await stat(path);
 
     if (!stats.isFile()) throw new NotFoundException();
-
     res.set('Content-Length', stats.size.toString());
-    const file = await readFile(path);
-    return file.toString('utf8');
+    const stream = createReadStream(path);
+    return stream.pipe(res);
   }
 
   @Post('/:sessionId/context')

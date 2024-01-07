@@ -1,0 +1,35 @@
+title_name = "Halo 3 Beta"
+title_id = "4D53880C"
+hash = "768B22B542C6D0F5"
+
+[[patch]]
+    name = "Ignore session arbitration"
+    desc = "Crude temporary solution"
+    author = "codie"
+    is_enabled = true
+
+    [[patch.be16]]
+        address = 0x8211EAE0
+        value = 0x4800
+
+[[patch]]
+    name = "Allow public IP addresses."
+    desc = "Allows the game to connect to players who are not on the current network."
+    author = "codie"
+    is_enabled = true
+
+    [[patch.be16]] # This one may be wrong! @ 0x823B6FF0 in release.
+        address = 0x82106BD0
+        value = 0x4800
+
+    [[patch.be32]]
+        address = 0x820E1230
+        value = 0x60000000
+
+    [[patch.be32]]
+        address = 0x820E0B70
+        value = 0x60000000
+    
+    [[patch.be32]]
+        address = 0x820F0F0C
+        value = 0x60000000

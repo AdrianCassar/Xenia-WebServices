@@ -1,0 +1,134 @@
+{
+    "properties": {
+        "0x10000006": {
+            "info": "exp-base",
+            "method": "sum",
+            "statId": 4
+        },
+        "0x10000007": {
+            "info": "exp-penalty",
+            "method": "max",
+            "statId": 5
+        },
+        "0x10000011": {
+            "info": "custom-games-won",
+            "method": "sum",
+            "statId": 3
+        },
+        "0x10000010": {
+            "info": "custom-games-comp",
+            "method": "sum",
+            "statId": 12
+        },
+        "0x10000050": {
+            "info": "hopper-exp-base",
+            "method": "sum",
+            "statId": 5
+        },
+        "0x10000051": {
+            "info": "hopper-exp-penalty",
+            "method": "max",
+            "statId": 6
+        },
+        "0x10000012": {
+            "info": "1st-game-played-date",
+            "method": "min",
+            "statId": 6
+        },
+        "0x10000013": {
+            "info": "last-game-played-date",
+            "method": "set",
+            "statId": 8
+        },
+        "0x10000009": {
+            "info": "ranked-games-played",
+            "method": "sum",
+            "statId": 10
+        },
+        "0x1000000a": {
+            "info": "ranked-games-comp",
+            "method": "sum",
+            "statId": 10
+        },
+        "0x1000000b": {
+            "info": "ranked-games-won",
+            "method": "sum",
+            "statId": 10
+        },
+        "0x10000004": {
+            "info": "hopper-games-played",
+            "method": "sum",
+            "statId": 2
+        },
+        "0x10000005": {
+            "info": "hopper-games-comp",
+            "method": "sum",
+            "statId": 1
+        },
+        "0x10000016": {
+            "info": "hopper-games-won",
+            "method": "sum",
+            "statId": 3
+        },
+        "0x10000003": {
+            "info": "hopper-skill",
+            "method": "max",
+            "statId": 4
+        },
+        "0x1000000c": {
+            "info": "unranked-games-played",
+            "method": "sum",
+            "statId": 14
+        },
+        "0x1000000d": {
+            "info": "unranked-games-completed",
+            "method": "sum",
+            "statId": 14
+        },
+        "0x1000000e": {
+            "info": "unranked-games-won",
+            "method": "sum",
+            "statId": 14
+        },
+        "0x10000008": {
+            "info": "highest-skill",
+            "method": "max",
+            "statId": 7
+        },
+        "0x20000014": {
+            "info": "unused (fake id)",
+            "method": "set",
+            "statId": 335544352
+        },
+        "0x1000800a": {
+            "info": "relative_score (fake id, never requested.)",
+            "method": "set",
+            "statId": 176160784
+        },
+        "0x1000800b ": {
+            "info": "session_team (fake id, never requested.)",
+            "method": "set",
+            "statId": 192938000
+        },
+        "0x1000800d": {
+            "info": "skill_hill_climbing_factor (fake id, never requested.)",
+            "method": "set",
+            "statId": 226492432
+        },
+        "0x10008010": {
+            "info": "draw_probability (fake id, never requested.)",
+            "method": "set",
+            "statId": 276824080
+        },
+        "0x3000800e": {
+            "info": "beta (fake id, never requested.)",
+            "method": "set",
+            "statId": 243269680
+        },
+        "0x3000800f": {
+            "info": "tau (fake id, never requested.)",
+            "method": "set",
+            "statId": 260046896
+        }
+    }
+}
