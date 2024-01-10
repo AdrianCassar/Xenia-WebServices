@@ -58,7 +58,7 @@ export default class SessionRepository implements ISessionRepository {
     }
 
     sessions.forEach(async (session) => {
-      const deleted_session = await this.SessionModel.findOneAndDelete({
+      await this.SessionModel.findOneAndDelete({
         id: session.id.value,
         titleId: session.titleId.toString(),
       });
@@ -76,7 +76,7 @@ export default class SessionRepository implements ISessionRepository {
       }
 
       console.log(
-        `Deleted Session: ${deleted_session.id} from ${deleted_session.hostAddress}`,
+        `Deleted Session: ${session.id.value} from ${session.hostAddress.value}`,
       );
     });
   }
