@@ -10,6 +10,12 @@ export class Session {
   @Prop({ required: true })
   titleId: string;
   @Prop({ required: true })
+  title: string;
+  @Prop({ required: true })
+  mediaId: string;
+  @Prop({ required: true })
+  version: string;
+  @Prop({ required: true })
   hostAddress: string;
   @Prop({ required: true })
   macAddress: string;

@@ -7,7 +7,10 @@ export default class SessionPersistanceMapper {
   public mapToDataModel(session: Session, updatedAt: Date): SessionModel {
     return {
       id: session.id.value,
+      title: session.title,
       titleId: session.titleId.toString(),
+      mediaId: session.mediaId,
+      version: session.version,
       hostAddress: session.hostAddress.value,
       flags: session.flags.value,
       publicSlotsCount: session.publicSlotsCount,

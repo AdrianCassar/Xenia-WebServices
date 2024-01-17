@@ -39,7 +39,7 @@ export class FindLeaderboardsQueryHandler
               (stat) => stat.value,
             );
 
-            var foundStatIds: string[] = [];
+            let foundStatIds: string[] = [];
 
             if (leaderboard) {
               foundStatIds = Object.keys(leaderboard.stats);

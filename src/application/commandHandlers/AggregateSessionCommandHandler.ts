@@ -5,9 +5,6 @@ import ISessionRepository, {
   ISessionRepositorySymbol,
 } from 'src/domain/repositories/ISessionRepository';
 import Session from 'src/domain/aggregates/Session';
-import { readFile } from 'fs/promises';
-
-const titleIdToTitleMap = {};
 
 @CommandHandler(AggregateSessionCommand)
 export class AggregateSessionCommandHandler
@@ -16,44 +13,41 @@ export class AggregateSessionCommandHandler
   constructor(
     @Inject(ISessionRepositorySymbol)
     private repository: ISessionRepository,
-  ) {
-    this.LoadTitleIds();
-  }
-
-  async LoadTitleIds() {
-    const title_ids_file = await readFile('title_ids.json');
-    const ids = JSON.parse(title_ids_file.toString('utf8'));
-
-    ids.forEach((title) => {
-      titleIdToTitleMap[title.titleid] = title.title;
-    });
-  }
+  ) {}
 
   async execute() {
     const sessions = await this.repository.findAllAdvertisedSessions();
 
     const titles = {};
 
-    sessions.forEach(async (session: Session) => {
-      let title = titleIdToTitleMap[session.titleId.toString()];
+    titles['Titles'] = [];
 
-      if (title === undefined) {
-        title = session.titleId;
-      } else {
-        title += ' - ' + session.titleId;
-      }
+    sessions.forEach((session: Session) => {
+      const titleId = session.titleId.toString();
 
-      const players = session.players.length;
+      let index = titles['Titles'].findIndex(
+        (title) => title.titleId === titleId,
+      );
 
-      if (!titles[title]) {
-        titles[title] = [];
+      if (index == -1) {
+        const data = {
+          titleId: titleId,
+          name: session.title,
+          sessions: [],
+        };
+
+        titles['Titles'].push(data);
+
+        index = titles['Titles'].length - 1;
       }
 
       const data = {
-        players: players,
+        mediaId: session.mediaId,
+        version: session.version,
+        players: session.players.length,
       };
 
-      titles[title].push(data);
+      titles['Titles'][index]['sessions'].push(data);
     });
 
     return JSON.stringify(titles);

@@ -5,24 +5,13 @@ import {
   Inject,
   NotFoundException,
   Param,
-  Put,
   RawBodyRequest,
-  StreamableFile,
-  Ip,
 } from '@nestjs/common';
-import * as rawbody from 'raw-body';
 import ILogger, { ILoggerSymbol } from '../../../ILogger';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
 import TitleId from 'src/domain/value-objects/TitleId';
-import {
-  Body,
-  Post,
-  Req,
-  Res,
-  UploadedFile,
-  UseInterceptors,
-} from '@nestjs/common/decorators';
+import { Body, Post, Req, Res } from '@nestjs/common/decorators';
 import { CreateSessionRequest } from '../requests/CreateSessionRequest';
 import { CreateSessionCommand } from 'src/application/commands/CreateSessionCommand';
 import SessionId from 'src/domain/value-objects/SessionId';
@@ -52,18 +41,14 @@ import { FindPlayerQuery } from 'src/application/queries/FindPlayerQuery';
 import { SetPlayerSessionIdCommand } from 'src/application/commands/SetPlayerSessionIdCommand';
 import Session from 'src/domain/aggregates/Session';
 import { Request, Response } from 'express';
-import { readFile, mkdir, stat, writeFile } from 'fs/promises';
+import { mkdir, stat, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { existsSync, readFileSync, createReadStream } from 'fs';
 import { UpdateLeaderboardCommand } from 'src/application/commands/UpdateLeaderboardCommand';
 import LeaderboardId from 'src/domain/value-objects/LeaderboardId';
 import { WriteStatsRequest } from '../requests/WriteStatsRequest';
-import LeaderboardStatId from 'src/domain/value-objects/LeaderboardStatId';
 import PropertyId from 'src/domain/value-objects/PropertyId';
-import Leaderboard, {
-  LeaderboardUpdateProps,
-} from 'src/domain/aggregates/Leaderboard';
-import { FindPlayerSessionQuery } from 'src/application/queries/FindPlayerSessionQuery';
+import { LeaderboardUpdateProps } from 'src/domain/aggregates/Leaderboard';
 import axios from 'axios';
 import { MigrateSessionCommand } from 'src/application/commands/MigrateSessionCommand';
 import { MigrateSessionRequest } from '../requests/MigrateSessionRequest';
@@ -94,6 +79,9 @@ export class SessionController {
       session = await this.commandBus.execute(
         new CreateSessionCommand(
           new TitleId(titleId),
+          request.title,
+          request.mediaId,
+          request.version,
           new SessionId(request.sessionId),
           new IpAddress(request.hostAddress),
           new SessionFlags(request.flags),
@@ -477,13 +465,11 @@ export class SessionController {
       'stats.json',
     );
 
-    // lol
-    const statsConfigStats = await stat(statsConfigPath);
-
-    if (!statsConfigStats.isFile()) {
+    if (!existsSync(statsConfigPath)) {
       console.warn(
         `No stats config found for title ${titleId}, unable to save stats.`,
       );
+
       return;
     }
 

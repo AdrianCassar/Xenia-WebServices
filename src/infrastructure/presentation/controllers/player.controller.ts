@@ -1,6 +1,5 @@
 import {
   Controller,
-  Get,
   Inject,
   Post,
   Body,
@@ -9,8 +8,6 @@ import {
 import ILogger, { ILoggerSymbol } from '../../../ILogger';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiTags } from '@nestjs/swagger';
-import { Ip } from '@nestjs/common/decorators';
-import axios from 'axios';
 import { CreatePlayerCommand } from 'src/application/commands/CreatePlayerCommand';
 import { CreatePlayerRequest } from '../requests/CreatePlayerRequest';
 import Xuid from 'src/domain/value-objects/Xuid';
@@ -19,7 +16,6 @@ import MacAddress from 'src/domain/value-objects/MacAddress';
 import { FindPlayerRequest } from '../requests/FindPlayerRequest';
 import { FindPlayerQuery } from 'src/application/queries/FindPlayerQuery';
 import type { PlayerResponse } from 'src/infrastructure/presentation/responses/PlayerResponse';
-import { FindPlayerSessionQuery } from 'src/application/queries/FindPlayerSessionQuery';
 
 // TODO
 /* This entire controller is all placeholder.

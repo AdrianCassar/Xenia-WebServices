@@ -9,6 +9,9 @@ import * as crypto from 'crypto';
 interface SessionProps {
   id: SessionId;
   titleId: TitleId;
+  title: string;
+  mediaId: string;
+  version: string;
   flags: SessionFlags;
   hostAddress: IpAddress;
   macAddress: MacAddress;
@@ -24,6 +27,9 @@ interface SessionProps {
 interface CreateProps {
   id: SessionId;
   titleId: TitleId;
+  title: string;
+  mediaId: string;
+  version: string;
   flags: SessionFlags;
   hostAddress: IpAddress;
   macAddress: MacAddress;
@@ -133,6 +139,18 @@ export default class Session {
 
   get titleId() {
     return this.props.titleId;
+  }
+
+  get title() {
+    return this.props.title;
+  }
+
+  get mediaId() {
+    return this.props.mediaId;
+  }
+
+  get version() {
+    return this.props.version;
   }
 
   get hostAddress() {

@@ -16,7 +16,10 @@ export default class SessionDomainMapper {
   public mapToDomainModel(session: SessionModel): Session {
     return new Session({
       id: new SessionId(session.id),
+      title: session.title,
       titleId: new TitleId(session.titleId),
+      mediaId: session.mediaId,
+      version: session.version,
       flags: new SessionFlags(session.flags),
       hostAddress: new IpAddress(session.hostAddress),
       macAddress: new MacAddress(session.macAddress),

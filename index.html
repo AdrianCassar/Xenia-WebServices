@@ -1,149 +1,230 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Xenia Web Services</title>
-  <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/xenia-canary/xenia-canary/canary_experimental/assets/icon/1024.png">
-  <link rel="apple-touch-icon" type="image/png" href="https://raw.githubusercontent.com/xenia-canary/xenia-canary/canary_experimental/assets/icon/1024.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Server Status">
+    <head>
+        <title>Xenia Web Services</title>
+        <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/xenia-canary/xenia-canary/canary_experimental/assets/icon/1024.png" />
+        <link rel="apple-touch-icon" type="image/png" href="https://raw.githubusercontent.com/xenia-canary/xenia-canary/canary_experimental/assets/icon/1024.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Server Status" />
 
-  <!-- OG Meta Tags -->
-  <meta property="og:url" content="https://xenia-netplay-2a0298c0e3f4.herokuapp.com/">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Xenia Web Services">
-  <meta property="og:description" content="Server Status">
-  <meta property="og:image" content="https://raw.githubusercontent.com/xenia-canary/xenia-canary/canary_experimental/assets/icon/1024.png">
+        <!-- OG Meta Tags -->
+        <meta property="og:url" content="https://xenia-netplay-2a0298c0e3f4.herokuapp.com/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Xenia Web Services" />
+        <meta property="og:description" content="Server Status" />
+        <meta property="og:image" content="https://raw.githubusercontent.com/xenia-canary/xenia-canary/canary_experimental/assets/icon/1024.png" />
 
-  <style>
-      body {
-          background-color: #181a1b;
-          color: #e8e6e3;
-      }
+        <style>
+            body {
+                background-color: #181a1b;
+                color: #e8e6e3;
+            }
 
-      a {
-          color: #1d5ceb;
-      }
+            a {
+                color: #1d5ceb;
+                text-decoration: none;
+            }
 
-      .sessions {
-          width: 200px;
-          height: 200px;
-          border: 2px solid black;
-          margin: 10px;
-      }
+            table {
+                table-layout: fixed;
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 80%;
+            }
 
-      table {
-          table-layout: fixed;
-          font-family: arial, sans-serif;
-          border-collapse: collapse;
-          width: 80%;
-      }
+            td,
+            th {
+                border: 1px solid #dddddd;
+                text-align: center;
+                padding: 4px;
+            }
 
-      @media only screen and (max-width: 600px) {
-        table {
-            table-layout: auto;
-        }
-      }
+            th {
+                font-size: 18px;
+            }
 
-      td,
-      th {
-          border: 1px solid #dddddd;
-          text-align: left;
-          padding: 8px;
-      }
+            tr:nth-child(even) {
+                background-color: #2b2f31;
+            }
 
-      tr:nth-child(even) {
-          background-color: #2b2f31;
-      }
-  </style>
-</head>
-<body>
-  <center>
-      <h1>Xenia Web Services</h1>
-      <a href="https://github.com/AdrianCassar/xenia-canary/tree/netplay_canary_experimental" target="_blank">Github</a>
-      <a href="https://github.com/AdrianCassar/xenia-canary/releases" target="_blank">Releases</a>
+            .container {
+                display: flex;
+                align-items: center;
+                justify-content: left;
+            }
 
-      <br />
-      <br />
+            .text {
+                font-size: 16px;
+                padding-left: 10px;
+                text-align: left;
+            }
+            
+            #sessions {
+                margin-top: 18px;
+                margin-bottom: 18px;
+            }
 
-      <div id="sessions"></div>
+            #title_update {
+                display: none;
+            }
 
-      <br />
-      <br />
+            @media only screen and (max-width: 600px) {
+                table {
+                    table-layout: auto;
+                }
 
-      <div id="countdown"></div>
+                th {
+                    font-size: 16px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <center>
+            <h1>Xenia Web Services</h1>
+            <a href="https://github.com/AdrianCassar/xenia-canary/tree/netplay_canary_experimental" target="_blank">Github</a>
+            <a href="https://github.com/AdrianCassar/xenia-canary/releases" target="_blank">Releases</a>
 
-      <!-- <label>Players Online: {online}</label> -->
-  </center>
+            <div id="sessions"></div>
 
-  <script>
-      function generateSessionsTable(gamesData) {
-          let result = '';
+            <div id="countdown"></div>
 
-          result += "<table>\n";
+            <!-- <label>Players Online: {online}</label> -->
+        </center>
 
-          result += `<tr>\n`;
-          result += `<th>Title</th>\n`;
-          result += `<th>Players</th>\n`;
-          result += `</tr>\n`;
+        <script>
+            function generateSessionsTable(sessionsData) {
+                let result = "";
 
-          for (const game in gamesData) {
-              const playersData = gamesData[game];
+                result += "<table>\n";
 
-              for (const playerInfo of playersData) {
-                  result += `<tr>\n`;
-                  result += `<td>${game}</td>\n`;
-                  result += `<td>${playerInfo.players}</td>\n`;
-                  result += `</tr>\n`;
-              }
-          }
+                result += `<tr>\n`;
+                result += `<th>Title</th>\n`;
+                result += `<th>Players</th>\n`;
+                result += `<th id="title_update">Latest TU</th>\n`;
+                result += `</tr>\n`;
 
-          result += "</table>\n";
+                sessionsData["Titles"].forEach((titleInfo) => {
+                    let titleData;
 
-          return result;
-      }
+                    // will return object if title not found.
+                    const response = HttpGet(`http://xboxunity.net/Resources/Lib/Title.php?tid=${titleInfo.titleId}`);
 
-      function HttpGet(url) {
-          var xmlHttp = new XMLHttpRequest();
+                    if (response.status == 304 || response.status == 200) {
+                        titleData = JSON.parse(response.responseText);
+                    }
 
-          xmlHttp.open("GET", url, false); // Synchronous Request
-          xmlHttp.send();
+                    const icon_path = `http://xboxunity.net/Resources/Lib/Icon.php?tid=${titleInfo.titleId}`;
+                    const error_icon_path = `https://i.postimg.cc/MKqhqZbS/Icon.png`;
 
-          return xmlHttp;
-      }
+                    let title = "N/A";
 
-      function refreshSessionTable() {
-          let sessionData = {};
+                    if (titleData.TitleID) {
+                        title = titleData.Name;
+                    } else if (titleInfo.name) {
+                        title = titleInfo.name;
+                    }
 
-          const response = HttpGet(window.origin + "/sessions");
+                    for (const session of titleInfo.sessions) {
+                        let Version_Text = session.version ? session.version : "N/A";
 
-          if (response.status == 304 || response.status == 200) {
-            sessionData = JSON.parse(response.responseText);
-          }
+                        let TU_Text = "N/A";
+                        let TU_download_url = "#";
 
-          document.getElementById("sessions").innerHTML = generateSessionsTable(sessionData);
-      }
+                        if (titleData.TitleID && session.mediaId) {
+                            const Title_Update = GetLatestTU(titleData, session.mediaId);
 
-      var time = 60;
+                            if (Title_Update) {
+                                TU_download_url = `http://xboxunity.net/Resources/Lib/TitleUpdate.php?tuid=${Title_Update.TitleUpdateID}`;
+                                TU_Text = `TU: ${Title_Update.Version}`;
+                            }
+                        }
 
-      function refreshTimer() {
-          if (time <= 0) {
+                        const icon = `<div class="image"><img src="${icon_path}" width="64" height="64" onerror="this.src='${error_icon_path}';"></div>`;
+
+                        result += `<tr>\n`;
+                        result += `<td>
+                            <div class="container">
+                                ${icon}
+                                <div class="text">
+                                    <div>${title}</div>
+                                    <div style="margin-top: 15px;font-size: 14px;">Title ID: ${titleInfo.titleId}</div>
+                                    <div style="margin-top: 4px;font-size: 14px;">Version: ${Version_Text}</div>
+                                </div>
+                            </div>
+                        </td>\n`;
+                        result += `<td>${session.players}</td>\n`;
+                        result += `<td id="title_update"><a href="${TU_download_url}">${TU_Text}</a></td>\n`;
+                        result += `</tr>\n`;
+                    }
+                });
+
+                result += "</table>\n";
+
+                return result;
+            }
+
+            function GetLatestTU(titleData, mediaId) {
+                let latestTU;
+
+                if (mediaId == 0) {
+                    return latestTU;
+                }
+
+                titleData["MediaIds"].forEach((media) => {
+                    if (media.MediaID == mediaId) {
+                        const lastIndex = media["Updates"].length - 1;
+                        latestTU = media["Updates"][lastIndex];
+                    }
+                });
+
+                return latestTU;
+            }
+
+            function HttpGet(url) {
+                var xmlHttp = new XMLHttpRequest();
+
+                try {
+                    xmlHttp.open("GET", url, false); // Synchronous Request
+                    xmlHttp.send();
+                } catch (err) {}
+
+                return xmlHttp;
+            }
+
+            function refreshSessionTable() {
+                let sessionData = {};
+
+                const response = HttpGet(window.origin + "/sessions");
+
+                if (response.status == 304 || response.status == 200) {
+                    sessionData = JSON.parse(response.responseText);
+                }
+
+                document.getElementById("sessions").innerHTML = generateSessionsTable(sessionData);
+            }
+
+            var time = 60;
+
+            function refreshTimer() {
+                if (time <= 0) {
+                    refreshSessionTable();
+                    time = 60;
+                }
+
+                document.getElementById("countdown").innerHTML = "Refreshing in " + time + "s";
+
+                time -= 1;
+            }
+
+            function setIntervalImmediately(func, interval) {
+                func();
+                return setInterval(func, interval);
+            }
+
+            setIntervalImmediately(refreshTimer, 1000);
+
             refreshSessionTable();
-              time = 60;
-          }
-
-          document.getElementById("countdown").innerHTML = "Refreshing in " + time + "s";
-
-          time -= 1;
-      }
-
-      function setIntervalImmediately(func, interval) {
-        func();
-        return setInterval(func, interval);
-      }
-
-      setIntervalImmediately(refreshTimer, 1000);
-      
-      refreshSessionTable();
-  </script>
-</body>
+        </script>
+    </body>
 </html>

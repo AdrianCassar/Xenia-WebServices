@@ -6,7 +6,10 @@ import TitleId from 'src/domain/value-objects/TitleId';
 
 export class CreateSessionCommand {
   constructor(
-    public readonly title: TitleId,
+    public readonly titleId: TitleId,
+    public readonly title: string,
+    public readonly mediaId: string,
+    public readonly version: string,
     public readonly sessionId: SessionId,
     public readonly hostAddress: IpAddress,
     public readonly flags: SessionFlags,
