@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
-import { XeniaModule } from '../../src/xenia.module';
+import request from 'supertest';
+import { XeniaModule } from '../src/xenia.module';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;

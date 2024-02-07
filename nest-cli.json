@@ -1,8 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
-  "collection": "@nestj,s/schematics",
+  "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
+    "deleteOutDir": true,
     "assets": [
       { "include": "public/**/*", "outDir": "dist/src", "watchAssets": true }
     ]
