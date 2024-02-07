@@ -3,11 +3,11 @@ import ILogger, { ILoggerSymbol } from '../../../ILogger';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { Delete, Param, Query } from '@nestjs/common/decorators';
-import axios from 'axios';
 import IpAddress from 'src/domain/value-objects/IpAddress';
 import MacAddress from 'src/domain/value-objects/MacAddress';
 import { DeleteSessionsCommand } from 'src/application/commands/DeleteSessionCommand';
 import { RealIP } from 'nestjs-real-ip';
+import { ProcessClientAddressCommand } from 'src/application/commands/ProcessClientAddressCommand';
 
 @ApiTags('XNet')
 @Controller()
@@ -20,52 +20,24 @@ export class XNetController {
 
   @Get('/whoami')
   async getClientAddress(@RealIP() ip: string) {
-    const splitIp = ip.split(':');
-    let ipv4 = splitIp[splitIp.length - 1];
-
-    console.log('whoami was: ' + ip);
-
-    if (
-      ipv4 == '127.0.0.1' ||
-      ipv4.startsWith('192.168') ||
-      ipv4.split('.')[0] == '10'
-    ) {
-      // Hi me! Who are you?
-      const res = await axios.get('https://api.ipify.org/');
-      ipv4 = res.data;
-    }
-
-    console.log('whoami now: ' + ipv4);
+    const ipv4 = await this.commandBus.execute(
+      new ProcessClientAddressCommand(ip),
+    );
 
     return { address: ipv4 };
   }
 
   @Delete(['/DeleteSessions/:macAddress', '/DeleteSessions'])
-  @ApiQuery({ name: 'hostAddress', description: 'IP Address', required: false })
-  @ApiParam({ name: 'macAddress', description: 'Mac Address', required: true })
+  @ApiQuery({ name: 'hostAddress', description: 'IP Address' })
+  @ApiParam({ name: 'macAddress', description: 'Mac Address' })
   async deleteAllSessions(
     @RealIP() ip: string,
     @Query('hostAddress') hostAddress?: string,
     @Param('macAddress') macAddress?: string,
   ) {
-    const splitIp = ip.split(':');
-    let ipv4 = splitIp[splitIp.length - 1];
+    let ipv4 = hostAddress ? hostAddress : ip;
 
-    if (hostAddress) {
-      ipv4 = hostAddress;
-    }
-
-    if (
-      ipv4 == '127.0.0.1' ||
-      ipv4.startsWith('192.168') ||
-      ipv4.split('.')[0] == '10'
-    ) {
-      console.log('Resolving local IP');
-
-      // Hi me! Who are you?
-      const res = await axios.get('https://api.ipify.org/');
-      ipv4 = res.data;
-    }
+    ipv4 = await this.commandBus.execute(new ProcessClientAddressCommand(ipv4));
 
     let mac = null;
 

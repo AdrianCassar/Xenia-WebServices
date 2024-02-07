@@ -6,6 +6,7 @@ import {
   NotFoundException,
   Param,
   RawBodyRequest,
+  HttpStatus,
 } from '@nestjs/common';
 import ILogger, { ILoggerSymbol } from '../../../ILogger';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
@@ -49,10 +50,10 @@ import LeaderboardId from 'src/domain/value-objects/LeaderboardId';
 import { WriteStatsRequest } from '../requests/WriteStatsRequest';
 import PropertyId from 'src/domain/value-objects/PropertyId';
 import { LeaderboardUpdateProps } from 'src/domain/aggregates/Leaderboard';
-import axios from 'axios';
 import { MigrateSessionCommand } from 'src/application/commands/MigrateSessionCommand';
 import { MigrateSessionRequest } from '../requests/MigrateSessionRequest';
 import { RealIP } from 'nestjs-real-ip';
+import { ProcessClientAddressCommand } from 'src/application/commands/ProcessClientAddressCommand';
 
 @ApiTags('Sessions')
 @Controller('/title/:titleId/sessions')
@@ -187,28 +188,22 @@ export class SessionController {
       new GetSessionQuery(new TitleId(titleId), new SessionId(sessionId)),
     );
 
-    const splitIp = ip.split(':');
-    let ipv4 = splitIp[splitIp.length - 1];
+    const ipv4 = await this.commandBus.execute(
+      new ProcessClientAddressCommand(ip),
+    );
 
-    if (
-      ipv4 == '127.0.0.1' ||
-      ipv4.startsWith('192.168') ||
-      ipv4.split('.')[0] == '10'
-    ) {
-      // Hi me! Who are you?
-      const res = await axios.get('https://api.ipify.org/');
-      ipv4 = res.data;
+    if (!session) {
+      console.log(`Session ${sessionId} is already deleted`);
+      return;
     }
 
-    if (session) {
-      console.log('Host Address: ' + session.hostAddress.value);
-      console.log('IPV4 Address: ' + ipv4);
-    } else {
-      console.log('Session already deleted? ' + ipv4);
-      console.log(session);
+    if (session.hostAddress.value !== ipv4) {
+      console.log(
+        `Client ${ipv4} attempted to delete session created by ${session.hostAddress.value}`,
+      );
+      console.log(`Session ${sessionId} will not be deleted`);
+      return;
     }
-
-    if (session == undefined || session.hostAddress.value !== ipv4) return;
 
     await this.commandBus.execute(
       new DeleteSessionCommand(new TitleId(titleId), new SessionId(sessionId)),
@@ -399,13 +394,14 @@ export class SessionController {
 
     if (!existsSync(path)) {
       res.set('Content-Length', '0');
-      res.sendStatus(204);
+      res.sendStatus(HttpStatus.NO_CONTENT);
       return;
     }
 
     const stats = await stat(path);
 
     if (!stats.isFile()) throw new NotFoundException();
+
     res.set('Content-Length', stats.size.toString());
     const stream = createReadStream(path);
     stream.pipe(res);

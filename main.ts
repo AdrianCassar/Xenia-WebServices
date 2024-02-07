@@ -2,11 +2,10 @@ import 'dotenv/config';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { XeniaModule } from './src/xenia.module';
-import * as requestIp from 'request-ip';
 import PresentationSettings from 'src/infrastructure/presentation/settings/PresentationSettings';
 import PersistanceSettings from 'src/infrastructure/persistance/settings/PersistanceSettings';
 import { HttpExceptionFilter } from 'src/application/http-exception.filter';
-import * as compression from 'compression';
+import compression from 'compression';
 
 async function bootstrap() {
   const app = await NestFactory.create(XeniaModule, {
@@ -24,15 +23,14 @@ async function bootstrap() {
   }
 
   app.enableCors();
-  app.use(requestIp.mw());
   app.use(compression());
   app.useGlobalFilters(new HttpExceptionFilter());
 
   // Support Heroku
   const PORT = process.env.PORT || new PresentationSettings().get().port;
 
-  await app.listen(PORT, () => {
-    console.log('Listening on port: ' + PORT);
-  });
+  await app.listen(PORT);
+
+  console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();
