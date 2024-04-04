@@ -11,6 +11,8 @@ export default abstract class AbstractEnvSettings<T> {
         mongoURI: process.env.MONGO_URI,
         swagger_API: process.env.SWAGGER_API,
         SSL: process.env.SSL,
+        nginx: process.env.nginx,
+        heroku_nginx: process.env.heroku_nginx,
       },
     };
   }
