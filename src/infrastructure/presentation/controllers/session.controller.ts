@@ -346,6 +346,19 @@ export class SessionController {
 
       throw new NotFoundException(error_msg);
     }
+
+    // Update joining players sessionId
+    const players_xuid = request.xuids.map((xuid) => new Xuid(xuid));
+    for (const player_xuid of players_xuid) {
+      const player = await this.queryBus.execute(
+        new GetPlayerQuery(player_xuid),
+      );
+      if (player) {
+        await this.commandBus.execute(
+          new SetPlayerSessionIdCommand(player.xuid, new SessionId(sessionId)),
+        );
+      }
+    }
   }
 
   @Post('/:sessionId/leave')
