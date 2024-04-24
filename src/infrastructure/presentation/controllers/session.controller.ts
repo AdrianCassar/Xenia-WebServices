@@ -27,6 +27,7 @@ import { ModifySessionRequest } from '../requests/ModifySessionRequest';
 import { JoinSessionCommand } from 'src/application/commands/JoinSessionCommand';
 import { JoinSessionRequest } from '../requests/JoinSessionRequest';
 import { GetSessionContextRequest } from '../requests/GetSessionContextRequest';
+import { GetSessionPropertyRequest } from '../requests/GetSessionPropertyRequest';
 import Xuid from 'src/domain/value-objects/Xuid';
 import { SessionSearchRequest } from '../requests/SessionSearchRequest';
 import { SessionDetailsResponse } from '../responses/SessionDetailsResponse';
@@ -34,8 +35,10 @@ import { LeaveSessionRequest } from '../requests/LeaveSessionRequest';
 import { LeaveSessionCommand } from 'src/application/commands/LeaveSessionCommand';
 import { DeleteSessionCommand } from 'src/application/commands/DeleteSessionCommand';
 import { AddSessionContextCommand } from 'src/application/commands/AddSessionContextCommand';
+import { AddSessionPropertyCommand } from 'src/application/commands/AddSessionPropertyCommand';
 import { SessionArbitrationResponse } from '../responses/SessionArbitrationResponse';
 import { SessionContextResponse } from '../responses/SessionContextResponse';
+import { SessionPropertyResponse } from '../responses/SessionPropertyResponse';
 import Player from 'src/domain/aggregates/Player';
 import { GetPlayerQuery } from 'src/application/queries/GetPlayerQuery';
 import { FindPlayerQuery } from 'src/application/queries/FindPlayerQuery';
@@ -594,6 +597,47 @@ export class SessionController {
 
     return {
       context: session.context,
+    };
+  }
+
+  @Post('/:sessionId/properties')
+  @ApiParam({ name: 'titleId', example: '4D5307E6' })
+  @ApiParam({ name: 'sessionId', example: 'B36B3FE8467CFAC7' })
+  async sessionPropertySet(
+    @Param('titleId') titleId: string,
+    @Param('sessionId') sessionId: string,
+    @Body() request: GetSessionPropertyRequest,
+  ) {
+    const session = await this.commandBus.execute(
+      new AddSessionPropertyCommand(
+        new TitleId(titleId),
+        new SessionId(sessionId),
+        request.properties,
+      ),
+    );
+
+    if (!session) {
+      throw new NotFoundException(`Session ${sessionId} was not found.`);
+    }
+  }
+
+  @Get('/:sessionId/properties')
+  @ApiParam({ name: 'titleId', example: '4D5307E6' })
+  @ApiParam({ name: 'sessionId', example: 'B36B3FE8467CFAC7' })
+  async sessionPropertyGet(
+    @Param('titleId') titleId: string,
+    @Param('sessionId') sessionId: string,
+  ): Promise<SessionPropertyResponse> {
+    const session = await this.queryBus.execute(
+      new GetSessionQuery(new TitleId(titleId), new SessionId(sessionId)),
+    );
+
+    if (!session) {
+      throw new NotFoundException(`Session ${sessionId} was not found.`);
+    }
+
+    return {
+      properties: session.properties,
     };
   }
 
