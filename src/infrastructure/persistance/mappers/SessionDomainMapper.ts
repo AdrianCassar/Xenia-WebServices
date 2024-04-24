@@ -29,6 +29,7 @@ export default class SessionDomainMapper {
       players: session.players,
       deleted: session.deleted,
       context: session.context,
+      properties: session.properties,
       migration: session.migration
         ? new SessionId(session.migration)
         : undefined,
