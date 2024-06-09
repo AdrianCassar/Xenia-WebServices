@@ -1,0 +1,26 @@
+title_name = "Halo 3"
+title_id = "4D5307E6" # MS-2022
+hash = "19EB90F06A070ED6" 
+#media_id = "2D357FF4" 
+
+[[patch]]
+    name = "Allow public IP addresses."
+    desc = "Allows the game to connect to players who are not on the current network."
+    author = "craftycodie"
+    is_enabled = true
+
+    [[patch.be32]]
+        address = 0x823A15E8 # transport_address_get_insecure_xbox_address
+        value = 0x60000000
+
+
+# Temp fix for service tags
+[[patch]]
+    name = "Disable string validation"
+    desc = "Crude temporary solution"
+    author = "codie"
+    is_enabled = true
+
+    [[patch.be32]]
+        address = 0x826BD0DC
+        value = 0x60000000
