@@ -37,20 +37,8 @@ hash = "3FE73A3A9C3BD684" # v13.2
     author = "craftycodie"
     is_enabled = true
 
-    [[patch.be16]]
-        address = 0x823B6FF0
-        value = 0x4800
-
     [[patch.be32]]
-        address = 0x823B7468
-        value = 0x60000000
-
-    [[patch.be32]]
-        address = 0x823B6E10
-        value = 0x60000000
-    
-    [[patch.be32]]
-        address = 0x823B6D80
+        address = 0x823B7468 # transport_address_get_insecure_xbox_address
         value = 0x60000000
 
 # Temp fix for service tags
