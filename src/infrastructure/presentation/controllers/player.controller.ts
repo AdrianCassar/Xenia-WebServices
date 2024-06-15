@@ -10,6 +10,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { CreatePlayerCommand } from 'src/application/commands/CreatePlayerCommand';
 import { CreatePlayerRequest } from '../requests/CreatePlayerRequest';
 import Xuid from 'src/domain/value-objects/Xuid';
+import Gamertag from 'src/domain/value-objects/Gamertag';
 import IpAddress from 'src/domain/value-objects/IpAddress';
 import MacAddress from 'src/domain/value-objects/MacAddress';
 import { FindPlayerRequest } from '../requests/FindPlayerRequest';
@@ -35,6 +36,7 @@ export class PlayerController {
     await this.commandBus.execute(
       new CreatePlayerCommand(
         new Xuid(request.xuid),
+        new Gamertag(request.gamertag),
         new Xuid(request.machineId),
         new IpAddress(request.hostAddress),
         new MacAddress(request.macAddress),
@@ -58,6 +60,7 @@ export class PlayerController {
 
     return {
       xuid: player.xuid.value,
+      gamertag: player.gamertag.value,
       hostAddress: player.hostAddress.value,
       machineId: player.machineId.value,
       port: player.port,

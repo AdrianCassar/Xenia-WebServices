@@ -27,6 +27,7 @@ export class CreatePlayerCommandHandler
     await this.repository.save(
       Player.create({
         xuid: command.xuid,
+        gamertag: command.gamertag,
         hostAddress: command.hostAddress,
         macAddress: command.macAddress,
         machineId: command.machineId,

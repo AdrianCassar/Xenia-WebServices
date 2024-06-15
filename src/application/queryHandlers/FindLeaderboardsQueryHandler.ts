@@ -3,6 +3,9 @@ import { QueryHandler, IQueryHandler } from '@nestjs/cqrs';
 import ILeaderboardRepository, {
   ILeaderboardRepositorySymbol,
 } from 'src/domain/repositories/ILeaderboardRepository';
+import IPlayerRepository, {
+  IPlayerRepositorySymbol,
+} from 'src/domain/repositories/IPlayerRepository';
 import { FindLeaderboardsResponse } from 'src/infrastructure/presentation/responses/FindLeaderboardsResponse';
 import { FindLeaderboardsQuery } from '../queries/FindLeaderboardsQuery';
 
@@ -13,6 +16,8 @@ export class FindLeaderboardsQueryHandler
   constructor(
     @Inject(ILeaderboardRepositorySymbol)
     private repository: ILeaderboardRepository,
+    @Inject(IPlayerRepositorySymbol)
+    private repository2: IPlayerRepository,
   ) {}
 
   async execute(
@@ -27,6 +32,7 @@ export class FindLeaderboardsQueryHandler
         };
         await Promise.all(
           query.players.map(async (player) => {
+            const user = await this.repository2.findByXuid(player);
             const leaderboard = await this.repository.findLeaderboard(
               query.titleId,
               leaderboardQuery.id,
@@ -70,7 +76,7 @@ export class FindLeaderboardsQueryHandler
 
             leaderboardResponse.players.push({
               xuid: player.value,
-              gamertag: '',
+              gamertag: user.gamertag.value,
               stats,
             });
           }),

@@ -3,6 +3,7 @@ export interface PlayerResponse {
   port: number;
   macAddress: string;
   xuid: string;
+  gamertag: string;
   machineId: string;
   sessionId: string;
 }

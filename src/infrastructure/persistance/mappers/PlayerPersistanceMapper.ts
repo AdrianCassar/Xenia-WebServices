@@ -7,6 +7,7 @@ export default class PlayerPersistanceMapper {
   public mapToDataModel(player: Player): PlayerModel {
     return {
       xuid: player.xuid.value,
+      gamertag: player.gamertag.value,
       hostAddress: player.hostAddress.value,
       machineId: player.machineId.value,
       macAddress: player.macAddress.value,
