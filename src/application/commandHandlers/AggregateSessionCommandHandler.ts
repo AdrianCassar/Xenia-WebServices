@@ -32,7 +32,7 @@ export class AggregateSessionCommandHandler
     return '';
   }
 
-  async downloadContent(url: string, type: any): Promise<any> {
+  async downloadContent(url: string, type: string): Promise<any> {
     let data = undefined;
 
     try {
