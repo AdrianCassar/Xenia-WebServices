@@ -4,7 +4,7 @@ import { AggregateSessionCommand } from '../commands/AggregateSessionCommand';
 import ISessionRepository, {
   ISessionRepositorySymbol,
 } from 'src/domain/repositories/ISessionRepository';
-import axios, { AxiosRequestConfig } from 'axios';
+import fetch from 'node-fetch';
 
 const icon_cache = new Map<string, string>();
 const title_info_cache = new Map<string, object>();
@@ -35,29 +35,21 @@ export class AggregateSessionCommandHandler
   async downloadContent(url: string, type: any): Promise<any> {
     let data = undefined;
 
-    const config: AxiosRequestConfig = {
-      url: url,
-      responseType: type,
-      timeout: 500,
-    };
+    try {
+      const response = await fetch(url, { timeout: 500 });
 
-    await axios
-      .request(config)
-      .then((response) => {
-        data = response.data;
-      })
-      .catch((error) => {
-        if (error.response) {
-          this.logger.error(`Failed ${url}`);
-        } else if (error.request) {
-          this.logger.error(`Failed ${url}`);
-        } else {
-          this.logger.error(`Failed ${url}`);
+      if (response.ok) {
+        if (type === 'arraybuffer') {
+          data = await response.arrayBuffer();
+        } else if (type === 'json') {
+          data = await response.json();
         }
-
-        this.logger.error(`${error.message}\n`);
-      });
-
+      } else {
+        this.logger.error(`Failed ${url}`);
+      }
+    } catch (error) {
+      this.logger.error(`${error.message}\n`);
+    }
     return data;
   }
 
