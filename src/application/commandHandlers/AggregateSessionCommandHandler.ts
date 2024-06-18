@@ -112,12 +112,15 @@ export class AggregateSessionCommandHandler
 
         index = titles['Titles'].length - 1;
       }
+      const publicSlots = session.openPublicSlots + session.filledPublicSlots;
+      const privateSlots =
+        session.openPrivateSlots + session.filledPrivateSlots;
 
       const data = {
         mediaId: session.mediaId,
         version: session.version,
         players: session.players.length,
-        total: session.openPublicSlots + session.filledPublicSlots,
+        total: publicSlots + privateSlots,
       };
 
       titles['Titles'][index]['sessions'].push(data);
