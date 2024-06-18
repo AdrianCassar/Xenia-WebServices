@@ -57,7 +57,7 @@ function generateSessionsTable(sessionsData) {
                   </div>
               </div>
           </td>\n`;
-      result += `<td>${session.players}</td>\n`;
+      result += `<td>${session.players} of ${session.total}</td>\n`;
       result += `<td id="title_update"><a href="${TU_download_url}">${TU_Text}</a></td>\n`;
       result += `</tr>\n`;
     }

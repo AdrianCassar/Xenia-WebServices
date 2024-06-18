@@ -125,6 +125,7 @@ export class AggregateSessionCommandHandler
         mediaId: session.mediaId,
         version: session.version,
         players: session.players.length,
+        total: session.openPublicSlots + session.filledPublicSlots,
       };
 
       titles['Titles'][index]['sessions'].push(data);
