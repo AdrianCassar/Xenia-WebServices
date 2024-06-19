@@ -50,7 +50,7 @@ function generateSessionsTable(sessionsData) {
               <div class="container">
                   ${icon}
                   <div class="text">
-                      <div>${title}</div>
+                      <div><a href="https://github.com/xenia-project/game-compatibility/issues?q=is:issue%20is:open ${titleInfo.titleId}">${title}</a></div>
                       <div style="margin-top: 15px;font-size: 14px;">Title ID: ${titleInfo.titleId}</div>
                       <div style="margin-top: 4px;font-size: 14px;">Media ID: ${MediaID_Text}</div>
                       <div style="margin-top: 4px;font-size: 14px;">Version: ${Version_Text}</div>
