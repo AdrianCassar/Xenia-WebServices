@@ -1,3 +1,4 @@
+import { ConsoleLogger } from '@nestjs/common';
 import IpAddress from '../value-objects/IpAddress';
 import MacAddress from '../value-objects/MacAddress';
 import SessionFlags from '../value-objects/SessionFlags';
@@ -17,7 +18,7 @@ interface SessionProps {
   publicSlotsCount: number;
   privateSlotsCount: number;
   port: number;
-  players: Xuid[];
+  players: Map<string, boolean>;
   deleted: boolean;
   context: Map<string, number>;
   migration?: SessionId;
@@ -55,7 +56,7 @@ interface ContextProps {
 }
 
 interface JoinProps {
-  xuids: Xuid[];
+  members: Map<Xuid, boolean>;
 }
 
 interface LeaveProps {
@@ -65,20 +66,42 @@ interface LeaveProps {
 export default class Session {
   private readonly props: SessionProps;
 
+  private _availablePublicSlots: number = 0;
+  private _availablePrivateSlots: number = 0;
+  private _logger: ConsoleLogger = new ConsoleLogger('Session');
+
   public constructor(props: SessionProps) {
     this.props = props;
+
+    // Set available slots
+    const players = Array.from(this.players.values());
+
+    const num_private_slots = players.filter((value) => value === true).length;
+    const num_public_slots = players.filter((value) => value === false).length;
+
+    this._availablePrivateSlots = Math.max(
+      0,
+      this.privateSlotsCount - num_private_slots,
+    );
+
+    this._availablePublicSlots = Math.max(
+      0,
+      this.publicSlotsCount - num_public_slots,
+    );
+
+    this._logger.setContext(`Session - ${props.id.value.toUpperCase()}`);
   }
 
   public static create(props: CreateProps) {
     return new Session({
       ...props,
-      players: [],
+      players: new Map<string, boolean>(),
       deleted: false,
       context: new Map<string, number>(),
     });
   }
 
-  static GenerateSessionId() {
+  public static GenerateSessionId() {
     const rnd_value = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
 
     const session_id_value =
@@ -103,6 +126,9 @@ export default class Session {
 
     props.session.props.migration = newSession.id;
 
+    newSession.availablePrivateSlots = props.session.availablePrivateSlots;
+    newSession.availablePublicSlots = props.session.availablePublicSlots;
+
     return newSession;
   }
 
@@ -114,23 +140,92 @@ export default class Session {
 
   public modify(props: ModifyProps) {
     this.props.flags = props.flags;
+
+    const num_private_slots: number = Math.max(
+      0,
+      this.props.privateSlotsCount - this._availablePrivateSlots,
+    );
+
+    const num_public_slots: number = Math.max(
+      0,
+      this.props.publicSlotsCount - this._availablePublicSlots,
+    );
+
     this.props.privateSlotsCount = props.privateSlotsCount;
     this.props.publicSlotsCount = props.publicSlotsCount;
+
+    // Update available slots
+    this._availablePrivateSlots = Math.max(
+      0,
+      this.props.privateSlotsCount - num_private_slots,
+    );
+
+    this._availablePublicSlots = Math.max(
+      0,
+      this.props.publicSlotsCount - num_public_slots,
+    );
   }
 
   public join(props: JoinProps) {
-    this.props.players.push(...props.xuids);
+    props.members.forEach((IsPrivate: boolean, xuid: Xuid) => {
+      this.players.set(xuid.value, IsPrivate);
 
-    const xuidValues = this.props.players.map((xuid) => xuid.value);
-    const distinctXuidValues = [...new Set(xuidValues)];
-    this.props.players = distinctXuidValues.map((xuid) => new Xuid(xuid));
+      if (IsPrivate) {
+        this._availablePrivateSlots = Math.max(
+          0,
+          this._availablePrivateSlots - 1,
+        );
+      } else {
+        this._availablePublicSlots = Math.max(
+          0,
+          this._availablePublicSlots - 1,
+        );
+      }
+
+      this._logger.verbose(
+        `Player Joining:: XUID: ${xuid.value} IsPrivate: ${IsPrivate ? 'true' : 'false'}`,
+      );
+
+      this._logger.verbose(
+        `AvailablePrivateSlots: ${this.availablePrivateSlots}`,
+      );
+
+      this._logger.verbose(
+        `AvailablePublicSlots: ${this.availablePublicSlots}`,
+      );
+    });
   }
 
   public leave(props: LeaveProps) {
-    const xuidValues = props.xuids.map((xuid) => xuid.value);
-    this.props.players = this.props.players.filter(
-      (player) => !xuidValues.includes(player.value),
-    );
+    for (const xuid of Array.from(props.xuids)) {
+      const IsPrivate: boolean = this.players[xuid.value];
+
+      this.players.delete(xuid.value);
+
+      if (IsPrivate) {
+        this._availablePrivateSlots = Math.min(
+          this.privateSlotsCount,
+          this._availablePrivateSlots + 1,
+        );
+      } else {
+        this._availablePublicSlots = Math.min(
+          this.publicSlotsCount,
+          this._availablePublicSlots + 1,
+        );
+      }
+
+      this._logger.verbose(
+        `Player Leaving:: XUID: ${xuid.value} IsPrivate: ${IsPrivate ? 'true' : 'false'}`,
+      );
+
+      this._logger.verbose(
+        `AvailablePrivateSlots: ${this.availablePrivateSlots}`,
+      );
+
+      this._logger.verbose(
+        `AvailablePublicSlots: ${this.availablePublicSlots}`,
+      );
+    }
   }
 
   public delete() {
@@ -173,21 +268,32 @@ export default class Session {
     return this.props.privateSlotsCount;
   }
 
-  get openPublicSlots() {
-    return this.publicSlotsCount - this.players.length;
+  get availablePublicSlots() {
+    return this._availablePublicSlots;
   }
 
-  get openPrivateSlots() {
-    // TODO: Implement
-    return this.privateSlotsCount;
+  set availablePublicSlots(publicSlots: number) {
+    this._availablePublicSlots = Math.max(0, publicSlots);
+  }
+
+  get availablePrivateSlots() {
+    return this._availablePrivateSlots;
+  }
+
+  set availablePrivateSlots(privateSlots: number) {
+    this._availablePrivateSlots = Math.max(0, privateSlots);
   }
 
   get filledPublicSlots() {
-    return this.publicSlotsCount - this.openPublicSlots;
+    return this.publicSlotsCount - this.availablePublicSlots;
   }
 
   get filledPrivateSlots() {
-    return this.privateSlotsCount - this.openPrivateSlots;
+    return this.privateSlotsCount - this.availablePrivateSlots;
+  }
+
+  get totalSlots() {
+    return this.publicSlotsCount + this.privateSlotsCount;
   }
 
   get macAddress() {

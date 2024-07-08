@@ -4,7 +4,6 @@ import { ConsoleLogger, Injectable } from '@nestjs/common';
 import TitleId from 'src/domain/value-objects/TitleId';
 import IpAddress from 'src/domain/value-objects/IpAddress';
 import SessionFlags from 'src/domain/value-objects/SessionFlags';
-import Xuid from 'src/domain/value-objects/Xuid';
 import MacAddress from 'src/domain/value-objects/MacAddress';
 import SessionId from 'src/domain/value-objects/SessionId';
 
@@ -25,7 +24,7 @@ export default class SessionDomainMapper {
       publicSlotsCount: session.publicSlotsCount,
       privateSlotsCount: session.privateSlotsCount,
       port: session.port,
-      players: session.players.map((xuid) => new Xuid(xuid)),
+      players: session.players,
       deleted: session.deleted,
       context: session.context,
       migration: session.migration

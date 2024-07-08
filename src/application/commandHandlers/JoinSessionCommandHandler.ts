@@ -25,7 +25,7 @@ export class JoinSessionCommandHandler
     }
 
     session.join({
-      xuids: command.xuids,
+      members: command.members,
     });
 
     await this.repository.save(session);

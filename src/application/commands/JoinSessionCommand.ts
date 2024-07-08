@@ -6,6 +6,6 @@ export class JoinSessionCommand {
   constructor(
     public readonly titleId: TitleId,
     public readonly sessionId: SessionId,
-    public readonly xuids: Xuid[],
+    public readonly members: Map<Xuid, boolean>,
   ) {}
 }

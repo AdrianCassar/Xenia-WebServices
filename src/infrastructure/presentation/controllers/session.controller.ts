@@ -53,7 +53,7 @@ import { MigrateSessionCommand } from 'src/application/commands/MigrateSessionCo
 import { MigrateSessionRequest } from '../requests/MigrateSessionRequest';
 import { RealIP } from 'nestjs-real-ip';
 import { ProcessClientAddressCommand } from 'src/application/commands/ProcessClientAddressCommand';
-import { Session } from 'src/infrastructure/persistance/models/SessionSchema';
+import Session from 'src/domain/aggregates/Session';
 
 @ApiTags('Sessions')
 @Controller('/title/:titleId/sessions')
@@ -225,13 +225,15 @@ export class SessionController {
     @Param('titleId') titleId: string,
     @Param('sessionId') sessionId: string,
   ): Promise<SessionDetailsResponse> {
-    const session = await this.queryBus.execute(
+    const session: Session = await this.queryBus.execute(
       new GetSessionQuery(new TitleId(titleId), new SessionId(sessionId)),
     );
 
     if (!session) {
       throw new NotFoundException(`Session ${sessionId} was not found.`);
     }
+
+    const xuids: string[] = Array.from(session.players.keys());
 
     return {
       id: session.id.value,
@@ -241,11 +243,11 @@ export class SessionController {
       macAddress: session.macAddress.value,
       publicSlotsCount: session.publicSlotsCount,
       privateSlotsCount: session.privateSlotsCount,
-      openPublicSlotsCount: session.openPublicSlots,
-      openPrivateSlotsCount: session.openPrivateSlots,
+      openPublicSlotsCount: session.availablePublicSlots,
+      openPrivateSlotsCount: session.availablePrivateSlots,
       filledPublicSlotsCount: session.filledPublicSlots,
       filledPrivateSlotsCount: session.filledPrivateSlots,
-      players: session.players.map((xuid) => ({ xuid: xuid.value })),
+      players: xuids.map((xuid) => ({ xuid: xuid })),
     };
   }
 
@@ -256,7 +258,7 @@ export class SessionController {
     @Param('titleId') titleId: string,
     @Param('sessionId') sessionId: string,
   ): Promise<SessionArbitrationResponse> {
-    const session = await this.queryBus.execute(
+    const session: Session = await this.queryBus.execute(
       new GetSessionQuery(new TitleId(titleId), new SessionId(sessionId)),
     );
 
@@ -264,9 +266,11 @@ export class SessionController {
       throw new NotFoundException(`Session ${sessionId} was not found.`);
     }
 
+    const xuids: string[] = Array.from(session.players.keys());
+
     const players: Player[] = await Promise.all(
-      session.players.map((xuid) => {
-        return this.queryBus.execute(new GetPlayerQuery(xuid));
+      xuids.map((xuid) => {
+        return this.queryBus.execute(new GetPlayerQuery(new Xuid(xuid)));
       }),
     );
 
@@ -332,11 +336,26 @@ export class SessionController {
     @Param('sessionId') sessionId: string,
     @Body() request: JoinSessionRequest,
   ) {
+    const members = new Map<Xuid, boolean>();
+
+    request.xuids.forEach((xuid, index) => {
+      // Default to public slot if slots are not provided
+      const is_private: boolean = request.privateSlots
+        ? request.privateSlots[index]
+        : false;
+
+      if (!request.privateSlots) {
+        this.logger.warn('Defaulting to public slot');
+      }
+
+      members.set(new Xuid(xuid), is_private);
+    });
+
     const session = await this.commandBus.execute(
       new JoinSessionCommand(
         new TitleId(titleId),
         new SessionId(sessionId),
-        request.xuids.map((xuid) => new Xuid(xuid)),
+        members,
       ),
     );
 
@@ -349,10 +368,12 @@ export class SessionController {
 
     // Update joining players sessionId
     const players_xuid = request.xuids.map((xuid) => new Xuid(xuid));
+
     for (const player_xuid of players_xuid) {
       const player = await this.queryBus.execute(
         new GetPlayerQuery(player_xuid),
       );
+
       if (player) {
         await this.commandBus.execute(
           new SetPlayerSessionIdCommand(player.xuid, new SessionId(sessionId)),

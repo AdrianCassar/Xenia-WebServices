@@ -30,7 +30,7 @@ export class Session {
   @Prop({ required: true })
   port: number;
   @Prop({ required: true })
-  players: string[];
+  players: Map<string, boolean>;
   @Prop({ required: true, default: false })
   deleted: boolean;
   @Prop({ required: true })

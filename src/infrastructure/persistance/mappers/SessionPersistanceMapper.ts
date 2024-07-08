@@ -18,7 +18,7 @@ export default class SessionPersistanceMapper {
       advertised: session.flags.isAdvertised,
       macAddress: session.macAddress.value,
       port: session.port,
-      players: session.players.map((xuid) => xuid.value),
+      players: session.players,
       deleted: session.deleted,
       context: session.context,
       migration: session.migration ? session.migration.value : undefined,

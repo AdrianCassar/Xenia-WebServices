@@ -76,7 +76,7 @@ export class FindLeaderboardsQueryHandler
 
             leaderboardResponse.players.push({
               xuid: player.value,
-              gamertag: user?.gamertag?.value ? user.gamertag.value : "",
+              gamertag: user?.gamertag?.value ? user.gamertag.value : '',
               stats,
             });
           }),
