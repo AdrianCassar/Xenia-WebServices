@@ -115,6 +115,8 @@ export default class Session {
   }
 
   public static createMigration(props: CreateMigrationProps) {
+    if (props.session.players.size > 0)
+      props.session.players.delete(props.session.players.keys().next().value);
     const newSession = new Session({
       ...props.session.props,
       id: new SessionId(this.GenerateSessionId()),
