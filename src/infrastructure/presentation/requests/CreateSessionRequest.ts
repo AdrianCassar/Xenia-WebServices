@@ -1,4 +1,5 @@
 export interface CreateSessionRequest {
+  xuid: string;
   title: string;
   mediaId: string;
   version: string;

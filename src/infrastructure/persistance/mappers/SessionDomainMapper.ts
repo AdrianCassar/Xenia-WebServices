@@ -6,6 +6,7 @@ import IpAddress from 'src/domain/value-objects/IpAddress';
 import SessionFlags from 'src/domain/value-objects/SessionFlags';
 import MacAddress from 'src/domain/value-objects/MacAddress';
 import SessionId from 'src/domain/value-objects/SessionId';
+import Xuid from 'src/domain/value-objects/Xuid';
 
 @Injectable()
 export default class SessionDomainMapper {
@@ -14,8 +15,9 @@ export default class SessionDomainMapper {
   public mapToDomainModel(session: SessionModel): Session {
     return new Session({
       id: new SessionId(session.id),
-      title: session.title,
       titleId: new TitleId(session.titleId),
+      xuid: session.xuid ? new Xuid(session.xuid) : undefined,
+      title: session.title,
       mediaId: session.mediaId,
       version: session.version,
       flags: new SessionFlags(session.flags),

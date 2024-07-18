@@ -10,6 +10,8 @@ export class Session {
   @Prop({ required: true })
   titleId: string;
   @Prop({ required: true })
+  xuid: string;
+  @Prop({ required: true })
   title: string;
   @Prop({ required: true })
   mediaId: string;

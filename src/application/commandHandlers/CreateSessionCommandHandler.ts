@@ -18,6 +18,7 @@ export class CreateSessionCommandHandler
   async execute(command: CreateSessionCommand) {
     const session = Session.create({
       id: command.sessionId,
+      xuid: command.xuid,
       titleId: command.titleId,
       title: command.title,
       mediaId: command.mediaId,
