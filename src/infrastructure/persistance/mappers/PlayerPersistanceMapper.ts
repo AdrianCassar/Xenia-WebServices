@@ -14,6 +14,8 @@ export default class PlayerPersistanceMapper {
       port: player.port,
       sessionId: player.sessionId?.value,
       updatedAt: new Date(),
+      titleId: player.titleId?.toString(),
+      state: player.state?.value,
     };
   }
 }

@@ -21,6 +21,10 @@ export class Player {
   sessionId?: string;
   @Prop({ type: Date, expires: '1d', default: Date.now(), required: true })
   updatedAt: Date;
+  @Prop()
+  titleId?: string;
+  @Prop()
+  state?: number;
 }
 
 export const PlayerSchema = SchemaFactory.createForClass(Player);

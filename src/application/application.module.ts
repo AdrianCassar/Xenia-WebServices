@@ -27,6 +27,8 @@ import { GetSessionsQueryHandler } from './queryHandlers/GetSessionQueryHandler'
 import { SessionSearchQueryHandler } from './queryHandlers/SessionSearchQueryHandler';
 import { AggregateSessionCommandHandler } from './commandHandlers/AggregateSessionCommandHandler';
 import { ProcessClientAddressCommandHandler } from './commandHandlers/ProcessClientAddressCommandHandler';
+import { GetPlayersQueryHandler } from './queryHandlers/GetPlayersQueryHandler';
+import { UpdatePlayerCommandHandler } from './commandHandlers/UpdatePlayerCommandHandler';
 
 export const queryHandlers = [
   GetSessionsQueryHandler,
@@ -34,6 +36,8 @@ export const queryHandlers = [
   FindPlayerQueryHandler,
   FindPlayerSessionQueryHandler,
   GetPlayerQueryHandler,
+  GetPlayersQueryHandler,
+  UpdatePlayerCommandHandler,
   FindLeaderboardsQueryHandler,
 ];
 

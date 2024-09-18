@@ -7,6 +7,11 @@ import MacAddress from 'src/domain/value-objects/MacAddress';
 import { DeleteSessionsCommand } from 'src/application/commands/DeleteSessionCommand';
 import { RealIP } from 'nestjs-real-ip';
 import { ProcessClientAddressCommand } from 'src/application/commands/ProcessClientAddressCommand';
+import { FindPlayerQuery } from 'src/application/queries/FindPlayerQuery';
+import Player from 'src/domain/aggregates/Player';
+import { UpdatePlayerCommand } from 'src/application/commands/UpdatePlayerCommand';
+import SessionId from 'src/domain/value-objects/SessionId';
+import TitleId from 'src/domain/value-objects/TitleId';
 
 @ApiTags('XNet')
 @Controller()
@@ -51,5 +56,18 @@ export class XNetController {
     await this.commandBus.execute(
       new DeleteSessionsCommand(new IpAddress(ipv4), mac),
     );
+
+    const player: Player = await this.queryBus.execute(
+      new FindPlayerQuery(new IpAddress(ipv4)),
+    );
+
+    if (player) {
+      player.setSession(new SessionId('0'.repeat(16)));
+      player.setTitleId(new TitleId('0'));
+
+      await this.commandBus.execute(
+        new UpdatePlayerCommand(player.xuid, player),
+      );
+    }
   }
 }

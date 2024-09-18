@@ -39,7 +39,6 @@ import { SessionContextResponse } from '../responses/SessionContextResponse';
 import Player from 'src/domain/aggregates/Player';
 import { GetPlayerQuery } from 'src/application/queries/GetPlayerQuery';
 import { FindPlayerQuery } from 'src/application/queries/FindPlayerQuery';
-import { SetPlayerSessionIdCommand } from 'src/application/commands/SetPlayerSessionIdCommand';
 import { Request, Response } from 'express';
 import { mkdir, stat, writeFile } from 'fs/promises';
 import { join } from 'path';
@@ -54,6 +53,7 @@ import { MigrateSessionRequest } from '../requests/MigrateSessionRequest';
 import { RealIP } from 'nestjs-real-ip';
 import { ProcessClientAddressCommand } from 'src/application/commands/ProcessClientAddressCommand';
 import Session from 'src/domain/aggregates/Session';
+import { UpdatePlayerCommand } from 'src/application/commands/UpdatePlayerCommand';
 
 @ApiTags('Sessions')
 @Controller('/title/:titleId/sessions')
@@ -99,17 +99,16 @@ export class SessionController {
         this.logger.debug('Updating Stats.');
       }
 
-      const player = await this.queryBus.execute(
+      const player: Player = await this.queryBus.execute(
         new FindPlayerQuery(new IpAddress(request.hostAddress)),
       );
 
       // If player doesn't exists add them to players table
       if (player) {
+        player.setSession(new SessionId(request.sessionId));
+
         await this.commandBus.execute(
-          new SetPlayerSessionIdCommand(
-            player.xuid,
-            new SessionId(request.sessionId),
-          ),
+          new UpdatePlayerCommand(player.xuid, player),
         );
       } else {
         this.logger.debug(`Player not found: ${request.hostAddress}`);
@@ -212,6 +211,9 @@ export class SessionController {
     const result: Session = await this.commandBus.execute(
       new DeleteSessionCommand(new TitleId(titleId), new SessionId(sessionId)),
     );
+
+    // Reset player's session id and title id when they delete a session.
+    // Problem is supporting multiple session instances
 
     if (!result.deleted) {
       throw new NotFoundException(
@@ -372,13 +374,16 @@ export class SessionController {
     const players_xuid = request.xuids.map((xuid) => new Xuid(xuid));
 
     for (const player_xuid of players_xuid) {
-      const player = await this.queryBus.execute(
+      const player: Player = await this.queryBus.execute(
         new GetPlayerQuery(player_xuid),
       );
 
       if (player) {
+        player.setSession(new SessionId(sessionId));
+        player.setTitleId(new TitleId(titleId));
+
         await this.commandBus.execute(
-          new SetPlayerSessionIdCommand(player.xuid, new SessionId(sessionId)),
+          new UpdatePlayerCommand(player.xuid, player),
         );
       }
     }
@@ -406,6 +411,28 @@ export class SessionController {
 
       throw new NotFoundException(error_msg);
     }
+
+    // Update leaving players
+    // Reset player's session id and title id when they leave a session.
+    // Problem is supporting multiple session instances
+    /*
+      const players_xuid = request.xuids.map((xuid) => new Xuid(xuid));
+
+      for (const player_xuid of players_xuid) {
+        const player: Player = await this.queryBus.execute(
+          new GetPlayerQuery(player_xuid),
+        );
+
+        if (player) {
+          player.setSession(new SessionId('0'.repeat(16)));
+          // player.setTitleId(new TitleId('0'));
+
+          await this.commandBus.execute(
+            new UpdatePlayerCommand(player.xuid, player),
+          );
+        }
+      }
+    */
   }
 
   @Post('/search')

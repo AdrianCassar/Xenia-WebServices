@@ -34,7 +34,23 @@ export default class PlayerRepository implements IPlayerRepository {
     );
   }
 
-  public async findByXuid(xuid: Xuid) {
+  public async findByXuids(xuids: Xuid[]): Promise<Player[]> {
+    const player_xuids: string[] = xuids.map((_xuid: Xuid) => {
+      return _xuid.value;
+    });
+
+    const players_docs = await this.PlayerModel.find({
+      xuid: player_xuids,
+    });
+
+    const players: Player[] = players_docs.map((document) => {
+      return this.playerDomainMapper.mapToDomainModel(document);
+    });
+
+    return players;
+  }
+
+  public async findByXuid(xuid: Xuid): Promise<Player> {
     const player = await this.PlayerModel.findOne({
       xuid: xuid.value,
     });
@@ -46,7 +62,7 @@ export default class PlayerRepository implements IPlayerRepository {
     return this.playerDomainMapper.mapToDomainModel(player);
   }
 
-  public async findByAddress(ip: IpAddress) {
+  public async findByAddress(ip: IpAddress): Promise<Player> {
     const player = await this.PlayerModel.findOne({
       hostAddress: ip.value,
     });
