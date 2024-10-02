@@ -33,7 +33,7 @@ export class TitleController {
   ) {
     const path = join(
       process.cwd(),
-      'titles',
+      './src/titles',
       titleId.toUpperCase(),
       'servers.json',
     );
@@ -62,7 +62,7 @@ export class TitleController {
   ) {
     const path = join(
       process.cwd(),
-      'titles',
+      './src/titles',
       titleId.toUpperCase(),
       'services',
       `${serviceId}.json`,
@@ -90,7 +90,7 @@ export class TitleController {
   ) {
     const path = join(
       process.cwd(),
-      'titles',
+      './src/titles',
       titleId.toUpperCase(),
       'ports.json',
     );

@@ -556,7 +556,7 @@ export class SessionController {
 
     const statsConfigPath = join(
       process.cwd(),
-      'titles',
+      './src/titles',
       titleId.toUpperCase(),
       'stats.json',
     );

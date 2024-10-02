@@ -6,9 +6,8 @@
     "deleteOutDir": true,
     "assets": [
       { "include": "public/**/*", "outDir": "dist/src", "watchAssets": true },
-      { "include": "../titles/", "outDir": "dist/src/titles" },
-      { "include": "../config/", "outDir": "dist/src/config" },
-      { "include": "../nginx/", "outDir": "dist/src/nginx" }
+      { "include": "titles/**", "outDir": "dist/src" },
+      { "include": "nginx/**", "outDir": "dist/src" }
     ]
   }
 }
