@@ -21,7 +21,7 @@ export class AppLoggerMiddleware implements NestMiddleware {
       const headers_JSON = JSON.stringify(headers);
 
       this.logger.log(
-        `${method} ${originalUrl} ${statusCode} - ${userAgent} ${ip_ipv4} ${headers_JSON}`,
+        `${method} ${originalUrl} ${statusCode} - ${userAgent} ${ip_ipv4.toString()} ${headers_JSON}`,
       );
     });
 

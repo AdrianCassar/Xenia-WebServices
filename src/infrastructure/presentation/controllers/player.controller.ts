@@ -85,7 +85,7 @@ export class PlayerController {
 
       try {
         xuid_ = new Xuid(xuid);
-      } catch (error) {
+      } catch {
         this.logger.error(`Invalid XUID: ${xuid}`);
       }
 

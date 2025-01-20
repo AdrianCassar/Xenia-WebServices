@@ -45,11 +45,11 @@ export class XNetController {
 
     ipv4 = await this.commandBus.execute(new ProcessClientAddressCommand(ipv4));
 
-    let mac = null;
+    let mac: MacAddress = null;
 
     try {
       mac = new MacAddress(macAddress);
-    } catch (err: unknown) {
+    } catch {
       this.logger.debug('Deleting session(s) based on IP!');
     }
 

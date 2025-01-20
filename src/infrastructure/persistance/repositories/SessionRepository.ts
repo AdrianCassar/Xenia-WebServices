@@ -58,12 +58,11 @@ export default class SessionRepository implements ISessionRepository {
   }
 
   public async deleteSessions(sessions: Session[]) {
-    if (sessions.length <= 0) {
+    if (sessions.length == 0) {
       this.logger.debug('Sessions already deleted.');
-      return;
     }
 
-    sessions.forEach(async (session) => {
+    for (const session of sessions) {
       await this.SessionModel.findOneAndDelete({
         id: session.id.value,
         titleId: session.titleId.toString(),
@@ -84,7 +83,7 @@ export default class SessionRepository implements ISessionRepository {
       this.logger.debug(
         `Deleted Session: ${session.id.value} from ${session.hostAddress.value}`,
       );
-    });
+    }
   }
 
   public async findSession(titleId: TitleId, id: SessionId) {

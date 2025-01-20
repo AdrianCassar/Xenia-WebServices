@@ -22,7 +22,7 @@ export class AggregateSessionCommandHandler
   }
 
   async downloadImageAsBase64(url: string): Promise<string> {
-    const response = await this.downloadContent(url, 'arraybuffer');
+    const response: string = await this.downloadContent(url, 'arraybuffer');
 
     if (response) {
       const base64 = Buffer.from(response, 'binary').toString('base64');

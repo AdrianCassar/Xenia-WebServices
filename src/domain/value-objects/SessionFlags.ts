@@ -43,8 +43,8 @@ export default class SessionFlags extends TinyTypeOf<number>() {
 
   public get isHost(): boolean {
     const host = this.isFlagSet(Flags.HOST);
-    const stats_only = this.value == Flags.STATS;
-    const singleplayer = this.value == FlagsEx.SINGLEPLAYER_WITH_STATS;
+    const stats_only = this.value == <number>Flags.STATS;
+    const singleplayer = this.value == <number>FlagsEx.SINGLEPLAYER_WITH_STATS;
 
     return host || stats_only || singleplayer;
   }
@@ -58,8 +58,9 @@ export default class SessionFlags extends TinyTypeOf<number>() {
   }
 
   public get isStatsSession(): boolean {
-    const stats_only = this.value == Flags.STATS;
-    const stats_host_only = this.value == Flags.STATS + Flags.HOST;
+    const stats_only = this.value == <number>Flags.STATS;
+    const stats_host_only =
+      this.value == <number>Flags.STATS + <number>Flags.HOST;
 
     return stats_only || stats_host_only;
   }

@@ -142,7 +142,7 @@ export class SessionController {
     @Param('titleId') titleId: string,
     @Param('sessionId') sessionId: string,
   ) {
-    const session = await this.queryBus.execute(
+    const session: Session = await this.queryBus.execute(
       new GetSessionQuery(new TitleId(titleId), new SessionId(sessionId)),
     );
 
@@ -161,7 +161,7 @@ export class SessionController {
     @Param('sessionId') sessionId: string,
     @Body() request: MigrateSessionRequest,
   ) {
-    const session = await this.queryBus.execute(
+    const session: Session = await this.queryBus.execute(
       new GetSessionQuery(new TitleId(titleId), new SessionId(sessionId)),
     );
 
@@ -469,7 +469,7 @@ export class SessionController {
     @Param('titleId') titleId: string,
     @Body() request: SessionSearchRequest,
   ) {
-    const sessions = await this.queryBus.execute(
+    const sessions: Session[] = await this.queryBus.execute(
       new SessionSearchQuery(
         new TitleId(titleId),
         request.searchIndex,

@@ -17,7 +17,7 @@ export class IndexController {
   @Get('/sessions')
   @Header('content-type', 'application/json')
   async sessionData() {
-    const sessionsJSON = await this.commandBus.execute(
+    const sessionsJSON: string = await this.commandBus.execute(
       new AggregateSessionCommand(),
     );
 

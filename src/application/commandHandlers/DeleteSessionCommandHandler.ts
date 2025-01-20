@@ -34,7 +34,7 @@ export class DeleteSessionCommandHandler
       return undefined;
     }
 
-    this.deleteSession(session);
+    await this.deleteSession(session);
 
     return session;
   }
@@ -45,7 +45,7 @@ export class DeleteSessionCommandHandler
     }
 
     session.delete();
-    this.repository.save(session);
+    await this.repository.save(session);
 
     const qosPath = join(
       process.cwd(),
