@@ -5,7 +5,7 @@
   "compilerOptions": {
     "deleteOutDir": true,
     "assets": [
-      { "include": "public/**/*", "outDir": "dist/src", "watchAssets": true },
+      { "include": "public/**", "outDir": "dist/src", "watchAssets": true },
       { "include": "titles/**", "outDir": "dist/src" },
       { "include": "nginx/**", "outDir": "dist/src" }
     ]

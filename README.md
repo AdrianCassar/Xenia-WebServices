@@ -2,7 +2,7 @@
 
 # Xenia Web Services
 
-This is a Web API designed to support the Xenia Xbox 360 emulator in providing Online and Multiplayer functionality. A fork of [Xenia-Canary](https://github.com/AdrianCassar/xenia-canary/tree/netplay_canary_experimental#netplay-fork) has been created for use with this Web API.
+This is a Web API designed to support the Xenia Xbox 360 emulator in providing Online and Multiplayer functionality. A fork [Xenia Canary Netplay](https://github.com/AdrianCassar/xenia-canary) has been created for use with this Web API.
 It has been designed and developed specifically for Xenia, and does not represent or resemble any first-party Xbox API.
 
 If you'd like to help improve this project, you may report issues or contribute by submitting PRs.

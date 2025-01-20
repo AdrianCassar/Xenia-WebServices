@@ -125,11 +125,11 @@ async function refreshSessionTable() {
   }
 }
 
-let time = 60;
+let time = 30;
 
 function refreshTimer() {
   if (time <= 0) {
-    time = 60;
+    time = 30;
     refreshSessionTable();
   }
 

@@ -1,10 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import request from 'supertest';
-import { XeniaModule } from '../src/xenia.module';
+import * as request from 'supertest';
+import { App } from 'supertest/types';
+import { XeniaModule } from './../src/xenia.module';
 
 describe('AppController (e2e)', () => {
-  let app: INestApplication;
+  let app: INestApplication<App>;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({

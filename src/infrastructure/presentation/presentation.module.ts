@@ -25,7 +25,7 @@ export class PresentationModule implements NestModule {
   configure(consumer: MiddlewareConsumer): void {
     consumer
       .apply(AppLoggerMiddleware)
-      .exclude('/assets/(.*)', '/js/(.*)', '/css/(.*)')
+      .exclude('/assets/{*splat}', '/js/{*splat}', '/css/{*splat}')
       .forRoutes('*');
   }
 }
