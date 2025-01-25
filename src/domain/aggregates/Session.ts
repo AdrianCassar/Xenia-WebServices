@@ -5,6 +5,7 @@ import SessionFlags from '../value-objects/SessionFlags';
 import SessionId from '../value-objects/SessionId';
 import TitleId from '../value-objects/TitleId';
 import Xuid from '../value-objects/Xuid';
+import Property from '../value-objects/Property';
 
 interface SessionProps {
   id: SessionId;
@@ -22,7 +23,7 @@ interface SessionProps {
   players: Map<string, boolean>;
   deleted: boolean;
   context: Map<string, number>;
-  properties: Map<string, number>;
+  properties: Array<Property>;
   migration?: SessionId;
 }
 
@@ -59,7 +60,7 @@ interface ContextProps {
   context: Map<number, { contextId: number; value: number }>;
 }
 interface PropertyProps {
-  property: Map<number, { propertyId: number; value: number }>;
+  properties: Array<Property>;
 }
 interface JoinProps {
   members: Map<Xuid, boolean>;
@@ -68,6 +69,9 @@ interface JoinProps {
 interface LeaveProps {
   xuids: Xuid[];
 }
+
+const X_PROPERTY_GAMER_HOSTNAME = 0x40008109;
+const X_PROPERTY_GAMER_PUID = 0x20008107;
 
 export default class Session {
   private readonly props: SessionProps;
@@ -104,7 +108,7 @@ export default class Session {
       players: new Map<string, boolean>(),
       deleted: false,
       context: new Map<string, number>(),
-      properties: new Map<string, number>(),
+      properties: new Array<Property>(),
     });
   }
 
@@ -153,9 +157,9 @@ export default class Session {
     });
   }
 
-  public addProperty(props: PropertyProps) {
-    props.property.forEach((entry) => {
-      this.props.properties.set(entry.propertyId.toString(16), entry.value);
+  public addProperties(props: PropertyProps) {
+    props.properties.forEach((entry) => {
+      this.props.properties.push(entry);
     });
   }
 
@@ -351,5 +355,29 @@ export default class Session {
 
   get properties() {
     return this.props.properties;
+  }
+
+  get propertiesStringArray() {
+    const properties: Array<string> = this.props.properties.map((prop) => {
+      return prop.toString();
+    });
+
+    return properties;
+  }
+
+  get propertyHostGamerName() {
+    const GAMER_HOSTNAME = this.props.properties.find((prop) => {
+      return prop.id == X_PROPERTY_GAMER_HOSTNAME;
+    });
+
+    return GAMER_HOSTNAME;
+  }
+
+  get propertyPUID() {
+    const PUID = this.props.properties.find((prop) => {
+      return prop.id == X_PROPERTY_GAMER_PUID;
+    });
+
+    return PUID;
   }
 }
