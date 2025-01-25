@@ -57,6 +57,7 @@ import { RealIP } from 'nestjs-real-ip';
 import { ProcessClientAddressCommand } from 'src/application/commands/ProcessClientAddressCommand';
 import Session from 'src/domain/aggregates/Session';
 import { UpdatePlayerCommand } from 'src/application/commands/UpdatePlayerCommand';
+import Property from 'src/domain/value-objects/Property';
 
 @ApiTags('Sessions')
 @Controller('/title/:titleId/sessions')
@@ -575,18 +576,32 @@ export class SessionController {
 
   @Post('/:sessionId/properties')
   @ApiParam({ name: 'titleId', example: '4D5307E6' })
-  @ApiParam({ name: 'sessionId', example: 'B36B3FE8467CFAC7' })
+  @ApiParam({ name: 'sessionId', example: 'AE00000000000000' })
   async sessionPropertySet(
     @Param('titleId') titleId: string,
     @Param('sessionId') sessionId: string,
     @Body() request: GetSessionPropertyRequest,
   ) {
-    const session = await this.commandBus.execute(
+    const properties: Array<Property> = request.properties.map(
+      (base64: string) => {
+        return new Property(base64);
+      },
+    );
+
+    const session: Session = await this.commandBus.execute(
       new AddSessionPropertyCommand(
         new TitleId(titleId),
         new SessionId(sessionId),
-        request.properties,
+        properties,
       ),
+    );
+
+    this.logger.verbose(
+      `Host Gamer Name: ${session.propertyHostGamerName.getUTF16()}`,
+    );
+
+    this.logger.verbose(
+      `Host PUID: ${session.propertyPUID.getData().readBigInt64BE().toString(16).padStart(16, '0').toUpperCase()}`,
     );
 
     if (!session) {
@@ -596,12 +611,12 @@ export class SessionController {
 
   @Get('/:sessionId/properties')
   @ApiParam({ name: 'titleId', example: '4D5307E6' })
-  @ApiParam({ name: 'sessionId', example: 'B36B3FE8467CFAC7' })
+  @ApiParam({ name: 'sessionId', example: 'AE00000000000000' })
   async sessionPropertyGet(
     @Param('titleId') titleId: string,
     @Param('sessionId') sessionId: string,
   ): Promise<SessionPropertyResponse> {
-    const session = await this.queryBus.execute(
+    const session: Session = await this.queryBus.execute(
       new GetSessionQuery(new TitleId(titleId), new SessionId(sessionId)),
     );
 
@@ -610,7 +625,7 @@ export class SessionController {
     }
 
     return {
-      properties: session.properties,
+      properties: session.propertiesStringArray,
     };
   }
 
