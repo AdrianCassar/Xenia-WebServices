@@ -5,6 +5,10 @@ import { Session as SessionModel } from '../models/SessionSchema';
 @Injectable()
 export default class SessionPersistanceMapper {
   public mapToDataModel(session: Session, updatedAt: Date): SessionModel {
+    const properties: Array<string> = session.properties.map((prop) => {
+      return prop.toString();
+    });
+
     return {
       id: session.id.value,
       titleId: session.titleId.toString(),
@@ -22,7 +26,7 @@ export default class SessionPersistanceMapper {
       players: session.players,
       deleted: session.deleted,
       context: session.context,
-      properties: session.properties,
+      properties: properties,
       migration: session.migration ? session.migration.value : undefined,
       updatedAt,
     };

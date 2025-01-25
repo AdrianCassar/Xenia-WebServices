@@ -38,7 +38,7 @@ export class Session {
   @Prop({ required: true })
   context: Map<string, number>;
   @Prop({ required: true })
-  properties: Map<string, number>;
+  properties: Array<string>;
   @Prop({ required: false })
   migration: string;
 

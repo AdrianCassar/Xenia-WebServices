@@ -24,7 +24,7 @@ export class AddSessionPropertyCommandHandler
       return undefined;
     }
 
-    session.addProperty({ property: command.properties });
+    session.addProperties({ properties: command.properties });
     await this.repository.save(session);
 
     return session;

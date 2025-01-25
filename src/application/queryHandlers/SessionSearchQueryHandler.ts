@@ -18,7 +18,7 @@ export class SessionSearchQueryHandler
   }
 
   async execute(query: SessionSearchQuery) {
-    this.logger.debug('Session Search ' + query.searchIndex);
+    this.logger.verbose(`Matchmaking Query ID: ${query.searchIndex}`);
 
     return this.repository.findAdvertisedSessions(
       query.title,
