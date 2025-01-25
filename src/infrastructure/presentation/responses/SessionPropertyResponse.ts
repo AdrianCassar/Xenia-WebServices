@@ -1,3 +1,3 @@
 export interface SessionPropertyResponse {
-  properties: Map<number, number>;
+  properties: Array<string>;
 }

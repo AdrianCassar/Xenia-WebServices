@@ -7,12 +7,17 @@ import SessionFlags from 'src/domain/value-objects/SessionFlags';
 import MacAddress from 'src/domain/value-objects/MacAddress';
 import SessionId from 'src/domain/value-objects/SessionId';
 import Xuid from 'src/domain/value-objects/Xuid';
+import Property from 'src/domain/value-objects/Property';
 
 @Injectable()
 export default class SessionDomainMapper {
   constructor(private readonly logger: ConsoleLogger) {}
 
   public mapToDomainModel(session: SessionModel): Session {
+    const properties: Array<Property> = session.properties.map((prop) => {
+      return new Property(prop);
+    });
+
     return new Session({
       id: new SessionId(session.id),
       titleId: new TitleId(session.titleId),
@@ -29,7 +34,7 @@ export default class SessionDomainMapper {
       players: session.players,
       deleted: session.deleted,
       context: session.context,
-      properties: session.properties,
+      properties: properties,
       migration: session.migration
         ? new SessionId(session.migration)
         : undefined,
