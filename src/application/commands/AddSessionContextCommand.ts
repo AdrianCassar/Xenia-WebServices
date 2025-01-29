@@ -5,6 +5,6 @@ export class AddSessionContextCommand {
   constructor(
     public readonly titleId: TitleId,
     public readonly sessionId: SessionId,
-    public readonly contexts: Map<number, { contextId: number; value: number }>,
+    public readonly contexts: Array<{ contextId: number; value: number }>,
   ) {}
 }
