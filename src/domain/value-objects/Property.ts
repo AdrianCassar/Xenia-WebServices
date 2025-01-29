@@ -1,5 +1,17 @@
 import { TinyTypeOf } from 'tiny-types';
 
+export enum X_USER_DATA_TYPE {
+  CONTEXT = 0,
+  INT32 = 1,
+  INT64 = 2,
+  DOUBLE = 3,
+  WSTRING = 4,
+  FLOAT = 5,
+  BINARY = 6,
+  DATETIME = 7,
+  UNSET = 0xff,
+}
+
 export default class Property extends TinyTypeOf<string>() {
   buffer: Buffer<ArrayBuffer>;
   data: Buffer<ArrayBuffer>;
@@ -7,7 +19,7 @@ export default class Property extends TinyTypeOf<string>() {
   id_hex: string = '';
   id: number = 0;
   size: number = 0;
-  type: number = 0;
+  type: X_USER_DATA_TYPE = 0;
 
   public constructor(base64: string) {
     super(base64);
@@ -29,7 +41,7 @@ export default class Property extends TinyTypeOf<string>() {
   }
 
   getUTF16() {
-    if (this.type != 4) {
+    if (this.type != X_USER_DATA_TYPE.WSTRING) {
       return '';
     }
 
@@ -64,6 +76,20 @@ export default class Property extends TinyTypeOf<string>() {
   }
 
   toStringPretty() {
-    return `ID: ${this.getIDString()}  Type: ${this.getType()}  Size: ${this.getSize()}`;
+    return `${this.getType() == X_USER_DATA_TYPE.CONTEXT ? 'Context' : 'Property'} ID:\t0x${this.getIDString().toUpperCase().padStart(8, '0')}  Type: ${this.getType()}  Size: ${this.getSize()}`;
+  }
+
+  static SerializeContextToBase64(id: number, value: number): string {
+    const buffer = Buffer.alloc(12);
+
+    let offset: number = 0;
+
+    buffer.writeInt32LE(id, offset);
+    offset += 4;
+    buffer.writeInt32LE(4, offset);
+    offset += 4;
+    buffer.writeInt32BE(value, offset);
+
+    return buffer.toString('base64');
   }
 }
