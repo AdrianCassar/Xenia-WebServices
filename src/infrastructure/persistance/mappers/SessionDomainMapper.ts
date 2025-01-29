@@ -18,6 +18,20 @@ export default class SessionDomainMapper {
       return new Property(prop);
     });
 
+    // Serialize contexts back into base64
+    // const contexts: Array<Property> = Array.from(session.context).map(
+    //   ([id, value]) => {
+    //     const serialized_context: string = Property.SerializeContextToBase64(
+    //       Number(`0x${id}`),
+    //       value,
+    //     );
+
+    //     return new Property(serialized_context);
+    //   },
+    // );
+
+    // properties = properties.concat(contexts);
+
     return new Session({
       id: new SessionId(session.id),
       titleId: new TitleId(session.titleId),

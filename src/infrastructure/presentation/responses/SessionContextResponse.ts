@@ -1,3 +1,3 @@
 export interface SessionContextResponse {
-  context: Map<number, number>;
+  context: Map<string, number>;
 }

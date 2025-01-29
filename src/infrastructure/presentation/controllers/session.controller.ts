@@ -60,7 +60,7 @@ import { UpdatePlayerCommand } from 'src/application/commands/UpdatePlayerComman
 import { GetTitleSessionsQuery } from 'src/application/queries/GetTitleSessionsQuery';
 import SessionDetailsPresentationMapper from '../mappers/SessionDetailsPresentationMapper';
 import { PreJoinRequest } from '../requests/PreJoinRequest';
-import Property from 'src/domain/value-objects/Property';
+import Property, { X_USER_DATA_TYPE } from 'src/domain/value-objects/Property';
 
 @ApiTags('Sessions')
 @Controller('/title/:titleId/sessions')
@@ -568,7 +568,7 @@ export class SessionController {
     @Param('sessionId') sessionId: string,
     @Body() request: GetSessionContextRequest,
   ) {
-    const session = await this.commandBus.execute(
+    const session: Session = await this.commandBus.execute(
       new AddSessionContextCommand(
         new TitleId(titleId),
         new SessionId(sessionId),
@@ -588,7 +588,7 @@ export class SessionController {
     @Param('titleId') titleId: string,
     @Param('sessionId') sessionId: string,
   ): Promise<SessionContextResponse> {
-    const session = await this.queryBus.execute(
+    const session: Session = await this.queryBus.execute(
       new GetSessionQuery(new TitleId(titleId), new SessionId(sessionId)),
     );
 
@@ -609,13 +609,45 @@ export class SessionController {
     @Param('sessionId') sessionId: string,
     @Body() request: GetSessionPropertyRequest,
   ) {
-    const properties: Array<Property> = request.properties.map(
-      (base64: string) => {
+    // Extract properties and exclude contexts
+    const properties: Array<Property> = request.properties
+      .filter((base64: string) => {
+        const prop: Property = new Property(base64);
+
+        return prop.type != X_USER_DATA_TYPE.CONTEXT;
+      })
+      .map((base64: string) => {
         return new Property(base64);
-      },
+      });
+
+    // Extract contexts from properties
+    const contexts: Array<{ contextId: number; value: number }> =
+      request.properties
+        .filter((base64: string) => {
+          const prop: Property = new Property(base64);
+
+          return prop.type == X_USER_DATA_TYPE.CONTEXT;
+        })
+        .map((base64: string) => {
+          const prop: Property = new Property(base64);
+          const value = prop.getData().readUInt32BE();
+
+          return { contextId: prop.id, value: value };
+        });
+
+    const context_session: Session = await this.commandBus.execute(
+      new AddSessionContextCommand(
+        new TitleId(titleId),
+        new SessionId(sessionId),
+        contexts,
+      ),
     );
 
-    const session: Session = await this.commandBus.execute(
+    if (!context_session) {
+      throw new NotFoundException(`Session ${sessionId} was not found.`);
+    }
+
+    const properties_session: Session = await this.commandBus.execute(
       new AddSessionPropertyCommand(
         new TitleId(titleId),
         new SessionId(sessionId),
@@ -623,16 +655,17 @@ export class SessionController {
       ),
     );
 
-    this.logger.verbose(
-      `Host Gamer Name: ${session.propertyHostGamerName.getUTF16()}`,
-    );
+    const HostGamerName: Property = properties_session.propertyHostGamerName;
+    const PUID: Property = properties_session.propertyPUID;
 
-    this.logger.verbose(
-      `Host PUID: ${session.propertyPUID.getData().readBigInt64BE().toString(16).padStart(16, '0').toUpperCase()}`,
-    );
+    if (HostGamerName) {
+      this.logger.verbose(`Host Gamer Name: ${HostGamerName.getUTF16()}`);
+    }
 
-    if (!session) {
-      throw new NotFoundException(`Session ${sessionId} was not found.`);
+    if (PUID) {
+      this.logger.verbose(
+        `Host PUID: ${PUID.getData().readBigInt64BE().toString(16).padStart(16, '0').toUpperCase()}`,
+      );
     }
   }
 

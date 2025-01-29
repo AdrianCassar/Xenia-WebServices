@@ -57,7 +57,7 @@ interface CreateMigrationProps {
 }
 
 interface ContextProps {
-  context: Map<number, { contextId: number; value: number }>;
+  context: Array<{ contextId: number; value: number }>;
 }
 interface PropertyProps {
   properties: Array<Property>;
@@ -159,7 +159,22 @@ export default class Session {
 
   public addProperties(props: PropertyProps) {
     props.properties.forEach((entry) => {
-      this.props.properties.push(entry);
+      const propIndex = this.props.properties.findIndex(
+        (prop) => prop.id == entry.id,
+      );
+
+      // Update property if it already exists during host migration
+      if (propIndex >= 0) {
+        const current_prop = this.props.properties[propIndex];
+
+        if (!entry.getData().equals(current_prop.getData())) {
+          this._logger.verbose(`Updated: ${entry.toStringPretty()}`);
+
+          this.props.properties[propIndex] = entry;
+        }
+      } else {
+        this.props.properties.push(entry);
+      }
     });
   }
 
@@ -358,9 +373,22 @@ export default class Session {
   }
 
   get propertiesStringArray() {
-    const properties: Array<string> = this.props.properties.map((prop) => {
+    let properties: Array<string> = this.props.properties.map((prop) => {
       return prop.toString();
     });
+
+    const contexts: Array<string> = Array.from(this.context).map(
+      ([id, value]) => {
+        const serialized_context: string = Property.SerializeContextToBase64(
+          Number(`0x${id}`),
+          value,
+        );
+
+        return serialized_context;
+      },
+    );
+
+    properties = properties.concat(contexts);
 
     return properties;
   }
