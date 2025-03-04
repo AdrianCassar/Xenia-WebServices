@@ -16,7 +16,7 @@ async function bootstrap() {
   const envs = new PersistanceSettings().get();
 
   if (envs.mongoURI == '') {
-    logger.debug(`MONGO_URI is undefined!`);
+    logger.error(`MONGO_URI is undefined!`);
   }
 
   const app = await NestFactory.create<NestExpressApplication>(XeniaModule, {
@@ -27,6 +27,7 @@ async function bootstrap() {
   const Swagger_enabled = envs.swagger_API == 'true';
   const Heroku_Nginx_enabled = envs.heroku_nginx == 'true';
   const Nginx_enabled = envs.nginx == 'true';
+  const XStorage_enabled = envs.xstorage == 'true';
 
   if (Swagger_enabled) {
     const config = new DocumentBuilder()
@@ -82,6 +83,7 @@ async function bootstrap() {
   logger.debug(
     `Heroku & Nginx:\t ${Heroku_Nginx_enabled ? 'Enabled' : 'Disabled'}`,
   );
+  logger.debug(`XStorage:\t\t ${XStorage_enabled ? 'Enabled' : 'Disabled'}`);
   logger.debug(``);
   logger.debug(`Application is running on: ${await app.getUrl()}`);
 }

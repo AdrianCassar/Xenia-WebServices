@@ -4,6 +4,7 @@ export interface PersistanceSettingsProps {
   SSL: string;
   nginx: string;
   heroku_nginx: string;
+  xstorage: string;
 }
 
 export default interface IPersistanceSettings {

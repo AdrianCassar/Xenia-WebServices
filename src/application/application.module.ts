@@ -29,6 +29,10 @@ import { AggregateSessionCommandHandler } from './commandHandlers/AggregateSessi
 import { ProcessClientAddressCommandHandler } from './commandHandlers/ProcessClientAddressCommandHandler';
 import { GetPlayersQueryHandler } from './queryHandlers/GetPlayersQueryHandler';
 import { UpdatePlayerCommandHandler } from './commandHandlers/UpdatePlayerCommandHandler';
+import { XStorageUploadCommandHandler } from './commandHandlers/XStorageUploadCommandHandler';
+import { XStorageDownloadCommandHandler } from './commandHandlers/XStorageDownloadCommandHandler';
+import { XStorageDeleteCommandHandler } from './commandHandlers/XStorageDeleteCommandHandler';
+import { XStorageBuildServerPathCommandHandler } from './commandHandlers/XStorageBuildServerPathCommandHandler';
 
 export const queryHandlers = [
   GetSessionsQueryHandler,
@@ -39,6 +43,10 @@ export const queryHandlers = [
   GetPlayersQueryHandler,
   UpdatePlayerCommandHandler,
   FindLeaderboardsQueryHandler,
+  XStorageDeleteCommandHandler,
+  XStorageUploadCommandHandler,
+  XStorageDownloadCommandHandler,
+  XStorageBuildServerPathCommandHandler,
 ];
 
 export const commandHandlers = [
