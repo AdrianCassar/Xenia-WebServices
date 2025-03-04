@@ -29,6 +29,7 @@ import { AggregateSessionCommandHandler } from './commandHandlers/AggregateSessi
 import { ProcessClientAddressCommandHandler } from './commandHandlers/ProcessClientAddressCommandHandler';
 import { GetPlayersQueryHandler } from './queryHandlers/GetPlayersQueryHandler';
 import { UpdatePlayerCommandHandler } from './commandHandlers/UpdatePlayerCommandHandler';
+import { GetPlayerGamertagQueryHandler } from './queryHandlers/GetPlayerGamertagQueryHandle';
 
 export const queryHandlers = [
   GetSessionsQueryHandler,
@@ -39,6 +40,7 @@ export const queryHandlers = [
   GetPlayersQueryHandler,
   UpdatePlayerCommandHandler,
   FindLeaderboardsQueryHandler,
+  GetPlayerGamertagQueryHandler,
 ];
 
 export const commandHandlers = [

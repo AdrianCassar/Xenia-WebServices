@@ -8,6 +8,7 @@ import PlayerPersistanceMapper from '../mappers/PlayerPersistanceMapper';
 import { PlayerDocument } from '../models/PlayerSchema';
 import Xuid from 'src/domain/value-objects/Xuid';
 import IpAddress from 'src/domain/value-objects/IpAddress';
+import Gamertag from 'src/domain/value-objects/Gamertag';
 
 @Injectable()
 export default class PlayerRepository implements IPlayerRepository {
@@ -70,6 +71,16 @@ export default class PlayerRepository implements IPlayerRepository {
     if (!player) {
       return undefined;
     }
+
+    return this.playerDomainMapper.mapToDomainModel(player);
+  }
+
+  public async findByGamertag(gamertag: Gamertag): Promise<Player> {
+    this.logger.debug(gamertag);
+
+    const player = await this.PlayerModel.findOne({
+      gamertag: gamertag.value,
+    });
 
     return this.playerDomainMapper.mapToDomainModel(player);
   }
