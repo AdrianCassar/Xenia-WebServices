@@ -21,6 +21,7 @@ export default interface ISessionRepository {
     macAddress: MacAddress,
   ) => Promise<Session[]>;
   findByPlayer: (xuid: Xuid) => Promise<Session>;
+  findTitleSessions: (titleId: TitleId) => Promise<Session[]>;
   deleteSessions: (sessions: Session[]) => Promise<void>;
   save: (session: Session) => Promise<void>;
 }
