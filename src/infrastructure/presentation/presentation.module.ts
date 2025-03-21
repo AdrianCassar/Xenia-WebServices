@@ -8,6 +8,7 @@ import { SessionController } from './controllers/session.controller';
 import { PlayerController } from './controllers/player.controller';
 import { LeaderboardsController } from './controllers/leaderboards.controller';
 import { IndexController } from './controllers/index.controller';
+import SessionDetailsPresentationMapper from './mappers/SessionDetailsPresentationMapper';
 
 @Module({
   imports: [CqrsModule],
@@ -19,7 +20,7 @@ import { IndexController } from './controllers/index.controller';
     LeaderboardsController,
     IndexController,
   ],
-  providers: [SessionPresentationMapper],
+  providers: [SessionPresentationMapper, SessionDetailsPresentationMapper],
 })
 export class PresentationModule implements NestModule {
   configure(consumer: MiddlewareConsumer): void {
