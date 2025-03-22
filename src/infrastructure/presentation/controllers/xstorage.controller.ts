@@ -14,7 +14,7 @@ import {
 import { Request, Response } from 'express';
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
-import { join } from 'path';
+import { join, normalize } from 'path';
 import { glob, Path } from 'glob';
 import PersistanceSettings from 'src/infrastructure/persistance/settings/PersistanceSettings';
 import { XStorageUploadCommand } from 'src/application/commands/XStorageUploadCommand';
@@ -43,6 +43,8 @@ export class XStorageController {
   title_file_size_limit: number = 5242880; // 5 MB
   clip_file_size_limit: number = 11534336; // 11 MB
 
+  root_path: string = join(process.cwd(), './src/xstorage');
+
   @Post('/title/:titleId/storage/clips')
   @ApiParam({
     name: 'xuid',
@@ -61,7 +63,7 @@ export class XStorageController {
     }
 
     const location = `/user/${xuid}/title/${titleId}/storage/clips`;
-    const absolute_path = join(process.cwd(), './src/xstorage', location);
+    const absolute_path = join(this.root_path, normalize(location));
 
     const result: number = await this.commandBus.execute(
       new XStorageBuildServerPathCommand(absolute_path),
@@ -106,7 +108,7 @@ export class XStorageController {
     }
 
     const location = `/user/${xuid}/title/${titleId}/storage/clips/${file}`;
-    const absolute_path = join(process.cwd(), './src/xstorage', location);
+    const absolute_path = join(this.root_path, normalize(location));
 
     const uploaded: boolean = await this.commandBus.execute(
       new XStorageUploadCommand(
@@ -143,7 +145,7 @@ export class XStorageController {
     @Res() res: Response,
   ) {
     const location = `/user/${xuid}/title/${titleId}/storage/clips/${file}`;
-    const absolute_path = join(process.cwd(), './src/xstorage', location);
+    const absolute_path = join(this.root_path, normalize(location));
 
     const downloaded: boolean = await this.commandBus.execute(
       new XStorageDownloadCommand(
@@ -181,8 +183,7 @@ export class XStorageController {
     throw new ForbiddenException('Deleting clip content is not allowed!');
 
     const absolute_path = join(
-      process.cwd(),
-      './src/xstorage',
+      this.root_path,
       `/user/${xuid}/title/${titleId}/storage/clips/${file}`,
     );
 
@@ -207,7 +208,7 @@ export class XStorageController {
     }
 
     const location = `/user/${xuid}/title/${titleId}/storage`;
-    const absolute_path = join(process.cwd(), './src/xstorage', location);
+    const absolute_path = join(this.root_path, normalize(location));
 
     const result: number = await this.commandBus.execute(
       new XStorageBuildServerPathCommand(absolute_path),
@@ -252,7 +253,7 @@ export class XStorageController {
     }
 
     const location = `/user/${xuid}/title/${titleId}/storage/${file}`;
-    const absolute_path = join(process.cwd(), './src/xstorage', location);
+    const absolute_path = join(this.root_path, normalize(location));
 
     const uploaded: boolean = await this.commandBus.execute(
       new XStorageUploadCommand(
@@ -289,7 +290,7 @@ export class XStorageController {
     @Res() res: Response,
   ) {
     const location = `/user/${xuid}/title/${titleId}/storage/${file}`;
-    const absolute_path = join(process.cwd(), './src/xstorage', location);
+    const absolute_path = join(this.root_path, normalize(location));
 
     const downloaded: boolean = await this.commandBus.execute(
       new XStorageDownloadCommand(
@@ -325,8 +326,7 @@ export class XStorageController {
     @Param('file') file: string,
   ) {
     const absolute_path = join(
-      process.cwd(),
-      './src/xstorage',
+      this.root_path,
       `/user/${xuid}/title/${titleId}/storage/${file}`,
     );
 
@@ -346,7 +346,7 @@ export class XStorageController {
     }
 
     const location = `/title/${titleId}/storage`;
-    const absolute_path = join(process.cwd(), './src/xstorage', location);
+    const absolute_path = join(this.root_path, normalize(location));
 
     const result: number = await this.commandBus.execute(
       new XStorageBuildServerPathCommand(absolute_path),
@@ -386,7 +386,7 @@ export class XStorageController {
     }
 
     const location = `/title/${titleId}/storage/${file}`;
-    const absolute_path = join(process.cwd(), './src/xstorage', location);
+    const absolute_path = join(this.root_path, normalize(location));
 
     const result: boolean = await this.commandBus.execute(
       new XStorageUploadCommand(
@@ -418,7 +418,7 @@ export class XStorageController {
     @Res() res: Response,
   ) {
     const location = `/title/${titleId}/storage/${file}`;
-    const absolute_path = join(process.cwd(), './src/xstorage', location);
+    const absolute_path = join(this.root_path, normalize(location));
 
     await this.commandBus.execute(
       new XStorageDownloadCommand(
@@ -449,7 +449,7 @@ export class XStorageController {
     }
 
     const location = `/title/${titleId}/storage/${file}`;
-    const absolute_path = join(process.cwd(), './src/xstorage', location);
+    const absolute_path = join(this.root_path, normalize(location));
 
     await this.commandBus.execute(new XStorageDeleteCommand(absolute_path));
   }
@@ -466,23 +466,14 @@ export class XStorageController {
     this.logger.verbose(request.MaxItems);
 
     const location = `${directory}`;
-    let absolute_path = join(process.cwd(), './src/xstorage', location);
+    let absolute_path = join(this.root_path, normalize(location));
 
-    const pos = absolute_path.lastIndexOf('\\');
+    if (!absolute_path.startsWith(this.root_path)) {
+      absolute_path = this.root_path;
+    }
 
-    const split_absolute_path = absolute_path.split('');
-    split_absolute_path[pos] = '/';
-    absolute_path = split_absolute_path.join('');
-
-    let absolute_path_query_all = absolute_path;
     const wildcard_start = absolute_path.lastIndexOf('/');
-
-    absolute_path_query_all = absolute_path_query_all.substring(
-      0,
-      wildcard_start,
-    );
-
-    absolute_path_query_all += '/*';
+    let absolute_path_query_all = absolute_path.substring(0, wildcard_start) + '/*';
 
     const total_num_items = (
       await glob(`${absolute_path_query_all}`, {
