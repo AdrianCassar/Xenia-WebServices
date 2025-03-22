@@ -21,6 +21,10 @@ import { PresenceRequest } from '../requests/PresenceRequest';
 import Player from 'src/domain/aggregates/Player';
 import { GetPlayersQuery } from 'src/application/queries/GetPlayersQuery';
 import _ from 'lodash';
+import { FindUserInfo, FindUsersInfo } from '../responses/FindUserInfo';
+import { FindUsersInfoRequest } from '../requests/FindUsersInfoRequest';
+import { GetPlayerQuery } from 'src/application/queries/GetPlayerQuery';
+import { GetPlayerGamertagQuery } from 'src/application/queries/GetPlayerGamertagQuery';
 
 @ApiTags('Player')
 @Controller('/players')
@@ -115,5 +119,52 @@ export class PlayerController {
     });
 
     return playerPresences;
+  }
+
+  // Fill in the missing information given a xuid or gamertag
+  @Post('/findusers')
+  async FindUsers(
+    @Body() request: FindUsersInfoRequest,
+  ): Promise<FindUsersInfo> {
+    const UsersInfo: FindUsersInfo = [];
+
+    this.logger.debug(request);
+
+    for (const UserInfo of request.UsersInfo) {
+      const info: FindUserInfo = {
+        xuid: UserInfo[0],
+        gamertag: UserInfo[1],
+      };
+
+      let player: Player;
+
+      if (info.xuid) {
+        const xuid: Xuid = new Xuid(info.xuid);
+
+        player = await this.queryBus.execute(new GetPlayerQuery(xuid));
+
+        if (player && !info.gamertag) {
+          info.gamertag = player.gamertag.value;
+        }
+      }
+
+      if (info.gamertag) {
+        const gamertag: Gamertag = new Gamertag(info.gamertag);
+
+        player = await this.queryBus.execute(
+          new GetPlayerGamertagQuery(gamertag),
+        );
+
+        if (player && !info.xuid) {
+          info.xuid = player.xuid.value;
+        }
+      }
+
+      UsersInfo.push(info);
+    }
+
+    this.logger.debug(UsersInfo);
+
+    return UsersInfo;
   }
 }
