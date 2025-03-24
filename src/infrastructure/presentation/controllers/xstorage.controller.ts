@@ -37,6 +37,33 @@ export class XStorageController {
     this.logger.setContext(XStorageController.name);
   }
 
+  // sanatizes path while maintaining windows support
+  SanitizePath(path: string) {
+    let newPath = path.replace('\\', '/').replace('../', '');
+    if (
+      path == '**' ||
+      path == '*' ||
+      path == './*' ||
+      path == './**' ||
+      path == '/**'
+    ) {
+      newPath = '/title/*';
+    }
+    const safe_path = join(this.xstorage_root, normalize(newPath));
+    if (!safe_path.startsWith(this.xstorage_root))
+      return join(this.xstorage_root, 'title');
+    return safe_path;
+  }
+
+  // Pulls title id from path if id is null
+  GetTitleIDFromPath(path: string): number {
+    const title_pos: number = path.indexOf('title/');
+    const offset = title_pos + 'title/'.length;
+    const title_id_length = 8;
+    const title_id = path.substring(offset, offset + title_id_length);
+    return Number(`0x${title_id}`);
+  }
+
   envs = new PersistanceSettings().get();
 
   user_file_size_limit: number = 8192; // 8 KB
@@ -63,7 +90,7 @@ export class XStorageController {
     }
 
     const location = `/user/${xuid}/title/${titleId}/storage/clips`;
-    const absolute_path = join(process.cwd(), './src/xstorage', location);
+    const absolute_path = this.SanitizePath(location);
 
     const result: number = await this.commandBus.execute(
       new XStorageBuildServerPathCommand(absolute_path),
@@ -108,7 +135,7 @@ export class XStorageController {
     }
 
     const location = `/user/${xuid}/title/${titleId}/storage/clips/${file}`;
-    const absolute_path = join(process.cwd(), './src/xstorage', location);
+    const absolute_path = this.SanitizePath(location);
 
     const uploaded: boolean = await this.commandBus.execute(
       new XStorageUploadCommand(
@@ -145,7 +172,7 @@ export class XStorageController {
     @Res() res: Response,
   ) {
     const location = `/user/${xuid}/title/${titleId}/storage/clips/${file}`;
-    const absolute_path = join(process.cwd(), './src/xstorage', location);
+    const absolute_path = this.SanitizePath(location);
 
     const downloaded: boolean = await this.commandBus.execute(
       new XStorageDownloadCommand(
@@ -183,8 +210,7 @@ export class XStorageController {
     throw new ForbiddenException('Deleting clip content is not allowed!');
 
     const absolute_path = join(
-      process.cwd(),
-      './src/xstorage',
+      this.xstorage_root,
       `/user/${xuid}/title/${titleId}/storage/clips/${file}`,
     );
 
@@ -209,7 +235,7 @@ export class XStorageController {
     }
 
     const location = `/user/${xuid}/title/${titleId}/storage`;
-    const absolute_path = join(process.cwd(), './src/xstorage', location);
+    const absolute_path = this.SanitizePath(location);
 
     const result: number = await this.commandBus.execute(
       new XStorageBuildServerPathCommand(absolute_path),
@@ -254,7 +280,7 @@ export class XStorageController {
     }
 
     const location = `/user/${xuid}/title/${titleId}/storage/${file}`;
-    const absolute_path = join(process.cwd(), './src/xstorage', location);
+    const absolute_path = this.SanitizePath(location);
 
     const uploaded: boolean = await this.commandBus.execute(
       new XStorageUploadCommand(
@@ -291,7 +317,7 @@ export class XStorageController {
     @Res() res: Response,
   ) {
     const location = `/user/${xuid}/title/${titleId}/storage/${file}`;
-    const absolute_path = join(process.cwd(), './src/xstorage', location);
+    const absolute_path = this.SanitizePath(location);
 
     const downloaded: boolean = await this.commandBus.execute(
       new XStorageDownloadCommand(
@@ -327,8 +353,7 @@ export class XStorageController {
     @Param('file') file: string,
   ) {
     const absolute_path = join(
-      process.cwd(),
-      './src/xstorage',
+      this.xstorage_root,
       `/user/${xuid}/title/${titleId}/storage/${file}`,
     );
 
@@ -348,7 +373,7 @@ export class XStorageController {
     }
 
     const location = `/title/${titleId}/storage`;
-    const absolute_path = join(process.cwd(), './src/xstorage', location);
+    const absolute_path = this.SanitizePath(location);
 
     const result: number = await this.commandBus.execute(
       new XStorageBuildServerPathCommand(absolute_path),
@@ -388,7 +413,7 @@ export class XStorageController {
     }
 
     const location = `/title/${titleId}/storage/${file}`;
-    const absolute_path = join(process.cwd(), './src/xstorage', location);
+    const absolute_path = this.SanitizePath(location);
 
     const result: boolean = await this.commandBus.execute(
       new XStorageUploadCommand(
@@ -420,7 +445,7 @@ export class XStorageController {
     @Res() res: Response,
   ) {
     const location = `/title/${titleId}/storage/${file}`;
-    const absolute_path = join(process.cwd(), './src/xstorage', location);
+    const absolute_path = this.SanitizePath(location);
 
     await this.commandBus.execute(
       new XStorageDownloadCommand(
@@ -451,7 +476,7 @@ export class XStorageController {
     }
 
     const location = `/title/${titleId}/storage/${file}`;
-    const absolute_path = join(process.cwd(), './src/xstorage', location);
+    const absolute_path = this.SanitizePath(location);
 
     await this.commandBus.execute(new XStorageDeleteCommand(absolute_path));
   }
@@ -466,7 +491,7 @@ export class XStorageController {
     @Body() request: XStorageEnumerateRequest,
   ): Promise<XStorageEnumerateResponse> {
     const location = `${directory}`;
-    const absolute_path = join(this.xstorage_root, normalize(location));
+    const absolute_path = this.SanitizePath(location);
     const posix_absolute_path = absolute_path.replaceAll(
       path.sep,
       path.posix.sep,
@@ -520,7 +545,14 @@ export class XStorageController {
       xuid = location.substring(offset, offset + xuid_length);
     }
 
-    const title_id_value = Number(`0x${title_id}`);
+    // This is only invalid if a wildcard is used (user/* | user/*/title)
+    // We should only enumerate the user folder with an xuid.
+    if (isNaN(Number(`0x${xuid}`)))
+      return {
+        items: [],
+        total_num_items: total_num_items,
+      };
+
     const xuid_value = Number(`0x${xuid}`);
 
     const sort_last_modified = items.sort(
@@ -530,8 +562,12 @@ export class XStorageController {
     const enumerated_files: Array<X_STORAGE_FILE_INFO> = [];
 
     sort_last_modified.forEach((entity: Entry) => {
+      const num_title_id = isNaN(Number(`0x${title_id}`))
+        ? this.GetTitleIDFromPath(entity.path)
+        : Number(`0x${title_id}`);
+
       const item_details: X_STORAGE_FILE_INFO = {
-        title_id: title_id_value,
+        title_id: num_title_id,
         title_version: 0,
         owner_puid: xuid_value,
         country_id: 0,
@@ -550,10 +586,6 @@ export class XStorageController {
       items: enumerated_files,
       total_num_items: total_num_items,
     };
-
-    this.logger.verbose(
-      `Enumerate Files: ${JSON.stringify(enumerate_response, null, 2)}`,
-    );
 
     return enumerate_response;
   }

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class XStorageEnumerateRequest {
-  @ApiProperty()
+  @ApiProperty({ default: 50, required: true })
   MaxItems: number;
 }
