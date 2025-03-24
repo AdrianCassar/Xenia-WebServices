@@ -47,6 +47,7 @@
     "axios": "^1.7.9",
     "compression": "^1.7.5",
     "dotenv": "^16.4.7",
+    "fast-glob": "^3.3.3",
     "fast-xml-parser": "^4.5.1",
     "helmet": "^8.0.0",
     "ipaddr.js": "^2.2.0",

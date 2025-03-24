@@ -30,6 +30,10 @@ import { ProcessClientAddressCommandHandler } from './commandHandlers/ProcessCli
 import { GetPlayersQueryHandler } from './queryHandlers/GetPlayersQueryHandler';
 import { UpdatePlayerCommandHandler } from './commandHandlers/UpdatePlayerCommandHandler';
 import { GetPlayerGamertagQueryHandler } from './queryHandlers/GetPlayerGamertagQueryHandle';
+import { XStorageUploadCommandHandler } from './commandHandlers/XStorageUploadCommandHandler';
+import { XStorageDownloadCommandHandler } from './commandHandlers/XStorageDownloadCommandHandler';
+import { XStorageDeleteCommandHandler } from './commandHandlers/XStorageDeleteCommandHandler';
+import { XStorageBuildServerPathCommandHandler } from './commandHandlers/XStorageBuildServerPathCommandHandler';
 
 export const queryHandlers = [
   GetSessionsQueryHandler,
@@ -41,6 +45,10 @@ export const queryHandlers = [
   UpdatePlayerCommandHandler,
   FindLeaderboardsQueryHandler,
   GetPlayerGamertagQueryHandler,
+  XStorageDeleteCommandHandler,
+  XStorageUploadCommandHandler,
+  XStorageDownloadCommandHandler,
+  XStorageBuildServerPathCommandHandler,
 ];
 
 export const commandHandlers = [

@@ -17,6 +17,7 @@ export default abstract class AbstractEnvSettings<T> {
         heroku_nginx: process.env.heroku_nginx
           ? process.env.heroku_nginx
           : 'false',
+        xstorage: process.env.xstorage ? process.env.xstorage : 'false',
       },
     };
   }
