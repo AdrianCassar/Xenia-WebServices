@@ -8,6 +8,7 @@ import { SessionController } from './controllers/session.controller';
 import { PlayerController } from './controllers/player.controller';
 import { LeaderboardsController } from './controllers/leaderboards.controller';
 import { IndexController } from './controllers/index.controller';
+import { XStorageController } from './controllers/xstorage.controller';
 
 @Module({
   imports: [CqrsModule],
@@ -18,6 +19,7 @@ import { IndexController } from './controllers/index.controller';
     PlayerController,
     LeaderboardsController,
     IndexController,
+    XStorageController,
   ],
   providers: [SessionPresentationMapper],
 })
