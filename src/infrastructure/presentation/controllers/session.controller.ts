@@ -54,6 +54,8 @@ import { RealIP } from 'nestjs-real-ip';
 import { ProcessClientAddressCommand } from 'src/application/commands/ProcessClientAddressCommand';
 import Session from 'src/domain/aggregates/Session';
 import { UpdatePlayerCommand } from 'src/application/commands/UpdatePlayerCommand';
+import { GetTitleSessionsQuery } from 'src/application/queries/GetTitleSessionsQuery';
+import SessionDetailsPresentationMapper from '../mappers/SessionDetailsPresentationMapper';
 
 @ApiTags('Sessions')
 @Controller('/title/:titleId/sessions')
@@ -63,6 +65,7 @@ export class SessionController {
     private readonly queryBus: QueryBus,
     private readonly commandBus: CommandBus,
     private readonly sessionMapper: SessionPresentationMapper,
+    private readonly sessionDetailsMapper: SessionDetailsPresentationMapper,
   ) {
     this.logger.setContext(SessionController.name);
   }
@@ -133,6 +136,16 @@ export class SessionController {
         this.logger.debug(`Session ${request.sessionId} was not found.`);
       }
     }
+  }
+
+  @Get('/search')
+  @ApiParam({ name: 'titleId', example: '4D5307E6' })
+  async GetTitleSessions(@Param('titleId') titleId: string) {
+    const sessions: Session[] = await this.queryBus.execute(
+      new GetTitleSessionsQuery(new TitleId(titleId)),
+    );
+
+    return sessions.map(this.sessionDetailsMapper.CreateSessionDetails);
   }
 
   @Get('/:sessionId')
