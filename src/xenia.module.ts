@@ -15,6 +15,9 @@ import { join } from 'path';
     PresentationModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'src/public'),
+      serveRoot: '/',
+      exclude: ['/title/{*splat}', '/xstorage/{*splat}'],
+      // exclude:, ['/api/{*splat}'],
     }),
   ],
   controllers: [],
