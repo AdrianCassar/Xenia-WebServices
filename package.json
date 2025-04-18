@@ -9,6 +9,7 @@
     "node": "^20 || ^22"
   },
   "scripts": {
+    "heroku-prebuild": "git clone --branch main https://github.com/AdrianCassar/TitleManagedStorageArchiveXbox360.git ./src/xstorage/title",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"**/public/**/*.js\"",
@@ -18,8 +19,8 @@
     "start:prod": "node dist/main",
     "lint": "eslint \"src/**/*.ts\" test",
     "lint:fix": "eslint \"src/**/*.ts\" --fix",
-    "prettier-check": "prettier \"**/*.ts\" \"**/public/**/*.js\" --check",
-    "prettier-write": "prettier \"**/*.ts\" \"**/public/**/*.js\" --write",
+    "prettier-check": "prettier \"src/**/*.ts\" \"**/public/**/*.js\" --check",
+    "prettier-write": "prettier \"src/**/*.ts\" \"**/public/**/*.js\" --write",
     "test": "jest --passWithNoTests",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",

@@ -1,0 +1,3 @@
+[submodule "src/xstorage/title"]
+	path = src/xstorage/title
+	url = https://github.com/AdrianCassar/TitleManagedStorageArchiveXbox360.git

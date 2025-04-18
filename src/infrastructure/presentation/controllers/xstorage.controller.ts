@@ -36,13 +36,19 @@ import { UploadState } from 'src/application/commandHandlers/XStorageUploadComma
 curl user tests:
 
 Delete:
-curl -X DELETE http://127.0.0.1:36000/xstorage/user/0009000000000000/title/41560817/storage/mpdata
+curl -X DELETE http://127.0.0.1:36000/xstorage/user/0009000000000000/title/41560817/mpdata
 
 Download:
-curl http://127.0.0.1:36000/xstorage/user/0009000000000000/title/41560817/storage/mpdata -O
+curl http://127.0.0.1:36000/xstorage/user/0009000000000000/title/41560817/mpdata -O
 
 Upload:
-curl -i -X POST http://127.0.0.1:36000/xstorage/user/0009000000000000/title/41560817/storage/mpdata --data-binary "@C:\...\Xenia-WebServices\src\xstorage\user\0009000000000000\title\41560817\storage\mpdata"
+curl -i -X POST http://127.0.0.1:36000/xstorage/user/0009000000000000/title/41560817/mpdata --data-binary "@C:\...\Xenia-WebServices\src\xstorage\user\0009000000000000\title\41560817\mpdata"
+**/
+
+/**
+  Paths from console:
+  //title.41560817/t:41560817/playlists.patch2
+  //tuser.41560817/u:000901f02d9d4989/41560817/mpdata
 **/
 
 @ApiTags('XStorage')
@@ -85,7 +91,7 @@ export class XStorageController {
     return safe_path;
   }
 
-  @Post('/title/:titleId/storage/clips')
+  @Post('/title/:titleId/clips')
   @ApiParam({
     name: 'xuid',
     example: '0009000000000000',
@@ -102,7 +108,7 @@ export class XStorageController {
       throw new ForbiddenException('XStorage support is disabled on backend!');
     }
 
-    const location = `/user/${xuid}/title/${titleId}/storage/clips`;
+    const location = `/user/${xuid}/title/${titleId}/clips`;
     const absolute_path = this.SanitizePath(location);
 
     const result: BuildServerPathState = await this.commandBus.execute(
@@ -124,7 +130,7 @@ export class XStorageController {
     return result;
   }
 
-  @Post('/title/:titleId/storage/clips/:file')
+  @Post('/title/:titleId/clips/:file')
   @ApiParam({
     name: 'xuid',
     example: '0009000000000000',
@@ -147,7 +153,7 @@ export class XStorageController {
       throw new ForbiddenException('XStorage support is disabled on backend!');
     }
 
-    const location = `/user/${xuid}/title/${titleId}/storage/clips/${file}`;
+    const location = `/user/${xuid}/title/${titleId}/clips/${file}`;
     const absolute_path = this.SanitizePath(location);
 
     const result: UploadState = await this.commandBus.execute(
@@ -179,7 +185,7 @@ export class XStorageController {
     return result;
   }
 
-  @Get('/title/:titleId/storage/clips/:file')
+  @Get('/title/:titleId/clips/:file')
   @ApiParam({
     name: 'xuid',
     example: '0009000000000000',
@@ -198,7 +204,7 @@ export class XStorageController {
     @Param('file') file: string,
     @Res() res: Response,
   ) {
-    const location = `/user/${xuid}/title/${titleId}/storage/clips/${file}`;
+    const location = `/user/${xuid}/title/${titleId}/clips/${file}`;
     const absolute_path = this.SanitizePath(location);
 
     const downloaded: boolean = await this.commandBus.execute(
@@ -216,7 +222,7 @@ export class XStorageController {
     }
   }
 
-  @Delete('/title/:titleId/storage/clips/:file')
+  @Delete('/title/:titleId/clips/:file')
   @ApiParam({
     name: 'xuid',
     example: '0009000000000000',
@@ -238,13 +244,13 @@ export class XStorageController {
 
     const absolute_path = join(
       this.xstorage_root,
-      `/user/${xuid}/title/${titleId}/storage/clips/${file}`,
+      `/user/${xuid}/title/${titleId}/clips/${file}`,
     );
 
     await this.commandBus.execute(new XStorageDeleteCommand(absolute_path));
   }
 
-  @Post('/user/:xuid/title/:titleId/storage')
+  @Post('/user/:xuid/title/:titleId')
   @ApiParam({
     name: 'xuid',
     example: '0009000000000000',
@@ -261,7 +267,7 @@ export class XStorageController {
       throw new ForbiddenException('XStorage support is disabled on backend!');
     }
 
-    const location = `/user/${xuid}/title/${titleId}/storage`;
+    const location = `/user/${xuid}/title/${titleId}`;
     const absolute_path = this.SanitizePath(location);
 
     const result: BuildServerPathState = await this.commandBus.execute(
@@ -283,7 +289,7 @@ export class XStorageController {
     return result;
   }
 
-  @Post('/user/:xuid/title/:titleId/storage/:file')
+  @Post('/user/:xuid/title/:titleId/:file')
   @ApiParam({
     name: 'xuid',
     example: '0009000000000000',
@@ -306,7 +312,7 @@ export class XStorageController {
       throw new ForbiddenException('XStorage support is disabled on backend!');
     }
 
-    const location = `/user/${xuid}/title/${titleId}/storage/${file}`;
+    const location = `/user/${xuid}/title/${titleId}/${file}`;
     const absolute_path = this.SanitizePath(location);
 
     const result: UploadState = await this.commandBus.execute(
@@ -338,7 +344,7 @@ export class XStorageController {
     return result;
   }
 
-  @Get('/user/:xuid/title/:titleId/storage/:file')
+  @Get('/user/:xuid/title/:titleId/:file')
   @ApiParam({
     name: 'xuid',
     example: '0009000000000000',
@@ -357,7 +363,7 @@ export class XStorageController {
     @Param('file') file: string,
     @Res() res: Response,
   ) {
-    const location = `/user/${xuid}/title/${titleId}/storage/${file}`;
+    const location = `/user/${xuid}/title/${titleId}/${file}`;
     const absolute_path = this.SanitizePath(location);
 
     const downloaded: boolean = await this.commandBus.execute(
@@ -375,7 +381,7 @@ export class XStorageController {
     }
   }
 
-  @Delete('/user/:xuid/title/:titleId/storage/:file')
+  @Delete('/user/:xuid/title/:titleId/:file')
   @ApiParam({
     name: 'xuid',
     example: '0009000000000000',
@@ -395,13 +401,13 @@ export class XStorageController {
   ) {
     const absolute_path = join(
       this.xstorage_root,
-      `/user/${xuid}/title/${titleId}/storage/${file}`,
+      `/user/${xuid}/title/${titleId}/${file}`,
     );
 
     await this.commandBus.execute(new XStorageDeleteCommand(absolute_path));
   }
 
-  @Post('/title/:titleId/storage')
+  @Post('/title/:titleId')
   @ApiParam({
     name: 'titleId',
     example: '41560817',
@@ -413,7 +419,7 @@ export class XStorageController {
       throw new ForbiddenException('XStorage support is disabled on backend!');
     }
 
-    const location = `/title/${titleId}/storage`;
+    const location = `/title/${titleId}`;
     const absolute_path = this.SanitizePath(location);
 
     const result: BuildServerPathState = await this.commandBus.execute(
@@ -435,7 +441,7 @@ export class XStorageController {
     return result;
   }
 
-  @Post('/title/:titleId/storage/:file')
+  @Post('/title/:titleId/:file')
   @ApiParam({
     name: 'titleId',
     example: '41560817',
@@ -453,7 +459,7 @@ export class XStorageController {
       throw new ForbiddenException('XStorage support is disabled on backend!');
     }
 
-    const location = `/title/${titleId}/storage/${file}`;
+    const location = `/title/${titleId}/${file}`;
     const absolute_path = this.SanitizePath(location);
 
     const result: UploadState = await this.commandBus.execute(
@@ -485,7 +491,7 @@ export class XStorageController {
     return result;
   }
 
-  @Get('/title/:titleId/storage/:file')
+  @Get('/title/:titleId/:file')
   @ApiParam({
     name: 'titleId',
     example: '41560817',
@@ -499,7 +505,7 @@ export class XStorageController {
     @Param('file') file: string,
     @Res() res: Response,
   ) {
-    const location = `/title/${titleId}/storage/${file}`;
+    const location = `/title/${titleId}/${file}`;
     const absolute_path = this.SanitizePath(location);
 
     await this.commandBus.execute(
@@ -511,7 +517,7 @@ export class XStorageController {
     );
   }
 
-  @Delete('/title/:titleId/storage/:file')
+  @Delete('/title/:titleId/:file')
   @ApiParam({
     name: 'titleId',
     example: '41560817',
@@ -530,7 +536,7 @@ export class XStorageController {
       throw new ForbiddenException('XStorage support is disabled on backend!');
     }
 
-    const location = `/title/${titleId}/storage/${file}`;
+    const location = `/title/${titleId}/${file}`;
     const absolute_path = this.SanitizePath(location);
 
     await this.commandBus.execute(new XStorageDeleteCommand(absolute_path));
@@ -539,7 +545,7 @@ export class XStorageController {
   @Post('/enumerate/:directory')
   @ApiParam({
     name: 'directory',
-    example: 'user/0009000000000000/title/41560817/storage/',
+    example: 'title/41560817/*',
   })
   async XStorageEnumerate(
     @Param('directory') directory: string,
@@ -581,13 +587,8 @@ export class XStorageController {
     const enumerated_files: Array<X_STORAGE_FILE_INFO> = [];
 
     sort_last_modified.forEach((entity: Entry) => {
-      // Support title/*/storage/*
-      const title_id_value = isNaN(title_id)
-        ? this.GetTitleIDFromPath(entity.path)
-        : title_id;
-
       const item_details: X_STORAGE_FILE_INFO = {
-        title_id: title_id_value,
+        title_id: title_id,
         title_version: 0,
         owner_puid: xuid,
         country_id: 0,
@@ -623,6 +624,10 @@ export class XStorageController {
       const title_id_str = path.substring(offset, offset + title_id_length);
 
       title_id = Number(`0x${title_id_str}`);
+    }
+
+    if (isNaN(title_id)) {
+      title_id = 0;
     }
 
     return title_id;

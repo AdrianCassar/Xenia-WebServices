@@ -28,6 +28,10 @@ export class XStorageUploadCommandHandler
       );
     }
 
+    if (buffer_size == 0) {
+      return UploadState.Error;
+    }
+
     let result = UploadState.Uploaded;
 
     if (!existsSync(dir_path.dir)) {
