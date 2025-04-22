@@ -35,6 +35,7 @@ import { XStorageDownloadCommandHandler } from './commandHandlers/XStorageDownlo
 import { XStorageDeleteCommandHandler } from './commandHandlers/XStorageDeleteCommandHandler';
 import { XStorageBuildServerPathCommandHandler } from './commandHandlers/XStorageBuildServerPathCommandHandler';
 import { GetTitleSessionsQueryHandler } from './queryHandlers/GetTitleSessionsQueryHandler';
+import { DeleteMyProfilesQueryHandler } from './queryHandlers/DeleteAllMyProfilesQueryHandler';
 
 export const queryHandlers = [
   GetSessionsQueryHandler,
@@ -51,6 +52,7 @@ export const queryHandlers = [
   XStorageDownloadCommandHandler,
   XStorageBuildServerPathCommandHandler,
   GetTitleSessionsQueryHandler,
+  DeleteMyProfilesQueryHandler,
 ];
 
 export const commandHandlers = [

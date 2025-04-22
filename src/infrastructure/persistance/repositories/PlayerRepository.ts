@@ -75,6 +75,22 @@ export default class PlayerRepository implements IPlayerRepository {
     return this.playerDomainMapper.mapToDomainModel(player);
   }
 
+  public async DeleteAllMyProfilesByAddress(ip: IpAddress): Promise<Player[]> {
+    const players_docs = await this.PlayerModel.find({
+      hostAddress: ip.value,
+    });
+
+    const players: Player[] = players_docs.map((document) => {
+      return this.playerDomainMapper.mapToDomainModel(document);
+    });
+
+    await this.PlayerModel.deleteMany({
+      hostAddress: ip.value,
+    });
+
+    return players;
+  }
+
   public async findByGamertag(gamertag: Gamertag): Promise<Player> {
     const player = await this.PlayerModel.findOne({
       gamertag: gamertag.value,

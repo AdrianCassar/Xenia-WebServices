@@ -9,6 +9,7 @@ export default interface IPlayerRepository {
   findByAddress: (hostAddress: IpAddress) => Promise<Player | undefined>;
   findByGamertag: (gamertag: Gamertag) => Promise<Player | undefined>;
   save: (player: Player) => Promise<void>;
+  DeleteAllMyProfilesByAddress: (hostAddress: IpAddress) => Promise<Player[]>;
 }
 
 export const IPlayerRepositorySymbol = Symbol('IPlayerRepository');

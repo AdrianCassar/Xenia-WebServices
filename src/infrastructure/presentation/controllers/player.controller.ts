@@ -4,6 +4,7 @@ import {
   Body,
   NotFoundException,
   ConsoleLogger,
+  Get,
 } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiTags } from '@nestjs/swagger';
@@ -25,6 +26,9 @@ import { FindUserInfo, FindUsersInfo } from '../responses/FindUserInfo';
 import { FindUsersInfoRequest } from '../requests/FindUsersInfoRequest';
 import { GetPlayerQuery } from 'src/application/queries/GetPlayerQuery';
 import { GetPlayerGamertagQuery } from 'src/application/queries/GetPlayerGamertagQuery';
+import { ProcessClientAddressCommand } from 'src/application/commands/ProcessClientAddressCommand';
+import { RealIP } from 'nestjs-real-ip';
+import { DeleteMyProfilesQuery } from 'src/application/queries/DeleteMyProfilesQuery';
 
 @ApiTags('Player')
 @Controller('/players')
@@ -162,5 +166,24 @@ export class PlayerController {
     }
 
     return UsersInfo;
+  }
+
+  @Get('/deletemyprofiles')
+  async DeleteAllMyProfiles(@RealIP() ip: string) {
+    const ipv4 = await this.commandBus.execute(
+      new ProcessClientAddressCommand(ip),
+    );
+
+    const profiles: Player[] = await this.queryBus.execute(
+      new DeleteMyProfilesQuery(new IpAddress(ipv4)),
+    );
+
+    const deleted_profiles: Array<[string, string]> = [];
+
+    for (const profile of profiles) {
+      deleted_profiles.push([profile.gamertag.value, profile.xuid.value]);
+    }
+
+    return deleted_profiles;
   }
 }
