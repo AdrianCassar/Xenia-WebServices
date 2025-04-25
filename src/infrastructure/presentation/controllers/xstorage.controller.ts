@@ -587,8 +587,13 @@ export class XStorageController {
     const enumerated_files: Array<X_STORAGE_FILE_INFO> = [];
 
     sort_last_modified.forEach((entity: Entry) => {
+	// Support per-title wildcard
+	// title/*/** -> title/41560817/playlist.info
+       const num_title_id = title_id == 0
+        ? this.GetTitleIDFromPath(entity.path)
+        : title_id;
       const item_details: X_STORAGE_FILE_INFO = {
-        title_id: title_id,
+        title_id: num_title_id,
         title_version: 0,
         owner_puid: xuid,
         country_id: 0,
