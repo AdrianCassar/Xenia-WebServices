@@ -12,6 +12,15 @@ export enum X_USER_DATA_TYPE {
   UNSET = 0xff,
 }
 
+/*
+  XUSER_PROPERTY - 24 Bytes
+    - AttributeKey - 4 Bytes
+    - Padding - 4 Bytes
+
+    - X_USER_DATA - 16 Bytes
+      - X_USER_DATA_TYPE - 8 Bytes
+      - X_USER_DATA_UNION - 8 Bytes
+*/
 export default class Property extends TinyTypeOf<string>() {
   buffer: Buffer<ArrayBuffer>;
   data: Buffer<ArrayBuffer>;
@@ -32,11 +41,23 @@ export default class Property extends TinyTypeOf<string>() {
     }
 
     this.id = this.buffer.readInt32LE(0);
-    this.type = (this.buffer.readInt32BE(0) & 0xff) >> 4;
-    this.size = this.buffer.readInt32LE(4);
+    this.type = this.buffer.readUint8(4);
 
-    const offset: number = 8;
-    this.data = this.buffer.subarray(offset, offset + this.size);
+    if (
+      this.type == X_USER_DATA_TYPE.WSTRING ||
+      this.type == X_USER_DATA_TYPE.BINARY
+    ) {
+      const offset: number = 20;
+      this.size = this.buffer.length - offset;
+
+      this.data = this.buffer.subarray(offset, offset + this.size);
+    } else {
+      const offset: number = 12;
+      this.size = this.buffer.length - offset;
+
+      this.data = this.buffer.subarray(offset, offset + this.size);
+    }
+
     this.id_hex = this.id.toString(16);
   }
 
@@ -80,14 +101,15 @@ export default class Property extends TinyTypeOf<string>() {
   }
 
   static SerializeContextToBase64(id: number, value: number): string {
-    const buffer = Buffer.alloc(12);
+    const buffer_size = 20;
+    const buffer = Buffer.alloc(buffer_size);
 
     let offset: number = 0;
 
     buffer.writeInt32LE(id, offset);
     offset += 4;
-    buffer.writeInt32LE(4, offset);
-    offset += 4;
+    buffer.writeInt8(X_USER_DATA_TYPE.CONTEXT, offset);
+    offset += 8;
     buffer.writeInt32BE(value, offset);
 
     return buffer.toString('base64');
