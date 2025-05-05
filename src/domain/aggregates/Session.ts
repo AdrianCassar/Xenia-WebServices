@@ -5,6 +5,7 @@ import SessionFlags from '../value-objects/SessionFlags';
 import SessionId from '../value-objects/SessionId';
 import TitleId from '../value-objects/TitleId';
 import Xuid from '../value-objects/Xuid';
+import Property from '../value-objects/Property';
 
 interface SessionProps {
   id: SessionId;
@@ -22,6 +23,7 @@ interface SessionProps {
   players: Map<string, boolean>;
   deleted: boolean;
   context: Map<string, number>;
+  properties: Array<Property>;
   migration?: SessionId;
 }
 
@@ -55,9 +57,11 @@ interface CreateMigrationProps {
 }
 
 interface ContextProps {
-  context: Map<number, { contextId: number; value: number }>;
+  context: Array<{ contextId: number; value: number }>;
 }
-
+interface PropertyProps {
+  properties: Array<Property>;
+}
 interface JoinProps {
   members: Map<Xuid, boolean>;
 }
@@ -65,6 +69,9 @@ interface JoinProps {
 interface LeaveProps {
   xuids: Xuid[];
 }
+
+const X_PROPERTY_GAMER_HOSTNAME = 0x40008109;
+const X_PROPERTY_GAMER_PUID = 0x20008107;
 
 export default class Session {
   private readonly props: SessionProps;
@@ -101,6 +108,7 @@ export default class Session {
       players: new Map<string, boolean>(),
       deleted: false,
       context: new Map<string, number>(),
+      properties: new Array<Property>(),
     });
   }
 
@@ -146,6 +154,27 @@ export default class Session {
   public addContext(props: ContextProps) {
     props.context.forEach((entry) => {
       this.props.context.set(entry.contextId.toString(16), entry.value);
+    });
+  }
+
+  public addProperties(props: PropertyProps) {
+    props.properties.forEach((entry) => {
+      const propIndex = this.props.properties.findIndex(
+        (prop) => prop.id == entry.id,
+      );
+
+      // Update property if it already exists during host migration
+      if (propIndex >= 0) {
+        const current_prop = this.props.properties[propIndex];
+
+        if (!entry.getData().equals(current_prop.getData())) {
+          this._logger.verbose(`Updated: ${entry.toStringPretty()}`);
+
+          this.props.properties[propIndex] = entry;
+        }
+      } else {
+        this.props.properties.push(entry);
+      }
     });
   }
 
@@ -337,5 +366,46 @@ export default class Session {
 
   get context() {
     return this.props.context;
+  }
+
+  get properties() {
+    return this.props.properties;
+  }
+
+  get propertiesStringArray() {
+    let properties: Array<string> = this.props.properties.map((prop) => {
+      return prop.toString();
+    });
+
+    const contexts: Array<string> = Array.from(this.context).map(
+      ([id, value]) => {
+        const serialized_context: string = Property.SerializeContextToBase64(
+          Number(`0x${id}`),
+          value,
+        );
+
+        return serialized_context;
+      },
+    );
+
+    properties = properties.concat(contexts);
+
+    return properties;
+  }
+
+  get propertyHostGamerName() {
+    const GAMER_HOSTNAME = this.props.properties.find((prop) => {
+      return prop.id == X_PROPERTY_GAMER_HOSTNAME;
+    });
+
+    return GAMER_HOSTNAME;
+  }
+
+  get propertyPUID() {
+    const PUID = this.props.properties.find((prop) => {
+      return prop.id == X_PROPERTY_GAMER_PUID;
+    });
+
+    return PUID;
   }
 }
