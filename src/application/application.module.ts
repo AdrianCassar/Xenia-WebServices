@@ -9,6 +9,7 @@ import { PersistanceModule } from 'src/infrastructure/persistance/persistance.mo
 import { CreatePlayerCommandHandler } from './commandHandlers/CreatePlayerCommandHandler';
 import { CreateSessionCommandHandler } from './commandHandlers/CreateSessionCommandHandler';
 import { AddSessionContextCommandHandler } from './commandHandlers/AddSessionContextCommandHandler';
+import { AddSessionPropertyCommandHandler } from './commandHandlers/AddSessionPropertyCommandHandler';
 import {
   DeleteSessionCommandHandler,
   DeleteSessionsCommandHandler,
@@ -67,6 +68,7 @@ export const commandHandlers = [
   UpdateLeaderboardCommandHandler,
   MigrateSessionCommandHandler,
   AddSessionContextCommandHandler,
+  AddSessionPropertyCommandHandler,
   AggregateSessionCommandHandler,
   ProcessClientAddressCommandHandler,
 ];

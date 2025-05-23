@@ -5,6 +5,8 @@ import SessionFlags from '../value-objects/SessionFlags';
 import SessionId from '../value-objects/SessionId';
 import TitleId from '../value-objects/TitleId';
 import Xuid from '../value-objects/Xuid';
+import Property, { X_USER_DATA_TYPE } from '../value-objects/Property';
+import { Table } from 'console-table-printer';
 
 interface SessionProps {
   id: SessionId;
@@ -22,6 +24,7 @@ interface SessionProps {
   players: Map<string, boolean>;
   deleted: boolean;
   context: Map<string, number>;
+  properties: Array<Property>;
   migration?: SessionId;
 }
 
@@ -55,9 +58,11 @@ interface CreateMigrationProps {
 }
 
 interface ContextProps {
-  context: Map<number, { contextId: number; value: number }>;
+  context: Array<{ contextId: number; value: number }>;
 }
-
+interface PropertyProps {
+  properties: Array<Property>;
+}
 interface JoinProps {
   members: Map<Xuid, boolean>;
 }
@@ -65,6 +70,9 @@ interface JoinProps {
 interface LeaveProps {
   xuids: Xuid[];
 }
+
+const X_PROPERTY_GAMER_HOSTNAME = 0x40008109;
+const X_PROPERTY_GAMER_PUID = 0x20008107;
 
 export default class Session {
   private readonly props: SessionProps;
@@ -101,6 +109,7 @@ export default class Session {
       players: new Map<string, boolean>(),
       deleted: false,
       context: new Map<string, number>(),
+      properties: new Array<Property>(),
     });
   }
 
@@ -147,6 +156,58 @@ export default class Session {
     props.context.forEach((entry) => {
       this.props.context.set(entry.contextId.toString(16), entry.value);
     });
+  }
+
+  public addProperties(props: PropertyProps) {
+    const table = this.getPropertiesTable();
+
+    table.table.columns.find((col) => col.title === 'Value').title =
+      'New Value';
+
+    table.addColumn({
+      name: `column8`,
+      title: 'Old Value',
+      alignment: 'center',
+    });
+
+    props.properties.forEach((entry) => {
+      const propIndex = this.props.properties.findIndex(
+        (prop) => prop.id == entry.id,
+      );
+
+      // Update property if it already exists during host migration
+      if (propIndex >= 0) {
+        const current_prop = this.props.properties[propIndex];
+
+        if (!entry.getData().equals(current_prop.getData())) {
+          table.addRow(
+            {
+              column1: entry.getFriendlyName(),
+              column2: `${entry.getType() == X_USER_DATA_TYPE.CONTEXT ? 'Context' : 'Property'}`,
+              column3: `0x${entry.getIDString()}`,
+              column4: `${entry.getTypeString()}`,
+              column5: `${entry.getSizeFromType()}`,
+              column6: `${entry.isSystemProperty() ? 'System' : 'Custom'}`,
+              column7: entry.getParsedData(),
+              column8: current_prop.getParsedData(),
+            },
+            { color: `${entry.isSystemProperty() ? 'blue' : 'magenta'}` },
+          );
+
+          this.props.properties[propIndex] = entry;
+        }
+      } else {
+        this.props.properties.push(entry);
+      }
+    });
+
+    const num_updated = table.table.rows.length;
+
+    if (num_updated) {
+      this._logger.verbose(`Updated ${num_updated} Properties:`);
+
+      table.printTable();
+    }
   }
 
   public modify(props: ModifyProps) {
@@ -337,5 +398,117 @@ export default class Session {
 
   get context() {
     return this.props.context;
+  }
+
+  get properties() {
+    return this.props.properties;
+  }
+
+  get propertiesStringArray() {
+    let properties: Array<string> = this.props.properties.map((prop) => {
+      return prop.toString();
+    });
+
+    const contexts: Array<string> = Array.from(this.context).map(
+      ([id, value]) => {
+        const serialized_context: string = Property.SerializeContextToBase64(
+          Number(`0x${id}`),
+          value,
+        );
+
+        return serialized_context;
+      },
+    );
+
+    properties = properties.concat(contexts);
+
+    return properties;
+  }
+
+  get propertyHostGamerName() {
+    const GAMER_HOSTNAME = this.props.properties.find((prop) => {
+      return prop.id == X_PROPERTY_GAMER_HOSTNAME;
+    });
+
+    return GAMER_HOSTNAME;
+  }
+
+  get propertyPUID() {
+    const PUID = this.props.properties.find((prop) => {
+      return prop.id == X_PROPERTY_GAMER_PUID;
+    });
+
+    return PUID;
+  }
+
+  getPropertiesTable() {
+    const table = new Table({
+      columns: [
+        {
+          name: `column1`,
+          title: 'Name',
+          alignment: 'center',
+        },
+        {
+          name: `column2`,
+          title: 'Type',
+          alignment: 'center',
+        },
+        {
+          name: `column3`,
+          title: 'ID',
+          alignment: 'center',
+        },
+        {
+          name: `column4`,
+          title: 'Data Type',
+          alignment: 'center',
+        },
+        {
+          name: `column5`,
+          title: 'Size',
+          alignment: 'center',
+        },
+        {
+          name: `column6`,
+          title: 'Scope',
+          alignment: 'center',
+        },
+        {
+          name: `column7`,
+          title: 'Value',
+          alignment: 'center',
+        },
+      ],
+    });
+
+    return table;
+  }
+
+  PrettyPrintPropertiesTable() {
+    const properties: Array<Property> = this.propertiesStringArray.map(
+      (prop) => {
+        return new Property(prop.toString());
+      },
+    );
+
+    const table = this.getPropertiesTable();
+
+    properties.forEach((prop) => {
+      table.addRow(
+        {
+          column1: prop.getFriendlyName(),
+          column2: `${prop.getType() == X_USER_DATA_TYPE.CONTEXT ? 'Context' : 'Property'}`,
+          column3: `0x${prop.getIDString()}`,
+          column4: `${prop.getTypeString()}`,
+          column5: `${prop.getSizeFromType()}`,
+          column6: `${prop.isSystemProperty() ? 'System' : 'Custom'}`,
+          column7: prop.getParsedData(),
+        },
+        { color: `${prop.isSystemProperty() ? 'blue' : 'magenta'}` },
+      );
+    });
+
+    table.printTable();
   }
 }
