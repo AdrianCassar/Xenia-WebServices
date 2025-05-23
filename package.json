@@ -47,6 +47,7 @@
     "@types/uuid": "^10.0.0",
     "axios": "^1.9.0",
     "compression": "^1.8.0",
+    "console-table-printer": "^2.13.0",
     "dotenv": "^16.5.0",
     "fast-glob": "^3.3.3",
     "fast-xml-parser": "^5.2.2",
