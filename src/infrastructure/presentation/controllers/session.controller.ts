@@ -655,18 +655,7 @@ export class SessionController {
       ),
     );
 
-    const HostGamerName: Property = properties_session.propertyHostGamerName;
-    const PUID: Property = properties_session.propertyPUID;
-
-    if (HostGamerName) {
-      this.logger.verbose(`Host Gamer Name: ${HostGamerName.getUTF16()}`);
-    }
-
-    if (PUID) {
-      this.logger.verbose(
-        `Host PUID: ${PUID.getData().readBigInt64BE().toString(16).padStart(16, '0').toUpperCase()}`,
-      );
-    }
+    properties_session.PrettyPrintPropertiesTable();
   }
 
   @Get('/:sessionId/properties')

@@ -5,7 +5,8 @@ import SessionFlags from '../value-objects/SessionFlags';
 import SessionId from '../value-objects/SessionId';
 import TitleId from '../value-objects/TitleId';
 import Xuid from '../value-objects/Xuid';
-import Property from '../value-objects/Property';
+import Property, { X_USER_DATA_TYPE } from '../value-objects/Property';
+import { Table } from 'console-table-printer';
 
 interface SessionProps {
   id: SessionId;
@@ -158,6 +159,17 @@ export default class Session {
   }
 
   public addProperties(props: PropertyProps) {
+    const table = this.getPropertiesTable();
+
+    table.table.columns.find((col) => col.title === 'Value').title =
+      'New Value';
+
+    table.addColumn({
+      name: `column8`,
+      title: 'Old Value',
+      alignment: 'center',
+    });
+
     props.properties.forEach((entry) => {
       const propIndex = this.props.properties.findIndex(
         (prop) => prop.id == entry.id,
@@ -168,7 +180,19 @@ export default class Session {
         const current_prop = this.props.properties[propIndex];
 
         if (!entry.getData().equals(current_prop.getData())) {
-          this._logger.verbose(`Updated: ${entry.toStringPretty()}`);
+          table.addRow(
+            {
+              column1: entry.getFriendlyName(),
+              column2: `${entry.getType() == X_USER_DATA_TYPE.CONTEXT ? 'Context' : 'Property'}`,
+              column3: `0x${entry.getIDString()}`,
+              column4: `${entry.getTypeString()}`,
+              column5: `${entry.getSizeFromType()}`,
+              column6: `${entry.isSystemProperty() ? 'System' : 'Custom'}`,
+              column7: entry.getParsedData(),
+              column8: current_prop.getParsedData(),
+            },
+            { color: `${entry.isSystemProperty() ? 'blue' : 'magenta'}` },
+          );
 
           this.props.properties[propIndex] = entry;
         }
@@ -176,6 +200,14 @@ export default class Session {
         this.props.properties.push(entry);
       }
     });
+
+    const num_updated = table.table.rows.length;
+
+    if (num_updated) {
+      this._logger.verbose(`Updated ${num_updated} Properties:`);
+
+      table.printTable();
+    }
   }
 
   public modify(props: ModifyProps) {
@@ -407,5 +439,76 @@ export default class Session {
     });
 
     return PUID;
+  }
+
+  getPropertiesTable() {
+    const table = new Table({
+      columns: [
+        {
+          name: `column1`,
+          title: 'Name',
+          alignment: 'center',
+        },
+        {
+          name: `column2`,
+          title: 'Type',
+          alignment: 'center',
+        },
+        {
+          name: `column3`,
+          title: 'ID',
+          alignment: 'center',
+        },
+        {
+          name: `column4`,
+          title: 'Data Type',
+          alignment: 'center',
+        },
+        {
+          name: `column5`,
+          title: 'Size',
+          alignment: 'center',
+        },
+        {
+          name: `column6`,
+          title: 'Scope',
+          alignment: 'center',
+        },
+        {
+          name: `column7`,
+          title: 'Value',
+          alignment: 'center',
+        },
+      ],
+    });
+
+    return table;
+  }
+
+  PrettyPrintPropertiesTable() {
+    const properties: Array<Property> = this.propertiesStringArray.map(
+      (prop) => {
+        return new Property(prop.toString());
+      },
+    );
+
+    const table = this.getPropertiesTable();
+
+    properties.forEach((prop) => {
+      table.addRow(
+        {
+          column1: prop.getFriendlyName(),
+          column2: `${prop.getType() == X_USER_DATA_TYPE.CONTEXT ? 'Context' : 'Property'}`,
+          column3: `0x${prop.getIDString()}`,
+          column4: `${prop.getTypeString()}`,
+          column5: `${prop.getSizeFromType()}`,
+          column6: `${prop.isSystemProperty() ? 'System' : 'Custom'}`,
+          column7: prop.getParsedData(),
+        },
+        { color: `${prop.isSystemProperty() ? 'blue' : 'magenta'}` },
+      );
+    });
+
+    table.printTable();
   }
 }
