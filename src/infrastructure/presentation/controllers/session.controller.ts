@@ -56,6 +56,7 @@ import Session from 'src/domain/aggregates/Session';
 import { UpdatePlayerCommand } from 'src/application/commands/UpdatePlayerCommand';
 import { GetTitleSessionsQuery } from 'src/application/queries/GetTitleSessionsQuery';
 import SessionDetailsPresentationMapper from '../mappers/SessionDetailsPresentationMapper';
+import { PreJoinRequest } from '../requests/PreJoinRequest';
 
 @ApiTags('Sessions')
 @Controller('/title/:titleId/sessions')
@@ -405,6 +406,23 @@ export class SessionController {
       throw new NotFoundException(error_msg);
     }
 
+    const players_xuid = request.xuids.map((xuid) => xuid);
+
+    const xuids: PreJoinRequest = {
+      xuids: players_xuid,
+    };
+
+    await this.preJoin(titleId, sessionId, xuids);
+  }
+
+  @Post('/:sessionId/prejoin')
+  @ApiParam({ name: 'titleId', example: '4D5307E6' })
+  @ApiParam({ name: 'sessionId', example: 'AE00000000000000' })
+  async preJoin(
+    @Param('titleId') titleId: string,
+    @Param('sessionId') sessionId: string,
+    @Body() request: PreJoinRequest,
+  ) {
     // Update joining players sessionId
     const players_xuid = request.xuids.map((xuid) => new Xuid(xuid));
 
@@ -413,17 +431,13 @@ export class SessionController {
         new GetPlayerQuery(player_xuid),
       );
 
-      const flags = new SessionFlags(session.flags.value);
-
-      if (player && flags.isAdvertised) {
+      if (player) {
         player.setSession(new SessionId(sessionId));
         player.setTitleId(new TitleId(titleId));
 
         await this.commandBus.execute(
           new UpdatePlayerCommand(player.xuid, player),
         );
-      } else {
-        this.logger.verbose(`Skip updating presence`);
       }
     }
   }
