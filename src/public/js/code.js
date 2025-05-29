@@ -1,13 +1,11 @@
 function generateSessionsTable(sessionsData) {
-  let result = '';
+  let result = '<table>\n';
 
-  result += '<table>\n';
-
-  result += `<tr>\n`;
-  result += `<th scope="col">Title</th>\n`;
-  result += `<th scope="col">Players</th>\n`;
-  result += `<th scope="col" id="title_update">Latest TU</th>\n`;
-  result += `</tr>\n`;
+  result += `<tr>
+    <th scope="col">Gaming Sessions</th>
+    <th scope="col">Players</th>
+    <th scope="col" id="title_update">Latest TU</th>
+  </tr>\n`;
 
   sessionsData?.Titles?.forEach((titleInfo) => {
     let title = 'N/A';
@@ -42,40 +40,79 @@ function generateSessionsTable(sessionsData) {
         }
       }
 
-      const icon_asset = titleInfo.icon ? titleInfo.icon : 'assets/icon.svg';
-      const icon = `<div class="image"><img src="${icon_asset}" width="64" height="64" alt="${title}" title="${title}";"></div>`;
+      const icon_asset = titleInfo.icon || 'assets/icon.svg';
+      const icon = `<div class="image"><img src="${icon_asset}" width="64" height="64" alt="${title}" title="${title}"></div>`;
 
-      result += `<tr>\n`;
-      result += `<td>
-              <div class="container">
-                  ${icon}
-                  <div class="text">
-                      <div><a href="https://github.com/xenia-project/game-compatibility/issues?q=is:issue%20is:open ${titleInfo.titleId}" target="_blank">${title}</a></div>
-                      <div style="margin-top: 15px;font-size: 14px;">Title ID: ${titleInfo.titleId}</div>
-                      <div style="margin-top: 4px;font-size: 14px;">Media ID: ${MediaID_Text}</div>
-                      <div style="margin-top: 4px;font-size: 14px;">Version: ${Version_Text}</div>
-                  </div>
-              </div>
-          </td>\n`;
-      result += `<td>${session.players} of ${session.total}</td>\n`;
-      result += `<td id="title_update"><a href="${TU_download_url}">${TU_Text}</a></td>\n`;
-      result += `</tr>\n`;
+      const HOST_GAMERTAG = session.host_gamertag;
+      const host_gamertag_div = HOST_GAMERTAG
+        ? `<div id="host_gamertag" style="white-space: pre-line;margin-top: 15px;">${HOST_GAMERTAG}</div>`
+        : '';
+
+      const HOST_PRESENCE = session.host_presence;
+      const presence_div = HOST_PRESENCE
+        ? `<div style="white-space: pre-line;">${HOST_PRESENCE}</div>`
+        : '';
+
+      const HOST_XUID = session.host_xuid;
+      const host_xuid_button = HOST_XUID
+        ? `<button class="copy-xuid-btn" data-xuid="${HOST_XUID}" style="margin-top: 5px;">Copy XUID</button>`
+        : '';
+
+      let player_gamertags = 'Player 1';
+
+      if (Array.isArray(session.players)) {
+        player_gamertags = session.players
+          .map(
+            (player, index) =>
+              `<div ${index == 0 ? 'id="host_item"' : ''} class="list-item">${player}</div>`,
+          )
+          .join('');
+      }
+
+      const gridAdjustment =
+        session.players.length < 3
+          ? `style="grid-template-columns: repeat(${session.players.length}, 1fr);"`
+          : '';
+
+      result += `<tr>
+        <td>
+          <div class="container">
+            ${icon}
+            <div class="box">
+              <div id="game_title"><a href="https://github.com/xenia-project/game-compatibility/issues?q=is:issue%20is:open ${titleInfo.titleId}" target="_blank">${title}</a></div>
+              ${host_gamertag_div}
+              ${presence_div}
+              ${host_xuid_button}
+            </div>
+            <div class="box">
+              <div class="entry">Title ID: ${titleInfo.titleId}</div>
+              <div class="entry">Media ID: ${MediaID_Text}</div>
+              <div class="entry">Version: ${Version_Text}</div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div ${gridAdjustment} class="list-container" id="list">
+            ${player_gamertags ? player_gamertags : 'Player 1'}
+          </div>
+          <label>${session.players.length ? session.players.length : '1'} of ${session.total}</label>
+        </td>
+        <td id="title_update"><a href="${TU_download_url}">${TU_Text}</a></td>
+      </tr>\n`;
     }
   });
 
   result += '</table>\n';
-
   return result;
 }
 
 function GetLatestTU(titleInfo, mediaId) {
-  let latestTU;
-
   if (mediaId == 0) {
-    return latestTU;
+    return;
   }
 
-  titleInfo?.MediaIds.forEach((media) => {
+  let latestTU;
+  titleInfo?.MediaIds?.forEach((media) => {
     if (media.MediaID == mediaId) {
       const lastIndex = media['Updates'].length - 1;
       latestTU = media['Updates'][lastIndex];
@@ -87,42 +124,36 @@ function GetLatestTU(titleInfo, mediaId) {
 
 function isHexadecimal(s) {
   try {
-    let value = parseInt(s, 16);
-    return !isNaN(value);
-  } catch (e) {
+    return !isNaN(parseInt(s, 16));
+  } catch {
     return false;
   }
 }
 
 function isValidVersion(version) {
-  const expr = new RegExp(/^(\d+\.)?(\d+\.)?(\d+\.)(\d+)$/);
-  return expr.test(version);
+  return /^(\d+\.)?(\d+\.)?(\d+\.)(\d+)$/.test(version);
 }
 
 let table_loaded = false;
 
-async function refreshSessionTable() {
-  let sessionData = {};
+function refreshSessionTable() {
+  $.getJSON(window.origin + '/sessions')
+    .done(function (sessionData) {
+      const sessionTable = generateSessionsTable(sessionData);
 
-  const response = await fetch(window.origin + '/sessions');
-
-  if (response.status == 304 || response.status == 200) {
-    sessionData = await response.json();
-  } else {
-    console.log(`Error ${response.status}`);
-  }
-
-  const sessionTable = generateSessionsTable(sessionData);
-
-  if (table_loaded) {
-    document.getElementById('sessions').innerHTML = sessionTable;
-  } else {
-    // Animate skeleton loader for 2s on first load
-    setTimeout(() => {
-      document.getElementById('sessions').innerHTML = sessionTable;
-      table_loaded = true;
-    }, 2000);
-  }
+      if (table_loaded) {
+        $('#sessions').html(sessionTable);
+      } else {
+        // Animate skeleton loader for 2s on first load
+        setTimeout(() => {
+          $('#sessions').html(sessionTable);
+          table_loaded = true;
+        }, 2000);
+      }
+    })
+    .fail(function (jqXHR) {
+      console.log(`Error ${jqXHR.status}`);
+    });
 }
 
 let time = 30;
@@ -133,9 +164,8 @@ function refreshTimer() {
     refreshSessionTable();
   }
 
-  if (document.readyState == 'complete') {
-    document.getElementById('countdown').innerHTML = `Refreshing in ${time}s`;
-
+  if (document.readyState === 'complete') {
+    $('#countdown').html(`Refreshing in ${time}s`);
     time -= 1;
   }
 }
@@ -145,6 +175,29 @@ function setIntervalImmediately(func, interval) {
   return setInterval(func, interval);
 }
 
-setIntervalImmediately(refreshTimer, 1000);
+$(document).ready(function () {
+  setIntervalImmediately(refreshTimer, 1000);
+  refreshSessionTable();
+});
 
-refreshSessionTable();
+$(document).on('click', '.copy-xuid-btn', function () {
+  const $btn = $(this);
+  const xuid = $btn.data('xuid');
+
+  navigator.clipboard
+    .writeText(xuid)
+    .then(() => {
+      $btn.css('border', '2px solid green');
+
+      setTimeout(() => {
+        $btn.css('border', '');
+      }, 2000);
+    })
+    .catch((err) => {
+      $btn.css('border', '2px solid red');
+
+      setTimeout(() => {
+        $btn.css('border', '');
+      }, 2000);
+    });
+});

@@ -80,7 +80,7 @@ http {
             # Since we're serving static content from Nginx we need to add the headers here
             add_header Access-Control-Allow-Origin *;
             add_header Accept-Ranges bytes;
-            add_header Content-Security-Policy "script-src 'self' 'unsafe-inline' 'sha256-Zww3/pDgfYVU8OPCr/mr7NFf4ZA0lY1Xeb22wR47e0w=';default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src-attr 'none';style-src 'self' https: 'unsafe-inline'";
+            add_header Content-Security-Policy "script-src 'self' 'unsafe-inline' 'sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=';default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src-attr 'none';style-src 'self' https: 'unsafe-inline'";
             add_header Cross-Origin-Opener-Policy same-origin;
             add_header Cross-Origin-Resource-Policy same-origin;
             add_header Referrer-Policy no-referrer;

@@ -41,9 +41,10 @@ tr:nth-child(even) {
     justify-content: left;
 }
 
-.text {
+.box {
+    width: 50%;
+    padding: 10px;
     font-size: 16px;
-    padding-left: 10px;
     text-align: left;
 }
 
@@ -56,12 +57,81 @@ tr:nth-child(even) {
     margin-bottom: 18px;
 }
 
+.list-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+.list-item {
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+#host_gamertag {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#game_title {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#host_item {
+    font-weight: bold;
+}
+
+button {
+    background-color: #202124;
+    color: #e8e6e3;
+    cursor: pointer;
+    border: 1px solid white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.copy-xuid-btn {
+    transition: border 0.3s ease;
+    border-radius: 2px;
+    border: 2px solid white;
+    padding: 5px 15px;
+    font-size: 14px;
+}
+
+.entry {
+    margin-top: 3px;
+}
+
 @media only screen and (max-width: 600px) {
     table {
-        table-layout: auto;
+        width: 100%;
+    }
+
+    .list-container {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     th {
         font-size: 16px;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .box {
+        width: 100%;
+        text-align: center;
+        padding: 5px;
+    }
+
+    .copy-xuid-btn {
+        display: none;
     }
 }

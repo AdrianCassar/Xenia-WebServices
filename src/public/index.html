@@ -3,13 +3,6 @@
     <head>
         <title>Xenia Web Services</title>
 
-        <!-- Redirect before loading of assets. -->
-        <script integrity="sha256-Zww3/pDgfYVU8OPCr/mr7NFf4ZA0lY1Xeb22wR47e0w=">
-          if (window.location.href.slice(0, -1) != window.location.origin) {
-            window.location.href = window.location.origin;
-          }
-        </script>
-
         <link rel="shortcut icon" type="image/png" href="assets/favicon.png" />
         <link rel="shortcut icon" type="image/svg+xml" sizes="any" href="assets/favicon.svg" />
         <link rel="apple-touch-icon" type="image/png" href="assets/favicon.png" />
@@ -33,6 +26,7 @@
           }
         </style>
 
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="js/code.js"></script>
     </head>
     <body>
@@ -50,7 +44,7 @@
         <div id="sessions">
             <table>
                 <tr>
-                    <th>Title</th>
+                    <th>Gaming Sessions</th>
                     <th>Players</th>
                     <th id="title_update">Latest TU</th>
                 </tr>

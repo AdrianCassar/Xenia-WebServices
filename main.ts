@@ -47,7 +47,7 @@ async function bootstrap() {
           'script-src': [
             "'self'",
             "'unsafe-inline'",
-            "'sha256-Zww3/pDgfYVU8OPCr/mr7NFf4ZA0lY1Xeb22wR47e0w='",
+            "'sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo='",
           ],
           upgradeInsecureRequests: SSL_enabled ? [] : null,
         },
