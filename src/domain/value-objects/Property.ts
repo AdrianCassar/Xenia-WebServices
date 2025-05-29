@@ -89,7 +89,7 @@ export default class Property extends TinyTypeOf<string>() {
   data: Buffer<ArrayBuffer>;
 
   id_hex: string = '';
-  id: number = 0;
+  id: XProperty;
   size: number = 0;
   type: X_USER_DATA_TYPE = 0;
 

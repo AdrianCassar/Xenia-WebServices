@@ -16,6 +16,7 @@ export default class PlayerPersistanceMapper {
       updatedAt: new Date(),
       titleId: player.titleId?.toString(),
       state: player.state?.value,
+      richPresence: player.richPresence?.toString(),
     };
   }
 }

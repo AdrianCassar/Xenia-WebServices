@@ -16,6 +16,7 @@ interface PlayerProps {
   sessionId?: SessionId;
   titleId?: TitleId;
   state?: StateFlag;
+  richPresence?: string;
 }
 
 interface CreateProps {
@@ -46,6 +47,7 @@ export default class Player {
       ),
       sessionId: new SessionId('0'.repeat(16)),
       titleId: new TitleId('0'),
+      richPresence: '',
     });
   }
 
@@ -59,6 +61,7 @@ export default class Player {
     this.props.sessionId = player.sessionId;
     this.props.titleId = player.titleId;
     this.props.state = player.state;
+    this.props.richPresence = player.richPresence;
   }
 
   public setSession(sessionId: SessionId) {
@@ -71,6 +74,14 @@ export default class Player {
 
   public setGamertag(gamertag: Gamertag) {
     this.props.gamertag = gamertag;
+  }
+
+  public setRichPresence(richPresence: string) {
+    this.props.richPresence = richPresence;
+  }
+
+  public setState(state: StateFlag) {
+    this.props.state = state;
   }
 
   get xuid() {
@@ -107,5 +118,9 @@ export default class Player {
 
   get state() {
     return this.props.state;
+  }
+
+  get richPresence() {
+    return this.props.richPresence;
   }
 }

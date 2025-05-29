@@ -27,6 +27,7 @@ export default class PlayerDomainMapper {
     let state: StateFlag = new StateFlag(
       StateFlags.ONLINE | StateFlags.JOINABLE | StateFlags.PLAYING,
     );
+    let richPresence: string = '';
 
     try {
       if (player?.xuid) {
@@ -64,6 +65,10 @@ export default class PlayerDomainMapper {
       if (player?.state) {
         state = new StateFlag(player.state);
       }
+
+      if (player?.richPresence) {
+        richPresence = player.richPresence;
+      }
     } catch (error) {
       this.logger.fatal(error);
     }
@@ -78,6 +83,7 @@ export default class PlayerDomainMapper {
       sessionId: sessionId,
       titleId: titleId,
       state: state,
+      richPresence: richPresence,
     });
   }
 }

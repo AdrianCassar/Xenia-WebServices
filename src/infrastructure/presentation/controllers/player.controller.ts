@@ -17,8 +17,12 @@ import MacAddress from 'src/domain/value-objects/MacAddress';
 import { FindPlayerRequest } from '../requests/FindPlayerRequest';
 import { FindPlayerQuery } from 'src/application/queries/FindPlayerQuery';
 import type { PlayerResponse } from 'src/infrastructure/presentation/responses/PlayerResponse';
-import { GetPlayerPresence, PlayerPresence } from '../responses/PlayerPresence';
+import {
+  GetPlayerPresence as GetPlayersPresence,
+  PlayerPresence,
+} from '../responses/PlayerPresence';
 import { PresenceRequest } from '../requests/PresenceRequest';
+import { PresencesUpdateRequest } from '../requests/PresenceUpdateRequest';
 import Player from 'src/domain/aggregates/Player';
 import { GetPlayersQuery } from 'src/application/queries/GetPlayersQuery';
 import _ from 'lodash';
@@ -29,6 +33,8 @@ import { GetPlayerGamertagQuery } from 'src/application/queries/GetPlayerGamerta
 import { ProcessClientAddressCommand } from 'src/application/commands/ProcessClientAddressCommand';
 import { RealIP } from 'nestjs-real-ip';
 import { DeleteMyProfilesQuery } from 'src/application/queries/DeleteMyProfilesQuery';
+import { UpdatePlayerCommand } from 'src/application/commands/UpdatePlayerCommand';
+import StateFlag, { StateFlags } from 'src/domain/value-objects/StateFlag';
 
 @ApiTags('Player')
 @Controller('/players')
@@ -61,7 +67,7 @@ export class PlayerController {
   async findPlayer(
     @Body() request: FindPlayerRequest,
   ): Promise<PlayerResponse> {
-    this.logger.verbose('\n' + JSON.stringify(request, null, 2));
+    // this.logger.verbose('\n' + JSON.stringify(request, null, 2));
 
     const player = await this.queryBus.execute(
       new FindPlayerQuery(new IpAddress(request.hostAddress)),
@@ -82,9 +88,37 @@ export class PlayerController {
     };
   }
 
+  // Set Players Presence
+  @Post('/setpresence')
+  async SetPresence(@Body() request: PresencesUpdateRequest) {
+    for (const PresenceUpdate of request.presence) {
+      const player: Player = await this.queryBus.execute(
+        new GetPlayerQuery(new Xuid(PresenceUpdate.xuid)),
+      );
+
+      if (!player) {
+        continue;
+      }
+
+      const state: StateFlag = new StateFlag(
+        StateFlags.ONLINE | StateFlags.JOINABLE | StateFlags.PLAYING,
+      );
+
+      // player.setState(new StateFlag(19));
+      player.setRichPresence(PresenceUpdate.richPresence);
+
+      await this.commandBus.execute(
+        new UpdatePlayerCommand(player.xuid, player),
+      );
+    }
+  }
+
+  // Get Friends Presence
   @Post('/presence')
-  async Presence(@Body() request: PresenceRequest): Promise<GetPlayerPresence> {
-    const playerPresences: GetPlayerPresence = [];
+  async Presence(
+    @Body() request: PresenceRequest,
+  ): Promise<GetPlayersPresence> {
+    const playerPresences: GetPlayersPresence = [];
 
     this.logger.debug(request);
 
@@ -115,8 +149,7 @@ export class PlayerController {
         sessionId: player.sessionId.value,
         titleId: player.titleId.toString(),
         stateChangeTime: 0,
-        richPresenceStateSize: 0,
-        richPresence: 'Playing on Xenia',
+        richPresence: player.richPresence,
       };
 
       playerPresences.push(presence);

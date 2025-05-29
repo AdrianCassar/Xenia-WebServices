@@ -54,6 +54,7 @@
     "helmet": "^8.1.0",
     "ipaddr.js": "^2.2.0",
     "nestjs-real-ip": "^3.0.1",
+    "obscenity": "^0.4.3",
     "private-ip": "^3.0.2",
     "reflect-metadata": "^0.2.2",
     "rimraf": "^6.0.1",

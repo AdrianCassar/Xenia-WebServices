@@ -64,6 +64,7 @@ export class XNetController {
     if (player) {
       player.setSession(new SessionId('0'.repeat(16)));
       player.setTitleId(new TitleId('0'));
+      player.setRichPresence('');
 
       await this.commandBus.execute(
         new UpdatePlayerCommand(player.xuid, player),

@@ -52,6 +52,10 @@ export default class PlayerRepository implements IPlayerRepository {
   }
 
   public async findByXuid(xuid: Xuid): Promise<Player> {
+    if (!xuid) {
+      return undefined;
+    }
+
     const player = await this.PlayerModel.findOne({
       xuid: xuid.value,
     });

@@ -7,6 +7,13 @@ import ISessionRepository, {
 import axios, { AxiosRequestConfig, ResponseType } from 'axios';
 import { XMLParser } from 'fast-xml-parser';
 import { AxiosResponse } from 'axios';
+import IPlayerRepository, {
+  IPlayerRepositorySymbol,
+} from 'src/domain/repositories/IPlayerRepository';
+import Player from 'src/domain/aggregates/Player';
+import Xuid from 'src/domain/value-objects/Xuid';
+import XStringVerify from 'src/domain/XStringVerify';
+import Session from 'src/domain/aggregates/Session';
 
 const icon_cache = new Map<string, string>();
 const title_info_cache = new Map<string, object>();
@@ -18,7 +25,9 @@ export class AggregateSessionCommandHandler
 {
   constructor(
     @Inject(ISessionRepositorySymbol)
-    private repository: ISessionRepository,
+    private session_repository_: ISessionRepository,
+    @Inject(IPlayerRepositorySymbol)
+    private player_repository_: IPlayerRepository,
     private readonly logger: ConsoleLogger,
   ) {
     logger.setContext(AggregateSessionCommand.name);
@@ -217,8 +226,80 @@ export class AggregateSessionCommandHandler
     }
   }
 
+  async getHostGamertag(session: Session): Promise<string> {
+    if (session.HasProperties()) {
+      const HostGamerNameProperty = session.propertyHostGamerName;
+
+      if (HostGamerNameProperty) {
+        const HostGamerName = HostGamerNameProperty.getUTF16();
+
+        // Check for empty HostGamerName incase of base64 corruption
+        if (HostGamerName) {
+          return HostGamerName;
+        }
+      }
+    }
+
+    // Find via XUID in session
+    for (const player_xuid of session.players.keys()) {
+      const peer = await this.player_repository_.findByXuid(
+        new Xuid(player_xuid),
+      );
+
+      if (!peer) {
+        return 'Player 1';
+      }
+
+      const peer_gamertag = peer.gamertag.value;
+
+      // Fallback for clients without properties support
+      if (session.xuid?.value == peer.xuid.value) {
+        if (XStringVerify.Verify(peer_gamertag)) {
+          return peer_gamertag;
+        }
+      }
+    }
+
+    // Get first player in players map
+    if (session.players.size > 0) {
+      const xuid: string = session.players.keys().next().value;
+      const peer = await this.player_repository_.findByXuid(new Xuid(xuid));
+
+      if (!peer) {
+        return 'Player 1';
+      }
+
+      const peer_gamertag = peer.gamertag.value;
+
+      if (XStringVerify.Verify(peer_gamertag)) {
+        return peer_gamertag;
+      }
+    }
+
+    return 'Player 1';
+  }
+
+  async getHostPresenceString(session: Session): Promise<string> {
+    const HOST_XUID: Xuid = session.getHostXUID;
+
+    if (HOST_XUID) {
+      const HOST: Player = await this.player_repository_.findByXuid(HOST_XUID);
+
+      if (
+        HOST &&
+        XStringVerify.Verify(HOST.richPresence) &&
+        HOST.richPresence
+      ) {
+        return HOST.richPresence;
+      }
+    }
+
+    const title_id = session.titleId.toString();
+    return `Playing ${await this.getTitleName(title_id)}`;
+  }
+
   async execute() {
-    const sessions = await this.repository.findAllAdvertisedSessions();
+    const sessions = await this.session_repository_.findAllAdvertisedSessions();
 
     const titles = {};
 
@@ -227,12 +308,74 @@ export class AggregateSessionCommandHandler
     for (const session of sessions) {
       const title_id = session.titleId.toString();
 
-      const game_title: string = await this.getTitleName(title_id);
+      let game_title: string = await this.getTitleName(title_id);
       const tile_icon: string = await this.getTitleTileIcon(title_id);
       const title_info_json: object = await this.getTitleJsonInfo(title_id);
 
+      // Fallback to title from session
+      if (!game_title) {
+        if (XStringVerify.Verify(session.title)) {
+          game_title = session.title;
+        }
+      }
+
+      const HOST_XUID: Xuid = session.getHostXUID;
+      const HOST_PRESENCE_STRING: string =
+        await this.getHostPresenceString(session);
+      const HOST_GAMERTAG: string = await this.getHostGamertag(session);
+      const PlayerGamertags = new Array<string>();
+
+      PlayerGamertags.push(HOST_GAMERTAG);
+
+      let defaulting_gamertags: number = 0;
+      let local_defaulting_gamertags: number = 0;
+
+      let players_count: number = 0;
+      if (session.players.size > 1) {
+        for (const player_xuid of session.players.keys()) {
+          players_count++;
+
+          const peer = await this.player_repository_.findByXuid(
+            new Xuid(player_xuid),
+          );
+
+          // Player is local if they're not registered
+          if (!peer) {
+            // Skip Defaulting Host
+            if (session.players.size == 1) {
+              continue;
+            }
+
+            local_defaulting_gamertags++;
+            PlayerGamertags.push(`Local Player ${local_defaulting_gamertags}`);
+
+            continue;
+          }
+
+          // Skip Host since they're already added to PlayerGamertags
+          if (HOST_XUID) {
+            if (HOST_XUID.value == peer.xuid.value) {
+              continue;
+            }
+          } else if (players_count == 1) {
+            // We can't get XUID so assume player 1 is host
+            continue;
+          }
+
+          const peer_gamertag = peer.gamertag.value;
+
+          // Peer Gamer
+          if (XStringVerify.Verify(peer_gamertag)) {
+            PlayerGamertags.push(peer_gamertag);
+          } else {
+            defaulting_gamertags++;
+            PlayerGamertags.push(`Player ${defaulting_gamertags}`);
+          }
+        }
+      }
+
       let index = titles['Titles'].findIndex(
-        (title) => title.titleId == title_id,
+        (title: { titleId: string }) => title.titleId == title_id,
       );
 
       if (index == -1) {
@@ -252,8 +395,11 @@ export class AggregateSessionCommandHandler
       const data = {
         mediaId: session.mediaId,
         version: session.version,
-        players: session.players.size,
+        players: PlayerGamertags,
         total: session.totalSlots,
+        host_presence: HOST_PRESENCE_STRING,
+        host_gamertag: HOST_GAMERTAG,
+        host_xuid: HOST_XUID?.value,
       };
 
       titles['Titles'][index]['sessions'].push(data);
@@ -262,8 +408,6 @@ export class AggregateSessionCommandHandler
     this.logger.verbose(`XML Cache Count: ${title_xml_cache.size}`);
     this.logger.verbose(`JSON Cache Count: ${title_info_cache.size}`);
     this.logger.verbose(`Tile Icon Cache Count: ${icon_cache.size}`);
-
-    this.logger.verbose(``);
 
     this.logger.verbose('Recent Games:');
     for (const [titleId, _xml_document] of title_xml_cache) {

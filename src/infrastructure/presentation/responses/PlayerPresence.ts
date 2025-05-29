@@ -5,7 +5,6 @@ export interface PlayerPresence {
   sessionId: string;
   titleId: string;
   stateChangeTime: number;
-  richPresenceStateSize: number; // Not needed can determine size from string itself.
   richPresence: string;
 }
 

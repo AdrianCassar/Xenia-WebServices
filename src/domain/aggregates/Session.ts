@@ -5,7 +5,10 @@ import SessionFlags from '../value-objects/SessionFlags';
 import SessionId from '../value-objects/SessionId';
 import TitleId from '../value-objects/TitleId';
 import Xuid from '../value-objects/Xuid';
-import Property, { X_USER_DATA_TYPE } from '../value-objects/Property';
+import Property, {
+  X_USER_DATA_TYPE,
+  XProperty,
+} from '../value-objects/Property';
 import { Table } from 'console-table-printer';
 
 interface SessionProps {
@@ -70,9 +73,6 @@ interface JoinProps {
 interface LeaveProps {
   xuids: Xuid[];
 }
-
-const X_PROPERTY_GAMER_HOSTNAME = 0x40008109;
-const X_PROPERTY_GAMER_PUID = 0x20008107;
 
 export default class Session {
   private readonly props: SessionProps;
@@ -427,7 +427,7 @@ export default class Session {
 
   get propertyHostGamerName() {
     const GAMER_HOSTNAME = this.props.properties.find((prop) => {
-      return prop.id == X_PROPERTY_GAMER_HOSTNAME;
+      return prop.id == XProperty.GAMER_HOSTNAME;
     });
 
     return GAMER_HOSTNAME;
@@ -435,10 +435,32 @@ export default class Session {
 
   get propertyPUID() {
     const PUID = this.props.properties.find((prop) => {
-      return prop.id == X_PROPERTY_GAMER_PUID;
+      return prop.id == XProperty.GAMER_PUID;
     });
 
     return PUID;
+  }
+
+  get getHostXUID(): Xuid {
+    if (this.HasProperties()) {
+      const PUID = this.propertyPUID;
+
+      if (PUID) {
+        if (PUID.getData().byteLength == 8) {
+          return new Xuid(
+            PUID.getData().readBigUInt64BE().toString(16).padStart(16, '0'),
+          );
+        } else {
+          this._logger.error('Corrupt PUID!');
+        }
+      }
+    } else {
+      return this?.xuid;
+    }
+  }
+
+  HasProperties() {
+    return this.properties.length == 0 ? false : true;
   }
 
   getPropertiesTable() {

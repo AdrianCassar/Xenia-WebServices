@@ -25,6 +25,8 @@ export class Player {
   titleId?: string;
   @Prop()
   state?: number;
+  @Prop()
+  richPresence?: string;
 }
 
 export const PlayerSchema = SchemaFactory.createForClass(Player);
