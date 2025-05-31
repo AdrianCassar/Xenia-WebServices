@@ -108,6 +108,28 @@ button {
     margin-top: 3px;
 }
 
+#server_details_btn {
+    background-color: #2b2f31;
+    color: #e8e6e3;
+    border-radius: 2px;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 25px;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+#server_details {
+    display: none;
+}
+
+ul, li {
+    padding: 2px;
+}
+
 @media only screen and (max-width: 600px) {
     table {
         width: 100%;
@@ -132,6 +154,10 @@ button {
     }
 
     .copy-xuid-btn {
+        display: none;
+    }
+
+    #server_details_btn {
         display: none;
     }
 }

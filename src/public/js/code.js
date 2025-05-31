@@ -7,6 +7,29 @@ function generateSessionsTable(sessionsData) {
     <th scope="col" id="title_update">Latest TU</th>
   </tr>\n`;
 
+  if (sessionsData?.Metadata) {
+    $('#server_details_btn').show();
+
+    let Build_Commit = sessionsData?.Metadata.HEROKU_BUILD_COMMIT;
+    let Created_At = sessionsData?.Metadata.HEROKU_RELEASE_CREATED_AT;
+    let Description = sessionsData?.Metadata.HEROKU_BUILD_DESCRIPTION;
+
+    let BUILD_COMMIT = $('#BUILD_COMMIT');
+    let RELEASE_CREATED_AT = $('#RELEASE_CREATED_AT');
+    let BUILD_DESCRIPTION = $('#BUILD_DESCRIPTION');
+
+    RELEASE_CREATED_AT.text(Created_At);
+    BUILD_DESCRIPTION.text(Description);
+
+    if (Build_Commit) {
+      const Commit_URL = `https://github.com/AdrianCassar/Xenia-WebServices/commit/${Build_Commit}`
+      BUILD_COMMIT.attr("href", Commit_URL)
+      BUILD_COMMIT.text(`${sessionsData?.Metadata.HEROKU_BUILD_COMMIT.substring(0, 7)}`);
+    }
+  } else {
+    $('#server_details_btn').hide();
+  }
+
   sessionsData?.Titles?.forEach((titleInfo) => {
     let title = 'N/A';
 
@@ -200,4 +223,8 @@ $(document).on('click', '.copy-xuid-btn', function () {
         $btn.css('border', '');
       }, 2000);
     });
+});
+
+$(document).on('click', '#server_details_btn', function () {
+  $('#server_details').toggle();
 });
