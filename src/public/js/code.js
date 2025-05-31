@@ -1,3 +1,6 @@
+let time = 30;
+let serverStartTime = 0;
+
 function generateSessionsTable(sessionsData) {
   let result = '<table>\n';
 
@@ -6,6 +9,37 @@ function generateSessionsTable(sessionsData) {
     <th scope="col">Players</th>
     <th scope="col" id="title_update">Latest TU</th>
   </tr>\n`;
+
+  if (sessionsData?.Metadata) {
+    let Build_Commit = sessionsData?.Metadata.HEROKU_BUILD_COMMIT;
+    let Released_At = sessionsData?.Metadata.HEROKU_RELEASE_CREATED_AT;
+
+    if (!serverStartTime) {
+      serverStartTime = new Date(sessionsData?.Metadata.START_TIME);
+      updateUptime();
+    }
+
+    let BUILD_COMMIT = $('#BUILD_COMMIT');
+    let RELEASE_CREATED_AT = $('#RELEASE_CREATED_AT');
+
+    if (Released_At) {
+      Released_At = new Date(sessionsData?.Metadata.HEROKU_RELEASE_CREATED_AT).toDateString();
+    } else {
+      Released_At = 'N/A';
+    }
+
+    RELEASE_CREATED_AT.text(Released_At);
+
+    if (Build_Commit) {
+      const Commit_URL = `https://github.com/AdrianCassar/Xenia-WebServices/commit/${Build_Commit}`
+      BUILD_COMMIT.attr('href', Commit_URL)
+      BUILD_COMMIT.text(`${sessionsData?.Metadata.HEROKU_BUILD_COMMIT.substring(0, 7)}`);
+    } else {
+      BUILD_COMMIT.removeAttr('target')
+      BUILD_COMMIT.attr('href', '#')
+      BUILD_COMMIT.text(`N/A`);
+    }
+  }
 
   sessionsData?.Titles?.forEach((titleInfo) => {
     let title = 'N/A';
@@ -156,7 +190,28 @@ function refreshSessionTable() {
     });
 }
 
-let time = 30;
+function formatUTCToDDHHMMSS(ms) {
+  const totalSeconds = Math.floor(ms / 1000);
+  const days = Math.floor(totalSeconds / (60 * 60 * 24));
+  const hours = Math.floor((totalSeconds % (60 * 60 * 24)) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  const hh = hours.toString().padStart(2, '0');
+  const mm = minutes.toString().padStart(2, '0');
+  const ss = seconds.toString().padStart(2, '0');
+
+  return `${days}d ${hh}:${mm}:${ss}`;
+}
+
+function updateUptime() {
+  if (serverStartTime > 0) {
+    const diffMs = new Date() - serverStartTime;
+    const uptimeStr = formatUTCToDDHHMMSS(diffMs);
+
+    $('#UPTIME').html(uptimeStr);
+  }
+}
 
 function refreshTimer() {
   if (time <= 0) {
@@ -166,6 +221,8 @@ function refreshTimer() {
 
   if (document.readyState === 'complete') {
     $('#countdown').html(`Refreshing in ${time}s`);
+    updateUptime();
+
     time -= 1;
   }
 }
@@ -200,4 +257,8 @@ $(document).on('click', '.copy-xuid-btn', function () {
         $btn.css('border', '');
       }, 2000);
     });
+});
+
+$(document).on('click', '#server_details_btn', function () {
+  $('#server_details').toggle();
 });

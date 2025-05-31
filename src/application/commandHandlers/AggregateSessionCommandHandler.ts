@@ -14,10 +14,13 @@ import Player from 'src/domain/aggregates/Player';
 import Xuid from 'src/domain/value-objects/Xuid';
 import XStringVerify from 'src/domain/XStringVerify';
 import Session from 'src/domain/aggregates/Session';
+import PersistanceSettings from 'src/infrastructure/persistance/settings/PersistanceSettings';
 
 const icon_cache = new Map<string, string>();
 const title_info_cache = new Map<string, object>();
 const title_xml_cache = new Map<string, object>();
+
+const config = new PersistanceSettings().get();
 
 @CommandHandler(AggregateSessionCommand)
 export class AggregateSessionCommandHandler
@@ -301,9 +304,25 @@ export class AggregateSessionCommandHandler
   async execute() {
     const sessions = await this.session_repository_.findAllAdvertisedSessions();
 
+    const HasMetaData = Boolean(
+      config.HEROKU_RELEASE_CREATED_AT?.length ||
+        config.HEROKU_BUILD_COMMIT?.length ||
+        config.START_TIME?.length,
+    );
+
+    const Metadata = {
+      HEROKU_RELEASE_CREATED_AT: config.HEROKU_RELEASE_CREATED_AT,
+      HEROKU_BUILD_COMMIT: config.HEROKU_BUILD_COMMIT,
+      START_TIME: config.START_TIME,
+    };
+
     const titles = {};
 
     titles['Titles'] = [];
+
+    if (HasMetaData) {
+      titles['Metadata'] = Metadata;
+    }
 
     for (const session of sessions) {
       const title_id = session.titleId.toString();
