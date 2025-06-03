@@ -1,0 +1,9 @@
+{
+  "services": [
+    {
+      "service_id": "555307EC",
+      "address": "127.0.0.1",
+      "port": 1009
+    }
+  ]
+}

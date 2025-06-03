@@ -51,21 +51,18 @@ export class TitleController {
     return file.toString('utf8');
   }
 
-  @Get('/services/:serviceId')
+  @Get('/services')
   @ApiParam({ name: 'titleId', example: '4D5307E6' })
-  @ApiParam({ name: 'serviceId', example: '45410004' })
   @Header('content-type', 'application/json')
   async getTitleService(
     @Param('titleId') titleId: string,
-    @Param('serviceId') serviceId: string,
     @Res({ passthrough: true }) res: Response,
   ) {
     const path = join(
       process.cwd(),
       './src/titles',
       titleId.toUpperCase(),
-      'services',
-      `${serviceId}.json`,
+      'services.json',
     );
 
     if (!existsSync(path)) {
