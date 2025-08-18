@@ -9,7 +9,7 @@
     "node": "^20 || ^22"
   },
   "scripts": {
-    "heroku-prebuild": "git clone --branch main https://github.com/AdrianCassar/TitleManagedStorageArchiveXbox360.git ./src/xstorage/title",
+    "heroku-prebuild": "git clone --branch main-fixed-line-endings https://github.com/AdrianCassar/TitleManagedStorageArchiveXbox360.git ./src/xstorage/title",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"**/public/**/*.js\"",
