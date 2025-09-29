@@ -64,4 +64,8 @@ export default class SessionFlags extends TinyTypeOf<number>() {
 
     return stats_only || stats_host_only;
   }
+
+  public get isFriendsOnly(): boolean {
+    return this.isFlagSet(Flags.JOIN_VIA_PRESENCE_FRIENDS_ONLY);
+  }
 }

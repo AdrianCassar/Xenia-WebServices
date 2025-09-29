@@ -12,6 +12,7 @@ import Player from 'src/domain/aggregates/Player';
 import { UpdatePlayerCommand } from 'src/application/commands/UpdatePlayerCommand';
 import SessionId from 'src/domain/value-objects/SessionId';
 import TitleId from 'src/domain/value-objects/TitleId';
+import StateFlag, { StateFlags } from 'src/domain/value-objects/StateFlag';
 
 @ApiTags('XNet')
 @Controller()
@@ -62,8 +63,13 @@ export class XNetController {
     );
 
     if (player) {
+      const default_state = new StateFlag(
+        StateFlags.ONLINE | StateFlags.JOINABLE | StateFlags.PLAYING,
+      );
+
       player.setSession(new SessionId('0'.repeat(16)));
       player.setTitleId(new TitleId('0'));
+      player.setState(default_state);
       player.setRichPresence('');
 
       await this.commandBus.execute(

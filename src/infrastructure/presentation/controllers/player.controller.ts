@@ -34,7 +34,6 @@ import { ProcessClientAddressCommand } from 'src/application/commands/ProcessCli
 import { RealIP } from 'nestjs-real-ip';
 import { DeleteMyProfilesQuery } from 'src/application/queries/DeleteMyProfilesQuery';
 import { UpdatePlayerCommand } from 'src/application/commands/UpdatePlayerCommand';
-import StateFlag, { StateFlags } from 'src/domain/value-objects/StateFlag';
 
 @ApiTags('Player')
 @Controller('/players')
@@ -100,11 +99,6 @@ export class PlayerController {
         continue;
       }
 
-      const state: StateFlag = new StateFlag(
-        StateFlags.ONLINE | StateFlags.JOINABLE | StateFlags.PLAYING,
-      );
-
-      // player.setState(new StateFlag(19));
       player.setRichPresence(PresenceUpdate.richPresence);
 
       await this.commandBus.execute(
@@ -203,7 +197,7 @@ export class PlayerController {
 
   @Get('/deletemyprofiles')
   async DeleteAllMyProfiles(@RealIP() ip: string) {
-    const ipv4 = await this.commandBus.execute(
+    const ipv4: string = await this.commandBus.execute(
       new ProcessClientAddressCommand(ip),
     );
 

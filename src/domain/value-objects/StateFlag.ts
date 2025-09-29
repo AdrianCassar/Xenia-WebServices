@@ -30,6 +30,10 @@ export default class StateFlag extends TinyTypeOf<number>() {
     return this.isFlagSet(StateFlags.PLAYING);
   }
 
+  public isFriendsOnly(): boolean {
+    return this.isFlagSet(StateFlags.FRIENDS_ONLY);
+  }
+
   public setOnline() {
     this.value = this.value | StateFlags.ONLINE;
   }
@@ -40,6 +44,14 @@ export default class StateFlag extends TinyTypeOf<number>() {
 
   public setPlaying() {
     this.value = this.value | StateFlags.PLAYING;
+  }
+
+  public setFriendsOnly() {
+    this.value = this.value | StateFlags.FRIENDS_ONLY;
+  }
+
+  public removeFlag(flag: number): void {
+    this.value &= ~flag;
   }
 
   public toString(): string {

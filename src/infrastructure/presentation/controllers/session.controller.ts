@@ -61,6 +61,7 @@ import { GetTitleSessionsQuery } from 'src/application/queries/GetTitleSessionsQ
 import SessionDetailsPresentationMapper from '../mappers/SessionDetailsPresentationMapper';
 import { PreJoinRequest } from '../requests/PreJoinRequest';
 import Property, { X_USER_DATA_TYPE } from 'src/domain/value-objects/Property';
+import { StateFlags } from 'src/domain/value-objects/StateFlag';
 
 @ApiTags('Sessions')
 @Controller('/title/:titleId/sessions')
@@ -110,6 +111,12 @@ export class SessionController {
       const player: Player = await this.queryBus.execute(
         new FindPlayerQuery(new IpAddress(request.hostAddress)),
       );
+
+      // 5841128F needs friends only flag to discover sessions.
+      // If session is friends only then set friends only state for host.
+      if (flags.isFriendsOnly) {
+        player.state.setFriendsOnly();
+      }
 
       // If player doesn't exists add them to players table
       if (player) {
@@ -248,14 +255,26 @@ export class SessionController {
       return;
     }
 
-    const result: Session = await this.commandBus.execute(
+    const deleted_session: Session = await this.commandBus.execute(
       new DeleteSessionCommand(new TitleId(titleId), new SessionId(sessionId)),
     );
+
+    if (deleted_session.HasProperties()) {
+      const host: Player = await this.queryBus.execute(
+        new GetPlayerQuery(deleted_session.getHostXUID),
+      );
+
+      // Remove friends only state it's no longer needed
+      if (host && host.state.isFriendsOnly()) {
+        host.state.removeFlag(StateFlags.FRIENDS_ONLY);
+        await this.commandBus.execute(new UpdatePlayerCommand(host.xuid, host));
+      }
+    }
 
     // Reset player's session id and title id when they delete a session.
     // Problem is supporting multiple session instances
 
-    if (!result.deleted) {
+    if (!deleted_session.deleted) {
       throw new NotFoundException(
         `Failed to soft delete session ${sessionId}.`,
       );
@@ -355,15 +374,42 @@ export class SessionController {
     @Param('sessionId') sessionId: string,
     @Body() request: ModifySessionRequest,
   ) {
-    const session = await this.commandBus.execute(
+    const flags: SessionFlags = new SessionFlags(request.flags);
+
+    const session: Session = await this.commandBus.execute(
       new ModifySessionCommand(
         new TitleId(titleId),
         new SessionId(sessionId),
-        new SessionFlags(request.flags),
+        flags,
         request.publicSlotsCount,
         request.privateSlotsCount,
       ),
     );
+
+    if (session && session.HasProperties()) {
+      const host: Player = await this.queryBus.execute(
+        new GetPlayerQuery(session.getHostXUID),
+      );
+
+      if (host) {
+        let update_state: boolean = true;
+
+        // If friends only flag was set, then set friends only flag to host state
+        if (flags.isFriendsOnly && !host.state.isFriendsOnly()) {
+          host.state.setFriendsOnly();
+        } else if (!flags.isFriendsOnly && host.state.isFriendsOnly()) {
+          host.state.removeFlag(StateFlags.FRIENDS_ONLY);
+        } else {
+          update_state = false;
+        }
+
+        if (update_state) {
+          await this.commandBus.execute(
+            new UpdatePlayerCommand(host.xuid, host),
+          );
+        }
+      }
+    }
 
     if (!session) {
       throw new NotFoundException(
