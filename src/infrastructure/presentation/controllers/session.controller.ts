@@ -681,6 +681,19 @@ export class SessionController {
           return { contextId: prop.id, value: value };
         });
 
+    const session: Session = await this.queryBus.execute(
+      new GetSessionQuery(new TitleId(titleId), new SessionId(sessionId)),
+    );
+
+    if (!session) {
+      throw new NotFoundException(`Session ${sessionId} was not found.`);
+    }
+
+    // Print only after initializing properties and contexts but before updating.
+    if (session.HasProperties() || session.HasContexts()) {
+      session.PrettyPrintPropertiesAndContextsUpdateTable(properties, contexts);
+    }
+
     const context_session: Session = await this.commandBus.execute(
       new AddSessionContextCommand(
         new TitleId(titleId),
@@ -688,10 +701,6 @@ export class SessionController {
         contexts,
       ),
     );
-
-    if (!context_session) {
-      throw new NotFoundException(`Session ${sessionId} was not found.`);
-    }
 
     const properties_session: Session = await this.commandBus.execute(
       new AddSessionPropertyCommand(

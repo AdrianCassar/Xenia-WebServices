@@ -145,9 +145,7 @@ export default class Property extends TinyTypeOf<string>() {
 
   getTypeString() {
     switch (this.getType()) {
-      case X_USER_DATA_TYPE.CONTEXT: {
-        return 'Context';
-      }
+      case X_USER_DATA_TYPE.CONTEXT:
       case X_USER_DATA_TYPE.INT32: {
         return 'Int32';
       }
@@ -179,7 +177,7 @@ export default class Property extends TinyTypeOf<string>() {
     return this.id;
   }
 
-  getIDString() {
+  getIDHexString() {
     return this.id_hex;
   }
 
@@ -276,7 +274,7 @@ export default class Property extends TinyTypeOf<string>() {
   }
 
   toStringPretty() {
-    return `${this.getType() == X_USER_DATA_TYPE.CONTEXT ? 'Context' : 'Property'} ID:\t0x${this.getIDString()}  Data Type: ${this.getType()}  Size: ${this.getSizeFromType()}  Type: ${this.isSystemProperty() ? 'System' : 'Custom'}`;
+    return `${this.getType() == X_USER_DATA_TYPE.CONTEXT ? 'Context' : 'Property'} ID:\t0x${this.getIDHexString()}  Data Type: ${this.getType()}  Size: ${this.getSizeFromType()}  Type: ${this.isSystemProperty() ? 'System' : 'Custom'}`;
   }
 
   static SerializeContextToBase64(id: number, value: number): string {
