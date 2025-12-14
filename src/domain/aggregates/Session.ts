@@ -159,55 +159,22 @@ export default class Session {
   }
 
   public addProperties(props: PropertyProps) {
-    const table = this.getPropertiesTable();
-
-    table.table.columns.find((col) => col.title === 'Value').title =
-      'New Value';
-
-    table.addColumn({
-      name: `column8`,
-      title: 'Old Value',
-      alignment: 'center',
-    });
-
     props.properties.forEach((entry) => {
-      const propIndex = this.props.properties.findIndex(
+      const prop_index = this.props.properties.findIndex(
         (prop) => prop.id == entry.id,
       );
 
-      // Update property if it already exists during host migration
-      if (propIndex >= 0) {
-        const current_prop = this.props.properties[propIndex];
+      // Update property if it already exists.
+      if (prop_index != -1) {
+        const old_prop = this.props.properties[prop_index];
 
-        if (!entry.getData().equals(current_prop.getData())) {
-          table.addRow(
-            {
-              column1: entry.getFriendlyName(),
-              column2: `${entry.getType() == X_USER_DATA_TYPE.CONTEXT ? 'Context' : 'Property'}`,
-              column3: `0x${entry.getIDString()}`,
-              column4: `${entry.getTypeString()}`,
-              column5: `${entry.getSizeFromType()}`,
-              column6: `${entry.isSystemProperty() ? 'System' : 'Custom'}`,
-              column7: entry.getParsedData(),
-              column8: current_prop.getParsedData(),
-            },
-            { color: `${entry.isSystemProperty() ? 'blue' : 'magenta'}` },
-          );
-
-          this.props.properties[propIndex] = entry;
+        if (!entry.getData().equals(old_prop.getData())) {
+          this.props.properties[prop_index] = entry;
         }
       } else {
         this.props.properties.push(entry);
       }
     });
-
-    const num_updated = table.table.rows.length;
-
-    if (num_updated) {
-      this._logger.verbose(`Updated ${num_updated} Properties:`);
-
-      table.printTable();
-    }
   }
 
   public modify(props: ModifyProps) {
@@ -463,6 +430,10 @@ export default class Session {
     return this.properties.length == 0 ? false : true;
   }
 
+  HasContexts() {
+    return this.context.size == 0 ? false : true;
+  }
+
   getPropertiesTable() {
     const table = new Table({
       columns: [
@@ -521,7 +492,7 @@ export default class Session {
         {
           column1: prop.getFriendlyName(),
           column2: `${prop.getType() == X_USER_DATA_TYPE.CONTEXT ? 'Context' : 'Property'}`,
-          column3: `0x${prop.getIDString()}`,
+          column3: `0x${prop.getIDHexString()}`,
           column4: `${prop.getTypeString()}`,
           column5: `${prop.getSizeFromType()}`,
           column6: `${prop.isSystemProperty() ? 'System' : 'Custom'}`,
@@ -532,5 +503,166 @@ export default class Session {
     });
 
     table.printTable();
+  }
+
+  PrettyPrintPropertiesAndContextsUpdateTable(
+    props: Array<Property>,
+    ctxs: Array<{ contextId: number; value: number }>,
+  ) {
+    // Convert contexts to properties class
+    const contexts: Array<Property> = ctxs.map((context) => {
+      const serialized_context: string = Property.SerializeContextToBase64(
+        Number(`0x${context.contextId.toString(16)}`),
+        context.value,
+      );
+
+      return new Property(serialized_context);
+    });
+
+    const table = this.getPropertiesTable();
+
+    table.table.columns.find((col) => col.title === 'Value').title =
+      'New Value';
+
+    table.addColumn({
+      name: `column8`,
+      title: 'Old Value',
+      alignment: 'center',
+    });
+
+    table.addColumn({
+      name: `column9`,
+      title: 'State',
+      alignment: 'center',
+    });
+
+    let num_prop_added = 0;
+    let num_prop_updated = 0;
+
+    let num_ctx_added = 0;
+    let num_ctx_updated = 0;
+
+    props.forEach((entry) => {
+      const prop_index = this.props.properties.findIndex(
+        (prop) => prop.id == entry.id,
+      );
+
+      let updated_property = false;
+      let added_property = false;
+      let old_prop: Property;
+
+      // If entry already exists then we are updating, otherwise adding.
+      if (prop_index != -1) {
+        old_prop = this.props.properties[prop_index];
+
+        // Existing property data changed
+        if (!entry.getData().equals(old_prop.getData())) {
+          updated_property = true;
+          num_prop_updated++;
+        }
+      } else {
+        added_property = true;
+        num_prop_added++;
+      }
+
+      if (updated_property) {
+        table.addRow(
+          {
+            column1: entry.getFriendlyName(),
+            column2: `${entry.getType() == X_USER_DATA_TYPE.CONTEXT ? 'Context' : 'Property'}`,
+            column3: `0x${entry.getIDHexString()}`,
+            column4: `${entry.getTypeString()}`,
+            column5: `${entry.getSizeFromType()}`,
+            column6: `${entry.isSystemProperty() ? 'System' : 'Custom'}`,
+            column7: entry.getParsedData(),
+            column8: old_prop.getParsedData(),
+            column9: 'Updated',
+          },
+          { color: `${entry.isSystemProperty() ? 'blue' : 'magenta'}` },
+        );
+      } else if (added_property) {
+        table.addRow(
+          {
+            column1: entry.getFriendlyName(),
+            column2: `${entry.getType() == X_USER_DATA_TYPE.CONTEXT ? 'Context' : 'Property'}`,
+            column3: `0x${entry.getIDHexString()}`,
+            column4: `${entry.getTypeString()}`,
+            column5: `${entry.getSizeFromType()}`,
+            column6: `${entry.isSystemProperty() ? 'System' : 'Custom'}`,
+            column7: entry.getParsedData(),
+            column8: 'N/A',
+            column9: 'Added',
+          },
+          { color: `${entry.isSystemProperty() ? 'blue' : 'magenta'}` },
+        );
+      }
+    });
+
+    contexts.forEach((entry) => {
+      const context_id = entry.getID().toString(16); // without padding
+
+      let updated_context = false;
+      let added_context = false;
+      let old_ctx: Property;
+
+      if (this.context.has(context_id)) {
+        const context_value = this.context.get(context_id);
+
+        const serialized_context: string = Property.SerializeContextToBase64(
+          entry.getID(),
+          context_value,
+        );
+
+        old_ctx = new Property(serialized_context);
+
+        // Existing context data changed
+        if (!entry.getData().equals(old_ctx.getData())) {
+          updated_context = true;
+          num_ctx_updated++;
+        }
+      } else {
+        added_context = true;
+        num_ctx_added++;
+      }
+
+      if (updated_context) {
+        table.addRow(
+          {
+            column1: entry.getFriendlyName(),
+            column2: `${entry.getType() == X_USER_DATA_TYPE.CONTEXT ? 'Context' : 'Property'}`,
+            column3: `0x${entry.getIDHexString()}`,
+            column4: `${entry.getTypeString()}`,
+            column5: `${entry.getSizeFromType()}`,
+            column6: `${entry.isSystemProperty() ? 'System' : 'Custom'}`,
+            column7: entry.getParsedData(),
+            column8: old_ctx.getParsedData(),
+            column9: 'Updated',
+          },
+          { color: `${entry.isSystemProperty() ? 'blue' : 'magenta'}` },
+        );
+      } else if (added_context) {
+        table.addRow(
+          {
+            column1: entry.getFriendlyName(),
+            column2: `${entry.getType() == X_USER_DATA_TYPE.CONTEXT ? 'Context' : 'Property'}`,
+            column3: `0x${entry.getIDHexString()}`,
+            column4: `${entry.getTypeString()}`,
+            column5: `${entry.getSizeFromType()}`,
+            column6: `${entry.isSystemProperty() ? 'System' : 'Custom'}`,
+            column7: entry.getParsedData(),
+            column8: 'N/A',
+            column9: 'Added',
+          },
+          { color: `${entry.isSystemProperty() ? 'blue' : 'magenta'}` },
+        );
+      }
+    });
+
+    const total_added = num_prop_added + num_ctx_added;
+    const total_updated = num_prop_updated + num_ctx_updated;
+
+    if (total_added || total_updated) {
+      table.printTable();
+    }
   }
 }

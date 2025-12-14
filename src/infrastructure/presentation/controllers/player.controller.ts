@@ -114,8 +114,6 @@ export class PlayerController {
   ): Promise<GetPlayersPresence> {
     const playerPresences: GetPlayersPresence = [];
 
-    this.logger.debug(request);
-
     let xuids: Array<Xuid> = request.xuids.map((xuid: string) => {
       let xuid_: Xuid = undefined;
 
