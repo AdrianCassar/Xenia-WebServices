@@ -5,7 +5,7 @@ import {
   NotFoundException,
   Param,
   RawBodyRequest,
-  HttpException,
+  ForbiddenException,
   HttpStatus,
   ConsoleLogger,
 } from '@nestjs/common';
@@ -85,7 +85,28 @@ export class SessionController {
     const flags = new SessionFlags(request.flags);
 
     if (flags.isHost) {
-      this.logger.debug('Host creating session: ' + request.sessionId);
+      this.logger.verbose('Host creating session: ' + request.sessionId);
+
+      let player: Player;
+
+      if (request.xuid) {
+        player = await this.queryBus.execute(
+          new GetPlayerQuery(new Xuid(request.xuid)),
+        );
+      } else {
+        // Fallback for backwards compatibility older netplay builds don't provide xuid.
+        player = await this.queryBus.execute(
+          new FindPlayerQuery(new IpAddress(request.hostAddress)),
+        );
+      }
+
+      // If player is not registered then refuse to create session.
+      if (!player) {
+        const error_msg = `Player not found: ${request.xuid ? request.xuid : request.hostAddress}`;
+        this.logger.error(error_msg);
+
+        throw new ForbiddenException(error_msg);
+      }
 
       await this.commandBus.execute(
         new CreateSessionCommand(
@@ -105,12 +126,8 @@ export class SessionController {
       );
 
       if (flags.isStatsSession) {
-        this.logger.debug('Updating Stats.');
+        this.logger.verbose('Updating Stats.');
       }
-
-      const player: Player = await this.queryBus.execute(
-        new FindPlayerQuery(new IpAddress(request.hostAddress)),
-      );
 
       // 5841128F needs friends only flag to discover sessions.
       // If session is friends only then set friends only state for host.
@@ -119,23 +136,17 @@ export class SessionController {
       }
 
       // If player doesn't exists add them to players table
-      if (player) {
-        if (flags.isAdvertised) {
-          player.setSession(new SessionId(request.sessionId));
+      if (flags.isAdvertised) {
+        player.setSession(new SessionId(request.sessionId));
 
-          await this.commandBus.execute(
-            new UpdatePlayerCommand(player.xuid, player),
-          );
-        } else {
-          this.logger.verbose(`Skip updating presence`);
-        }
+        await this.commandBus.execute(
+          new UpdatePlayerCommand(player.xuid, player),
+        );
       } else {
-        this.logger.debug(`Player not found: ${request.hostAddress}`);
-
-        throw new HttpException('Unknown Player', HttpStatus.BAD_REQUEST);
+        this.logger.verbose(`Skip updating presence`);
       }
     } else {
-      this.logger.debug(`Peer joining session: ${request.sessionId}`);
+      this.logger.verbose(`Peer joining session: ${request.sessionId}`);
 
       const session = await this.queryBus.execute(
         new GetSessionQuery(
@@ -145,7 +156,7 @@ export class SessionController {
       );
 
       if (!session) {
-        this.logger.debug(`Session ${request.sessionId} was not found.`);
+        this.logger.error(`Session ${request.sessionId} was not found.`);
       }
     }
   }
