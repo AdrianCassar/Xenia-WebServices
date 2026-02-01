@@ -6,9 +6,7 @@ import IPlayerRepository, {
 import { DeleteMyProfilesQuery } from '../queries/DeleteMyProfilesQuery';
 
 @QueryHandler(DeleteMyProfilesQuery)
-export class DeleteMyProfilesQueryHandler
-  implements IQueryHandler<DeleteMyProfilesQuery>
-{
+export class DeleteMyProfilesQueryHandler implements IQueryHandler<DeleteMyProfilesQuery> {
   constructor(
     @Inject(IPlayerRepositorySymbol)
     private repository: IPlayerRepository,

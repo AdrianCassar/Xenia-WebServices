@@ -7,9 +7,7 @@ import ISessionRepository, {
 import { CreateSessionCommand } from '../commands/CreateSessionCommand';
 
 @CommandHandler(CreateSessionCommand)
-export class CreateSessionCommandHandler
-  implements ICommandHandler<CreateSessionCommand>
-{
+export class CreateSessionCommandHandler implements ICommandHandler<CreateSessionCommand> {
   constructor(
     @Inject(ISessionRepositorySymbol)
     private repository: ISessionRepository,

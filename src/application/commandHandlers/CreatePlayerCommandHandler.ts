@@ -13,9 +13,7 @@ import {
 import { CreatePlayerCommand } from '../commands/CreatePlayerCommand';
 
 @CommandHandler(CreatePlayerCommand)
-export class CreatePlayerCommandHandler
-  implements ICommandHandler<CreatePlayerCommand>
-{
+export class CreatePlayerCommandHandler implements ICommandHandler<CreatePlayerCommand> {
   constructor(
     @Inject(IPlayerRepositorySymbol)
     private repository: IPlayerRepository,

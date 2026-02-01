@@ -6,9 +6,7 @@ import ISessionRepository, {
 import { GetTitleSessionsQuery } from '../queries/GetTitleSessionsQuery';
 
 @QueryHandler(GetTitleSessionsQuery)
-export class GetTitleSessionsQueryHandler
-  implements IQueryHandler<GetTitleSessionsQuery>
-{
+export class GetTitleSessionsQueryHandler implements IQueryHandler<GetTitleSessionsQuery> {
   constructor(
     @Inject(ISessionRepositorySymbol)
     private repository: ISessionRepository,

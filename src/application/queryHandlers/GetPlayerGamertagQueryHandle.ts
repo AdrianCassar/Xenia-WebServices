@@ -6,9 +6,7 @@ import IPlayerRepository, {
 import { GetPlayerGamertagQuery } from '../queries/GetPlayerGamertagQuery';
 
 @QueryHandler(GetPlayerGamertagQuery)
-export class GetPlayerGamertagQueryHandler
-  implements IQueryHandler<GetPlayerGamertagQuery>
-{
+export class GetPlayerGamertagQueryHandler implements IQueryHandler<GetPlayerGamertagQuery> {
   constructor(
     @Inject(IPlayerRepositorySymbol)
     private repository: IPlayerRepository,

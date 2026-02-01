@@ -11,9 +11,7 @@ export enum BuildServerPathState {
 }
 
 @CommandHandler(XStorageBuildServerPathCommand)
-export class XStorageBuildServerPathCommandHandler
-  implements ICommandHandler<XStorageBuildServerPathCommand>
-{
+export class XStorageBuildServerPathCommandHandler implements ICommandHandler<XStorageBuildServerPathCommand> {
   constructor(private readonly logger: ConsoleLogger) {}
 
   async execute(

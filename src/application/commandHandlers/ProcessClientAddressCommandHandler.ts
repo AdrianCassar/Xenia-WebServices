@@ -4,9 +4,7 @@ import ipaddr from 'ipaddr.js';
 import { ConsoleLogger } from '@nestjs/common';
 
 @CommandHandler(ProcessClientAddressCommand)
-export class ProcessClientAddressCommandHandler
-  implements ICommandHandler<ProcessClientAddressCommand>
-{
+export class ProcessClientAddressCommandHandler implements ICommandHandler<ProcessClientAddressCommand> {
   constructor(private readonly logger: ConsoleLogger) {
     logger.setContext(ProcessClientAddressCommand.name);
   }

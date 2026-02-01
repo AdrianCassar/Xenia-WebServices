@@ -6,9 +6,7 @@ import IPlayerRepository, {
 import { UpdatePlayerCommand } from '../commands/UpdatePlayerCommand';
 
 @CommandHandler(UpdatePlayerCommand)
-export class UpdatePlayerCommandHandler
-  implements ICommandHandler<UpdatePlayerCommand>
-{
+export class UpdatePlayerCommandHandler implements ICommandHandler<UpdatePlayerCommand> {
   constructor(
     @Inject(IPlayerRepositorySymbol)
     private repository: IPlayerRepository,

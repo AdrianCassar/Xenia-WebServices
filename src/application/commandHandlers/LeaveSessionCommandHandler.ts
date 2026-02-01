@@ -6,9 +6,7 @@ import ISessionRepository, {
 import { LeaveSessionCommand } from '../commands/LeaveSessionCommand';
 
 @CommandHandler(LeaveSessionCommand)
-export class LeaveSessionCommandHandler
-  implements ICommandHandler<LeaveSessionCommand>
-{
+export class LeaveSessionCommandHandler implements ICommandHandler<LeaveSessionCommand> {
   constructor(
     @Inject(ISessionRepositorySymbol)
     private repository: ISessionRepository,

@@ -4,9 +4,7 @@ import { existsSync } from 'fs';
 import { unlink } from 'fs/promises';
 
 @CommandHandler(XStorageDeleteCommand)
-export class XStorageDeleteCommandHandler
-  implements ICommandHandler<XStorageDeleteCommand>
-{
+export class XStorageDeleteCommandHandler implements ICommandHandler<XStorageDeleteCommand> {
   constructor() {}
 
   async execute(command: XStorageDeleteCommand) {

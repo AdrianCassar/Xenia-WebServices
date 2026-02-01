@@ -12,9 +12,7 @@ export enum UploadState {
 }
 
 @CommandHandler(XStorageUploadCommand)
-export class XStorageUploadCommandHandler
-  implements ICommandHandler<XStorageUploadCommand>
-{
+export class XStorageUploadCommandHandler implements ICommandHandler<XStorageUploadCommand> {
   constructor(private readonly logger: ConsoleLogger) {}
 
   async execute(command: XStorageUploadCommand): Promise<number> {

@@ -23,7 +23,9 @@ function generateSessionsTable(sessionsData) {
     let RELEASE_CREATED_AT = $('#RELEASE_CREATED_AT');
 
     if (Released_At) {
-      Released_At = new Date(sessionsData?.Metadata.HEROKU_RELEASE_CREATED_AT).toDateString();
+      Released_At = new Date(
+        sessionsData?.Metadata.HEROKU_RELEASE_CREATED_AT,
+      ).toDateString();
     } else {
       Released_At = 'N/A';
     }
@@ -31,12 +33,14 @@ function generateSessionsTable(sessionsData) {
     RELEASE_CREATED_AT.text(Released_At);
 
     if (Build_Commit) {
-      const Commit_URL = `https://github.com/AdrianCassar/Xenia-WebServices/commit/${Build_Commit}`
-      BUILD_COMMIT.attr('href', Commit_URL)
-      BUILD_COMMIT.text(`${sessionsData?.Metadata.HEROKU_BUILD_COMMIT.substring(0, 7)}`);
+      const Commit_URL = `https://github.com/AdrianCassar/Xenia-WebServices/commit/${Build_Commit}`;
+      BUILD_COMMIT.attr('href', Commit_URL);
+      BUILD_COMMIT.text(
+        `${sessionsData?.Metadata.HEROKU_BUILD_COMMIT.substring(0, 7)}`,
+      );
     } else {
-      BUILD_COMMIT.removeAttr('target')
-      BUILD_COMMIT.attr('href', '#')
+      BUILD_COMMIT.removeAttr('target');
+      BUILD_COMMIT.attr('href', '#');
       BUILD_COMMIT.text(`N/A`);
     }
   }

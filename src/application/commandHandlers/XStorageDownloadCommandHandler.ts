@@ -11,9 +11,7 @@ import { createReadStream, existsSync } from 'fs';
 import { XStorageDownloadCommand } from '../commands/XStorageDownloadCommand';
 
 @CommandHandler(XStorageDownloadCommand)
-export class XStorageDownloadCommandHandler
-  implements ICommandHandler<XStorageDownloadCommand>
-{
+export class XStorageDownloadCommandHandler implements ICommandHandler<XStorageDownloadCommand> {
   constructor() {}
 
   async execute(command: XStorageDownloadCommand): Promise<boolean> {

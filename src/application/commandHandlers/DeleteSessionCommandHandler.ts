@@ -13,9 +13,7 @@ import {
 } from '../commands/DeleteSessionCommand';
 
 @CommandHandler(DeleteSessionCommand)
-export class DeleteSessionCommandHandler
-  implements ICommandHandler<DeleteSessionCommand>
-{
+export class DeleteSessionCommandHandler implements ICommandHandler<DeleteSessionCommand> {
   constructor(
     @Inject(ISessionRepositorySymbol)
     private repository: ISessionRepository,
@@ -65,9 +63,7 @@ export class DeleteSessionCommandHandler
 }
 
 @CommandHandler(DeleteSessionsCommand)
-export class DeleteSessionsCommandHandler
-  implements ICommandHandler<DeleteSessionsCommand>
-{
+export class DeleteSessionsCommandHandler implements ICommandHandler<DeleteSessionsCommand> {
   constructor(
     @Inject(ISessionRepositorySymbol)
     private repository: ISessionRepository,

@@ -6,9 +6,7 @@ import IPlayerRepository, {
 import { SetPlayerSessionIdCommand } from '../commands/SetPlayerSessionIdCommand';
 
 @CommandHandler(SetPlayerSessionIdCommand)
-export class SetPlayerSessionIdCommandHandler
-  implements ICommandHandler<SetPlayerSessionIdCommand>
-{
+export class SetPlayerSessionIdCommandHandler implements ICommandHandler<SetPlayerSessionIdCommand> {
   constructor(
     @Inject(IPlayerRepositorySymbol)
     private repository: IPlayerRepository,

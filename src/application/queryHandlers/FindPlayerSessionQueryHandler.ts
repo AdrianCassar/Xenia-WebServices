@@ -6,9 +6,7 @@ import ISessionRepository, {
 import { FindPlayerSessionQuery } from '../queries/FindPlayerSessionQuery';
 
 @QueryHandler(FindPlayerSessionQuery)
-export class FindPlayerSessionQueryHandler
-  implements IQueryHandler<FindPlayerSessionQuery>
-{
+export class FindPlayerSessionQueryHandler implements IQueryHandler<FindPlayerSessionQuery> {
   constructor(
     @Inject(ISessionRepositorySymbol)
     private repository: ISessionRepository,

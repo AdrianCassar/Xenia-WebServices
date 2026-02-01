@@ -6,9 +6,7 @@ import ISessionRepository, {
 import { SessionSearchQuery } from '../queries/SessionSearchQuery';
 
 @QueryHandler(SessionSearchQuery)
-export class SessionSearchQueryHandler
-  implements IQueryHandler<SessionSearchQuery>
-{
+export class SessionSearchQueryHandler implements IQueryHandler<SessionSearchQuery> {
   constructor(
     @Inject(ISessionRepositorySymbol)
     private repository: ISessionRepository,

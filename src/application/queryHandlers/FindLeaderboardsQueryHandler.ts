@@ -10,9 +10,7 @@ import { FindLeaderboardsResponse } from 'src/infrastructure/presentation/respon
 import { FindLeaderboardsQuery } from '../queries/FindLeaderboardsQuery';
 
 @QueryHandler(FindLeaderboardsQuery)
-export class FindLeaderboardsQueryHandler
-  implements IQueryHandler<FindLeaderboardsQuery>
-{
+export class FindLeaderboardsQueryHandler implements IQueryHandler<FindLeaderboardsQuery> {
   constructor(
     @Inject(ILeaderboardRepositorySymbol)
     private repository: ILeaderboardRepository,

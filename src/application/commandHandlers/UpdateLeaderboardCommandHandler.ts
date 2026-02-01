@@ -7,9 +7,7 @@ import ILeaderboardRepository, {
 import { UpdateLeaderboardCommand } from '../commands/UpdateLeaderboardCommand';
 
 @CommandHandler(UpdateLeaderboardCommand)
-export class UpdateLeaderboardCommandHandler
-  implements ICommandHandler<UpdateLeaderboardCommand>
-{
+export class UpdateLeaderboardCommandHandler implements ICommandHandler<UpdateLeaderboardCommand> {
   constructor(
     @Inject(ILeaderboardRepositorySymbol)
     private repository: ILeaderboardRepository,

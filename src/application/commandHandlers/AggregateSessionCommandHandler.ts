@@ -23,9 +23,7 @@ const title_xml_cache = new Map<string, object>();
 const config = new PersistanceSettings().get();
 
 @CommandHandler(AggregateSessionCommand)
-export class AggregateSessionCommandHandler
-  implements ICommandHandler<AggregateSessionCommand>
-{
+export class AggregateSessionCommandHandler implements ICommandHandler<AggregateSessionCommand> {
   constructor(
     @Inject(ISessionRepositorySymbol)
     private session_repository_: ISessionRepository,
@@ -308,8 +306,8 @@ export class AggregateSessionCommandHandler
 
     const HasMetaData = Boolean(
       config.HEROKU_RELEASE_CREATED_AT?.length ||
-        config.HEROKU_BUILD_COMMIT?.length ||
-        config.START_TIME?.length,
+      config.HEROKU_BUILD_COMMIT?.length ||
+      config.START_TIME?.length,
     );
 
     const Metadata = {

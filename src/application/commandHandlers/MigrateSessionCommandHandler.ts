@@ -7,9 +7,7 @@ import ISessionRepository, {
 import { MigrateSessionCommand } from '../commands/MigrateSessionCommand';
 
 @CommandHandler(MigrateSessionCommand)
-export class MigrateSessionCommandHandler
-  implements ICommandHandler<MigrateSessionCommand>
-{
+export class MigrateSessionCommandHandler implements ICommandHandler<MigrateSessionCommand> {
   constructor(
     @Inject(ISessionRepositorySymbol)
     private repository: ISessionRepository,

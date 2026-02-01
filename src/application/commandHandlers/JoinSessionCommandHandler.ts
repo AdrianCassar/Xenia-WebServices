@@ -6,9 +6,7 @@ import ISessionRepository, {
 import { JoinSessionCommand } from '../commands/JoinSessionCommand';
 
 @CommandHandler(JoinSessionCommand)
-export class JoinSessionCommandHandler
-  implements ICommandHandler<JoinSessionCommand>
-{
+export class JoinSessionCommandHandler implements ICommandHandler<JoinSessionCommand> {
   constructor(
     @Inject(ISessionRepositorySymbol)
     private repository: ISessionRepository,

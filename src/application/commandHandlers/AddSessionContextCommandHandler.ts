@@ -6,9 +6,7 @@ import ISessionRepository, {
 import { AddSessionContextCommand } from '../commands/AddSessionContextCommand';
 
 @CommandHandler(AddSessionContextCommand)
-export class AddSessionContextCommandHandler
-  implements ICommandHandler<AddSessionContextCommand>
-{
+export class AddSessionContextCommandHandler implements ICommandHandler<AddSessionContextCommand> {
   constructor(
     @Inject(ISessionRepositorySymbol)
     private repository: ISessionRepository,
