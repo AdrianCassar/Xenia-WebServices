@@ -23,7 +23,7 @@ import {
 } from '../responses/PlayerPresence';
 import { PresenceRequest } from '../requests/PresenceRequest';
 import { PresencesUpdateRequest } from '../requests/PresenceUpdateRequest';
-import Player from 'src/domain/aggregates/Player';
+import Player, { getUserSettingsTable } from 'src/domain/aggregates/Player';
 import { GetPlayersQuery } from 'src/application/queries/GetPlayersQuery';
 import _ from 'lodash';
 import { FindUserInfo, FindUsersInfo } from '../responses/FindUserInfo';
@@ -34,6 +34,12 @@ import { ProcessClientAddressCommand } from 'src/application/commands/ProcessCli
 import { RealIP } from 'nestjs-real-ip';
 import { DeleteMyProfilesQuery } from 'src/application/queries/DeleteMyProfilesQuery';
 import { UpdatePlayerCommand } from 'src/application/commands/UpdatePlayerCommand';
+import UserSetting, {
+  DefaultGamerpic,
+  XUserSetting,
+} from 'src/domain/value-objects/UserSetting';
+import { SettingsUpdateRequest } from '../requests/SettingsUpdateRequest';
+import { Table } from 'console-table-printer';
 
 @ApiTags('Player')
 @Controller('/players')
@@ -51,15 +57,36 @@ export class PlayerController {
   async createPlayer(@Body() request: CreatePlayerRequest) {
     // what if xuid or mac address fails?
 
-    await this.commandBus.execute(
+    const user_settings = new Map<string, Array<UserSetting>>();
+
+    if (request?.settings) {
+      const settings_data = new Map<string, string[]>(
+        Object.entries(request.settings),
+      );
+
+      for (const [title_id, base64_settings] of settings_data) {
+        for (const base64 of base64_settings) {
+          if (user_settings.has(title_id)) {
+            user_settings.get(title_id).push(new UserSetting(base64));
+          } else {
+            user_settings.set(title_id, [new UserSetting(base64)]);
+          }
+        }
+      }
+    }
+
+    const player: Player = await this.commandBus.execute(
       new CreatePlayerCommand(
         new Xuid(request.xuid),
         new Xuid(request.machineId),
         new IpAddress(request.hostAddress),
         new MacAddress(request.macAddress),
         request.gamertag ? new Gamertag(request.gamertag) : undefined,
+        request.settings ? user_settings : undefined,
       ),
     );
+
+    player.PrettyPrintUserSettingsTable();
   }
 
   @Post('/find')
@@ -191,6 +218,186 @@ export class PlayerController {
     }
 
     return UsersInfo;
+  }
+
+  @Post('/setsettings')
+  async SetSettings(@Body() request: SettingsUpdateRequest) {
+    const settings = new Map<string, Map<string, Array<string>>>();
+
+    if (Array.isArray(request.settings)) {
+      for (const xuidsObj of request.settings) {
+        const xuids = Object.keys(xuidsObj)[0];
+
+        const titlesArray = xuidsObj[xuids];
+
+        const titles = new Map<string, Array<string>>();
+
+        if (Array.isArray(titlesArray)) {
+          for (const titlesObj of titlesArray) {
+            const titlesKey = Object.keys(titlesObj)[0];
+
+            const settingsArray = titlesObj[titlesKey];
+
+            if (Array.isArray(settingsArray)) {
+              titles.set(titlesKey, settingsArray);
+            }
+          }
+        }
+
+        settings.set(xuids, titles);
+      }
+    }
+
+    const xuids: Array<Xuid> = Array.from(settings.keys()).map(
+      (xuid: string) => {
+        return new Xuid(xuid);
+      },
+    );
+
+    const players: Array<Player> = await this.queryBus.execute(
+      new GetPlayersQuery(xuids),
+    );
+
+    for (const player of players) {
+      const xuid = player.xuid;
+
+      const user_settings = settings.get(xuid.value);
+
+      player.updateSettings(user_settings);
+
+      const updated_player: Player = await this.commandBus.execute(
+        new UpdatePlayerCommand(player.xuid, player),
+      );
+    }
+  }
+
+  @Post('/getsettings')
+  async GetSettings(@Body() request: SettingsUpdateRequest): Promise<string> {
+    const settings = new Map<string, Map<string, Array<string>>>();
+
+    if (Array.isArray(request.settings)) {
+      for (const xuidsObj of request.settings) {
+        const xuids = Object.keys(xuidsObj)[0];
+
+        const titlesArray = xuidsObj[xuids];
+
+        const titles = new Map<string, Array<string>>();
+
+        if (Array.isArray(titlesArray)) {
+          for (const titlesObj of titlesArray) {
+            const titlesKey = Object.keys(titlesObj)[0];
+
+            const settingIdsArray = titlesObj[titlesKey];
+
+            if (Array.isArray(settingIdsArray)) {
+              titles.set(titlesKey, settingIdsArray);
+            }
+          }
+        }
+
+        settings.set(xuids, titles);
+      }
+    }
+
+    const users_settings = new Map<string, Map<string, Array<UserSetting>>>();
+
+    const xuids: Xuid[] = settings
+      .keys()
+      .map((xuid) => new Xuid(xuid))
+      .toArray();
+
+    const players: Player[] = await this.queryBus.execute(
+      new GetPlayersQuery(xuids),
+    );
+
+    for (const [xuid, titles] of settings) {
+      const player: Player = players.find(
+        (current_xuid) => current_xuid.xuid.value == xuid,
+      );
+
+      const title_settings = new Map<string, Array<UserSetting>>();
+
+      for (const [title_id, setting_ids] of titles) {
+        const user_settings = new Array<UserSetting>();
+
+        for (const setting_id of setting_ids) {
+          const settingId: XUserSetting = <XUserSetting>(
+            Number(`0x${setting_id}`)
+          );
+
+          let user_setting: UserSetting;
+
+          if (player) {
+            user_setting = player.getSetting(title_id, settingId);
+          } else {
+            this.logger.error(`Unregistered profile: ${xuid}`);
+          }
+
+          // We must always provide a gamerpic otherwise game will constantly ask for one.
+          if (!user_setting) {
+            if (settingId == XUserSetting.XPROFILE_GAMERCARD_PICTURE_KEY) {
+              user_setting = DefaultGamerpic;
+            }
+          }
+
+          if (user_setting) {
+            user_settings.push(user_setting);
+          } else {
+            this.logger.error(`Missing user setting ${setting_id}`);
+          }
+        }
+
+        title_settings.set(title_id, user_settings);
+      }
+
+      users_settings.set(xuid, title_settings);
+    }
+
+    const users_settings_jsonObj = {
+      settings: [...users_settings].map(([xuids, titleIds]) => ({
+        [xuids]: [...titleIds].map(([title_id, settings]) => ({
+          [title_id]: settings.map((setting) => setting.toString()),
+        })),
+      })),
+    };
+
+    const users_settings_json_string = JSON.stringify(
+      users_settings_jsonObj,
+      null,
+      4,
+    );
+
+    const tables = new Array<Table>();
+
+    users_settings.values().forEach((user) => {
+      user.forEach((settings, title_id) => {
+        const table: Table = getUserSettingsTable();
+
+        table.table.title = `${title_id}`;
+
+        settings.forEach((setting) => {
+          table.addRow(
+            {
+              column1: setting.getFriendlyName(),
+              column2: `${!setting.isTitleSpecific() ? 'Dashboard' : 'Title'}`,
+              column3: `0x${setting.getIDHexString()}`,
+              column4: `${setting.getTypeString()}`,
+              column5: `${setting.getSizeFromType()}`,
+              column6: setting.getParsedData(),
+            },
+            { color: `${!setting.isTitleSpecific() ? 'blue' : 'magenta'}` },
+          );
+        });
+
+        tables.push(table);
+      });
+    });
+
+    tables.forEach((table) => {
+      table.printTable();
+    });
+
+    return users_settings_json_string;
   }
 
   @Get('/deletemyprofiles')
