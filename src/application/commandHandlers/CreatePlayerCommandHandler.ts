@@ -21,14 +21,15 @@ export class CreatePlayerCommandHandler implements ICommandHandler<CreatePlayerC
     private SessionModel: Model<SessionDocument>,
   ) {}
 
-  async execute(command: CreatePlayerCommand) {
-    await this.repository.save(
+  async execute(command: CreatePlayerCommand): Promise<Player> {
+    return await this.repository.save(
       Player.create({
         xuid: command.xuid,
         gamertag: command.gamertag,
         hostAddress: command.hostAddress,
         macAddress: command.macAddress,
         machineId: command.machineId,
+        settings: command.settings,
       }),
     );
   }

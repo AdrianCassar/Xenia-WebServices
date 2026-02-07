@@ -4,6 +4,7 @@ import IPlayerRepository, {
   IPlayerRepositorySymbol,
 } from 'src/domain/repositories/IPlayerRepository';
 import { UpdatePlayerCommand } from '../commands/UpdatePlayerCommand';
+import Player from 'src/domain/aggregates/Player';
 
 @CommandHandler(UpdatePlayerCommand)
 export class UpdatePlayerCommandHandler implements ICommandHandler<UpdatePlayerCommand> {
@@ -12,7 +13,7 @@ export class UpdatePlayerCommandHandler implements ICommandHandler<UpdatePlayerC
     private repository: IPlayerRepository,
   ) {}
 
-  async execute(command: UpdatePlayerCommand) {
+  async execute(command: UpdatePlayerCommand): Promise<Player> {
     const player = await this.repository.findByXuid(command.xuid);
 
     if (!player) {
@@ -20,6 +21,7 @@ export class UpdatePlayerCommandHandler implements ICommandHandler<UpdatePlayerC
     }
 
     player.updatePlayer(command.player);
-    await this.repository.save(player);
+
+    return await this.repository.save(player);
   }
 }
