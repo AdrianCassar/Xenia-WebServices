@@ -8,6 +8,7 @@ import SessionId from 'src/domain/value-objects/SessionId';
 import Gamertag from 'src/domain/value-objects/Gamertag';
 import TitleId from 'src/domain/value-objects/TitleId';
 import StateFlag, { StateFlags } from 'src/domain/value-objects/StateFlag';
+import UserSetting from 'src/domain/value-objects/UserSetting';
 
 @Injectable()
 export default class PlayerDomainMapper {
@@ -22,6 +23,7 @@ export default class PlayerDomainMapper {
     let machineId: Xuid = new Xuid('FA00002212345678');
     let port: number = 0;
     let gamertag: Gamertag = new Gamertag('Xenia User');
+    let settings: Map<string, Array<UserSetting>>;
     let sessionId: SessionId = new SessionId('0'.repeat(16));
     let titleId: TitleId = new TitleId('0');
     let state: StateFlag = new StateFlag(
@@ -36,6 +38,20 @@ export default class PlayerDomainMapper {
 
       if (player?.gamertag) {
         gamertag = new Gamertag(player.gamertag);
+      }
+
+      if (player?.settings) {
+        settings = new Map<string, Array<UserSetting>>();
+
+        for (const [title_id, base64_settings] of player.settings) {
+          for (const base64 of base64_settings) {
+            if (settings.has(title_id)) {
+              settings.get(title_id).push(new UserSetting(base64));
+            } else {
+              settings.set(title_id, [new UserSetting(base64)]);
+            }
+          }
+        }
       }
 
       if (player?.hostAddress) {
@@ -76,6 +92,7 @@ export default class PlayerDomainMapper {
     return new Player({
       xuid: xuid,
       gamertag: gamertag,
+      settings: settings,
       hostAddress: hostAddress,
       macAddress: macAddress,
       machineId: machineId,

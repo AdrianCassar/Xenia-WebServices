@@ -2,6 +2,7 @@ import IpAddress from 'src/domain/value-objects/IpAddress';
 import MacAddress from 'src/domain/value-objects/MacAddress';
 import Xuid from 'src/domain/value-objects/Xuid';
 import Gamertag from 'src/domain/value-objects/Gamertag';
+import UserSetting from 'src/domain/value-objects/UserSetting';
 
 export class CreatePlayerCommand {
   constructor(
@@ -10,5 +11,6 @@ export class CreatePlayerCommand {
     public readonly hostAddress: IpAddress,
     public readonly macAddress: MacAddress,
     public readonly gamertag?: Gamertag,
+    public readonly settings?: Map<string, Array<UserSetting>>,
   ) {}
 }

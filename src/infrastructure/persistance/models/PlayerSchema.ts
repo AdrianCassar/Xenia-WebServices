@@ -10,6 +10,8 @@ export class Player {
   @Prop({ required: true })
   gamertag: string;
   @Prop({ required: true })
+  settings: Map<string, Array<string>>;
+  @Prop({ required: true })
   machineId: string;
   @Prop({ required: true })
   hostAddress: string;
