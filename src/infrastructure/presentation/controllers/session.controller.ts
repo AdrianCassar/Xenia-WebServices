@@ -557,7 +557,7 @@ export class SessionController {
     @Param('titleId') titleId: string,
     @Body() request: SessionSearchRequest,
   ) {
-    const sessions: Session[] = await this.queryBus.execute(
+    let sessions: Array<Session> = await this.queryBus.execute(
       new SessionSearchQuery(
         new TitleId(titleId),
         request.searchIndex,
@@ -565,6 +565,11 @@ export class SessionController {
         request.numUsers,
       ),
     );
+
+    // It would be more efficient if we could filter the query itself.
+    sessions = sessions.filter((session) => {
+      return session.getHostXUID.value != request.searcher_xuid;
+    });
 
     return sessions.map(this.sessionMapper.mapToPresentationModel);
   }
