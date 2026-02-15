@@ -1,6 +1,6 @@
 import { TinyTypeOf } from 'tiny-types';
 
-const kPropertyScopeMask = 0x00008000;
+export const kPropertyScopeMask = 0x00008000;
 
 export enum X_USER_DATA_TYPE {
   CONTEXT = 0,

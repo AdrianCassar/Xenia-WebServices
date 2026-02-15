@@ -22,8 +22,8 @@ export default class PlayerRepository implements IPlayerRepository {
     this.logger.setContext(PlayerRepository.name);
   }
 
-  public async save(player: Player) {
-    await this.PlayerModel.findOneAndUpdate(
+  public async save(player: Player): Promise<Player> {
+    const player_document = await this.PlayerModel.findOneAndUpdate(
       {
         xuid: player.xuid.value,
       },
@@ -33,6 +33,8 @@ export default class PlayerRepository implements IPlayerRepository {
         new: true,
       },
     );
+
+    return this.playerDomainMapper.mapToDomainModel(player_document);
   }
 
   public async findByXuids(xuids: Xuid[]): Promise<Player[]> {

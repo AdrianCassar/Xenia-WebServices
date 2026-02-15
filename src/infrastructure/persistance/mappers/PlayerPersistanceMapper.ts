@@ -5,9 +5,12 @@ import { Player as PlayerModel } from '../models/PlayerSchema';
 @Injectable()
 export default class PlayerPersistanceMapper {
   public mapToDataModel(player: Player): PlayerModel {
+    const base64_settings = player.getSettingsStringArray();
+
     return {
       xuid: player.xuid.value,
       gamertag: player.gamertag?.value,
+      settings: base64_settings,
       hostAddress: player.hostAddress.value,
       machineId: player.machineId.value,
       macAddress: player.macAddress.value,
