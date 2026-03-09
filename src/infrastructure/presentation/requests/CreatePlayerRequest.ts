@@ -11,4 +11,6 @@ export class CreatePlayerRequest {
   hostAddress: string;
   @ApiProperty()
   macAddress: string;
+  @ApiProperty()
+  settings: Map<string, Array<string>>;
 }
