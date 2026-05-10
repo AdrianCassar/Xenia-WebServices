@@ -101,7 +101,7 @@ export default class SessionRepository implements ISessionRepository {
 
   public async findByPlayer(xuid: Xuid) {
     const session = await this.SessionModel.findOne({
-      players: xuid.value,
+      [`players.${xuid.value}`]: true
     });
 
     if (!session) {
