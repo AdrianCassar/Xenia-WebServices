@@ -32,7 +32,7 @@ export default class LeaderboardRepository implements ILeaderboardRepository {
       this.leaderboardPersistanceMapper.mapToDataModel(leaderboard),
       {
         upsert: true,
-        new: true,
+        returnDocument: 'after',
       },
     );
   }

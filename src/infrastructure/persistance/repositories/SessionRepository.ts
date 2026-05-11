@@ -36,7 +36,7 @@ export default class SessionRepository implements ISessionRepository {
       this.sessionPersistanceMapper.mapToDataModel(session, new Date()),
       {
         upsert: true,
-        new: true,
+        returnDocument: 'after',
       },
     );
   }

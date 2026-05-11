@@ -30,7 +30,7 @@ export default class PlayerRepository implements IPlayerRepository {
       this.playerPersistanceMapper.mapToDataModel(player),
       {
         upsert: true,
-        new: true,
+        returnDocument: 'after',
       },
     );
 
