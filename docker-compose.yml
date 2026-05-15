@@ -1,13 +1,15 @@
 services:
   backend:
-    build: .
+    build:
+      context: .
+      args:
+        NODE_VERSION: ${NODE_VERSION:-lts-alpine}
     image: xenia-backend:build
     environment:
       API_PORT: 36000
       MONGO_URI: mongodb://database:27017/
       SWAGGER_API: true
       nginx: true
-    # Comment out for nginx proxy
     ports:
       - '36000:36000'
     # volumes:
@@ -24,18 +26,3 @@ services:
     volumes:
       - './data/mongo:/data/db'
   
-  #nginx:
-  #  build:
-  #    context: ./src/nginx
-  #  image: xenia-nginx:latest
-  #  restart: always
-  #  ports:
-  #    - "36000:80"
-  #  volumes:
-  #    # Optionally overwrite nginx.conf
-  #    #- ./src/nginx/docker.nginx.conf:/etc/nginx/nginx.conf:ro
-  #    #- ./src/public:/usr/share/nginx/html:ro
-  #    - ./logs:/var/log/nginx
-  #  depends_on:
-  #    - backend
-
