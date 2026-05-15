@@ -6,7 +6,7 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": "^20 || ^22"
+    "node": "^22 || ^24"
   },
   "scripts": {
     "heroku-prebuild": "git clone --branch main https://github.com/AdrianCassar/TitleManagedStorageArchiveXbox360.git ./src/xstorage/title",
