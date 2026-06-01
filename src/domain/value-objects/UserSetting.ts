@@ -298,7 +298,7 @@ export default class UserSetting extends TinyTypeOf<string>() {
 
       this.data = this.buffer.subarray(offset, offset + this.size);
     } else {
-      const offset: number = 12;
+      const offset: number = 16;
       this.size = this.buffer.length - offset;
 
       this.data = this.buffer.subarray(offset, offset + this.size);
