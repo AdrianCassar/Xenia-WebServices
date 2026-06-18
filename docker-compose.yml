@@ -1,11 +1,15 @@
 services:
   backend:
-    build: .
+    build:
+      context: .
+      args:
+        NODE_VERSION: ${NODE_VERSION:-lts-alpine}
+    image: xenia-backend:build
     environment:
-        API_PORT: 36000
-        MONGO_URI: mongodb://database:27017/
-        SWAGGER_API: true
-        nginx: true
+      API_PORT: 36000
+      MONGO_URI: mongodb://database:27017/
+      SWAGGER_API: true
+      nginx: true
     ports:
       - '36000:36000'
     # volumes:
@@ -14,9 +18,11 @@ services:
     #   - './src/public:/xenia-web-service/dist/src/public'
     depends_on:
       - database
+
   database:
     image: mongo
     ports:
       - '27018:27017'
     volumes:
       - './data/mongo:/data/db'
+  
