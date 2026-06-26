@@ -51,6 +51,45 @@ curl -i -X POST http://127.0.0.1:36000/xstorage/user/0009000000000000/title/4156
   //tuser.41560817/u:000901f02d9d4989/41560817/mpdata
 **/
 
+export enum XContentType {
+  kFolder = 0xFFFFFFFF,
+  kInvalid = 0x00000000,
+  kSavedGame = 0x00000001,
+  kMarketplaceContent = 0x00000002,
+  kPublisher = 0x00000003,
+  kIptvDvr = 0x00001000,
+  kIptvPauseBuffer = 0x00002000,
+  kXNACommunity = 0x00003000,
+  kInstalledGame = 0x00004000,
+  kXboxTitle = 0x00005000,
+  kSocialTitle = 0x00006000,
+  kXbox360Title = 0x00007000,
+  kSUStoragePack = 0x00008000,
+  kAvatarItem = 0x00009000,
+  kProfile = 0x00010000,
+  kGamerPicture = 0x00020000,
+  kTheme = 0x00030000,
+  kCacheFile = 0x00040000,
+  kStorageDownload = 0x00050000,
+  kXboxSavedGame = 0x00060000,
+  kXboxDownload = 0x00070000,
+  kGameDemo = 0x00080000,
+  kVideo = 0x00090000,
+  kGameTitle = 0x000A0000,
+  kInstaller = 0x000B0000,
+  kGameTrailer = 0x000C0000,
+  kArcadeTitle = 0x000D0000,
+  kXNA = 0x000E0000,
+  kLicenseStore = 0x000F0000,
+  kMovie = 0x00100000,
+  kTV = 0x00200000,
+  kMusicVideo = 0x00300000,
+  kGameVideo = 0x00400000,
+  kPodcastVideo = 0x00500000,
+  kViralVideo = 0x00600000,
+  kCommunityGame = 0x02000000,
+};
+
 @ApiTags('XStorage')
 @Controller('xstorage')
 export class XStorageController {
@@ -91,29 +130,24 @@ export class XStorageController {
     return safe_path;
   }
 
-  @Post('/clips/title/:titleId/:xuid/:leaderboardId')
-  @ApiParam({
-    name: 'xuid',
-    example: '0009000000000000',
-  })
+  @Post('/clips/title/:titleId/:xuid')
   @ApiParam({
     name: 'titleId',
     example: '41560817',
   })
   @ApiParam({
-    name: 'leaderboardId',
-    example: '100',
+    name: 'xuid',
+    example: '0009000000000000',
   })
   async XStorageBuildServerPathClip(
     @Param('xuid') xuid: string,
     @Param('titleId') titleId: string,
-    @Param('leaderboardId') leaderboardId: string,
   ): Promise<number> {
     if (this.envs.xstorage == 'false') {
       throw new ForbiddenException('XStorage support is disabled on backend!');
     }
 
-    const location = `/clips/title/${titleId}/${xuid}/${leaderboardId}`;
+    const location = `/clips/title/${titleId}/${xuid}`;
     const absolute_path = this.SanitizePath(location);
 
     const result: BuildServerPathState = await this.commandBus.execute(
@@ -135,7 +169,7 @@ export class XStorageController {
     return result;
   }
 
-  @Post('/clips/title/:titleId/:xuid/:leaderboardId/:file')
+  @Post('/clips/title/:titleId/:xuid/:leaderboardId')
   @ApiParam({
     name: 'titleId',
     example: '41560817',
@@ -146,24 +180,19 @@ export class XStorageController {
   })
   @ApiParam({
     name: 'leaderboardId',
-    example: '100',
-  })
-  @ApiParam({
-    name: 'file',
-    example: 'Game_Clip',
+    example: '00000000',
   })
   async XStorageUploadClip(
     @Param('xuid') xuid: string,
     @Param('titleId') titleId: string,
     @Param('leaderboardId') leaderboardId: string,
-    @Param('file') file: string,
     @Req() req: RawBodyRequest<Request>,
   ): Promise<number> {
     if (this.envs.xstorage == 'false') {
       throw new ForbiddenException('XStorage support is disabled on backend!');
     }
 
-    const location = `/clips/title/${titleId}/${xuid}/${leaderboardId}/${file}`;
+    const location = `/clips/title/${titleId}/${xuid}/${leaderboardId}`;
     const absolute_path = this.SanitizePath(location);
 
     const result: UploadState = await this.commandBus.execute(
@@ -195,7 +224,7 @@ export class XStorageController {
     return result;
   }
 
-  @Get('/clips/title/:titleId/:xuid/:leaderboardId/:file')
+  @Get('/clips/title/:titleId/:xuid/:leaderboardId')
   @ApiParam({
     name: 'titleId',
     example: '41560817',
@@ -206,20 +235,15 @@ export class XStorageController {
   })
   @ApiParam({
     name: 'leaderboardId',
-    example: '100',
-  })
-  @ApiParam({
-    name: 'file',
-    example: 'Game_Clip',
+    example: '00000000',
   })
   async XStorageDownloadClip(
     @Param('xuid') xuid: string,
     @Param('titleId') titleId: string,
     @Param('leaderboardId') leaderboardId: string,
-    @Param('file') file: string,
     @Res() res: Response,
   ) {
-    const location = `/clips/title/${titleId}/${xuid}/${leaderboardId}/${file}`;
+    const location = `/clips/title/${titleId}/${xuid}/${leaderboardId}`;
     const absolute_path = this.SanitizePath(location);
 
     const downloaded: boolean = await this.commandBus.execute(
@@ -237,7 +261,7 @@ export class XStorageController {
     }
   }
 
-  @Delete('/clips/title/:titleId/:xuid/:leaderboardId/:file')
+  @Delete('/clips/title/:titleId/:xuid/:leaderboardId')
   @ApiParam({
     name: 'titleId',
     example: '41560817',
@@ -248,21 +272,16 @@ export class XStorageController {
   })
   @ApiParam({
     name: 'leaderboardId',
-    example: '100',
-  })
-  @ApiParam({
-    name: 'file',
-    example: 'Game_Clip',
+    example: '00000000',
   })
   async XStorageDeleteClip(
     @Param('xuid') xuid: string,
     @Param('titleId') titleId: string,
     @Param('leaderboardId') leaderboardId: string,
-    @Param('file') file: string,
   ) {
     throw new ForbiddenException('Deleting clip content is not allowed!');
 
-    const location = `/clips/title/${titleId}/${xuid}/${leaderboardId}/${file}`;
+    const location = `/clips/title/${titleId}/${xuid}/${leaderboardId}`;
     const absolute_path = this.SanitizePath(location);
 
     await this.commandBus.execute(new XStorageDeleteCommand(absolute_path));
@@ -614,7 +633,7 @@ export class XStorageController {
         title_version: 0,
         owner_puid: xuid,
         country_id: 0,
-        content_type: 0,
+        content_type: XContentType.kStorageDownload,
         storage_size: entity.stats.size,
         installed_size: entity.stats.size,
         created: this.UnixToFileTime(entity.stats.birthtimeMs),
