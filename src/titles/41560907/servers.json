@@ -1,0 +1,12 @@
+[
+    {
+        "address": "51.89.68.114",
+        "flags": 0,
+        "description": "ttl,usr,shr,web,dbg,upl,prs,std,bap,dwl"
+    },
+    {
+        "address": "51.89.68.114",
+        "flags": 0,
+        "description": "ttl,usr,shr,web,dbg,upl,prs,std,bap"
+    }
+]
