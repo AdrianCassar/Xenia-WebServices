@@ -71,7 +71,19 @@ export default class PlayerRepository implements IPlayerRepository {
 
   public async findByAddress(ip: IpAddress): Promise<Player> {
     const player = await this.PlayerModel.findOne({
-      hostAddress: ip.value,
+      $or: [{ hostAddress: ip.value }, { onlineAddress: ip.value }],
+    });
+
+    if (!player) {
+      return undefined;
+    }
+
+    return this.playerDomainMapper.mapToDomainModel(player);
+  }
+
+  public async findByOnlineAddress(ip: IpAddress): Promise<Player> {
+    const player = await this.PlayerModel.findOne({
+      onlineAddress: ip.value,
     });
 
     if (!player) {

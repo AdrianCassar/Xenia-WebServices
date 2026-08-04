@@ -87,6 +87,17 @@ export class PlayerController {
     );
 
     player.PrettyPrintUserSettingsTable();
+
+    return {
+      xuid: player.xuid.value,
+      gamertag: player.gamertag?.value,
+      hostAddress: player.hostAddress.value,
+      onlineAddress: player.onlineAddress?.value,
+      machineId: player.machineId.value,
+      port: player.port,
+      macAddress: player.macAddress.value,
+      sessionId: player.sessionId?.value,
+    };
   }
 
   @Post('/find')
@@ -107,6 +118,7 @@ export class PlayerController {
       xuid: player.xuid.value,
       gamertag: player.gamertag,
       hostAddress: player.hostAddress.value,
+      onlineAddress: player.onlineAddress?.value,
       machineId: player.machineId.value,
       port: player.port,
       macAddress: player.macAddress.value,

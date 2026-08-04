@@ -19,5 +19,7 @@ export class CreateSessionCommand {
     public readonly privateSlotsCount: number,
     public readonly macAddress: MacAddress,
     public readonly port: number,
+    public readonly onlineAddress?: IpAddress,
+    public readonly localAddress?: IpAddress,
   ) {}
 }

@@ -16,6 +16,7 @@ interface PlayerProps {
   gamertag?: Gamertag;
   settings?: Map<string, Array<UserSetting>>;
   hostAddress: IpAddress;
+  onlineAddress?: IpAddress;
   macAddress: MacAddress;
   machineId: Xuid;
   port: number;
@@ -30,6 +31,7 @@ interface CreateProps {
   gamertag: Gamertag;
   settings: Map<string, Array<UserSetting>>;
   hostAddress: IpAddress;
+  onlineAddress: IpAddress;
   macAddress: MacAddress;
   machineId: Xuid;
 }
@@ -69,6 +71,9 @@ export default class Player {
     this.props.gamertag = player.gamertag;
     this.props.settings = player.settings;
     this.props.hostAddress = player.hostAddress;
+    if (player.onlineAddress) {
+      this.props.onlineAddress = player.onlineAddress;
+    }
     this.props.macAddress = player.macAddress;
     this.props.machineId = player.machineId;
     this.props.port = player.port;
@@ -76,6 +81,10 @@ export default class Player {
     this.props.titleId = player.titleId;
     this.props.state = player.state;
     this.props.richPresence = player.richPresence;
+  }
+
+  public setOnlineAddress(onlineAddress: IpAddress) {
+    this.props.onlineAddress = onlineAddress;
   }
 
   public setSession(sessionId: SessionId) {
@@ -108,6 +117,10 @@ export default class Player {
 
   get hostAddress() {
     return this.props.hostAddress;
+  }
+
+  get onlineAddress() {
+    return this.props.onlineAddress;
   }
 
   get gamertag() {

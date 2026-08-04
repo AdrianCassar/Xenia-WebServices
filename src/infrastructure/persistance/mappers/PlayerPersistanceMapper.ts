@@ -12,6 +12,7 @@ export default class PlayerPersistanceMapper {
       gamertag: player.gamertag?.value,
       settings: base64_settings,
       hostAddress: player.hostAddress.value,
+      onlineAddress: player.onlineAddress?.value,
       machineId: player.machineId.value,
       macAddress: player.macAddress.value,
       port: player.port,

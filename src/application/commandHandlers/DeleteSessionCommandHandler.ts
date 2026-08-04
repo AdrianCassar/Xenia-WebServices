@@ -1,8 +1,5 @@
 import { ConsoleLogger, Inject } from '@nestjs/common';
 import { ICommandHandler, CommandHandler } from '@nestjs/cqrs';
-import { existsSync } from 'fs';
-import { unlink } from 'fs/promises';
-import { join } from 'path';
 import Session from 'src/domain/aggregates/Session';
 import ISessionRepository, {
   ISessionRepositorySymbol,
@@ -44,17 +41,6 @@ export class DeleteSessionCommandHandler implements ICommandHandler<DeleteSessio
 
     session.delete();
     await this.repository.save(session);
-
-    const qosPath = join(
-      process.cwd(),
-      'qos',
-      session.titleId.toString(),
-      session.id.value,
-    );
-
-    if (existsSync(qosPath)) {
-      await unlink(qosPath);
-    }
 
     this.logger.debug(`Soft Deleted Session: ${session.id.value}`);
 

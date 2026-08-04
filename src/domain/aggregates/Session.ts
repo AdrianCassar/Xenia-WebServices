@@ -20,6 +20,8 @@ interface SessionProps {
   version: string;
   flags: SessionFlags;
   hostAddress: IpAddress;
+  localAddress?: IpAddress;
+  onlineAddress?: IpAddress;
   macAddress: MacAddress;
   publicSlotsCount: number;
   privateSlotsCount: number;
@@ -40,6 +42,8 @@ interface CreateProps {
   version: string;
   flags: SessionFlags;
   hostAddress: IpAddress;
+  localAddress?: IpAddress;
+  onlineAddress?: IpAddress;
   macAddress: MacAddress;
   publicSlotsCount: number;
   privateSlotsCount: number;
@@ -56,6 +60,7 @@ interface CreateMigrationProps {
   session: Session;
   xuid: Xuid;
   hostAddress: IpAddress;
+  localAddress?: IpAddress;
   macAddress: MacAddress;
   port: number;
 }
@@ -139,6 +144,7 @@ export default class Session {
       id: new SessionId(this.GenerateSessionId()),
       xuid: props.xuid,
       hostAddress: props.hostAddress,
+      localAddress: props.localAddress,
       macAddress: props.macAddress,
       port: props.port,
       deleted: false,
@@ -297,6 +303,14 @@ export default class Session {
 
   get hostAddress() {
     return this.props.hostAddress;
+  }
+
+  get localAddress() {
+    return this.props.localAddress;
+  }
+
+  get onlineAddress() {
+    return this.props.onlineAddress;
   }
 
   get flags() {

@@ -2,6 +2,8 @@ export interface SessionDetailsResponse {
   id: string;
   flags: number;
   hostAddress: string;
+  localAddress?: string;
+  onlineAddress?: string;
   port: number;
   macAddress: string;
   publicSlotsCount: number;

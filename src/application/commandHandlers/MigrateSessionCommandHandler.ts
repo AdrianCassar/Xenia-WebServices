@@ -35,6 +35,7 @@ export class MigrateSessionCommandHandler implements ICommandHandler<MigrateSess
       session,
       xuid: command.xuid,
       hostAddress: command.hostAddress,
+      localAddress: command.localAddress,
       macAddress: command.macAddress,
       port: command.port,
     });

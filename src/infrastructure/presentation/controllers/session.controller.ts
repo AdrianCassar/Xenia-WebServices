@@ -4,15 +4,13 @@ import {
   Delete,
   NotFoundException,
   Param,
-  RawBodyRequest,
   ForbiddenException,
-  HttpStatus,
   ConsoleLogger,
 } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
 import TitleId from 'src/domain/value-objects/TitleId';
-import { Body, Post, Req, Res } from '@nestjs/common/decorators';
+import { Body, Post } from '@nestjs/common/decorators';
 import { CreateSessionRequest } from '../requests/CreateSessionRequest';
 import { CreateSessionCommand } from 'src/application/commands/CreateSessionCommand';
 import SessionId from 'src/domain/value-objects/SessionId';
@@ -42,10 +40,8 @@ import { SessionPropertyResponse } from '../responses/SessionPropertyResponse';
 import Player from 'src/domain/aggregates/Player';
 import { GetPlayerQuery } from 'src/application/queries/GetPlayerQuery';
 import { FindPlayerQuery } from 'src/application/queries/FindPlayerQuery';
-import { Request, Response } from 'express';
-import { mkdir, stat, writeFile } from 'fs/promises';
 import { join } from 'path';
-import { existsSync, readFileSync, createReadStream } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 import { UpdateLeaderboardCommand } from 'src/application/commands/UpdateLeaderboardCommand';
 import LeaderboardId from 'src/domain/value-objects/LeaderboardId';
 import { WriteStatsRequest } from '../requests/WriteStatsRequest';
@@ -122,6 +118,10 @@ export class SessionController {
           request.privateSlotsCount,
           new MacAddress(request.macAddress),
           request.port,
+          player.onlineAddress,
+          request.localAddress
+            ? new IpAddress(request.localAddress)
+            : undefined,
         ),
       );
 
@@ -213,6 +213,9 @@ export class SessionController {
         new IpAddress(request.hostAddress),
         new MacAddress(request.macAddress),
         request.port,
+        request.localAddress
+          ? new IpAddress(request.localAddress)
+          : undefined,
       ),
     );
 
@@ -313,6 +316,8 @@ export class SessionController {
       id: session.id.value,
       flags: session.flags.value,
       hostAddress: session.hostAddress.value,
+      localAddress: session.localAddress?.value,
+      onlineAddress: session.onlineAddress?.value,
       port: session.port,
       macAddress: session.macAddress.value,
       publicSlotsCount: session.publicSlotsCount,
@@ -572,57 +577,6 @@ export class SessionController {
     });
 
     return sessions.map(this.sessionMapper.mapToPresentationModel);
-  }
-
-  @Post('/:sessionId/qos')
-  @ApiParam({ name: 'titleId', example: '4D5307E6' })
-  @ApiParam({ name: 'sessionId', example: 'AE00000000000000' })
-  async qosUpload(
-    @Param('titleId') titleId: string,
-    @Param('sessionId') sessionId: string,
-    @Req() req: RawBodyRequest<Request>,
-  ) {
-    // Systemlink session documents aren't stored on the backend.
-    const session_id: SessionId = new SessionId(sessionId);
-
-    const qosPath = join(process.cwd(), 'qos', titleId, sessionId);
-
-    if (existsSync(qosPath)) {
-      this.logger.verbose(`${session_id.GetTypeString()}: Updating QoS Data.`);
-    } else {
-      await mkdir(join(process.cwd(), 'qos', titleId), { recursive: true });
-      this.logger.verbose(`${session_id.GetTypeString()}: Saving QoS Data.`);
-    }
-
-    // always write QoS data to ensure data is updated.
-    await writeFile(qosPath, req.rawBody);
-  }
-
-  @Get('/:sessionId/qos')
-  @ApiParam({ name: 'titleId', example: '4D5307E6' })
-  @ApiParam({ name: 'sessionId', example: 'AE00000000000000' })
-  async qosDownload(
-    @Param('titleId') titleId: string,
-    @Param('sessionId') sessionId: string,
-    @Res() res: Response,
-  ) {
-    const path = join(process.cwd(), 'qos', titleId, sessionId);
-
-    if (!existsSync(path)) {
-      res.set('Content-Length', '0');
-      res.sendStatus(HttpStatus.NO_CONTENT);
-      return;
-    }
-
-    const stats = await stat(path);
-
-    if (!stats.isFile()) {
-      throw new NotFoundException(`QoS data at ${path} not found.`);
-    }
-
-    res.set('Content-Length', stats.size.toString());
-    const stream = createReadStream(path);
-    stream.pipe(res);
   }
 
   @Post('/:sessionId/context')

@@ -12,5 +12,6 @@ export class MigrateSessionCommand {
     public readonly hostAddress: IpAddress,
     public readonly macAddress: MacAddress,
     public readonly port: number,
+    public readonly localAddress?: IpAddress,
   ) {}
 }

@@ -9,6 +9,7 @@ import compression from 'compression';
 import helmet from 'helmet';
 import { ConsoleLogger } from '@nestjs/common';
 import fs from 'fs';
+import { attachSignallingWebSocket } from './src/infrastructure/signaling/websockets-server';
 
 async function bootstrap() {
   const logger = new ConsoleLogger('Main');
@@ -74,6 +75,7 @@ async function bootstrap() {
   } else {
     // Listen on all network interfaces
     await app.listen(PORT, '0.0.0.0');
+    attachSignallingWebSocket(app.getHttpServer());
   }
 
   logger.debug(``);
