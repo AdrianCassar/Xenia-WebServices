@@ -19,6 +19,8 @@ export class Session {
   version: string;
   @Prop({ required: true })
   hostAddress: string;
+  @Prop()
+  onlineAddress?: string;
   @Prop({ required: true })
   macAddress: string;
   @Prop({ required: true })

@@ -31,7 +31,14 @@ export class XNetController {
       new ProcessClientAddressCommand(ip),
     );
 
-    return { address: ipv4 };
+    const player: Player = await this.queryBus.execute(
+      new FindPlayerQuery(new IpAddress(ipv4)),
+    );
+
+    return {
+      address: ipv4,
+      onlineAddress: player?.onlineAddress?.value,
+    };
   }
 
   @Delete(['/DeleteSessions/:macAddress', '/DeleteSessions'])

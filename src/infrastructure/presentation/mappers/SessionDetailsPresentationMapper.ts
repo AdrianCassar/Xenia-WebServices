@@ -14,6 +14,7 @@ export default class SessionDetailsPresentationMapper {
       id: session.id.value,
       flags: session.flags.value,
       hostAddress: session.hostAddress.value,
+      onlineAddress: session.onlineAddress?.value,
       macAddress: session.macAddress.value,
       publicSlotsCount: session.publicSlotsCount,
       privateSlotsCount: session.privateSlotsCount,

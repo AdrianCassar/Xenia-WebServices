@@ -20,6 +20,7 @@ interface SessionProps {
   version: string;
   flags: SessionFlags;
   hostAddress: IpAddress;
+  onlineAddress?: IpAddress;
   macAddress: MacAddress;
   publicSlotsCount: number;
   privateSlotsCount: number;
@@ -40,6 +41,7 @@ interface CreateProps {
   version: string;
   flags: SessionFlags;
   hostAddress: IpAddress;
+  onlineAddress?: IpAddress;
   macAddress: MacAddress;
   publicSlotsCount: number;
   privateSlotsCount: number;
@@ -297,6 +299,10 @@ export default class Session {
 
   get hostAddress() {
     return this.props.hostAddress;
+  }
+
+  get onlineAddress() {
+    return this.props.onlineAddress;
   }
 
   get flags() {

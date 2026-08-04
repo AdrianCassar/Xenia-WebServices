@@ -19,6 +19,7 @@ export default class PlayerDomainMapper {
 
     let xuid: Xuid = new Xuid('0'.repeat(16));
     let hostAddress: IpAddress = new IpAddress('0.0.0.0');
+    let onlineAddress: IpAddress = undefined;
     let macAddress: MacAddress = new MacAddress('002212345678');
     let machineId: Xuid = new Xuid('FA00002212345678');
     let port: number = 0;
@@ -58,6 +59,10 @@ export default class PlayerDomainMapper {
         hostAddress = new IpAddress(player.hostAddress);
       }
 
+      if (player?.onlineAddress) {
+        onlineAddress = new IpAddress(player.onlineAddress);
+      }
+
       if (player?.macAddress) {
         macAddress = new MacAddress(player.macAddress);
       }
@@ -94,6 +99,7 @@ export default class PlayerDomainMapper {
       gamertag: gamertag,
       settings: settings,
       hostAddress: hostAddress,
+      onlineAddress: onlineAddress,
       macAddress: macAddress,
       machineId: machineId,
       port: port,

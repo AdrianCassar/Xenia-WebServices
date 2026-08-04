@@ -122,6 +122,7 @@ export class SessionController {
           request.privateSlotsCount,
           new MacAddress(request.macAddress),
           request.port,
+          player.onlineAddress,
         ),
       );
 
@@ -313,6 +314,7 @@ export class SessionController {
       id: session.id.value,
       flags: session.flags.value,
       hostAddress: session.hostAddress.value,
+      onlineAddress: session.onlineAddress?.value,
       port: session.port,
       macAddress: session.macAddress.value,
       publicSlotsCount: session.publicSlotsCount,
@@ -582,20 +584,11 @@ export class SessionController {
     @Param('sessionId') sessionId: string,
     @Req() req: RawBodyRequest<Request>,
   ) {
-    // Systemlink session documents aren't stored on the backend.
-    const session_id: SessionId = new SessionId(sessionId);
-
-    const qosPath = join(process.cwd(), 'qos', titleId, sessionId);
-
-    if (existsSync(qosPath)) {
-      this.logger.verbose(`${session_id.GetTypeString()}: Updating QoS Data.`);
-    } else {
-      await mkdir(join(process.cwd(), 'qos', titleId), { recursive: true });
-      this.logger.verbose(`${session_id.GetTypeString()}: Saving QoS Data.`);
-    }
-
-    // always write QoS data to ensure data is updated.
-    await writeFile(qosPath, req.rawBody);
+    // Deprecated: QoS is P2P over ICE. Keep endpoint as a no-op for old clients.
+    this.logger.verbose(
+      `Deprecated QoS upload ignored for ${titleId}/${sessionId} (${req.rawBody?.length ?? 0} bytes).`,
+    );
+    return;
   }
 
   @Get('/:sessionId/qos')
@@ -606,23 +599,12 @@ export class SessionController {
     @Param('sessionId') sessionId: string,
     @Res() res: Response,
   ) {
-    const path = join(process.cwd(), 'qos', titleId, sessionId);
-
-    if (!existsSync(path)) {
-      res.set('Content-Length', '0');
-      res.sendStatus(HttpStatus.NO_CONTENT);
-      return;
-    }
-
-    const stats = await stat(path);
-
-    if (!stats.isFile()) {
-      throw new NotFoundException(`QoS data at ${path} not found.`);
-    }
-
-    res.set('Content-Length', stats.size.toString());
-    const stream = createReadStream(path);
-    stream.pipe(res);
+    // Deprecated: QoS is P2P over ICE.
+    this.logger.verbose(
+      `Deprecated QoS download ignored for ${titleId}/${sessionId}.`,
+    );
+    res.set('Content-Length', '0');
+    res.sendStatus(HttpStatus.NO_CONTENT);
   }
 
   @Post('/:sessionId/context')

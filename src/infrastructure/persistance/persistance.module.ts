@@ -16,6 +16,7 @@ import SessionRepository from './repositories/SessionRepository';
 import SessionPersistanceMapper from './mappers/SessionPersistanceMapper';
 import SessionDomainMapper from './mappers/SessionDomainMapper';
 import { Session, SessionSchema } from './models/SessionSchema';
+import OnlineAddressAllocator from './services/OnlineAddressAllocator';
 
 const persistanceSettings = new PersistanceSettings().get();
 
@@ -49,11 +50,13 @@ const persistanceSettings = new PersistanceSettings().get();
     },
     PlayerPersistanceMapper,
     PlayerDomainMapper,
+    OnlineAddressAllocator,
   ],
   exports: [
     ISessionRepositorySymbol,
     ILeaderboardRepositorySymbol,
     IPlayerRepositorySymbol,
+    OnlineAddressAllocator,
   ],
 })
 export class PersistanceModule {}

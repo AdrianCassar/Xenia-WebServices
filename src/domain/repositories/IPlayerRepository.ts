@@ -7,6 +7,9 @@ export default interface IPlayerRepository {
   findByXuid: (xuid: Xuid) => Promise<Player | undefined>;
   findByXuids: (xuid: Xuid[]) => Promise<Player[] | undefined>;
   findByAddress: (hostAddress: IpAddress) => Promise<Player | undefined>;
+  findByOnlineAddress: (
+    onlineAddress: IpAddress,
+  ) => Promise<Player | undefined>;
   findByGamertag: (gamertag: Gamertag) => Promise<Player | undefined>;
   save: (player: Player) => Promise<Player>;
   DeleteAllMyProfilesByAddress: (hostAddress: IpAddress) => Promise<Player[]>;

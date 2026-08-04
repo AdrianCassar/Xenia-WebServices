@@ -15,6 +15,8 @@ export class Player {
   machineId: string;
   @Prop({ required: true })
   hostAddress: string;
+  @Prop({ index: true })
+  onlineAddress?: string;
   @Prop({ required: true })
   macAddress: string;
   @Prop({ required: true })
