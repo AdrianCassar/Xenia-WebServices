@@ -4,15 +4,13 @@ import {
   Delete,
   NotFoundException,
   Param,
-  RawBodyRequest,
   ForbiddenException,
-  HttpStatus,
   ConsoleLogger,
 } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
 import TitleId from 'src/domain/value-objects/TitleId';
-import { Body, Post, Req, Res } from '@nestjs/common/decorators';
+import { Body, Post } from '@nestjs/common/decorators';
 import { CreateSessionRequest } from '../requests/CreateSessionRequest';
 import { CreateSessionCommand } from 'src/application/commands/CreateSessionCommand';
 import SessionId from 'src/domain/value-objects/SessionId';
@@ -42,10 +40,8 @@ import { SessionPropertyResponse } from '../responses/SessionPropertyResponse';
 import Player from 'src/domain/aggregates/Player';
 import { GetPlayerQuery } from 'src/application/queries/GetPlayerQuery';
 import { FindPlayerQuery } from 'src/application/queries/FindPlayerQuery';
-import { Request, Response } from 'express';
-import { mkdir, stat, writeFile } from 'fs/promises';
 import { join } from 'path';
-import { existsSync, readFileSync, createReadStream } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 import { UpdateLeaderboardCommand } from 'src/application/commands/UpdateLeaderboardCommand';
 import LeaderboardId from 'src/domain/value-objects/LeaderboardId';
 import { WriteStatsRequest } from '../requests/WriteStatsRequest';
@@ -581,37 +577,6 @@ export class SessionController {
     });
 
     return sessions.map(this.sessionMapper.mapToPresentationModel);
-  }
-
-  @Post('/:sessionId/qos')
-  @ApiParam({ name: 'titleId', example: '4D5307E6' })
-  @ApiParam({ name: 'sessionId', example: 'AE00000000000000' })
-  async qosUpload(
-    @Param('titleId') titleId: string,
-    @Param('sessionId') sessionId: string,
-    @Req() req: RawBodyRequest<Request>,
-  ) {
-    // Deprecated: QoS is P2P over ICE. Keep endpoint as a no-op for old clients.
-    this.logger.verbose(
-      `Deprecated QoS upload ignored for ${titleId}/${sessionId} (${req.rawBody?.length ?? 0} bytes).`,
-    );
-    return;
-  }
-
-  @Get('/:sessionId/qos')
-  @ApiParam({ name: 'titleId', example: '4D5307E6' })
-  @ApiParam({ name: 'sessionId', example: 'AE00000000000000' })
-  async qosDownload(
-    @Param('titleId') titleId: string,
-    @Param('sessionId') sessionId: string,
-    @Res() res: Response,
-  ) {
-    // Deprecated: QoS is P2P over ICE.
-    this.logger.verbose(
-      `Deprecated QoS download ignored for ${titleId}/${sessionId}.`,
-    );
-    res.set('Content-Length', '0');
-    res.sendStatus(HttpStatus.NO_CONTENT);
   }
 
   @Post('/:sessionId/context')

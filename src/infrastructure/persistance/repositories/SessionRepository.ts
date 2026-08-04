@@ -1,9 +1,6 @@
 import { Model } from 'mongoose';
 import { ConsoleLogger, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { existsSync } from 'fs';
-import { unlink } from 'fs/promises';
-import { join } from 'path';
 import { SessionDocument } from '../models/SessionSchema';
 import ISessionRepository from 'src/domain/repositories/ISessionRepository';
 import Session from 'src/domain/aggregates/Session';
@@ -67,18 +64,6 @@ export default class SessionRepository implements ISessionRepository {
         id: session.id.value,
         titleId: session.titleId.toString(),
       });
-
-      const qosPath = join(
-        process.cwd(),
-        'qos',
-        session.titleId.toString(),
-        session.id.value,
-      );
-
-      // Delete QoS data for the session.
-      if (existsSync(qosPath)) {
-        await unlink(qosPath);
-      }
 
       this.logger.debug(
         `Deleted Session: ${session.id.value} from ${session.hostAddress.value}`,
