@@ -41,6 +41,9 @@ export default class SessionDomainMapper {
       version: session.version,
       flags: new SessionFlags(session.flags),
       hostAddress: new IpAddress(session.hostAddress),
+      localAddress: session.localAddress
+        ? new IpAddress(session.localAddress)
+        : undefined,
       onlineAddress: session.onlineAddress
         ? new IpAddress(session.onlineAddress)
         : undefined,

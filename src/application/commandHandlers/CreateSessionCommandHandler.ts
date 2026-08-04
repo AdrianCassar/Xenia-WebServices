@@ -23,6 +23,7 @@ export class CreateSessionCommandHandler implements ICommandHandler<CreateSessio
       version: command.version,
       flags: command.flags,
       hostAddress: command.hostAddress,
+      localAddress: command.localAddress,
       onlineAddress: command.onlineAddress,
       publicSlotsCount: command.publicSlotsCount,
       privateSlotsCount: command.privateSlotsCount,

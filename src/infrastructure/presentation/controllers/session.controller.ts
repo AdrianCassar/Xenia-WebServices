@@ -123,6 +123,9 @@ export class SessionController {
           new MacAddress(request.macAddress),
           request.port,
           player.onlineAddress,
+          request.localAddress
+            ? new IpAddress(request.localAddress)
+            : undefined,
         ),
       );
 
@@ -214,6 +217,9 @@ export class SessionController {
         new IpAddress(request.hostAddress),
         new MacAddress(request.macAddress),
         request.port,
+        request.localAddress
+          ? new IpAddress(request.localAddress)
+          : undefined,
       ),
     );
 
@@ -314,6 +320,7 @@ export class SessionController {
       id: session.id.value,
       flags: session.flags.value,
       hostAddress: session.hostAddress.value,
+      localAddress: session.localAddress?.value,
       onlineAddress: session.onlineAddress?.value,
       port: session.port,
       macAddress: session.macAddress.value,

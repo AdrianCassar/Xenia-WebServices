@@ -5,6 +5,8 @@ export class MigrateSessionRequest {
   xuid: string;
   @ApiProperty()
   hostAddress: string;
+  @ApiProperty({ required: false })
+  localAddress?: string;
   @ApiProperty()
   macAddress: string;
   @ApiProperty()

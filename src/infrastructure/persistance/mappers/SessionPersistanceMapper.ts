@@ -17,6 +17,7 @@ export default class SessionPersistanceMapper {
       mediaId: session.mediaId,
       version: session.version,
       hostAddress: session.hostAddress.value,
+      localAddress: session.localAddress?.value,
       onlineAddress: session.onlineAddress?.value,
       flags: session.flags.value,
       publicSlotsCount: session.publicSlotsCount,

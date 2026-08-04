@@ -8,6 +8,7 @@ export interface CreateSessionRequest {
   publicSlotsCount: number;
   privateSlotsCount: number;
   hostAddress: string;
+  localAddress?: string;
   macAddress: string;
   port: number;
 }

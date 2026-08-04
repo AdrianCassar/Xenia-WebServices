@@ -20,6 +20,8 @@ export class Session {
   @Prop({ required: true })
   hostAddress: string;
   @Prop()
+  localAddress?: string;
+  @Prop()
   onlineAddress?: string;
   @Prop({ required: true })
   macAddress: string;
