@@ -449,12 +449,14 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
             continue;
           }
 
-          peer_info.gamerpic = peer
+          const gamerpic_key: string = peer
             .getSetting(
               DashboardID,
               XUserSetting.XPROFILE_GAMERCARD_PICTURE_KEY,
             )
             .getParsedData();
+
+          peer_info.gamerpic = await this.getPlayerGamerpicIcon(gamerpic_key);
 
           // Skip Host since they're already added to PlayerGamertags
           if (HOST_XUID) {
