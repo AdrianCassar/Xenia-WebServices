@@ -102,7 +102,10 @@ function generateSessionsTable(sessionsData) {
         player_gamertags = session.players
           .map(
             (player, index) =>
-              `<div ${index == 0 ? 'id="host_item"' : ''} class="list-item">${player}</div>`,
+              `<div ${index == 0 ? 'id="host_item"' : ''} class="list-item">
+                <div class="image"><img src="${player.gamerpic}" width="64" height="64" alt="Gamerpic"></div>
+                ${player.gamertag}
+              </div>`,
           )
           .join('');
       }

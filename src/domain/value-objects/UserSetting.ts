@@ -3,6 +3,8 @@ import { X_USER_DATA_TYPE, kPropertyScopeMask } from './Property';
 
 export const kTitleSpecificMask = 0x3f00;
 
+export const DashboardID = 'FFFE07D1';
+
 export enum XUserSetting {
   XPROFILE_PERMISSIONS = 0x10040000,
   XPROFILE_GAMER_TYPE = 0x10040001,

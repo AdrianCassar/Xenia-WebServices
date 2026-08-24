@@ -15,12 +15,24 @@ import Xuid from 'src/domain/value-objects/Xuid';
 import XStringVerify from 'src/domain/XStringVerify';
 import Session from 'src/domain/aggregates/Session';
 import PersistanceSettings from 'src/infrastructure/persistance/settings/PersistanceSettings';
+import {
+  DashboardID,
+  XUserSetting,
+} from 'src/domain/value-objects/UserSetting';
 
 const icon_cache = new Map<string, string>();
 const title_info_cache = new Map<string, object>();
 const title_xml_cache = new Map<string, object>();
 
+// Title ID -> Tile ID -> Base64 Icon
+const gamerpics_cache = new Map<string, Map<string, string>>();
+
 const config = new PersistanceSettings().get();
+
+interface PlayerInfo {
+  gamertag: string;
+  gamerpic: string;
+}
 
 @CommandHandler(AggregateSessionCommand)
 export class AggregateSessionCommandHandler implements ICommandHandler<AggregateSessionCommand> {
@@ -164,6 +176,42 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
     }
 
     return title_url;
+  }
+
+  async getPlayerGamerpicIcon(
+    gamerpic_key: string,
+    small: boolean = false,
+  ): Promise<string> {
+    const title_id = gamerpic_key.substring(0, 8);
+    const big_tile_id = gamerpic_key.substring(8, 16).replace(/^0+/, '');
+    const small_tile_id = gamerpic_key.substring(16, 24).replace(/^0+/, '');
+
+    let tile_id: string = small ? small_tile_id : big_tile_id;
+
+    // Check if tile icon is cached
+    if (gamerpics_cache.has(title_id)) {
+      if (small) {
+        if (gamerpics_cache.get(title_id).has(small_tile_id)) {
+          return gamerpics_cache.get(title_id).get(small_tile_id);
+        }
+      }
+
+      if (gamerpics_cache.get(title_id).has(big_tile_id)) {
+        return gamerpics_cache.get(title_id).get(big_tile_id);
+      }
+    }
+
+    const tile_icon: string = await this.downloadImageAsBase64(
+      `https://assets.xboxgamer.pics/titles/${title_id}/${tile_id}.png`,
+    );
+
+    if (gamerpics_cache.has(title_id)) {
+      gamerpics_cache.get(title_id).set(tile_id, tile_icon);
+    } else {
+      gamerpics_cache.set(title_id, new Map([[tile_id, tile_icon]]));
+    }
+
+    return tile_icon;
   }
 
   async getTitleTileIcon(titleId: string): Promise<string> {
@@ -337,13 +385,33 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
         }
       }
 
+      const player_xuids: Xuid[] = [...session.players.keys()].map(
+        (xuid) => new Xuid(xuid),
+      );
+
+      const players: Player[] =
+        await this.player_repository_.findByXuids(player_xuids);
+
       const HOST_XUID: Xuid = session.getHostXUID;
       const HOST_PRESENCE_STRING: string =
         await this.getHostPresenceString(session);
       const HOST_GAMERTAG: string = await this.getHostGamertag(session);
-      const PlayerGamertags = new Array<string>();
+      const PlayersInfo = new Array<PlayerInfo>();
 
-      PlayerGamertags.push(HOST_GAMERTAG);
+      const host_player: Player = players.find(
+        (player) => player.xuid.value === HOST_XUID.value,
+      );
+
+      const gamerpic_key: string = host_player
+        .getSetting(DashboardID, XUserSetting.XPROFILE_GAMERCARD_PICTURE_KEY)
+        .getParsedData();
+
+      let host_info: PlayerInfo = {
+        gamertag: HOST_GAMERTAG,
+        gamerpic: await this.getPlayerGamerpicIcon(gamerpic_key),
+      };
+
+      PlayersInfo.push(host_info);
 
       let defaulting_gamertags: number = 0;
       let local_defaulting_gamertags: number = 0;
@@ -351,10 +419,15 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
       let players_count: number = 0;
       if (session.players.size > 1) {
         for (const player_xuid of session.players.keys()) {
+          let peer_info: PlayerInfo = {
+            gamertag: '',
+            gamerpic: '',
+          };
+
           players_count++;
 
-          const peer = await this.player_repository_.findByXuid(
-            new Xuid(player_xuid),
+          const peer: Player = players.find(
+            (player) => player.xuid.value === player_xuid,
           );
 
           // Player is local if they're not registered
@@ -365,10 +438,23 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
             }
 
             local_defaulting_gamertags++;
-            PlayerGamertags.push(`Local Player ${local_defaulting_gamertags}`);
+
+            peer_info.gamertag = `Local Player ${local_defaulting_gamertags}`;
+            peer_info.gamerpic = await this.getPlayerGamerpicIcon(
+              'FFFE07D10002000200010002',
+            );
+
+            PlayersInfo.push(peer_info);
 
             continue;
           }
+
+          peer_info.gamerpic = peer
+            .getSetting(
+              DashboardID,
+              XUserSetting.XPROFILE_GAMERCARD_PICTURE_KEY,
+            )
+            .getParsedData();
 
           // Skip Host since they're already added to PlayerGamertags
           if (HOST_XUID) {
@@ -384,11 +470,13 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
 
           // Peer Gamer
           if (XStringVerify.Verify(peer_gamertag)) {
-            PlayerGamertags.push(peer_gamertag);
+            peer_info.gamertag = peer_gamertag;
           } else {
             defaulting_gamertags++;
-            PlayerGamertags.push(`Player ${defaulting_gamertags}`);
+            peer_info.gamertag = `Player ${defaulting_gamertags}`;
           }
+
+          PlayersInfo.push(peer_info);
         }
       }
 
@@ -413,7 +501,7 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
       const data = {
         mediaId: session.mediaId,
         version: session.version,
-        players: PlayerGamertags,
+        players: PlayersInfo,
         total: session.totalSlots,
         host_presence: HOST_PRESENCE_STRING,
         host_gamertag: HOST_GAMERTAG,
