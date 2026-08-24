@@ -1,61 +1,78 @@
-// @ts-check
-import eslint from '@eslint/js';
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
-import typescriptEslintEslintPlugin from "@typescript-eslint/eslint-plugin";
-import unusedImports from "eslint-plugin-unused-imports";
-import globals from 'globals';
+import js from '@eslint/js';
+import { defineConfig } from 'eslint/config';
 import tseslint from 'typescript-eslint';
+import globals from 'globals';
+import prettierRecommended from 'eslint-plugin-prettier/recommended';
+import unusedImports from 'eslint-plugin-unused-imports';
 
-export default tseslint.config(
+export default defineConfig([
   {
-    ignores: ['eslint.config.mjs', 'src/xstorage'],
+    ignores: [
+      'dist/**/*',
+      'node_modules/**/*',
+      'coverage/**/*',
+      'src/xstorage',
+    ],
   },
-  eslint.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
-  eslintPluginPrettierRecommended,
   {
+    files: ['**/*.ts'],
     languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
       globals: {
         ...globals.node,
         ...globals.jest,
       },
-      ecmaVersion: 5,
-      sourceType: 'module',
+      parser: tseslint.parser,
       parserOptions: {
-        projectService: true,
+        project: './tsconfig.json',
         tsconfigRootDir: import.meta.dirname,
       },
     },
-  },
-  {
     plugins: {
-      "@typescript-eslint": typescriptEslintEslintPlugin,
-      "unused-imports": unusedImports,
-    },
-    rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-floating-promises': 'warn',
-      '@typescript-eslint/no-unsafe-argument': 'warn',
-
-      // "@typescript-eslint/explicit-function-return-type": "off",
-      // "@typescript-eslint/explicit-module-boundary-types": "off",
-      // "@typescript-eslint/unbound-method": "off",
-      "@typescript-eslint/no-unsafe-assignment": "off",
-      "@typescript-eslint/no-unsafe-call": "off",
-      "@typescript-eslint/no-unsafe-member-access": "off",
-      "@typescript-eslint/no-unsafe-return": "off",
-
-      "prettier/prettier": ["error", {
-          endOfLine: "lf",
-      }],
-      "@typescript-eslint/no-unused-vars": "off",
-      "unused-imports/no-unused-imports": "error",
-      "unused-imports/no-unused-vars": ["warn", {
-          vars: "all",
-          varsIgnorePattern: "^_",
-          args: "after-used",
-          argsIgnorePattern: "^_",
-      }],
+      'unused-imports': unusedImports,
     },
   },
-);
+
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+
+  // Rule Overrides
+  {
+    files: ['**/*.ts'],
+    rules: {
+      '@typescript-eslint/no-parameter-properties': 'off',
+      '@typescript-eslint/no-useless-constructor': 'error',
+      '@typescript-eslint/explicit-function-return-type': 'off', // warn
+      '@typescript-eslint/explicit-module-boundary-types': 'off', // warn
+      '@typescript-eslint/no-explicit-any': 'off',
+
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_' },
+      ],
+
+      'prettier/prettier': [
+        'error',
+        {
+          endOfLine: 'lf',
+        },
+      ],
+
+      // Automatically removes unused imports during --fix
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        {
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+        },
+      ],
+    },
+  },
+
+  prettierRecommended,
+]);
