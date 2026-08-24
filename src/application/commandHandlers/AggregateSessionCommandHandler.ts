@@ -393,22 +393,31 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
         await this.player_repository_.findByXuids(player_xuids);
 
       const HOST_XUID: Xuid = session.getHostXUID;
-      const HOST_PRESENCE_STRING: string =
-        await this.getHostPresenceString(session);
-      const HOST_GAMERTAG: string = await this.getHostGamertag(session);
-      const PlayersInfo = new Array<PlayerInfo>();
+
+      if (!HOST_XUID) {
+        continue;
+      }
 
       const host_player: Player = players.find(
         (player) => player.xuid.value === HOST_XUID.value,
       );
 
-      const gamerpic_key: string = host_player
+      if (!host_player) {
+        continue;
+      }
+
+      const PlayersInfo = new Array<PlayerInfo>();
+
+      const HOST_PRESENCE_STRING: string =
+        await this.getHostPresenceString(session);
+      const HOST_GAMERTAG: string = await this.getHostGamertag(session);
+      const HOST_GAMERPIC_KEY: string = host_player
         .getSetting(DashboardID, XUserSetting.XPROFILE_GAMERCARD_PICTURE_KEY)
         .getParsedData();
 
-      let host_info: PlayerInfo = {
+      const host_info: PlayerInfo = {
         gamertag: HOST_GAMERTAG,
-        gamerpic: await this.getPlayerGamerpicIcon(gamerpic_key),
+        gamerpic: await this.getPlayerGamerpicIcon(HOST_GAMERPIC_KEY),
       };
 
       PlayersInfo.push(host_info);
@@ -419,7 +428,7 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
       let players_count: number = 0;
       if (session.players.size > 1) {
         for (const player_xuid of session.players.keys()) {
-          let peer_info: PlayerInfo = {
+          const peer_info: PlayerInfo = {
             gamertag: '',
             gamerpic: '',
           };
