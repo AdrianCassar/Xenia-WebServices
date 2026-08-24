@@ -9,7 +9,6 @@ export class ProcessClientAddressCommandHandler implements ICommandHandler<Proce
     logger.setContext(ProcessClientAddressCommand.name);
   }
 
-  // eslint-disable-next-line @typescript-eslint/require-await
   async execute(command: ProcessClientAddressCommand) {
     // Must trim ::ffff: from private IPs because session hostAddress is not in IPv6 format.
     const IP = ipaddr.process(command.ip);

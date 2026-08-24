@@ -52,7 +52,7 @@ curl -i -X POST http://127.0.0.1:36000/xstorage/user/0009000000000000/title/4156
 **/
 
 export enum XContentType {
-  kFolder = 0xFFFFFFFF,
+  kFolder = 0xffffffff,
   kInvalid = 0x00000000,
   kSavedGame = 0x00000001,
   kMarketplaceContent = 0x00000002,
@@ -75,12 +75,12 @@ export enum XContentType {
   kXboxDownload = 0x00070000,
   kGameDemo = 0x00080000,
   kVideo = 0x00090000,
-  kGameTitle = 0x000A0000,
-  kInstaller = 0x000B0000,
-  kGameTrailer = 0x000C0000,
-  kArcadeTitle = 0x000D0000,
-  kXNA = 0x000E0000,
-  kLicenseStore = 0x000F0000,
+  kGameTitle = 0x000a0000,
+  kInstaller = 0x000b0000,
+  kGameTrailer = 0x000c0000,
+  kArcadeTitle = 0x000d0000,
+  kXNA = 0x000e0000,
+  kLicenseStore = 0x000f0000,
   kMovie = 0x00100000,
   kTV = 0x00200000,
   kMusicVideo = 0x00300000,
@@ -88,7 +88,7 @@ export enum XContentType {
   kPodcastVideo = 0x00500000,
   kViralVideo = 0x00600000,
   kCommunityGame = 0x02000000,
-};
+}
 
 @ApiTags('XStorage')
 @Controller('xstorage')
