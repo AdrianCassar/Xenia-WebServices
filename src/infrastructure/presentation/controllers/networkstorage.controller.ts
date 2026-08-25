@@ -76,14 +76,25 @@ export class NetworkStorageController {
           const s = await stat(dir);
           if (!s.isDirectory()) continue;
           for (const file of await readdir(dir)) {
+            if (file.endsWith('.meta') || file.endsWith('.tmp')) continue;
             const fp = join(dir, file);
             const fs = await stat(fp);
             if (!fs.isFile()) continue;
             const xblName = this.toXblFilename(file);
+            // Try to read display name from .meta file
+            let displayName = xblName;
+            const metaPath = fp + '.meta';
+            if (existsSync(metaPath)) {
+              try {
+                const meta = await readFile(metaPath, 'utf8');
+                const metaObj = JSON.parse(meta);
+                if (metaObj.displayName) displayName = metaObj.displayName;
+              } catch {}
+            }
             savedGames.push({
               clientFileTime: this.toISO8601(fs.mtimeMs),
               fileName: xblName,
-              displayName: xblName,
+              displayName,
               size: fs.size,
               etag: `"${fs.size}-${fs.mtimeMs}"`,
               titleId: parseInt(titleDir, 10) || 0,
@@ -135,6 +146,7 @@ export class NetworkStorageController {
           if (!s.isDirectory()) continue;
           let usedBytes = 0;
           for (const file of await readdir(dir)) {
+            if (file.endsWith('.meta') || file.endsWith('.tmp')) continue;
             const fp = join(dir, file);
             const fs = await stat(fp);
             if (fs.isFile()) usedBytes += fs.size;
@@ -170,6 +182,7 @@ export class NetworkStorageController {
 
       if (existsSync(dir)) {
         for (const file of await readdir(dir)) {
+          if (file.endsWith('.meta') || file.endsWith('.tmp')) continue;
           const fp = join(dir, file);
           const s = await stat(fp);
           if (s.isFile()) {
@@ -208,14 +221,25 @@ export class NetworkStorageController {
 
       if (existsSync(dir)) {
         for (const file of await readdir(dir)) {
+          if (file.endsWith('.meta') || file.endsWith('.tmp')) continue;
           const fp = join(dir, file);
           const s = await stat(fp);
           if (!s.isFile()) continue;
           const xblName = this.toXblFilename(file);
+          // Try to read display name from .meta file
+          let displayName = xblName;
+          const metaPath = fp + '.meta';
+          if (existsSync(metaPath)) {
+            try {
+              const meta = await readFile(metaPath, 'utf8');
+              const metaObj = JSON.parse(meta);
+              if (metaObj.displayName) displayName = metaObj.displayName;
+            } catch {}
+          }
           savedGames.push({
             clientFileTime: this.toISO8601(s.mtimeMs),
             fileName: xblName,
-            displayName: xblName,
+            displayName,
             size: s.size,
             etag: `"${s.size}-${s.mtimeMs}"`,
             titleId: parseInt(titleId, 10) || 0,
@@ -313,6 +337,20 @@ export class NetworkStorageController {
         } else {
           await writeFile(fp, body);
         }
+
+        // Extract display name from blob header and store as .meta
+        // Blob format: [display_name_len:4][display_name:N][file_count:4]...
+        try {
+          const data = await readFile(fp);
+          if (data.length >= 4) {
+            const nameLen = data.readUInt32LE(0);
+            if (nameLen > 0 && data.length >= 4 + nameLen) {
+              const displayName = data.toString('utf8', 4, 4 + nameLen);
+              await writeFile(fp + '.meta', JSON.stringify({ displayName }));
+            }
+          }
+        } catch {}
+
         const s = await stat(fp);
         const etag = `"${s.size}-${s.mtimeMs}"`;
         this.logger.log(`PUT xuid=${xuid} titleId=${titleId} file="${filePart}" size=${s.size} -> 201`);
@@ -346,6 +384,7 @@ export class NetworkStorageController {
       const safeFile = this.normalizeFilename(filePart);
       const fp = join(dir, safeFile);
       if (existsSync(fp)) await unlink(fp);
+      if (existsSync(fp + '.meta')) await unlink(fp + '.meta');
       this.logger.log(`DELETE xuid=${xuid} titleId=${titleId} file="${filePart}"`);
       return res.status(200).send();
     } catch (err) {
