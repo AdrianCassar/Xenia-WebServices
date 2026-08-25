@@ -15,8 +15,9 @@ import Xuid from 'src/domain/value-objects/Xuid';
 import XStringVerify from 'src/domain/XStringVerify';
 import Session from 'src/domain/aggregates/Session';
 import PersistanceSettings from 'src/infrastructure/persistance/settings/PersistanceSettings';
-import {
+import UserSetting, {
   DashboardID,
+  DefaultGamerpicKey,
   XUserSetting,
 } from 'src/domain/value-objects/UserSetting';
 
@@ -411,9 +412,14 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
       const HOST_PRESENCE_STRING: string =
         await this.getHostPresenceString(session);
       const HOST_GAMERTAG: string = await this.getHostGamertag(session);
-      const HOST_GAMERPIC_KEY: string = host_player
-        .getSetting(DashboardID, XUserSetting.XPROFILE_GAMERCARD_PICTURE_KEY)
-        .getParsedData();
+      const HOST_GAMERPIC_SETTING: UserSetting = host_player.getSetting(
+        DashboardID,
+        XUserSetting.XPROFILE_GAMERCARD_PICTURE_KEY,
+      );
+
+      const HOST_GAMERPIC_KEY: string = HOST_GAMERPIC_SETTING
+        ? HOST_GAMERPIC_SETTING.getParsedData()
+        : DefaultGamerpicKey;
 
       const host_info: PlayerInfo = {
         gamertag: HOST_GAMERTAG,
@@ -449,21 +455,22 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
             local_defaulting_gamertags++;
 
             peer_info.gamertag = `Local Player ${local_defaulting_gamertags}`;
-            peer_info.gamerpic = await this.getPlayerGamerpicIcon(
-              'FFFE07D10002000200010002',
-            );
+            peer_info.gamerpic =
+              await this.getPlayerGamerpicIcon(DefaultGamerpicKey);
 
             PlayersInfo.push(peer_info);
 
             continue;
           }
 
-          const gamerpic_key: string = peer
-            .getSetting(
-              DashboardID,
-              XUserSetting.XPROFILE_GAMERCARD_PICTURE_KEY,
-            )
-            .getParsedData();
+          const gamerpic_key_setting: UserSetting = peer.getSetting(
+            DashboardID,
+            XUserSetting.XPROFILE_GAMERCARD_PICTURE_KEY,
+          );
+
+          const gamerpic_key: string = gamerpic_key_setting
+            ? gamerpic_key_setting.getParsedData()
+            : DefaultGamerpicKey;
 
           peer_info.gamerpic = await this.getPlayerGamerpicIcon(gamerpic_key);
 
