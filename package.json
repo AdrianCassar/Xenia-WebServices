@@ -26,12 +26,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "docker:build": "docker build -t xenia-webservices .",
-    "docker:run": "docker run --name xenia-webservices -p 36000:36000 xenia-webservices",
-    "docker:start": "docker start -a xenia-webservices",
-    "docker:mongo": "docker pull mongo",
-    "docker:run-mongo": "docker run --name mongo-xenia -p 27018:27017 -v %INIT_CWD%\\data\\mongo:/data/db -d mongo",
-    "docker:start-mongo": "docker start -a mongo-xenia",
+    "docker:build": "docker build -t xenia-webservices-backend:latest .",
     "docker:compose": "docker compose up"
   },
   "dependencies": {
