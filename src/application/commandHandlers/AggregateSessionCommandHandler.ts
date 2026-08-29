@@ -372,7 +372,40 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
       titles['Metadata'] = Metadata;
     }
 
-    for (const session of sessions) {
+    // We don't want to display too many sessions on the frontend so just display 1 session from host with the most active player count.
+    // This could probably be filtered on DB server side to be honest.
+    // Since we do not enforce only one profile logon on the backend, technically multiple profile logins of different titles may not display correctly.
+    const grouped_sessions = Object.groupBy(
+      sessions,
+      (session) => session.xuid.value,
+    );
+
+    const filtered_grouped_sessions = Object.values(grouped_sessions).flatMap(
+      (session_group) => {
+        // Find the most active session in this specific group
+        const active_session = session_group.reduce(
+          (active_session, less_active_session) => {
+            if (
+              active_session.players.size == less_active_session.players.size
+            ) {
+              return active_session;
+            }
+
+            if (
+              active_session.players.size > less_active_session.players.size
+            ) {
+              return active_session;
+            } else {
+              return less_active_session;
+            }
+          },
+        );
+
+        return [active_session];
+      },
+    );
+
+    for (const session of filtered_grouped_sessions) {
       const title_id = session.titleId.toString();
 
       let game_title: string = await this.getTitleName(title_id);

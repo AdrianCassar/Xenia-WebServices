@@ -103,7 +103,7 @@ function generateSessionsTable(sessionsData) {
           .map(
             (player, index) =>
               `<div ${index == 0 ? 'id="host_item"' : ''} class="list-item">
-                <div class="image"><img src="${player.gamerpic}" width="64" height="64" alt="Gamerpic"></div>
+                <div class="image"><img src="${player.gamerpic}" width="64" height="64"></div>
                 ${player.gamertag}
               </div>`,
           )
