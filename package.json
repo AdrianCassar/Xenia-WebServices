@@ -112,6 +112,6 @@
   },
   "allowScripts": {
     "@scarf/scarf@1.4.0": true,
-    "unrs-resolver@1.11.1": true
+    "unrs-resolver@1.12.2": true
   }
 }
