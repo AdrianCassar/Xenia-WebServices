@@ -116,18 +116,15 @@ export default class SessionRepository implements ISessionRepository {
     resultsCount: number,
     numUsers: number,
   ) {
-    const sessionsDocs = await this.SessionModel.find(
-      {
-        advertised: true,
-        deleted: false,
-        migration: undefined,
-        titleId: titleId.toString(),
-      },
-      undefined,
-      {
-        limit: resultsCount,
-      },
-    );
+    const sessionsDocs = await this.SessionModel.find({
+      titleId: titleId.toString(),
+      context: { $exists: true },
+      $expr: { $gt: [{ $size: { $objectToArray: '$context' } }, 0] },
+      'properties.0': { $exists: true },
+      advertised: true,
+      deleted: false,
+      migration: undefined,
+    }).limit(resultsCount);
 
     let sessions: Session[] = sessionsDocs.map(
       this.sessionDomainMapper.mapToDomainModel,
@@ -161,6 +158,9 @@ export default class SessionRepository implements ISessionRepository {
   public async findAllAdvertisedSessions() {
     const sessions = await this.SessionModel.find(
       {
+        context: { $exists: true },
+        $expr: { $gt: [{ $size: { $objectToArray: '$context' } }, 0] },
+        'properties.0': { $exists: true },
         advertised: true,
         deleted: false,
         migration: undefined,
@@ -174,10 +174,13 @@ export default class SessionRepository implements ISessionRepository {
   public async findTitleSessions(titleId: TitleId): Promise<Session[]> {
     const sessions = await this.SessionModel.find(
       {
+        titleId: titleId.toString(),
+        context: { $exists: true },
+        $expr: { $gt: [{ $size: { $objectToArray: '$context' } }, 0] },
+        'properties.0': { $exists: true },
         advertised: true,
         deleted: false,
         migration: undefined,
-        titleId: titleId.toString(),
       },
       undefined,
     );
