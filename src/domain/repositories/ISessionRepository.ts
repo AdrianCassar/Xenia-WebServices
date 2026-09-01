@@ -8,8 +8,11 @@ import Xuid from '../value-objects/Xuid';
 export default interface ISessionRepository {
   findAdvertisedSessions: (
     titleId: TitleId,
+    searcher_xuid: Xuid,
     resultsCount: number,
     numUsers: number,
+    query_id: number,
+    filters: Array<string>,
   ) => Promise<Session[]>;
   findAllAdvertisedSessions: () => Promise<Session[]>;
   findSession: (

@@ -56,6 +56,9 @@ async function bootstrap() {
   );
   app.use(compression());
 
+  // Increase limit so we can receive compressed XLast
+  app.useBodyParser('json', { limit: '1mb' });
+
   // Support Heroku
   const PORT = process.env.PORT || new PresentationSettings().get().port;
 

@@ -41,6 +41,8 @@ export class Session {
   properties: Array<string>;
   @Prop({ required: false })
   migration: string;
+  @Prop({ required: false })
+  xlast_src: string;
 
   // How long until Mongodb will automatically delete the document from the collection.
   // Mongodb will check every minute.

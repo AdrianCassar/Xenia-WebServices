@@ -10,6 +10,9 @@ import Property, {
   XProperty,
 } from '../value-objects/Property';
 import { Table } from 'console-table-printer';
+import { gunzipSync } from 'zlib';
+import { XMLParser } from 'fast-xml-parser';
+import { XboxLiveSubmissionProjectXML } from 'src/domain/value-objects/XLast';
 
 interface SessionProps {
   id: SessionId;
@@ -29,6 +32,7 @@ interface SessionProps {
   context: Map<string, number>;
   properties: Array<Property>;
   migration?: SessionId;
+  xlast_src?: string;
 }
 
 interface CreateProps {
@@ -44,6 +48,7 @@ interface CreateProps {
   publicSlotsCount: number;
   privateSlotsCount: number;
   port: number;
+  xlast_src: string;
 }
 
 interface ModifyProps {
@@ -371,6 +376,79 @@ export default class Session {
     return this.props.properties;
   }
 
+  get xlast_src() {
+    return this.props.xlast_src;
+  }
+
+  GetXLastSource(): XboxLiveSubmissionProjectXML {
+    if (!this.props.xlast_src) {
+      return undefined;
+    }
+
+    const compressed_xlast_src: Buffer<ArrayBuffer> = Buffer.from(
+      this.props.xlast_src,
+      'base64',
+    );
+
+    const decompressed_xlast_src =
+      gunzipSync(compressed_xlast_src).toString('utf16le');
+
+    const parser = new XMLParser({
+      ignoreAttributes: false,
+      attributeNamePrefix: '',
+      parseTagValue: true,
+      parseAttributeValue: true,
+
+      isArray: (_tagName, jPath, _isParentXmlGroup, _isAttribute) => {
+        const unboundedPaths = [
+          'XboxLiveSubmissionProject.GameConfigProject.LocalizedStrings.SupportedLocale',
+          'XboxLiveSubmissionProject.GameConfigProject.LocalizedStrings.LocalizedString',
+          'XboxLiveSubmissionProject.GameConfigProject.LocalizedStrings.LocalizedString.Translation',
+          'XboxLiveSubmissionProject.GameConfigProject.Privileges.Privilege',
+          'XboxLiveSubmissionProject.GameConfigProject.GameModes.GameMode',
+          'XboxLiveSubmissionProject.GameConfigProject.Contexts.Context',
+          'XboxLiveSubmissionProject.GameConfigProject.Contexts.Context.ContextValue',
+          'XboxLiveSubmissionProject.GameConfigProject.Images.Image',
+          'XboxLiveSubmissionProject.GameConfigProject.Achievements.Achievement',
+          'XboxLiveSubmissionProject.GameConfigProject.AvatarItems.AvatarItem',
+          'XboxLiveSubmissionProject.GameConfigProject.Properties.Property',
+          'XboxLiveSubmissionProject.GameConfigProject.Presence.PresenceMode',
+          'XboxLiveSubmissionProject.GameConfigProject.StatsViews.StatsView',
+          'XboxLiveSubmissionProject.GameConfigProject.StatsViews.StatsView.Columns.Field',
+          'XboxLiveSubmissionProject.GameConfigProject.StatsViewMasters.StatsView',
+          'XboxLiveSubmissionProject.GameConfigProject.StatsViewMasters.StatsView.Columns.Field',
+          'XboxLiveSubmissionProject.GameConfigProject.Matchmaking.Schema.Attribute',
+          'XboxLiveSubmissionProject.GameConfigProject.Matchmaking.Constants.Constant',
+          'XboxLiveSubmissionProject.GameConfigProject.Matchmaking.Queries.Query',
+          'XboxLiveSubmissionProject.GameConfigProject.Matchmaking.Queries.Query.Parameters.Parameter',
+          'XboxLiveSubmissionProject.GameConfigProject.Matchmaking.Queries.Query.Filters.Filter',
+          'XboxLiveSubmissionProject.GameConfigProject.Matchmaking.Queries.Query.SortOperations.SortOperation',
+          'XboxLiveSubmissionProject.GameConfigProject.Matchmaking.Queries.Query.Returns.Return',
+          'XboxLiveSubmissionProject.GameConfigProject.ProductInformation.Rating',
+          'XboxLiveSubmissionProject.GameConfigProject.ProductInformation.Genre',
+          'XboxLiveSubmissionProject.GameConfigProject.ProductInformation.Feature',
+          'XboxLiveSubmissionProject.GameConfigProject.ProductInformation.Platform',
+          'XboxLiveSubmissionProject.GameConfigProject.GamerPictures.Picture',
+          'XboxLiveSubmissionProject.GameConfigProject.FriendStatsViews.FriendStatsView',
+        ];
+
+        return unboundedPaths.includes(String(jPath));
+      },
+    });
+
+    let xml_document: XboxLiveSubmissionProjectXML;
+
+    try {
+      xml_document = parser.parse(
+        decompressed_xlast_src,
+      ) as XboxLiveSubmissionProjectXML;
+    } catch {
+      this._logger.error(`Invalid XLast Source!`);
+    }
+
+    return xml_document;
+  }
+
   get propertiesStringArray() {
     let properties: Array<string> = this.props.properties.map((prop) => {
       return prop.toString();
@@ -388,6 +466,16 @@ export default class Session {
     );
 
     properties = properties.concat(contexts);
+
+    return properties;
+  }
+
+  get propertiesComplete(): Array<Property> {
+    const properties: Array<Property> = this.propertiesStringArray.map(
+      (prop) => {
+        return new Property(prop.toString());
+      },
+    );
 
     return properties;
   }
@@ -485,11 +573,7 @@ export default class Session {
   }
 
   PrettyPrintPropertiesTable() {
-    const properties: Array<Property> = this.propertiesStringArray.map(
-      (prop) => {
-        return new Property(prop.toString());
-      },
-    );
+    const properties: Array<Property> = this.propertiesComplete;
 
     const table = this.getPropertiesTable();
 
@@ -502,7 +586,7 @@ export default class Session {
           column4: `${prop.getTypeString()}`,
           column5: `${prop.getSizeFromType()}`,
           column6: `${prop.isSystemProperty() ? 'System' : 'Custom'}`,
-          column7: prop.getParsedData(),
+          column7: prop.getParsedDataHex(),
         },
         { color: `${prop.isSystemProperty() ? 'blue' : 'magenta'}` },
       );
@@ -580,8 +664,8 @@ export default class Session {
             column4: `${entry.getTypeString()}`,
             column5: `${entry.getSizeFromType()}`,
             column6: `${entry.isSystemProperty() ? 'System' : 'Custom'}`,
-            column7: entry.getParsedData(),
-            column8: old_prop.getParsedData(),
+            column7: entry.getParsedDataHex(),
+            column8: old_prop.getParsedDataHex(),
             column9: 'Updated',
           },
           { color: `${entry.isSystemProperty() ? 'blue' : 'magenta'}` },
@@ -595,7 +679,7 @@ export default class Session {
             column4: `${entry.getTypeString()}`,
             column5: `${entry.getSizeFromType()}`,
             column6: `${entry.isSystemProperty() ? 'System' : 'Custom'}`,
-            column7: entry.getParsedData(),
+            column7: entry.getParsedDataHex(),
             column8: 'N/A',
             column9: 'Added',
           },
@@ -640,8 +724,8 @@ export default class Session {
             column4: `${entry.getTypeString()}`,
             column5: `${entry.getSizeFromType()}`,
             column6: `${entry.isSystemProperty() ? 'System' : 'Custom'}`,
-            column7: entry.getParsedData(),
-            column8: old_ctx.getParsedData(),
+            column7: entry.getParsedDataHex(),
+            column8: old_ctx.getParsedDataHex(),
             column9: 'Updated',
           },
           { color: `${entry.isSystemProperty() ? 'blue' : 'magenta'}` },
@@ -655,7 +739,7 @@ export default class Session {
             column4: `${entry.getTypeString()}`,
             column5: `${entry.getSizeFromType()}`,
             column6: `${entry.isSystemProperty() ? 'System' : 'Custom'}`,
-            column7: entry.getParsedData(),
+            column7: entry.getParsedDataHex(),
             column8: 'N/A',
             column9: 'Added',
           },
