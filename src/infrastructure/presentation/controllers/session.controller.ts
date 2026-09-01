@@ -108,7 +108,7 @@ export class SessionController {
         throw new ForbiddenException(error_msg);
       }
 
-      await this.commandBus.execute(
+      const session: Session = await this.commandBus.execute(
         new CreateSessionCommand(
           new TitleId(titleId),
           request.xuid ? new Xuid(request.xuid) : undefined,
@@ -122,6 +122,7 @@ export class SessionController {
           request.privateSlotsCount,
           new MacAddress(request.macAddress),
           request.port,
+          request.xlast_src,
         ),
       );
 
@@ -557,19 +558,16 @@ export class SessionController {
     @Param('titleId') titleId: string,
     @Body() request: SessionSearchRequest,
   ) {
-    let sessions: Array<Session> = await this.queryBus.execute(
+    const sessions: Array<Session> = await this.queryBus.execute(
       new SessionSearchQuery(
         new TitleId(titleId),
+        new Xuid(request.searcher_xuid),
         request.searchIndex,
         request.resultsCount,
         request.numUsers,
+        request.filters,
       ),
     );
-
-    // It would be more efficient if we could filter the query itself.
-    sessions = sessions.filter((session) => {
-      return session.getHostXUID.value != request.searcher_xuid;
-    });
 
     return sessions.map(this.sessionMapper.mapToPresentationModel);
   }

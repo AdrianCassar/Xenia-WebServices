@@ -50,7 +50,15 @@ export default class SessionFlags extends TinyTypeOf<number>() {
   }
 
   public get isAdvertised(): boolean {
-    return this.isFlagSet(Flags.PRESENCE) || this.isFlagSet(Flags.MATCHMAKING);
+    return this.isPresence || this.isMatchmaking;
+  }
+
+  public get isMatchmaking(): boolean {
+    return this.isFlagSet(Flags.MATCHMAKING);
+  }
+
+  public get isPresence(): boolean {
+    return this.isFlagSet(Flags.PRESENCE);
   }
 
   public get isStats(): boolean {

@@ -10,4 +10,5 @@ export interface CreateSessionRequest {
   hostAddress: string;
   macAddress: string;
   port: number;
+  xlast_src?: string;
 }

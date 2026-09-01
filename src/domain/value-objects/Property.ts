@@ -205,7 +205,40 @@ export default class Property extends TinyTypeOf<string>() {
     return this.size;
   }
 
+  getParsedValue() {
+    switch (this.getType()) {
+      case X_USER_DATA_TYPE.CONTEXT:
+        return this.getData().readUInt32BE();
+      case X_USER_DATA_TYPE.INT32:
+        return this.getData().readInt32BE();
+      case X_USER_DATA_TYPE.INT64:
+        return this.getData().readBigInt64BE();
+      case X_USER_DATA_TYPE.DOUBLE:
+        return this.getData().readDoubleBE();
+      case X_USER_DATA_TYPE.FLOAT:
+        return this.getData().readFloatBE();
+      case X_USER_DATA_TYPE.DATETIME:
+        return this.getData().readBigUInt64BE();
+    }
+  }
+
   getParsedData() {
+    switch (this.getType()) {
+      case X_USER_DATA_TYPE.CONTEXT:
+      case X_USER_DATA_TYPE.INT32:
+      case X_USER_DATA_TYPE.INT64:
+      case X_USER_DATA_TYPE.DOUBLE:
+      case X_USER_DATA_TYPE.FLOAT:
+      case X_USER_DATA_TYPE.DATETIME:
+        return this.getParsedValue();
+      case X_USER_DATA_TYPE.WSTRING:
+        return this.getUTF16();
+      case X_USER_DATA_TYPE.BINARY:
+        return this.getData();
+    }
+  }
+
+  getParsedDataHex(): string {
     switch (this.getType()) {
       case X_USER_DATA_TYPE.CONTEXT: {
         return this.getData()

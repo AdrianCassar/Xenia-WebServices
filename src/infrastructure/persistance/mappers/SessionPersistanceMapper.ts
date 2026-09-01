@@ -28,6 +28,7 @@ export default class SessionPersistanceMapper {
       context: session.context,
       properties: properties,
       migration: session.migration ? session.migration.value : undefined,
+      xlast_src: session.xlast_src ? session.xlast_src : undefined,
       updatedAt,
     };
   }

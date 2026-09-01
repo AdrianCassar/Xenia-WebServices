@@ -27,6 +27,7 @@ export class CreateSessionCommandHandler implements ICommandHandler<CreateSessio
       privateSlotsCount: command.privateSlotsCount,
       macAddress: command.macAddress,
       port: command.port,
+      xlast_src: command.xlast_src,
     });
 
     await this.repository.save(session);

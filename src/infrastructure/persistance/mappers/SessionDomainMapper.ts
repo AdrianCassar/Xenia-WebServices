@@ -52,6 +52,7 @@ export default class SessionDomainMapper {
       migration: session.migration
         ? new SessionId(session.migration)
         : undefined,
+      xlast_src: session?.xlast_src,
     });
   }
 }

@@ -16,12 +16,13 @@ export class SessionSearchQueryHandler implements IQueryHandler<SessionSearchQue
   }
 
   async execute(query: SessionSearchQuery) {
-    this.logger.verbose(`Matchmaking Query ID: ${query.searchIndex}`);
-
     return this.repository.findAdvertisedSessions(
       query.title,
+      query.searcher_xuid,
       query.resultsCount,
       query.numUsers,
+      query.searchIndex,
+      query.filters,
     );
   }
 }
