@@ -320,7 +320,7 @@ export default class SessionRepository implements ISessionRepository {
               );
 
               if (property) {
-                left_value = <bigint>property.getParsedValue();
+                left_value = BigInt(property.getParsedValue());
               }
             }
             break;
@@ -343,7 +343,7 @@ export default class SessionRepository implements ISessionRepository {
               });
 
               if (property) {
-                right_value = <bigint>property.getParsedValue();
+                right_value = BigInt(property.getParsedValue());
               }
             }
             break;

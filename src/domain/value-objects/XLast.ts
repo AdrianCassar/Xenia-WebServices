@@ -152,7 +152,7 @@ export interface PropertyElement {
   id?: number;
   friendlyName?: string;
   stringId?: number;
-  DefaultValue?: any;
+  DefaultValue?: number;
   Format?: PropertyFormat;
 }
 
@@ -260,7 +260,7 @@ export interface MatchmakingAttribute {
 export interface MatchmakingConstant {
   name?: string;
   id?: number;
-  value?: string;
+  value?: number;
 }
 
 export interface MatchmakingParameter {
