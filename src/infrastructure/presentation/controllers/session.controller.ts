@@ -60,8 +60,15 @@ import { UpdatePlayerCommand } from 'src/application/commands/UpdatePlayerComman
 import { GetTitleSessionsQuery } from 'src/application/queries/GetTitleSessionsQuery';
 import SessionDetailsPresentationMapper from '../mappers/SessionDetailsPresentationMapper';
 import { PreJoinRequest } from '../requests/PreJoinRequest';
-import Property, { X_USER_DATA_TYPE } from 'src/domain/value-objects/Property';
+import Property, {
+  X_USER_DATA_TYPE,
+  XProperty,
+} from 'src/domain/value-objects/Property';
 import { StateFlags } from 'src/domain/value-objects/StateFlag';
+import {
+  MatchmakingQuery,
+  XboxLiveSubmissionProjectXML,
+} from 'src/domain/value-objects/XLast';
 
 @ApiTags('Sessions')
 @Controller('/title/:titleId/sessions')
@@ -747,6 +754,90 @@ export class SessionController {
 
     return {
       properties: session.propertiesStringArray,
+    };
+  }
+
+  @Get('/:sessionId/properties/:query_id')
+  @ApiParam({ name: 'titleId', example: '4D5307E6' })
+  @ApiParam({ name: 'sessionId', example: 'AE00000000000000' })
+  async getSessionProperty(
+    @Param('titleId') titleId: string,
+    @Param('sessionId') sessionId: string,
+    @Param('query_id') query_id: number,
+  ): Promise<SessionPropertyResponse> {
+    const session: Session = await this.queryBus.execute(
+      new GetSessionQuery(new TitleId(titleId), new SessionId(sessionId)),
+    );
+
+    if (!session) {
+      throw new NotFoundException(`Session ${sessionId} was not found.`);
+    }
+
+    const xlast_src: XboxLiveSubmissionProjectXML = session.GetXLastSource();
+    let ordered_properties: Array<string> = new Array<string>();
+    let ordered: boolean = false;
+
+    if (xlast_src) {
+      const query: MatchmakingQuery =
+        xlast_src.XboxLiveSubmissionProject.GameConfigProject.Matchmaking.Queries.Query.find(
+          (query) => query.id == query_id,
+        );
+
+      if (query && query.Returns) {
+        ordered = true;
+
+        const session_properties: Array<Property> = session.propertiesComplete;
+
+        query.Returns.Return.forEach((property) => {
+          const return_property: Property = session_properties.find(
+            (session_property) =>
+              session_property.getID() === <XProperty>property.id,
+          );
+
+          if (return_property) {
+            ordered_properties.push(return_property.toString());
+          } else {
+            this.logger.error(
+              `Missing property in returns: ${property.id.toString(16).toUpperCase().padEnd(8, '0')}`,
+            );
+          }
+        });
+
+        // System Properties
+        // Add system properties last to maintain order.
+        const puid_exists = query.Returns.Return.find(
+          (property) => <XProperty>property.id === XProperty.GAMER_PUID,
+        );
+        const host_name_exists = query.Returns.Return.find(
+          (property) => <XProperty>property.id === XProperty.GAMER_HOSTNAME,
+        );
+
+        if (!puid_exists) {
+          const PUID: Property = session_properties.find(
+            (session_property) =>
+              session_property.getID() === <XProperty>XProperty.GAMER_PUID,
+          );
+
+          ordered_properties.push(PUID.toString());
+        }
+
+        if (!host_name_exists) {
+          const HostName: Property = session_properties.find(
+            (session_property) =>
+              session_property.getID() === <XProperty>XProperty.GAMER_HOSTNAME,
+          );
+
+          ordered_properties.push(HostName.toString());
+        }
+      }
+    }
+
+    if (!ordered) {
+      ordered_properties = session.propertiesStringArray;
+    }
+
+    return {
+      properties: ordered_properties,
     };
   }
 
