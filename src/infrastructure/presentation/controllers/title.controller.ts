@@ -104,4 +104,32 @@ export class TitleController {
 
     return file.toString('utf8');
   }
+
+  // XHTTP Hosts Map
+  @Get('/hosts')
+  @ApiParam({ name: 'titleId', example: '41560907' })
+  @Header('content-type', 'application/json')
+  async getTitleHosts(
+    @Param('titleId') titleId: string,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const path = join(
+      process.cwd(),
+      './src/titles',
+      titleId.toUpperCase(),
+      'hosts.json',
+    );
+
+    if (!existsSync(path)) {
+      return {};
+    }
+
+    const stats = await stat(path);
+
+    res.set('Content-Length', stats.size.toString());
+
+    const file = await readFile(path);
+
+    return file.toString('utf8');
+  }
 }

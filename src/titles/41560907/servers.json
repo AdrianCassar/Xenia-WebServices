@@ -1,0 +1,12 @@
+[
+    {
+        "address": "127.0.0.1",
+        "flags": 0,
+        "description": "ttl,usr,shr,web,dbg,upl,prs,std,bap,dwl"
+    },
+    {
+        "address": "127.0.0.1",
+        "flags": 0,
+        "description": "ttl,usr,shr,web,dbg,upl,prs,std,bap"
+    }
+]
