@@ -122,8 +122,8 @@ export default class Session {
     const rnd_value = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
 
     const session_id_value =
-      (BigInt(0xae) << BigInt(56)) |
-      (BigInt(rnd_value) & BigInt(0x0000ffffffffffff));
+      (BigInt(0x80) << BigInt(56)) |
+      (BigInt(rnd_value) & BigInt(0x00ffffffffffffffn));
 
     const id_hex_string = session_id_value.toString(16);
     const session_id = id_hex_string.padEnd(16, '0');
