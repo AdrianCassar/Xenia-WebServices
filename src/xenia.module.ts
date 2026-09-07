@@ -16,7 +16,7 @@ import { join } from 'path';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'src/public'),
       serveRoot: '/',
-      exclude: ['/title/{*splat}', '/xstorage/{*splat}'],
+      exclude: ['/title/{*splat}', '/xstorage/{*splat}', '/services/{*splat}', '/sessions/{*splat}', '/leaderboards/{*splat}', '/xnet/{*splat}'],
       // exclude:, ['/api/{*splat}'],
     }),
   ],

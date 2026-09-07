@@ -8,6 +8,8 @@ import { PlayerController } from './controllers/player.controller';
 import { LeaderboardsController } from './controllers/leaderboards.controller';
 import { IndexController } from './controllers/index.controller';
 import { XStorageController } from './controllers/xstorage.controller';
+import { TitleStorageController } from './controllers/titlestorage.controller';
+import { NetworkStorageController } from './controllers/networkstorage.controller';
 import SessionPresentationMapper from './mappers/SessionPresentationMapper';
 import SessionDetailsPresentationMapper from './mappers/SessionDetailsPresentationMapper';
 
@@ -21,6 +23,8 @@ import SessionDetailsPresentationMapper from './mappers/SessionDetailsPresentati
     LeaderboardsController,
     IndexController,
     XStorageController,
+    TitleStorageController,
+    NetworkStorageController,
   ],
   providers: [SessionPresentationMapper, SessionDetailsPresentationMapper],
 })

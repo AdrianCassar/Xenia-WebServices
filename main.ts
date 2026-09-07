@@ -9,6 +9,7 @@ import compression from 'compression';
 import helmet from 'helmet';
 import { ConsoleLogger } from '@nestjs/common';
 import fs from 'fs';
+import { json, urlencoded, raw, text } from 'express';
 
 async function bootstrap() {
   const logger = new ConsoleLogger('Main');
@@ -20,7 +21,35 @@ async function bootstrap() {
   }
 
   const app = await NestFactory.create<NestExpressApplication>(XeniaModule, {
-    rawBody: true,
+    bodyParser: false,
+  });
+
+  app.use((req: any, res: any, next: any) => {
+    const url: string = req.url || '';
+    if (url.startsWith('/users/') || url.startsWith('/media/') || url.startsWith('/storage/')) {
+      req.url = '/services' + req.url;
+      req.originalUrl = '/services' + req.originalUrl;
+    }
+    next();
+  });
+
+  // NodeJS parser does not work with TitleStorage(PUT) so we MUST use our own.
+  const rawBodyVerify = (req: any, res: any, buf: Buffer) => {req.rawBody = buf;};
+  const jsonParser = json({ limit: '1mb', verify: rawBodyVerify });
+  const urlencodedParser = urlencoded({ limit: '1mb', extended: true, verify: rawBodyVerify });
+  const rawParser = raw({ limit: '1mb', type: '*/*', verify: rawBodyVerify });
+  const textParser = text({ limit: '1mb', verify: rawBodyVerify });
+
+  app.use((req: any, res: any, next: any) => {
+    const url: string = req.url || '';
+    if (url.startsWith('/services/users/') || url.startsWith('/services/media/') || url.startsWith('/services/storage/')) {
+      return next();
+    }
+    const ct = (req.headers['content-type'] || '').toLowerCase();
+    if (ct.includes('application/json')) {return jsonParser(req, res, next);}
+    if (ct.includes('application/x-www-form-urlencoded')) {return urlencodedParser(req, res, next);}
+    if (ct.includes('text/plain')) {return textParser(req, res, next);}
+    return rawParser(req, res, next);
   });
 
   const SSL_enabled = envs.SSL == 'true';
