@@ -5,6 +5,7 @@ export interface PersistanceSettingsProps {
   nginx: string;
   heroku_nginx: string;
   xstorage: string;
+  titlestorage: string;
   HEROKU_RELEASE_CREATED_AT: string;
   HEROKU_BUILD_COMMIT: string;
   START_TIME: string;
