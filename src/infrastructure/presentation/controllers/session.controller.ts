@@ -779,7 +779,7 @@ export class SessionController {
 
     if (xlast_src) {
       const query: MatchmakingQuery =
-        xlast_src.XboxLiveSubmissionProject.GameConfigProject.Matchmaking.Queries.Query.find(
+        xlast_src.XboxLiveSubmissionProject?.GameConfigProject?.Matchmaking?.Queries?.Query?.find(
           (query) => query.id == query_id,
         );
 

@@ -251,11 +251,11 @@ export default class SessionRepository implements ISessionRepository {
       }
 
       const matchmaking_query =
-        xlast_src.XboxLiveSubmissionProject.GameConfigProject.Matchmaking.Queries.Query.find(
+        xlast_src?.XboxLiveSubmissionProject?.GameConfigProject?.Matchmaking?.Queries?.Query?.find(
           (query) => query.id === query_id,
         );
 
-      if (!matchmaking_query.Filters) {
+      if (!matchmaking_query?.Filters) {
         this.logger.verbose(`Matchmaking Query ID: ${query_id}`);
 
         evaluation_table.printTable();
@@ -350,7 +350,7 @@ export default class SessionRepository implements ISessionRepository {
           case 'Constant':
             {
               const constant: MatchmakingConstant =
-                xlast_src.XboxLiveSubmissionProject.GameConfigProject.Matchmaking.Constants.Constant.find(
+                xlast_src.XboxLiveSubmissionProject.GameConfigProject.Matchmaking?.Constants?.Constant?.find(
                   (constant) => constant.id === filter_spec.right,
                 );
 

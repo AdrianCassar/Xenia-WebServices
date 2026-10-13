@@ -390,6 +390,8 @@ export default class Session {
       'base64',
     );
 
+    // Clients only send the Matchmaking section of the XLast, wrapped in
+    // XboxLiveSubmissionProject/GameConfigProject.
     const decompressed_xlast_src =
       gunzipSync(compressed_xlast_src).toString('utf16le');
 

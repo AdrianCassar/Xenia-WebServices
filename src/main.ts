@@ -56,7 +56,8 @@ async function bootstrap() {
   );
   app.use(compression());
 
-  // Increase limit so we can receive compressed XLast
+  // Increase limit so we can receive compressed XLast.
+  // Newer clients only send the Matchmaking section, older clients send the full source.
   app.useBodyParser('json', { limit: '1mb' });
 
   // Support Heroku

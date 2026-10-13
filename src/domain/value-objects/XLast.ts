@@ -402,7 +402,7 @@ export interface GameConfigProject {
   validateAgainst?: string;
   classification?:
     'BaseGame' | 'DLC' | 'NewSKU' | 'TitleUpdate' | 'ConfigOnlyUpdate';
-  LocalizedStrings: LocalizedStrings;
+  LocalizedStrings?: LocalizedStrings;
   Privileges?: Privileges;
   GameModes?: GameModes;
   Contexts?: Contexts;
