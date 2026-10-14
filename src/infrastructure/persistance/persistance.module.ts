@@ -16,6 +16,9 @@ import SessionRepository from './repositories/SessionRepository';
 import SessionPersistanceMapper from './mappers/SessionPersistanceMapper';
 import SessionDomainMapper from './mappers/SessionDomainMapper';
 import { Session, SessionSchema } from './models/SessionSchema';
+import { PlayerStats, PlayerStatsSchema } from './models/PlayerStatsSchema';
+import { IPlayersStatsSymbol } from 'src/domain/repositories/IPlayersStatsRepository';
+import { PlayersStatsRepository } from './repositories/PlayersStatsRepository';
 
 const persistanceSettings = new PersistanceSettings().get();
 
@@ -26,6 +29,7 @@ const persistanceSettings = new PersistanceSettings().get();
       { name: Session.name, schema: SessionSchema },
       { name: Leaderboard.name, schema: LeaderboardSchema },
       { name: Player.name, schema: PlayerSchema },
+      { name: PlayerStats.name, schema: PlayerStatsSchema },
     ]),
   ],
   providers: [
@@ -47,6 +51,10 @@ const persistanceSettings = new PersistanceSettings().get();
       provide: IPlayerRepositorySymbol,
       useClass: PlayerRepository,
     },
+    {
+      provide: IPlayersStatsSymbol,
+      useClass: PlayersStatsRepository,
+    },
     PlayerPersistanceMapper,
     PlayerDomainMapper,
   ],
@@ -54,6 +62,7 @@ const persistanceSettings = new PersistanceSettings().get();
     ISessionRepositorySymbol,
     ILeaderboardRepositorySymbol,
     IPlayerRepositorySymbol,
+    IPlayersStatsSymbol,
   ],
 })
 export class PersistanceModule {}

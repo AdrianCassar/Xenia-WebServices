@@ -20,7 +20,9 @@ import { MigrateSessionCommandHandler } from './commandHandlers/MigrateSessionCo
 import { ModifySessionCommandHandler } from './commandHandlers/ModifySessionCommandHandler';
 import { SetPlayerSessionIdCommandHandler } from './commandHandlers/SetPlayerSessionIdCommandHandler';
 import { UpdateLeaderboardCommandHandler } from './commandHandlers/UpdateLeaderboardCommandHandler';
-import { FindLeaderboardsQueryHandler } from './queryHandlers/FindLeaderboardsQueryHandler';
+import { ReadLeaderboardsQueryHandler } from './queryHandlers/ReadLeaderboardsQueryHandler';
+import { EnumerateLeaderboardsQueryHandler } from './queryHandlers/EnumerateLeaderboardsQueryHandler';
+import { EstimateRankQueryHandler } from './queryHandlers/EstimateRankQueryHandler';
 import { FindPlayerQueryHandler } from './queryHandlers/FindPlayerQueryHandler';
 import { FindPlayerSessionQueryHandler } from './queryHandlers/FindPlayerSessionQueryHandler';
 import { GetPlayerQueryHandler } from './queryHandlers/GetPlayerQueryHandler';
@@ -37,6 +39,7 @@ import { XStorageDeleteCommandHandler } from './commandHandlers/XStorageDeleteCo
 import { XStorageBuildServerPathCommandHandler } from './commandHandlers/XStorageBuildServerPathCommandHandler';
 import { GetTitleSessionsQueryHandler } from './queryHandlers/GetTitleSessionsQueryHandler';
 import { DeleteMyProfilesQueryHandler } from './queryHandlers/DeleteAllMyProfilesQueryHandler';
+import { WriteStatsCommandHandler } from './commandHandlers/WriteStatsCommandHandler';
 
 export const queryHandlers = [
   GetSessionsQueryHandler,
@@ -46,7 +49,9 @@ export const queryHandlers = [
   GetPlayerQueryHandler,
   GetPlayersQueryHandler,
   UpdatePlayerCommandHandler,
-  FindLeaderboardsQueryHandler,
+  ReadLeaderboardsQueryHandler,
+  EnumerateLeaderboardsQueryHandler,
+  EstimateRankQueryHandler,
   GetPlayerGamertagQueryHandler,
   XStorageDeleteCommandHandler,
   XStorageUploadCommandHandler,
@@ -71,6 +76,7 @@ export const commandHandlers = [
   AddSessionPropertyCommandHandler,
   AggregateSessionCommandHandler,
   ProcessClientAddressCommandHandler,
+  WriteStatsCommandHandler,
 ];
 
 @Module({

@@ -403,14 +403,14 @@ export default class UserSetting extends TinyTypeOf<string>() {
       }
       case X_USER_DATA_TYPE.INT32: {
         return this.getData()
-          .readUInt32BE()
+          .readInt32BE()
           .toString(16)
           .padStart(8, '0')
           .toUpperCase();
       }
       case X_USER_DATA_TYPE.INT64: {
         return this.getData()
-          .readBigUInt64BE()
+          .readBigInt64BE()
           .toString(16)
           .padStart(16, '0')
           .toUpperCase();

@@ -8,6 +8,7 @@ import {
   ForbiddenException,
   HttpStatus,
   ConsoleLogger,
+  BadRequestException,
 } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
@@ -45,12 +46,7 @@ import { FindPlayerQuery } from 'src/application/queries/FindPlayerQuery';
 import { Request, Response } from 'express';
 import { mkdir, stat, writeFile } from 'fs/promises';
 import { join } from 'path';
-import { existsSync, readFileSync, createReadStream } from 'fs';
-import { UpdateLeaderboardCommand } from 'src/application/commands/UpdateLeaderboardCommand';
-import LeaderboardId from 'src/domain/value-objects/LeaderboardId';
-import { WriteStatsRequest } from '../requests/WriteStatsRequest';
-import PropertyId from 'src/domain/value-objects/PropertyId';
-import { LeaderboardUpdateProps } from 'src/domain/aggregates/Leaderboard';
+import { existsSync, createReadStream } from 'fs';
 import { MigrateSessionCommand } from 'src/application/commands/MigrateSessionCommand';
 import { MigrateSessionRequest } from '../requests/MigrateSessionRequest';
 import { RealIP } from 'nestjs-real-ip';
@@ -69,6 +65,8 @@ import {
   MatchmakingQuery,
   XboxLiveSubmissionProjectXML,
 } from 'src/domain/value-objects/XLast';
+import { WriteStatsDto } from 'src/infrastructure/persistance/dtos/WriteStatsDto';
+import { WriteStatsCommand } from 'src/application/commands/WriteStatsCommand';
 
 @ApiTags('Sessions')
 @Controller('/title/:titleId/sessions')
@@ -679,6 +677,8 @@ export class SessionController {
     @Param('sessionId') sessionId: string,
     @Body() request: GetSessionPropertyRequest,
   ) {
+    this.logger.verbose(JSON.stringify(request, null, 2));
+
     // Extract properties and exclude contexts
     const properties: Array<Property> = request.properties
       .filter((base64: string) => {
@@ -844,65 +844,19 @@ export class SessionController {
   @Post('/:sessionId/leaderboards')
   @ApiParam({ name: 'titleId', example: '4D5307E6' })
   @ApiParam({ name: 'sessionId', example: '8000000000000000' })
-  async postLeaderboards(
+  async writeStats(
     @Param('titleId') titleId: string,
     @Param('sessionId') sessionId: string,
-    @Body() request: WriteStatsRequest,
+    @Body() stats: WriteStatsDto,
   ) {
-    this.logger.verbose(
-      '\n' + JSON.stringify({ request: JSON.stringify(request) }),
-    );
-
-    const statsConfigPath = join(
-      process.cwd(),
-      './src/titles',
-      titleId.toUpperCase(),
-      'stats.json',
-    );
-
-    if (!existsSync(statsConfigPath)) {
-      this.logger.warn(
-        `No stats config found for title ${titleId}, unable to save stats.`,
-      );
-
-      return;
+    if (!stats.title_id) {
+      stats.title_id = titleId;
     }
 
-    const propertyMappings = JSON.parse(
-      readFileSync(statsConfigPath, 'utf8'),
-    ).properties;
+    if (!Array.isArray(stats.views)) {
+      throw new BadRequestException('Missing stats views.');
+    }
 
-    await Promise.all(
-      Object.entries(request.leaderboards).map(
-        async ([leaderboardId, leaderboard]) => {
-          const stats: LeaderboardUpdateProps['stats'] = {};
-          Object.entries(leaderboard.stats).forEach(([propId, stat]) => {
-            const propertyMapping =
-              propertyMappings[new PropertyId(propId).toString()];
-
-            if (!propertyMapping) {
-              this.logger.warn('UNKNOWN STAT ID FOR PROPERTY ' + propId);
-              return;
-            }
-
-            const statId = propertyMapping.statId;
-
-            stats[`${statId}`] = {
-              ...stat,
-              method: propertyMapping.method,
-            };
-          });
-
-          return await this.commandBus.execute(
-            new UpdateLeaderboardCommand(
-              new LeaderboardId(leaderboardId),
-              new TitleId(titleId),
-              new Xuid(request.xuid),
-              stats,
-            ),
-          );
-        },
-      ),
-    );
+    return await this.commandBus.execute(new WriteStatsCommand(stats));
   }
 }
