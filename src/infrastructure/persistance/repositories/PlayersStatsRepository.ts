@@ -380,7 +380,7 @@ export class PlayersStatsRepository implements IPlayersStatsRepository {
           });
           break;
         }
-        default: {
+        case RatingAttributeId: {
           const column = document?.columns.find(
             (column) => column.attribute_id === column_id,
           );
@@ -391,6 +391,21 @@ export class PlayersStatsRepository implements IPlayersStatsRepository {
               property: column.property,
             });
           }
+          break;
+        }
+        default: {
+          const column = document?.columns.find(
+            (column) => column.attribute_id === column_id,
+          );
+
+          // Every requested column is returned, titles such as 454D07D2
+          // read all requested columns without checking the column count.
+          columns.push({
+            attribute_id: column_id,
+            property: column
+              ? column.property
+              : Property.SerializeUnsetToBase64(),
+          });
         }
       }
     }

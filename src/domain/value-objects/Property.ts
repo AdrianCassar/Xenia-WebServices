@@ -3,10 +3,10 @@ import { TinyTypeOf } from 'tiny-types';
 export const kPropertyScopeMask = 0x00008000;
 
 export enum AggregationType {
-  Last = 0x8001, // Write the new value.
-  Max = 0x800b, // Write the new value if it is greater than the existing value.
-  Sum = 0x8003, // Add the new value to the existing value and write the result.
-  Min = 0x8009, // Write the new value if it is less than the existing value.
+  Last = 0x8001, // Replaces the stored value.
+  Max = 0x800b, // Keeps the larger of the stored and incoming values.
+  Sum = 0x8003, // Stores the total of the stored and incoming values.
+  Min = 0x8009, // Keeps the smaller of the stored and incoming values.
 }
 
 export enum X_USER_DATA_TYPE {
@@ -467,6 +467,16 @@ export default class Property extends TinyTypeOf<string>() {
     data.writeInt32BE(value);
 
     return new Property(Property.SerializePropertyToBase64(id, data));
+  }
+
+  // Property without data (X_USER_DATA_TYPE.UNSET), used for missing columns.
+  static SerializeUnsetToBase64(id: number = 0): string {
+    const buffer = Buffer.alloc(XPropertySize);
+
+    buffer.writeInt32LE(id, 0);
+    buffer.writeUInt8(X_USER_DATA_TYPE.UNSET, Int32Array.BYTES_PER_ELEMENT);
+
+    return buffer.toString('base64');
   }
 
   static fromUTF16(id: number, value: string): Property {
