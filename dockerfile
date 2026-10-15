@@ -18,6 +18,7 @@ ENV MONGO_URI=mongodb://host.docker.internal:27017/
 ENV SWAGGER_API=true
 ENV nginx=true
 ENV xstorage=true
+ENV titlestorage=true
 
 EXPOSE 36000
 
