@@ -33,6 +33,17 @@ export default defineConfig([
       'unused-imports': unusedImports,
     },
   },
+  {
+    files: ['src/frontend/**/*.ts'],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+      },
+      parserOptions: {
+        project: './src/frontend/tsconfig.json',
+      },
+    },
+  },
 
   js.configs.recommended,
   ...tseslint.configs.recommended,

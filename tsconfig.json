@@ -24,4 +24,5 @@
     "resolveJsonModule": true
   },
   "include": ["src/**/*"],
+  "exclude": ["src/frontend"],
 }

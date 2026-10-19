@@ -22,7 +22,6 @@ import UserSetting, {
 } from 'src/domain/value-objects/UserSetting';
 
 const icon_cache = new Map<string, string>();
-const title_info_cache = new Map<string, object>();
 const title_xml_cache = new Map<string, object>();
 
 // Title ID -> Tile ID -> Base64 Icon
@@ -255,26 +254,6 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
     return icon_base64;
   }
 
-  async getTitleJsonInfo(titleId: string): Promise<object> {
-    if (title_info_cache.has(titleId)) {
-      return title_info_cache.get(titleId);
-    }
-
-    // will return empty object if title not found.
-    const title_info = await this.downloadContent(
-      `http://xboxunity.net/Resources/Lib/Title.php?tid=${titleId}`,
-      'json',
-      500,
-    );
-
-    if (title_info) {
-      // Check if returned object was empty.
-      if (title_info.TitleID) {
-        title_info_cache.set(titleId, title_info);
-      }
-    }
-  }
-
   async getHostGamertag(session: Session): Promise<string> {
     if (session.HasProperties()) {
       const HostGamerNameProperty = session.propertyHostGamerName;
@@ -410,7 +389,6 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
 
       let game_title: string = await this.getTitleName(title_id);
       const tile_icon: string = await this.getTitleTileIcon(title_id);
-      const title_info_json: object = await this.getTitleJsonInfo(title_id);
 
       // Fallback to title from session
       if (!game_title) {
@@ -540,7 +518,6 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
           titleId: title_id,
           name: game_title,
           icon: tile_icon,
-          info: title_info_json,
           sessions: [],
         };
 
@@ -563,7 +540,6 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
     }
 
     this.logger.verbose(`XML Cache Count: ${title_xml_cache.size}`);
-    this.logger.verbose(`JSON Cache Count: ${title_info_cache.size}`);
     this.logger.verbose(`Tile Icon Cache Count: ${icon_cache.size}`);
 
     this.logger.verbose('Recent Games:');

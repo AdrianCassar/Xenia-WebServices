@@ -41,3 +41,6 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 /.vs
+
+# Compiled frontend (src/frontend)
+/src/public/js
