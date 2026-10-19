@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta charset="utf-8" />
         <title>Xenia Web Services</title>
 
         <link rel="shortcut icon" type="image/png" href="assets/favicon.png" />
@@ -8,7 +9,7 @@
         <link rel="apple-touch-icon" type="image/png" href="assets/favicon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="Server Status" />
-        <meta name="theme-color" content="#181a1b" />
+        <meta name="theme-color" content="#111315" />
 
         <!-- OG Meta Tags -->
         <meta property="og:url" content="https://xenia-netplay-2a0298c0e3f4.herokuapp.com/" />
@@ -18,66 +19,81 @@
         <meta property="og:image" content="https://xenia-netplay-2a0298c0e3f4.herokuapp.com/assets/favicon.png" />
 
         <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/skeleton-loader.css">
 
         <script src="js/code.js" defer></script>
     </head>
     <body>
-      <div style="text-align: center;">
-        <h1>Xenia Web Services</h1>
-
-        <div id="header">
-          <a href="https://github.com/AdrianCassar/xenia-canary" target="_blank">Github</a>
-          -
-          <a href="https://github.com/AdrianCassar/xenia-canary/releases" target="_blank">Releases</a>
-          -
-          <a href="https://github.com/AdrianCassar/xenia-canary/wiki" target="_blank">Netplay Wiki</a>
+      <header class="site-header">
+        <div class="brand">
+          <img class="brand-logo" src="assets/xbox.svg" alt="" width="40" height="40" />
+          <div>
+            <h1>Xenia Web Services</h1>
+            <p class="tagline">Live netplay sessions for the Xenia Xbox 360 emulator</p>
+          </div>
         </div>
 
-        <button id="server_details_btn">Server Details</button>
+        <nav class="nav">
+          <a href="https://github.com/AdrianCassar/xenia-canary" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/AdrianCassar/xenia-canary/releases" target="_blank" rel="noopener">Releases</a>
+          <a href="https://github.com/AdrianCassar/xenia-canary/wiki" target="_blank" rel="noopener">Netplay Wiki</a>
+        </nav>
+      </header>
 
-        <div id="server_details">
-          <ul style="list-style-type:none;">
-            <li>Commit: <a id="BUILD_COMMIT" href="https://github.com/AdrianCassar/xenia-canary" target="_blank"></a></li>
-            <li>Released At: <label id="RELEASE_CREATED_AT"></label></li>
-            <li>Uptime: <label id="UPTIME"></label></li>
-          </ul>  
-        </div>
+      <main>
+        <section class="status-bar" aria-label="Server status">
+          <div class="stats">
+            <div class="stat">
+              <span class="stat-value" id="session_count">–</span>
+              <span class="stat-label">Sessions</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="player_count">–</span>
+              <span class="stat-label">Players</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="game_count">–</span>
+              <span class="stat-label">Games</span>
+            </div>
+          </div>
 
-        <div id="sessions">
-            <table>
-                <tr>
-                    <th>Gaming Sessions</th>
-                    <th>Players</th>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="skeleton-container">
-                      <div class="post">
-                        <div class="avatar">
-                          <img alt="xbox-icon" src="assets/xbox.svg"/>
-                        </div>
-                        <div class="line"></div>
-                        <div class="line"></div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="skeleton-container">
-                      <div class="post">
-                        <div class="avatar">
-                          <img alt="xbox-icon" src="assets/xbox.svg"/>
-                        </div>
-                        <div class="line"></div>
-                        <div class="line"></div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-            </table>
-        </div>
+          <div class="refresh">
+            <span class="live-dot" aria-hidden="true"></span>
+            <span id="countdown">Loading…</span>
+            <div class="refresh-track" aria-hidden="true"><div class="refresh-bar" id="refresh_bar"></div></div>
+          </div>
+        </section>
 
-        <div id="countdown"></div>
-      </div>
+        <section id="sessions" class="sessions" aria-live="polite">
+          <div class="session-card skeleton" aria-hidden="true">
+            <div class="sk sk-icon"></div>
+            <div class="sk-lines"><div class="sk sk-line"></div><div class="sk sk-line short"></div></div>
+          </div>
+          <div class="session-card skeleton" aria-hidden="true">
+            <div class="sk sk-icon"></div>
+            <div class="sk-lines"><div class="sk sk-line"></div><div class="sk sk-line short"></div></div>
+          </div>
+          <div class="session-card skeleton" aria-hidden="true">
+            <div class="sk sk-icon"></div>
+            <div class="sk-lines"><div class="sk sk-line"></div><div class="sk sk-line short"></div></div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <dl class="server-details" aria-label="Server details">
+          <div>
+            <dt>Commit</dt>
+            <dd><a id="BUILD_COMMIT" href="https://github.com/AdrianCassar/Xenia-WebServices" target="_blank" rel="noopener">N/A</a></dd>
+          </div>
+          <div>
+            <dt>Released</dt>
+            <dd id="RELEASE_CREATED_AT">N/A</dd>
+          </div>
+          <div>
+            <dt>Uptime</dt>
+            <dd id="UPTIME">N/A</dd>
+          </div>
+        </dl>
+      </footer>
     </body>
 </html>
