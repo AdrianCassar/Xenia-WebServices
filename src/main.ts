@@ -7,6 +7,7 @@ import PresentationSettings from 'src/infrastructure/presentation/settings/Prese
 import PersistenceSettings from 'src/infrastructure/persistence/settings/PersistenceSettings';
 import compression from 'compression';
 import helmet from 'helmet';
+import { Request, Response, NextFunction } from 'express';
 import { ConsoleLogger } from '@nestjs/common';
 import fs from 'fs';
 
@@ -40,20 +41,31 @@ async function bootstrap() {
   }
 
   app.enableCors();
-  app.use(
-    helmet({
-      contentSecurityPolicy: {
-        directives: {
-          'script-src': [
-            "'self'",
-            "'unsafe-inline'",
-            "'sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo='",
-          ],
-          upgradeInsecureRequests: SSL_enabled ? [] : null,
-        },
+
+  const frontendHelmet = helmet({
+    contentSecurityPolicy: {
+      directives: {
+        'script-src': [
+          "'self'",
+          "'unsafe-inline'",
+          "'sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo='",
+        ],
+        upgradeInsecureRequests: SSL_enabled ? [] : null,
       },
-    }),
-  );
+    },
+  });
+
+  // Only apply helmet to the static frontend, not the API.
+  const frontendPaths =
+    /^\/(index\.html|50x\.html|assets\/.*|css\/.*|js\/.*)?$/;
+
+  app.use((req: Request, res: Response, next: NextFunction) => {
+    if (frontendPaths.test(req.path)) {
+      return frontendHelmet(req, res, next);
+    }
+
+    next();
+  });
   app.use(compression());
 
   // Increase limit so we can receive compressed XLast.
