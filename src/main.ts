@@ -4,7 +4,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { XeniaModule } from 'src/xenia.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import PresentationSettings from 'src/infrastructure/presentation/settings/PresentationSettings';
-import PersistanceSettings from 'src/infrastructure/persistance/settings/PersistanceSettings';
+import PersistenceSettings from 'src/infrastructure/persistence/settings/PersistenceSettings';
 import compression from 'compression';
 import helmet from 'helmet';
 import { ConsoleLogger } from '@nestjs/common';
@@ -13,7 +13,7 @@ import fs from 'fs';
 async function bootstrap() {
   const logger = new ConsoleLogger('Main');
 
-  const envs = new PersistanceSettings().get();
+  const envs = new PersistenceSettings().get();
 
   if (envs.mongoURI == '') {
     logger.error(`MONGO_URI is undefined!`);

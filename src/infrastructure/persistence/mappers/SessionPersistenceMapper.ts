@@ -3,7 +3,7 @@ import Session from '../../../domain/aggregates/Session';
 import { Session as SessionModel } from '../models/SessionSchema';
 
 @Injectable()
-export default class SessionPersistanceMapper {
+export default class SessionPersistenceMapper {
   public mapToDataModel(session: Session, updatedAt: Date): SessionModel {
     const properties: Array<string> = session.properties.map((prop) => {
       return prop.toString();

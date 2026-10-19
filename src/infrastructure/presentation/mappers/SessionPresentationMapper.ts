@@ -1,6 +1,6 @@
 import Session from '../../../domain/aggregates/Session';
 import { ConsoleLogger, Injectable } from '@nestjs/common';
-import { SessionDto } from '../../persistance/dtos/SessionDto';
+import { SessionDto } from '../../persistence/dtos/SessionDto';
 
 @Injectable()
 export default class SessionPresentationMapper {

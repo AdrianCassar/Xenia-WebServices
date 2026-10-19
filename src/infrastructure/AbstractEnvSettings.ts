@@ -7,7 +7,7 @@ export default abstract class AbstractEnvSettings<T> {
       presentation: {
         port: parseInt(process.env.API_PORT),
       },
-      persistance: {
+      persistence: {
         mongoURI: process.env.MONGO_URI ? process.env.MONGO_URI : '',
         swagger_API: process.env.SWAGGER_API
           ? process.env.SWAGGER_API

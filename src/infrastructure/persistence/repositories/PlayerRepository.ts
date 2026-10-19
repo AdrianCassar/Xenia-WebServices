@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import IPlayerRepository from 'src/domain/repositories/IPlayerRepository';
 import Player from 'src/domain/aggregates/Player';
 import PlayerDomainMapper from '../mappers/PlayerDomainMapper';
-import PlayerPersistanceMapper from '../mappers/PlayerPersistanceMapper';
+import PlayerPersistenceMapper from '../mappers/PlayerPersistenceMapper';
 import { PlayerDocument } from '../models/PlayerSchema';
 import Xuid from 'src/domain/value-objects/Xuid';
 import IpAddress from 'src/domain/value-objects/IpAddress';
@@ -17,7 +17,7 @@ export default class PlayerRepository implements IPlayerRepository {
     @InjectModel(Player.name)
     private PlayerModel: Model<PlayerDocument>,
     private readonly playerDomainMapper: PlayerDomainMapper,
-    private readonly playerPersistanceMapper: PlayerPersistanceMapper,
+    private readonly playerPersistenceMapper: PlayerPersistenceMapper,
   ) {
     this.logger.setContext(PlayerRepository.name);
   }
@@ -27,7 +27,7 @@ export default class PlayerRepository implements IPlayerRepository {
       {
         xuid: player.xuid.value,
       },
-      this.playerPersistanceMapper.mapToDataModel(player),
+      this.playerPersistenceMapper.mapToDataModel(player),
       {
         upsert: true,
         returnDocument: 'after',

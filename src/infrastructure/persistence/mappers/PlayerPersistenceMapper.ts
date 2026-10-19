@@ -3,7 +3,7 @@ import Player from '../../../domain/aggregates/Player';
 import { Player as PlayerModel } from '../models/PlayerSchema';
 
 @Injectable()
-export default class PlayerPersistanceMapper {
+export default class PlayerPersistenceMapper {
   public mapToDataModel(player: Player): PlayerModel {
     const base64_settings = player.getSettingsStringArray();
 

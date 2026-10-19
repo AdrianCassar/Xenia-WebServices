@@ -4,8 +4,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import {
   Session,
   SessionSchema,
-} from 'src/infrastructure/persistance/models/SessionSchema';
-import { PersistanceModule } from 'src/infrastructure/persistance/persistance.module';
+} from 'src/infrastructure/persistence/models/SessionSchema';
+import { PersistenceModule } from 'src/infrastructure/persistence/persistence.module';
 import { CreatePlayerCommandHandler } from './commandHandlers/CreatePlayerCommandHandler';
 import { CreateSessionCommandHandler } from './commandHandlers/CreateSessionCommandHandler';
 import { AddSessionContextCommandHandler } from './commandHandlers/AddSessionContextCommandHandler';
@@ -82,7 +82,7 @@ export const commandHandlers = [
 @Module({
   imports: [
     CqrsModule,
-    PersistanceModule,
+    PersistenceModule,
     MongooseModule.forFeature([{ name: Session.name, schema: SessionSchema }]),
   ],
   providers: [...queryHandlers, ...commandHandlers],

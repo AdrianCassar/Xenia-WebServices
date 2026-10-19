@@ -5,11 +5,11 @@ import {
   EnumerateLeaderboardsDto,
   EstimateRankDto,
   ReadLeaderboardsDto,
-} from 'src/infrastructure/persistance/dtos/ReadLeaderboardsDto';
+} from 'src/infrastructure/persistence/dtos/ReadLeaderboardsDto';
 import {
   EstimateRankResponseDto,
   LeaderboardsResponseDto,
-} from 'src/infrastructure/persistance/dtos/LeaderboardsResponseDto';
+} from 'src/infrastructure/persistence/dtos/LeaderboardsResponseDto';
 import { ReadLeaderboardsQuery } from 'src/application/queries/ReadLeaderboardsQuery';
 import { EnumerateLeaderboardsQuery } from 'src/application/queries/EnumerateLeaderboardsQuery';
 import { EstimateRankQuery } from 'src/application/queries/EstimateRankQuery';

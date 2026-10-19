@@ -1,4 +1,4 @@
-export interface PersistanceSettingsProps {
+export interface PersistenceSettingsProps {
   mongoURI: string;
   swagger_API: string;
   SSL: string;
@@ -10,6 +10,6 @@ export interface PersistanceSettingsProps {
   START_TIME: string;
 }
 
-export default interface IPersistanceSettings {
-  get(): PersistanceSettingsProps;
+export default interface IPersistenceSettings {
+  get(): PersistenceSettingsProps;
 }

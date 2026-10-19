@@ -14,7 +14,7 @@ import Player from 'src/domain/aggregates/Player';
 import Xuid from 'src/domain/value-objects/Xuid';
 import XStringVerify from 'src/domain/XStringVerify';
 import Session from 'src/domain/aggregates/Session';
-import PersistanceSettings from 'src/infrastructure/persistance/settings/PersistanceSettings';
+import PersistenceSettings from 'src/infrastructure/persistence/settings/PersistenceSettings';
 import UserSetting, {
   DashboardID,
   DefaultGamerpicKey,
@@ -27,7 +27,7 @@ const title_xml_cache = new Map<string, object>();
 // Title ID -> Tile ID -> Base64 Icon
 const gamerpics_cache = new Map<string, Map<string, string>>();
 
-const config = new PersistanceSettings().get();
+const config = new PersistenceSettings().get();
 
 interface PlayerInfo {
   gamertag: string;

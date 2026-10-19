@@ -3,7 +3,7 @@ import Leaderboard from '../../../domain/aggregates/Leaderboard';
 import { Leaderboard as LeaderboardModel } from '../models/LeaderboardSchema';
 
 @Injectable()
-export default class LeaderboardPersistanceMapper {
+export default class LeaderboardPersistenceMapper {
   public mapToDataModel(leaderboard: Leaderboard): LeaderboardModel {
     return {
       id: leaderboard.id.value,

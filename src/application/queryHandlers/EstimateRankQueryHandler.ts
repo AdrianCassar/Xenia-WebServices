@@ -4,7 +4,7 @@ import {
   IPlayersStatsRepository,
   IPlayersStatsSymbol,
 } from 'src/domain/repositories/IPlayersStatsRepository';
-import { EstimateRankResponseDto } from 'src/infrastructure/persistance/dtos/LeaderboardsResponseDto';
+import { EstimateRankResponseDto } from 'src/infrastructure/persistence/dtos/LeaderboardsResponseDto';
 import { EstimateRankQuery } from '../queries/EstimateRankQuery';
 
 @QueryHandler(EstimateRankQuery)

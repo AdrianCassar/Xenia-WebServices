@@ -16,7 +16,7 @@ import { CommandBus } from '@nestjs/cqrs';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
 import path, { join, normalize } from 'path';
 import fg, { Entry } from 'fast-glob';
-import PersistanceSettings from 'src/infrastructure/persistance/settings/PersistanceSettings';
+import PersistenceSettings from 'src/infrastructure/persistence/settings/PersistenceSettings';
 import { XStorageUploadCommand } from 'src/application/commands/XStorageUploadCommand';
 import { XStorageDownloadCommand } from 'src/application/commands/XStorageDownloadCommand';
 import { XStorageDeleteCommand } from 'src/application/commands/XStorageDeleteCommand';
@@ -100,7 +100,7 @@ export class XStorageController {
     this.logger.setContext(XStorageController.name);
   }
 
-  envs = new PersistanceSettings().get();
+  envs = new PersistenceSettings().get();
 
   user_file_size_limit: number = 8192; // 8 KB
   title_file_size_limit: number = 5242880; // 5 MB

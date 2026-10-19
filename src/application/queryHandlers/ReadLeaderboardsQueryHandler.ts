@@ -4,7 +4,7 @@ import {
   IPlayersStatsRepository,
   IPlayersStatsSymbol,
 } from 'src/domain/repositories/IPlayersStatsRepository';
-import { LeaderboardsResponseDto } from 'src/infrastructure/persistance/dtos/LeaderboardsResponseDto';
+import { LeaderboardsResponseDto } from 'src/infrastructure/persistence/dtos/LeaderboardsResponseDto';
 import { ReadLeaderboardsQuery } from '../queries/ReadLeaderboardsQuery';
 
 @QueryHandler(ReadLeaderboardsQuery)

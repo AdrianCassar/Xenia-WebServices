@@ -8,7 +8,7 @@ import { SessionDocument } from '../models/SessionSchema';
 import ISessionRepository from 'src/domain/repositories/ISessionRepository';
 import Session from 'src/domain/aggregates/Session';
 import SessionDomainMapper from '../mappers/SessionDomainMapper';
-import SessionPersistanceMapper from '../mappers/SessionPersistanceMapper';
+import SessionPersistenceMapper from '../mappers/SessionPersistenceMapper';
 import TitleId from 'src/domain/value-objects/TitleId';
 import SessionId from 'src/domain/value-objects/SessionId';
 import Xuid from 'src/domain/value-objects/Xuid';
@@ -25,7 +25,7 @@ export default class SessionRepository implements ISessionRepository {
     @InjectModel(Session.name)
     private SessionModel: Model<SessionDocument>,
     private readonly sessionDomainMapper: SessionDomainMapper,
-    private readonly sessionPersistanceMapper: SessionPersistanceMapper,
+    private readonly sessionPersistenceMapper: SessionPersistenceMapper,
   ) {
     this.logger.setContext(SessionRepository.name);
   }
@@ -36,7 +36,7 @@ export default class SessionRepository implements ISessionRepository {
         id: session.id.value,
         titleId: session.titleId.toString(),
       },
-      this.sessionPersistanceMapper.mapToDataModel(session, new Date()),
+      this.sessionPersistenceMapper.mapToDataModel(session, new Date()),
       {
         upsert: true,
         returnDocument: 'after',

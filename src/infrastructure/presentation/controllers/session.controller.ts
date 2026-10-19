@@ -65,7 +65,7 @@ import {
   MatchmakingQuery,
   XboxLiveSubmissionProjectXML,
 } from 'src/domain/value-objects/XLast';
-import { WriteStatsDto } from 'src/infrastructure/persistance/dtos/WriteStatsDto';
+import { WriteStatsDto } from 'src/infrastructure/persistence/dtos/WriteStatsDto';
 import { WriteStatsCommand } from 'src/application/commands/WriteStatsCommand';
 
 @ApiTags('Sessions')

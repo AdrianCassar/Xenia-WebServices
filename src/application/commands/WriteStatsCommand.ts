@@ -1,4 +1,4 @@
-import { WriteStatsDto } from 'src/infrastructure/persistance/dtos/WriteStatsDto';
+import { WriteStatsDto } from 'src/infrastructure/persistence/dtos/WriteStatsDto';
 
 export class WriteStatsCommand {
   constructor(public readonly stats: WriteStatsDto) {}

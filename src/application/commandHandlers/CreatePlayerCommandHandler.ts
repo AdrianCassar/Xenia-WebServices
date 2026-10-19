@@ -9,7 +9,7 @@ import IPlayerRepository, {
 import {
   Session,
   SessionDocument,
-} from 'src/infrastructure/persistance/models/SessionSchema';
+} from 'src/infrastructure/persistence/models/SessionSchema';
 import { CreatePlayerCommand } from '../commands/CreatePlayerCommand';
 
 @CommandHandler(CreatePlayerCommand)

@@ -2,12 +2,12 @@ import {
   EnumerateLeaderboardsDto,
   EstimateRankDto,
   ReadLeaderboardsDto,
-} from 'src/infrastructure/persistance/dtos/ReadLeaderboardsDto';
+} from 'src/infrastructure/persistence/dtos/ReadLeaderboardsDto';
 import {
   EstimateRankResponseDto,
   LeaderboardsResponseDto,
-} from 'src/infrastructure/persistance/dtos/LeaderboardsResponseDto';
-import { WriteStatsDto } from 'src/infrastructure/persistance/dtos/WriteStatsDto';
+} from 'src/infrastructure/persistence/dtos/LeaderboardsResponseDto';
+import { WriteStatsDto } from 'src/infrastructure/persistence/dtos/WriteStatsDto';
 
 export const IPlayersStatsSymbol = Symbol('IPlayersStatsRepository');
 
