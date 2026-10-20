@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Netplay Compatibility - Xenia Web Services</title>
+
+        <link rel="shortcut icon" type="image/png" href="assets/favicon.png" />
+        <link rel="shortcut icon" type="image/svg+xml" sizes="any" href="assets/favicon.svg" />
+        <link rel="apple-touch-icon" type="image/png" href="assets/favicon.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Netplay Compatibility" />
+        <meta name="theme-color" content="#111315" />
+
+        <!-- OG Meta Tags -->
+        <meta property="og:url" content="https://xenia-netplay-2a0298c0e3f4.herokuapp.com/compatibility.html" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Xenia Netplay Compatibility" />
+        <meta property="og:description" content="Games working over Xbox Live and Systemlink in Xenia Canary Netplay" />
+        <meta property="og:image" content="https://xenia-netplay-2a0298c0e3f4.herokuapp.com/assets/favicon.png" />
+
+        <link rel="stylesheet" href="css/style.css">
+
+        <script type="module" src="js/compatibility.js"></script>
+    </head>
+    <body>
+      <header class="site-header">
+        <div class="brand">
+          <img class="brand-logo" src="assets/xbox.svg" alt="" width="40" height="40" />
+          <div>
+            <h1>Netplay Compatibility</h1>
+            <p class="tagline">Games working over netplay and Systemlink in Xenia</p>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <a href="./">Sessions</a>
+          <a href="https://github.com/AdrianCassar/xenia-canary" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/AdrianCassar/xenia-canary/releases" target="_blank" rel="noopener">Releases</a>
+          <a href="https://github.com/AdrianCassar/xenia-canary/wiki" target="_blank" rel="noopener">Netplay Wiki</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="status-bar" aria-label="Compatibility stats">
+          <div class="stats compat-stats">
+            <div class="stat">
+              <span class="stat-value" id="total_count">–</span>
+              <span class="stat-label">Games</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="public_count">–</span>
+              <span class="stat-label">Public</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="local_count">–</span>
+              <span class="stat-label">Tested Locally</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="only_local_count">–</span>
+              <span class="stat-label">Only Local</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="systemlink_count">–</span>
+              <span class="stat-label">Systemlink</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="compat-intro">
+          <p>
+            Games that are working in some form of netplay, Xbox Live or Systemlink. These games may not be fully functional.
+            A game is added when two or more players can connect to each other and enter in-game together.
+          </p>
+          <p>
+            Not all regions, editions, DLCs and versions are compatible with each other. Games may require title updates,
+            compatibility packs or licenses. Make sure the <b>media ID</b> and <b>version</b> match for all players.
+            Game configurations can be found
+            <a href="https://github.com/A1eNaz/Xenia-Game-Settings/wiki" target="_blank" rel="noopener">here</a>.
+          </p>
+        </section>
+
+        <section class="compat-controls" aria-label="Filter games">
+          <input id="search" class="search" type="search" placeholder="Search by name or title ID" autocomplete="off" aria-label="Search games" />
+          <div class="filters" role="group" aria-label="Filter by status">
+            <button class="filter is-active" data-filter="all" aria-pressed="true">All</button>
+            <button class="filter" data-filter="public" aria-pressed="false">Public</button>
+            <button class="filter" data-filter="local" aria-pressed="false">Tested Locally</button>
+            <button class="filter" data-filter="onlyLocal" aria-pressed="false">Only Local</button>
+            <button class="filter" data-filter="systemlink" aria-pressed="false">Systemlink</button>
+          </div>
+          <span class="result-count" id="result_count" aria-live="polite"></span>
+        </section>
+
+        <section class="compat-table-wrap">
+          <table class="compat-table">
+            <thead>
+              <tr>
+                <th scope="col">Game</th>
+                <th scope="col" class="status-col">Public</th>
+                <th scope="col" class="status-col">Tested Locally</th>
+                <th scope="col" class="status-col">Only Local</th>
+                <th scope="col" class="status-col">Systemlink</th>
+                <th scope="col">Notes</th>
+              </tr>
+            </thead>
+            <tbody id="compat_rows">
+              <tr><td colspan="6" class="compat-loading">Loading…</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="legend" aria-label="Legend">
+          <div>
+            <h2>Status</h2>
+            <ul>
+              <li><span class="status working" aria-hidden="true">✓</span> Working</li>
+              <li><span class="status partial" aria-hidden="true">!</span> Working with issues</li>
+              <li><span class="status broken" aria-hidden="true">✕</span> Not working</li>
+            </ul>
+          </div>
+          <div>
+            <h2>Columns</h2>
+            <dl>
+              <dt>Public</dt><dd>Confirmed working on public servers.</dd>
+              <dt>Tested Locally</dt><dd>Confirmed working on a local server, needs testing on a public server.</dd>
+              <dt>Only Local</dt><dd>Has issues using a public server, but works on a local setup. <a href="https://www.radmin-vpn.com/" target="_blank" rel="noopener">Radmin VPN</a> may or may not work.</dd>
+              <dt>Systemlink</dt><dd>Confirmed working over Systemlink.</dd>
+            </dl>
+          </div>
+          <div>
+            <h2>Server dependency</h2>
+            <p>Games from these publishers usually require a dedicated server: Activision, Electronic Arts (EA) and Ubisoft.</p>
+          </div>
+        </section>
+      </main>
+    </body>
+</html>

@@ -1,0 +1,5030 @@
+[
+  {
+    "name": "0 Day Attack on Earth",
+    "titleId": "584109B7",
+    "artwork": "584109B7",
+    "local": "working"
+  },
+  {
+    "name": "007: Quantum of Solace",
+    "titleId": "415607FF",
+    "artwork": "415607FF",
+    "public": "partial",
+    "systemlink": "partial",
+    "comments": "Patch required for systemlink.\n\nSystemlink requires a server.",
+    "others": "[Systemlink Patch](https://github.com/AdrianCassar/Xenia-WebServices/blob/main/patches/415607FF%20-%20Quantum%20of%20Solace.patch.toml)"
+  },
+  {
+    "name": "0-D Beat Drop",
+    "titleId": "584109A8",
+    "artwork": "584109A8",
+    "local": "working"
+  },
+  {
+    "name": "1942: Joint Strike",
+    "titleId": "584108AA",
+    "artwork": "584108AA",
+    "onlyLocal": "working"
+  },
+  {
+    "name": "3D Ultra Minigolf Adventures",
+    "titleId": "58410841",
+    "artwork": "58410841",
+    "public": "working"
+  },
+  {
+    "name": "3D Ultra Minigolf Adventures 2",
+    "titleId": "58410A3B",
+    "artwork": "58410A3B",
+    "local": "working"
+  },
+  {
+    "name": "50 Cent: Blood on the Sand",
+    "titleId": "5451083B",
+    "artwork": "5451083B",
+    "local": "working"
+  },
+  {
+    "name": "A Kingdom for Keflings",
+    "titleId": "584108DB",
+    "artwork": "584108DB",
+    "local": "working"
+  },
+  {
+    "name": "A World of Keflings",
+    "titleId": "584109DB",
+    "artwork": "584109DB",
+    "local": "working"
+  },
+  {
+    "name": "Abyss Odyssey",
+    "titleId": "58411427",
+    "artwork": "58411427",
+    "local": "working"
+  },
+  {
+    "name": "ACE COMBAT 6: Fires of Liberation",
+    "titleId": "4E4D07D1",
+    "artwork": "4E4D07D1",
+    "public": "working",
+    "comments": "`ac6_ground_fix = true`\n\nPlayer and ranked works."
+  },
+  {
+    "name": "Ace Combat: Assault Horizon",
+    "titleId": "4E4D081C",
+    "artwork": "4E4D081C",
+    "local": "working"
+  },
+  {
+    "name": "Aces of the Galaxy",
+    "titleId": "58410886",
+    "artwork": "58410886",
+    "local": "working"
+  },
+  {
+    "name": "Aegis Wing",
+    "titleId": "5841083C",
+    "artwork": "5841083C",
+    "public": "working"
+  },
+  {
+    "name": "Age of Booty",
+    "titleId": "584108F0",
+    "artwork": "584108F0",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Air Conflicts: Pacific Carriers",
+    "titleId": "413307D6",
+    "artwork": "413307D6",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Air Conflicts: Secret Wars",
+    "titleId": "4B5907E0",
+    "artwork": "4B5907E0",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Air Conflicts: Vietnam",
+    "titleId": "413307D9",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Alien Breed 2: Assault",
+    "titleId": "58410A22",
+    "artwork": "58410A22",
+    "local": "working"
+  },
+  {
+    "name": "Alien Breed 3: Descent",
+    "titleId": "58410AA3",
+    "artwork": "58410AA3",
+    "local": "working"
+  },
+  {
+    "name": "Alien Breed Episode 1",
+    "titleId": "58410964",
+    "artwork": "58410964",
+    "public": "working"
+  },
+  {
+    "name": "Alien Hominid HD",
+    "titleId": "58410846",
+    "artwork": "58410846",
+    "local": "working"
+  },
+  {
+    "name": "Aliens Vs Predator",
+    "titleId": "5345082A",
+    "artwork": "5345082A",
+    "local": "working",
+    "comments": "`render_target_path_d3d12 = \"rov\"`"
+  },
+  {
+    "name": "Aliens: Colonial Marines",
+    "titleId": "5345080C",
+    "artwork": "5345080C",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\nGraphical issues"
+  },
+  {
+    "name": "All Pro Football 2K8",
+    "titleId": "54540807",
+    "artwork": "54540807",
+    "local": "working",
+    "comments": "Gameplay is slow-mo.\n\nPlayer and Ranked works."
+  },
+  {
+    "name": "Altered Beast",
+    "titleId": "584109A2",
+    "artwork": "584109A2",
+    "onlyLocal": "working"
+  },
+  {
+    "name": "America's Army: True Soldiers",
+    "titleId": "55530808",
+    "artwork": "55530808",
+    "systemlink": "partial"
+  },
+  {
+    "name": "Anarchy Reigns",
+    "titleId": "5345083F",
+    "artwork": "5345083F",
+    "onlyLocal": "working"
+  },
+  {
+    "name": "Apache: Air Assault",
+    "titleId": "4156088B",
+    "artwork": "4156088B",
+    "public": "working"
+  },
+  {
+    "name": "Apples to Apples",
+    "titleId": "58410B47",
+    "artwork": "58410B47",
+    "local": "working",
+    "comments": "Optional Avatars"
+  },
+  {
+    "name": "Arcana Heart 3",
+    "titleId": "415707DC",
+    "artwork": "415707DC",
+    "local": "working"
+  },
+  {
+    "name": "Are You Smarter Than a 5th Grader",
+    "titleId": "58410900",
+    "artwork": "58410900",
+    "local": "working"
+  },
+  {
+    "name": "Arkadian Warriors",
+    "titleId": "58410807",
+    "artwork": "58410807",
+    "public": "working"
+  },
+  {
+    "name": "Arkanoid Live!",
+    "titleId": "58410991",
+    "artwork": "58410991",
+    "local": "working"
+  },
+  {
+    "name": "Armored Core V",
+    "titleId": "4E4D0853",
+    "artwork": "4E4D0853",
+    "public": "partial",
+    "comments": "`protect_zero = false`\n\nConnecting unstable."
+  },
+  {
+    "name": "Armored Core: For Answer",
+    "titleId": "465307DA",
+    "artwork": "465307DA",
+    "local": "working",
+    "systemlink": "partial",
+    "comments": "Systemlink requires a server."
+  },
+  {
+    "name": "Armored Core: Verdict Day",
+    "titleId": "4E4D0864",
+    "artwork": "4E4D0864",
+    "local": "partial",
+    "comments": "Connecting unstable."
+  },
+  {
+    "name": "Armoured Core 4",
+    "titleId": "465307D6",
+    "artwork": "465307D6",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Ashes Cricket 2009",
+    "titleId": "434D082B",
+    "artwork": "434D082B",
+    "local": "working"
+  },
+  {
+    "name": "Assault Heroes",
+    "titleId": "584107FE",
+    "artwork": "584107FE",
+    "local": "working"
+  },
+  {
+    "name": "Awesomenauts",
+    "titleId": "58410B5A",
+    "artwork": "58410B5A",
+    "local": "working"
+  },
+  {
+    "name": "Backbreaker",
+    "titleId": "464F07DA",
+    "artwork": "464F07DA",
+    "local": "working",
+    "systemlink": "partial"
+  },
+  {
+    "name": "Backbreaker Vengeance",
+    "titleId": "58410B39",
+    "artwork": "58410B39",
+    "onlyLocal": "working"
+  },
+  {
+    "name": "Baja: Edge of Control",
+    "titleId": "545107EF",
+    "artwork": "545107EF",
+    "local": "working",
+    "systemlink": "working"
+  },
+  {
+    "name": "Band of Bugs",
+    "titleId": "5841082F",
+    "artwork": "5841082F",
+    "local": "working"
+  },
+  {
+    "name": "Bangai-O HD: Missile Fury",
+    "titleId": "58410AF2",
+    "artwork": "58410AF2",
+    "local": "working",
+    "systemlink": "working"
+  },
+  {
+    "name": "Bankshot Billiards 2",
+    "titleId": "584107EC",
+    "artwork": "584107EC",
+    "public": "working"
+  },
+  {
+    "name": "Battle Fantasia",
+    "titleId": "415707D4",
+    "artwork": "415707D4",
+    "local": "working"
+  },
+  {
+    "name": "Battle vs. Chess",
+    "titleId": "5A4507D1",
+    "artwork": "5A4507D1",
+    "local": "working",
+    "systemlink": "partial"
+  },
+  {
+    "name": "BattleBlock Theater",
+    "titleId": "58410A30",
+    "artwork": "58410A30",
+    "public": "working"
+  },
+  {
+    "name": "Battlestar Galactica",
+    "titleId": "58410861",
+    "artwork": "58410861",
+    "local": "working"
+  },
+  {
+    "name": "Battlestations Pacific",
+    "titleId": "534307E9",
+    "artwork": "534307E9",
+    "local": "working"
+  },
+  {
+    "name": "Battlestations: Midway",
+    "titleId": "534307D9",
+    "artwork": "534307D9",
+    "local": "working"
+  },
+  {
+    "name": "Battlezone",
+    "titleId": "58410850",
+    "artwork": "58410850",
+    "local": "working"
+  },
+  {
+    "name": "Beat'n Groovy",
+    "titleId": "5841087E",
+    "artwork": "5841087E",
+    "local": "working"
+  },
+  {
+    "name": "Beautiful Katamari",
+    "titleId": "4E4D07DC",
+    "artwork": "4E4D07DC",
+    "public": "working"
+  },
+  {
+    "name": "Beijing 2008",
+    "titleId": "534507F4",
+    "artwork": "534507F4",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Bejeweled Blitz Live",
+    "titleId": "58410A57",
+    "artwork": "58410A57",
+    "local": "working"
+  },
+  {
+    "name": "Bellator: MMA Onslaught",
+    "titleId": "58411203",
+    "artwork": "58411203",
+    "local": "working",
+    "comments": "Ranked doesn't work."
+  },
+  {
+    "name": "Binary Domain",
+    "titleId": "5345085C",
+    "artwork": "5345085C",
+    "local": "working",
+    "comments": "Unplayable due to broken graphics."
+  },
+  {
+    "name": "Bionic Commando",
+    "titleId": "434307DD",
+    "artwork": "434307DD",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "BioShock 2",
+    "titleId": "54540861",
+    "artwork": "54540861",
+    "public": "working"
+  },
+  {
+    "name": "Blacklight: Tango Down",
+    "titleId": "58410A5B",
+    "artwork": "58410A5B",
+    "local": "working"
+  },
+  {
+    "name": "BlackSite: Area 51",
+    "titleId": "4D5707D7",
+    "artwork": "4D5707D7",
+    "local": "working"
+  },
+  {
+    "name": "Blades of Time",
+    "titleId": "4B4E0838",
+    "artwork": "4B4E0838",
+    "public": "working"
+  },
+  {
+    "name": "BlazBlue Calamity",
+    "titleId": "415807D5",
+    "artwork": "415807D5",
+    "local": "working"
+  },
+  {
+    "name": "BlazBlue: Continuum Shift",
+    "titleId": "415707DA",
+    "artwork": "415707DA",
+    "local": "working"
+  },
+  {
+    "name": "BlazBlue: Continuum Shift Extend",
+    "titleId": "415707DD",
+    "artwork": "415707DD",
+    "local": "working"
+  },
+  {
+    "name": "Blazing Angels 2: Secret Missions of WWII",
+    "titleId": "555307FE",
+    "artwork": "555307FE",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Blazing Angels: Squadrons of WWII",
+    "titleId": "555307DB",
+    "artwork": "555307DB",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Bliss Island",
+    "titleId": "5841086C",
+    "artwork": "5841086C",
+    "local": "working"
+  },
+  {
+    "name": "Blood Bowl",
+    "titleId": "464507D1",
+    "artwork": "464507D1",
+    "local": "working"
+  },
+  {
+    "name": "Blood Drive",
+    "titleId": "4156088D",
+    "artwork": "4156088D",
+    "local": "working"
+  },
+  {
+    "name": "Bloody Good Time",
+    "titleId": "584109B3",
+    "artwork": "584109B3",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Blur",
+    "titleId": "41560845",
+    "artwork": "41560845",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Blur 2 (Unreleased Game)",
+    "systemlink": "partial"
+  },
+  {
+    "name": "Bodycount",
+    "titleId": "434D0839",
+    "artwork": "434D0839",
+    "local": "working"
+  },
+  {
+    "name": "Bomberman Battlefest",
+    "titleId": "584109B2",
+    "artwork": "584109B2",
+    "local": "working"
+  },
+  {
+    "name": "Bomberman LIVE",
+    "titleId": "5841083F",
+    "artwork": "5841083F",
+    "public": "working"
+  },
+  {
+    "name": "Boogie Bunnies",
+    "titleId": "584108D3",
+    "artwork": "584108D3",
+    "local": "working"
+  },
+  {
+    "name": "Borderlands",
+    "titleId": "545407E7",
+    "artwork": "545407E7",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Borderlands 2",
+    "titleId": "5454087C",
+    "artwork": "5454087C",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Borderlands: The Pre-Sequel",
+    "titleId": "545408B4",
+    "artwork": "545408B4",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Brain Challenge",
+    "titleId": "584108AE",
+    "artwork": "584108AE",
+    "local": "working"
+  },
+  {
+    "name": "Breach",
+    "titleId": "58410A68",
+    "artwork": "58410A68",
+    "public": "working"
+  },
+  {
+    "name": "Brothers in Arms: Hell's Highway",
+    "titleId": "555307EA",
+    "artwork": "555307EA",
+    "local": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "Brutal Legend",
+    "titleId": "454108C5",
+    "artwork": "454108C5",
+    "local": "working"
+  },
+  {
+    "name": "Buku Sudoku",
+    "titleId": "58410820",
+    "artwork": "58410820",
+    "local": "working"
+  },
+  {
+    "name": "Bulletstorm",
+    "titleId": "454108EF",
+    "artwork": "454108EF",
+    "local": "working"
+  },
+  {
+    "name": "BurgerTime World Tour",
+    "titleId": "58410B90",
+    "artwork": "58410B90",
+    "public": "working"
+  },
+  {
+    "name": "Call of Duty 2",
+    "titleId": "415607D1",
+    "artwork": "415607D1",
+    "public": "partial",
+    "systemlink": "partial",
+    "comments": "Systemlink works without a server.\n\nPatch required for systemlink. \n\nPlayer & Ranked works.",
+    "others": "[Systemlink Patch](https://github.com/AdrianCassar/Xenia-WebServices/blob/main/patches/415607D1%20-%20Call%20of%20Duty%202.patch.toml)\n\n[Deathmatch](https://www.youtube.com/watch?v=DR9Op_f1UUw)"
+  },
+  {
+    "name": "Call of Duty 3",
+    "titleId": "415607E1",
+    "artwork": "415607E1",
+    "public": "partial",
+    "systemlink": "working",
+    "comments": "Systemlink requires a server (MAC).",
+    "others": "Grass fix patch:\n\n[Call Of Duty 3 MP Patch](https://github.com/xenia-canary/game-patches/blob/main/patches/415607E1%20-%20Call%20Of%20Duty%203%20MP.patch.toml)\n\n[Call Of Duty 3 MP (TU3) Patch](https://github.com/xenia-canary/game-patches/blob/main/patches/415607E1%20-%20Call%20Of%20Duty%203%20MP%20(TU3).patch.toml)"
+  },
+  {
+    "name": "Call of Duty 4: Modern Warfare",
+    "titleId": "415607E6",
+    "artwork": "415607E6",
+    "public": "working",
+    "systemlink": "partial",
+    "comments": "Patch required for systemlink.\n\nSystemlink works without a server.",
+    "others": "[Systemlink Patch](https://github.com/AdrianCassar/Xenia-WebServices/blob/main/patches/415607E6%20-%20Call%20of%20Duty%204%20Modern%20Warfare.patch.toml)\n\n[Systemlink TU 4 Patch](https://github.com/AdrianCassar/Xenia-WebServices/blob/main/patches/415607E6%20-%20Call%20of%20Duty%204%20Modern%20Warfare%20(TU%204).patch.toml)"
+  },
+  {
+    "name": "Call of Duty: Advanced Warfare",
+    "titleId": "41560914",
+    "artwork": "41560914",
+    "public": "broken",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\nMultiplayer, Exo Zombies, and Exo Survival."
+  },
+  {
+    "name": "Call of Duty: Black Ops",
+    "titleId": "41560855",
+    "artwork": "41560855",
+    "public": "broken",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\nMultiplayer and Zombies work."
+  },
+  {
+    "name": "Call of Duty: Black Ops II",
+    "titleId": "415608F2",
+    "artwork": "415608F2",
+    "public": "broken",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Call of Duty: Black Ops III",
+    "titleId": "41560929",
+    "artwork": "41560929",
+    "public": "broken",
+    "systemlink": "broken",
+    "comments": "Systemlink requires a server."
+  },
+  {
+    "name": "Call of Duty: Classic",
+    "titleId": "58410957",
+    "artwork": "58410957",
+    "local": "working"
+  },
+  {
+    "name": "Call of Duty: Ghosts",
+    "titleId": "415608FC",
+    "artwork": "415608FC",
+    "public": "broken",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\nMultiplayer and Extinction.\n\nRecommended Content:\nCompatibility Pack 1\nCompatibility Pack 2\nTU 17"
+  },
+  {
+    "name": "Call of Duty: Modern Warfare 2",
+    "titleId": "41560817",
+    "artwork": "41560817",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Call of Duty: Modern Warfare 3",
+    "titleId": "415608CB",
+    "artwork": "415608CB",
+    "public": "broken",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Call of Duty: World at War",
+    "titleId": "4156081C",
+    "artwork": "4156081C",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\nCO-OP, Multiplayer and Zombies."
+  },
+  {
+    "name": "Call of Juarez",
+    "titleId": "555307FA",
+    "artwork": "555307FA",
+    "local": "working",
+    "systemlink": "working"
+  },
+  {
+    "name": "Call of Juarez: Bound in Blood",
+    "titleId": "5553081C",
+    "artwork": "5553081C",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Call of Juarez: The Cartel",
+    "titleId": "55530874",
+    "artwork": "55530874",
+    "local": "working"
+  },
+  {
+    "name": "Capcom Arcade Cabinet",
+    "titleId": "58411259",
+    "artwork": "58411259",
+    "local": "working"
+  },
+  {
+    "name": "Carcassonne",
+    "titleId": "58410840",
+    "artwork": "58410840",
+    "public": "working"
+  },
+  {
+    "name": "Castle Crashers",
+    "titleId": "584108B7",
+    "artwork": "584108B7",
+    "local": "working"
+  },
+  {
+    "name": "CastleStorm",
+    "titleId": "5841129A",
+    "artwork": "5841129A",
+    "local": "working"
+  },
+  {
+    "name": "Castlevania: Harmony of Despair",
+    "titleId": "58410A7A",
+    "artwork": "58410A7A",
+    "local": "working"
+  },
+  {
+    "name": "Catan",
+    "titleId": "5841083E",
+    "artwork": "5841083E",
+    "public": "working"
+  },
+  {
+    "name": "CellFactor: Psychokinetic Wars",
+    "titleId": "58410921",
+    "artwork": "58410921",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Championship Manager 2007",
+    "titleId": "534307D7",
+    "artwork": "534307D7",
+    "local": "working"
+  },
+  {
+    "name": "Chaotic Shadow Warriors",
+    "titleId": "4156085A",
+    "artwork": "4156085A",
+    "local": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Chessmaster Live",
+    "titleId": "58410866",
+    "artwork": "58410866",
+    "local": "working"
+  },
+  {
+    "name": "Chivalry: Medieval Warfare",
+    "titleId": "58411451",
+    "artwork": "58411451",
+    "local": "working"
+  },
+  {
+    "name": "Chromehounds",
+    "titleId": "534507D4",
+    "artwork": "534507D4",
+    "local": "partial",
+    "comments": "Requires a server."
+  },
+  {
+    "name": "Civilization Revolution",
+    "titleId": "545407E5",
+    "artwork": "545407E5",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\nPlayer works, ranked untested."
+  },
+  {
+    "name": "Cloning Clyde",
+    "titleId": "584107E7",
+    "artwork": "584107E7",
+    "public": "working"
+  },
+  {
+    "name": "Cobalt",
+    "titleId": "58411448",
+    "artwork": "58411448",
+    "local": "working"
+  },
+  {
+    "name": "College Hoops 2K6",
+    "titleId": "545407D2",
+    "artwork": "545407D2",
+    "local": "working"
+  },
+  {
+    "name": "Commanders: Attack of the Genos",
+    "titleId": "58410821",
+    "artwork": "58410821",
+    "local": "working"
+  },
+  {
+    "name": "Condemned 2: Bloodshot",
+    "titleId": "534507EF",
+    "artwork": "534507EF",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\nPlayer works, ranked untested."
+  },
+  {
+    "name": "Conflict: Denied Ops",
+    "titleId": "534307D3",
+    "artwork": "534307D3",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Multiplayer & CO-OP systemlink works without a server.\n\n`readback_resolve = true`"
+  },
+  {
+    "name": "Contra",
+    "titleId": "58410818",
+    "artwork": "58410818",
+    "public": "working"
+  },
+  {
+    "name": "Counter-Strike: GO",
+    "titleId": "5841125A",
+    "artwork": "5841125A",
+    "public": "working"
+  },
+  {
+    "name": "Counter-Strike: GO - Beta",
+    "titleId": "5841125A",
+    "artwork": "5841125A",
+    "public": "working"
+  },
+  {
+    "name": "Crackdown",
+    "titleId": "4D5307DC",
+    "artwork": "4D5307DC",
+    "systemlink": "partial",
+    "comments": "Systemlink works without a server.\n\nGame runs very slow."
+  },
+  {
+    "name": "Crackdown 2",
+    "titleId": "4D5308BC",
+    "artwork": "4D5308BC",
+    "local": "working"
+  },
+  {
+    "name": "Crash Time 4",
+    "titleId": "445407D9",
+    "artwork": "445407D9",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Crash Time 5",
+    "titleId": "445407E1",
+    "artwork": "445407E1",
+    "local": "working"
+  },
+  {
+    "name": "Crazy Mouse",
+    "titleId": "5841089B",
+    "artwork": "5841089B",
+    "local": "working"
+  },
+  {
+    "name": "Crimson Alliance",
+    "titleId": "58410983",
+    "artwork": "58410983",
+    "local": "working"
+  },
+  {
+    "name": "Crysis 2",
+    "titleId": "454108E3",
+    "artwork": "454108E3",
+    "local": "working"
+  },
+  {
+    "name": "Culdcept Saga",
+    "titleId": "424107DD",
+    "artwork": "424107DD",
+    "local": "working"
+  },
+  {
+    "name": "Cyberball 2072",
+    "titleId": "58410842",
+    "artwork": "58410842",
+    "local": "working"
+  },
+  {
+    "name": "Damage Inc.: Pacific Squadron WWII",
+    "titleId": "4D5907D3",
+    "artwork": "4D5907D3",
+    "local": "working"
+  },
+  {
+    "name": "Damnation",
+    "titleId": "434D0806",
+    "artwork": "434D0806",
+    "public": "working"
+  },
+  {
+    "name": "Dance Dance Revolotuion Universe 2",
+    "titleId": "4B4E07E7",
+    "artwork": "4B4E07E7",
+    "local": "working"
+  },
+  {
+    "name": "Dance Dance Revolution Universe",
+    "titleId": "4B4E07DC",
+    "artwork": "4B4E07DC",
+    "local": "working"
+  },
+  {
+    "name": "Dark Messiah of Might and Magic",
+    "titleId": "55530804",
+    "artwork": "55530804",
+    "local": "working"
+  },
+  {
+    "name": "Dark Sector",
+    "titleId": "445007D4",
+    "artwork": "445007D4",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\nPlayer & Ranked works"
+  },
+  {
+    "name": "Darkstalkers Resurrection",
+    "titleId": "5841122F",
+    "artwork": "5841122F",
+    "local": "working",
+    "comments": "`enable_host_guest_stack_synchronization = false`"
+  },
+  {
+    "name": "Darwinia+",
+    "titleId": "58410822",
+    "artwork": "58410822",
+    "local": "working"
+  },
+  {
+    "name": "Days of Thunder: Arcade",
+    "titleId": "58410A0F",
+    "artwork": "58410A0F",
+    "local": "working",
+    "comments": "Buggy"
+  },
+  {
+    "name": "Daytona USA",
+    "titleId": "58410B1D",
+    "artwork": "58410B1D",
+    "local": "working"
+  },
+  {
+    "name": "Dead Island",
+    "titleId": "4B4D07DF",
+    "artwork": "4B4D07DF",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Dead Island: Riptide",
+    "titleId": "4B4D07F2",
+    "artwork": "4B4D07F2",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Dead or Alive 4",
+    "titleId": "544307D1",
+    "artwork": "544307D1",
+    "local": "working"
+  },
+  {
+    "name": "Dead or Alive 5 Ultimate/Last Round",
+    "titleId": "4B5607E8",
+    "artwork": "4B5607E8",
+    "local": "working"
+  },
+  {
+    "name": "Dead or Alive Xtreme 2",
+    "titleId": "544307D2",
+    "artwork": "544307D2",
+    "local": "working",
+    "comments": "Unplayable due to broken graphics."
+  },
+  {
+    "name": "Dead Rising 2",
+    "titleId": "434307EC",
+    "artwork": "434307EC",
+    "local": "working",
+    "comments": "CO-OP session is created once Katey is in the safe room."
+  },
+  {
+    "name": "Dead Rising 2: Case West",
+    "titleId": "58410B00",
+    "artwork": "58410B00",
+    "public": "working"
+  },
+  {
+    "name": "Dead Rising 2: Case West (Oct 18, 2010 Prototype)",
+    "titleId": "58410B00",
+    "artwork": "58410B00",
+    "public": "working"
+  },
+  {
+    "name": "Dead Rising 2: Off the Record",
+    "titleId": "4343081F",
+    "artwork": "4343081F",
+    "local": "working"
+  },
+  {
+    "name": "Deadfall Adventures",
+    "titleId": "354807D5",
+    "artwork": "354807D5",
+    "local": "working"
+  },
+  {
+    "name": "Deadliest Warrior",
+    "titleId": "58410A69",
+    "artwork": "58410A69",
+    "local": "working"
+  },
+  {
+    "name": "Deadliest Warrior: Battlegrounds",
+    "titleId": "58411490",
+    "artwork": "58411490",
+    "local": "working"
+  },
+  {
+    "name": "Deadliest Warrior: Legends",
+    "titleId": "58410B5C",
+    "artwork": "58410B5C",
+    "local": "working"
+  },
+  {
+    "name": "Death By Cube",
+    "titleId": "584109C7",
+    "artwork": "584109C7",
+    "local": "working"
+  },
+  {
+    "name": "Death Tank",
+    "titleId": "58410910",
+    "artwork": "58410910",
+    "public": "working"
+  },
+  {
+    "name": "Deathsmiles II X",
+    "titleId": "435A07D9",
+    "artwork": "435A07D9",
+    "local": "working",
+    "comments": "`protect_zero = false`\n\nStuttering"
+  },
+  {
+    "name": "Deep Black: Episode 1",
+    "titleId": "584111E2",
+    "artwork": "584111E2",
+    "local": "working"
+  },
+  {
+    "name": "Defenders",
+    "titleId": "58410823",
+    "artwork": "58410823",
+    "local": "working"
+  },
+  {
+    "name": "Defenders of Ardania",
+    "titleId": "58410B37",
+    "artwork": "58410B37",
+    "local": "working"
+  },
+  {
+    "name": "Diablo III",
+    "titleId": "394F07D1",
+    "artwork": "394F07D1",
+    "local": "partial",
+    "systemlink": "working",
+    "comments": "Joining host while menus doesn't work."
+  },
+  {
+    "name": "Diablo III: Reaper of Souls",
+    "titleId": "394F07D4",
+    "artwork": "394F07D4",
+    "local": "working",
+    "systemlink": "partial"
+  },
+  {
+    "name": "Diner Dash",
+    "titleId": "584108B5",
+    "artwork": "584108B5",
+    "local": "working"
+  },
+  {
+    "name": "DiRT",
+    "titleId": "434D07DB",
+    "artwork": "434D07DB",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.",
+    "others": "[Race](https://www.youtube.com/watch?v=udMf-MUzpEc)"
+  },
+  {
+    "name": "Dirt 2",
+    "titleId": "434D0819",
+    "artwork": "434D0819",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Dirt 3",
+    "titleId": "434D083D",
+    "artwork": "434D083D",
+    "local": "working",
+    "systemlink": "working",
+    "others": "VIP Pass required for Xbox Live"
+  },
+  {
+    "name": "Dirt: Showdown",
+    "titleId": "434D0845",
+    "artwork": "434D0845",
+    "local": "working"
+  },
+  {
+    "name": "Discs of Tron",
+    "titleId": "5841088F",
+    "artwork": "5841088F",
+    "public": "working"
+  },
+  {
+    "name": "Disney Infinity 2.0",
+    "titleId": "4256082C",
+    "artwork": "4256082C",
+    "local": "working"
+  },
+  {
+    "name": "Dollar Dash",
+    "titleId": "58411283",
+    "artwork": "58411283",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Domino Master",
+    "titleId": "58410899",
+    "artwork": "58410899",
+    "local": "working"
+  },
+  {
+    "name": "Don Bradman Cricket 14",
+    "titleId": "484507D8",
+    "artwork": "484507D8",
+    "local": "working"
+  },
+  {
+    "name": "Don King Presents: Prizefighter",
+    "titleId": "545407DC",
+    "artwork": "545407DC",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Doom 3: BFG Edition",
+    "titleId": "425307F1",
+    "artwork": "425307F1",
+    "public": "partial",
+    "comments": "DOOM works.\nDOOM 2 requires overlapped networking.\nDOOM 3 is buggy."
+  },
+  {
+    "name": "DOOM II",
+    "titleId": "584109B6",
+    "artwork": "584109B6",
+    "local": "working"
+  },
+  {
+    "name": "Doritos Crash Course",
+    "titleId": "58410A71",
+    "artwork": "58410A71",
+    "local": "working"
+  },
+  {
+    "name": "Double D Dodgeball",
+    "titleId": "584108EF",
+    "artwork": "584108EF",
+    "local": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "Double Dragon",
+    "titleId": "5841085F",
+    "artwork": "5841085F",
+    "local": "working"
+  },
+  {
+    "name": "Dragon Ball Z: Burst Limit",
+    "titleId": "424107DC",
+    "artwork": "424107DC",
+    "public": "working"
+  },
+  {
+    "name": "Dragon Ball: Raging Blast",
+    "titleId": "4E4D0803",
+    "artwork": "4E4D0803",
+    "local": "working"
+  },
+  {
+    "name": "Dragon Ball: Raging Blast 2",
+    "titleId": "4E4D0826",
+    "artwork": "4E4D0826",
+    "local": "working"
+  },
+  {
+    "name": "Dream Chronicles",
+    "titleId": "58410A3E",
+    "artwork": "58410A3E",
+    "local": "working"
+  },
+  {
+    "name": "Duke Nukem 3D",
+    "titleId": "58410901",
+    "artwork": "58410901",
+    "local": "working",
+    "systemlink": "working"
+  },
+  {
+    "name": "Duke Nukem Forever",
+    "titleId": "5454084E",
+    "artwork": "5454084E",
+    "local": "working"
+  },
+  {
+    "name": "Dungeon Defenders",
+    "titleId": "58410B6D",
+    "artwork": "58410B6D",
+    "local": "working"
+  },
+  {
+    "name": "Dungeon Siege III",
+    "titleId": "535107F5",
+    "artwork": "535107F5",
+    "local": "working"
+  },
+  {
+    "name": "Dungeons & Dragons: Chronicles of Mystara",
+    "titleId": "584113C3",
+    "artwork": "584113C3",
+    "local": "working"
+  },
+  {
+    "name": "Dungeons & Dragons: Daggerdale",
+    "titleId": "58410AA2",
+    "artwork": "58410AA2",
+    "local": "working"
+  },
+  {
+    "name": "Dustforce",
+    "titleId": "584113BD",
+    "artwork": "584113BD",
+    "local": "working"
+  },
+  {
+    "name": "Dynasty Warriors: Gundam 2",
+    "titleId": "4E4D0800",
+    "artwork": "4E4D0800",
+    "local": "working"
+  },
+  {
+    "name": "Dynasty Warriors: Strikeforce",
+    "titleId": "4B4F07FA",
+    "artwork": "4B4F07FA",
+    "public": "working"
+  },
+  {
+    "name": "E4: Every Extend Extra Extreme",
+    "titleId": "58410872",
+    "artwork": "58410872",
+    "local": "working"
+  },
+  {
+    "name": "Earth Defense Force 2025",
+    "titleId": "44500805",
+    "artwork": "44500805",
+    "local": "working"
+  },
+  {
+    "name": "Earth Defense Force: Insect Armageddon",
+    "titleId": "445007F9",
+    "artwork": "445007F9",
+    "public": "working"
+  },
+  {
+    "name": "Earthworm Jim HD",
+    "titleId": "584109E2",
+    "artwork": "584109E2",
+    "local": "working"
+  },
+  {
+    "name": "Elements Of Destruction",
+    "titleId": "58410867",
+    "artwork": "58410867",
+    "public": "working",
+    "comments": "Player and ranked works"
+  },
+  {
+    "name": "Enchanted Arms",
+    "titleId": "465307D2",
+    "artwork": "465307D2",
+    "local": "working"
+  },
+  {
+    "name": "Encleverment Experiment",
+    "titleId": "58410907",
+    "artwork": "58410907",
+    "local": "working",
+    "comments": "`allow_avatar_initialization = true` must be enabled for all players."
+  },
+  {
+    "name": "Enemy Front",
+    "titleId": "435907D5",
+    "artwork": "435907D5",
+    "local": "working"
+  },
+  {
+    "name": "Enemy Territory: Quake Wars",
+    "titleId": "415607DF",
+    "artwork": "415607DF",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Every Party (エブリパーティ)",
+    "titleId": "4D5307D4",
+    "artwork": "4D5307D4",
+    "local": "working"
+  },
+  {
+    "name": "F.E.A.R.",
+    "titleId": "565507D9",
+    "artwork": "565507D9",
+    "local": "working"
+  },
+  {
+    "name": "F.E.A.R. 2: Project Origin",
+    "titleId": "575207D3",
+    "artwork": "575207D3",
+    "systemlink": "partial"
+  },
+  {
+    "name": "F.E.A.R. 3",
+    "titleId": "57520800",
+    "artwork": "57520800",
+    "local": "working"
+  },
+  {
+    "name": "F.E.A.R. Files",
+    "titleId": "565507E8",
+    "artwork": "565507E8",
+    "local": "working"
+  },
+  {
+    "name": "F1 2010",
+    "titleId": "434D082D",
+    "artwork": "434D082D",
+    "onlyLocal": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "F1 2011",
+    "titleId": "434D0842",
+    "artwork": "434D0842",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "VIP Pass required for Xbox Live.\nCO-OP session joinable through friends list\n`protect_zero = false` required for CO-OP.\n\nSystemlink works without a server."
+  },
+  {
+    "name": "F1 2012",
+    "titleId": "434D0847",
+    "artwork": "434D0847",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "VIP Pass required for Xbox Live.\nCO-OP session joinable through friends list.  \n\nSystemlink works without a server."
+  },
+  {
+    "name": "F1 2013",
+    "titleId": "434D084F",
+    "artwork": "434D084F",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Complete edition compatible with latest TU.\n\nSystemlink works without a server."
+  },
+  {
+    "name": "F1 2014",
+    "titleId": "434D0852",
+    "artwork": "434D0852",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "F1 Race Stars",
+    "titleId": "434D0849",
+    "artwork": "434D0849",
+    "onlyLocal": "working"
+  },
+  {
+    "name": "Fable Heroes",
+    "titleId": "58410B86",
+    "artwork": "58410B86",
+    "local": "working"
+  },
+  {
+    "name": "Fable II",
+    "titleId": "4D5307F1",
+    "artwork": "4D5307F1",
+    "local": "working"
+  },
+  {
+    "name": "Fable III",
+    "titleId": "4D5308D6",
+    "artwork": "4D5308D6",
+    "local": "working"
+  },
+  {
+    "name": "Fairytale Fights",
+    "titleId": "504307D1",
+    "local": "working"
+  },
+  {
+    "name": "Far Cry 2",
+    "titleId": "55530810",
+    "artwork": "55530810",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Far Cry Instincts: Predator",
+    "titleId": "555307DC",
+    "artwork": "555307DC",
+    "local": "working"
+  },
+  {
+    "name": "Fatal Fury Special",
+    "titleId": "5841083A",
+    "artwork": "5841083A",
+    "local": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "Fatal Inertia",
+    "titleId": "4B4F07D7",
+    "artwork": "4B4F07D7",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Field & Stream: Total Outdoorsman Challenge",
+    "titleId": "464F07DB",
+    "artwork": "464F07DB",
+    "local": "working",
+    "systemlink": "working"
+  },
+  {
+    "name": "Fighting Vipers",
+    "titleId": "5841129D",
+    "artwork": "5841129D",
+    "local": "working",
+    "comments": "Gameplay is slow-mo."
+  },
+  {
+    "name": "Final Exam",
+    "titleId": "584113F3",
+    "artwork": "584113F3",
+    "local": "working",
+    "comments": "Requires a save passed the tutorial."
+  },
+  {
+    "name": "Final Fight: Double Impact",
+    "titleId": "584109DD",
+    "artwork": "584109DD",
+    "local": "working"
+  },
+  {
+    "name": "Fireburst",
+    "titleId": "584113F8",
+    "artwork": "584113F8",
+    "local": "working"
+  },
+  {
+    "name": "Fist of the North Star: Ken's Rage",
+    "titleId": "4B4F8801",
+    "artwork": "4B4F8801",
+    "local": "working"
+  },
+  {
+    "name": "FlatOut: Ultimate Carnage",
+    "titleId": "454D07D2",
+    "artwork": "454D07D2",
+    "local": "working"
+  },
+  {
+    "name": "Football Genius: The Ultimate Quiz",
+    "titleId": "584109B1",
+    "artwork": "584109B1",
+    "local": "working"
+  },
+  {
+    "name": "Football Manager 2006",
+    "titleId": "534507D1",
+    "artwork": "534507D1",
+    "local": "working"
+  },
+  {
+    "name": "Football Manager 2007",
+    "titleId": "534507E7",
+    "artwork": "534507E7",
+    "local": "working"
+  },
+  {
+    "name": "Football Manager 2008",
+    "titleId": "534507F7",
+    "artwork": "534507F7",
+    "local": "working"
+  },
+  {
+    "name": "Forza Horizon",
+    "titleId": "4D5309C9",
+    "artwork": "4D5309C9",
+    "local": "working"
+  },
+  {
+    "name": "Forza Motorsport 2",
+    "titleId": "4D5307EA",
+    "artwork": "4D5307EA",
+    "local": "working"
+  },
+  {
+    "name": "Forza Motorsport 3",
+    "titleId": "4D53084D",
+    "artwork": "4D53084D",
+    "local": "working",
+    "comments": "Desync"
+  },
+  {
+    "name": "Forza Motorsport 4",
+    "titleId": "4D530910",
+    "artwork": "4D530910",
+    "local": "working"
+  },
+  {
+    "name": "Foul Play",
+    "titleId": "58411409",
+    "artwork": "58411409",
+    "public": "working"
+  },
+  {
+    "name": "Fracture",
+    "titleId": "4C4107D4",
+    "artwork": "4C4107D4",
+    "local": "working"
+  },
+  {
+    "name": "Frogger",
+    "titleId": "58410813",
+    "artwork": "58410813",
+    "public": "working"
+  },
+  {
+    "name": "Frogger 2",
+    "titleId": "5841087C",
+    "artwork": "5841087C",
+    "local": "working"
+  },
+  {
+    "name": "Front Mission Evolved",
+    "titleId": "535107E9",
+    "artwork": "535107E9",
+    "local": "working"
+  },
+  {
+    "name": "Frontlines: Fuel of War",
+    "titleId": "545107D8",
+    "artwork": "545107D8",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "FUEL",
+    "titleId": "434D080D",
+    "artwork": "434D080D",
+    "local": "working"
+  },
+  {
+    "name": "Full Auto",
+    "titleId": "534507D5",
+    "artwork": "534507D5",
+    "local": "working"
+  },
+  {
+    "name": "Full House Poker",
+    "titleId": "5841098D",
+    "artwork": "5841098D",
+    "local": "working",
+    "comments": "Requires Avatars"
+  },
+  {
+    "name": "FunTown Mahjong",
+    "titleId": "58410932",
+    "artwork": "58410932",
+    "local": "working",
+    "comments": "`protect_zero = false`"
+  },
+  {
+    "name": "Fuzion Frenzy 2",
+    "titleId": "485507D4",
+    "artwork": "485507D4",
+    "local": "working"
+  },
+  {
+    "name": "Garou: Mark of the Wolves",
+    "titleId": "58410971",
+    "artwork": "58410971",
+    "local": "working"
+  },
+  {
+    "name": "Gatling Gears",
+    "titleId": "58410B32",
+    "artwork": "58410B32",
+    "local": "working"
+  },
+  {
+    "name": "Gauntlet",
+    "titleId": "584107DF",
+    "artwork": "584107DF",
+    "public": "working"
+  },
+  {
+    "name": "Gears of War",
+    "titleId": "4D5307D5",
+    "artwork": "4D5307D5",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Gears of War 2",
+    "titleId": "4D53082D",
+    "artwork": "4D53082D",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Gears of War 3",
+    "titleId": "4D5308AB",
+    "artwork": "4D5308AB",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\nSystemlink is more stable than xbox live.\n\nBase version most stable for matchmaking & coop.\n\nPlayer & Ranked works."
+  },
+  {
+    "name": "Gears of War: Judgment",
+    "titleId": "4D530A26",
+    "artwork": "4D530A26",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Geon: Emotions",
+    "titleId": "58410844",
+    "artwork": "58410844",
+    "local": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "Ghostbusters: Sanctum of Slime",
+    "titleId": "58410A89",
+    "artwork": "58410A89",
+    "local": "working"
+  },
+  {
+    "name": "Ghostbusters: The Video Game",
+    "titleId": "494707F4",
+    "artwork": "494707F4",
+    "local": "working"
+  },
+  {
+    "name": "Gin Rummy",
+    "titleId": "5841090F",
+    "artwork": "5841090F",
+    "local": "working"
+  },
+  {
+    "name": "Girl Fight",
+    "titleId": "5841123A",
+    "artwork": "5841123A",
+    "local": "working"
+  },
+  {
+    "name": "Go! Go! Break Steady",
+    "titleId": "584108B8",
+    "artwork": "584108B8",
+    "local": "working"
+  },
+  {
+    "name": "God Mode",
+    "titleId": "584113CF",
+    "artwork": "584113CF",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\n`query_occlusion_querybatch_range = 64` to fix graphics."
+  },
+  {
+    "name": "Golden Axe",
+    "titleId": "58410862",
+    "artwork": "58410862",
+    "local": "working"
+  },
+  {
+    "name": "GoldenEye 007 XBLA (Bean)",
+    "titleId": "584108A9",
+    "artwork": "584108A9",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\nMay need vulkan on AMD to go in-game.\n\n`gpu = \"vulkan\"`",
+    "others": "[Community Edition Updater](http://n64vault.com/ge-xbla-tools:community-edition-updater)\n\n[Gameplay](https://www.youtube.com/watch?v=VLlW1uoK3cA)\n\n[Gameplay](https://www.youtube.com/watch?v=2RvCjdG4jbs)"
+  },
+  {
+    "name": "Gotham City Impostors",
+    "titleId": "58410A65",
+    "local": "working"
+  },
+  {
+    "name": "Grand Theft Auto IV",
+    "titleId": "545407F2",
+    "artwork": "545407F2",
+    "public": "working",
+    "comments": "Latest TU works. EFLC works.",
+    "others": "[Gameplay](https://www.twitch.tv/videos/2183292542)"
+  },
+  {
+    "name": "Grand Theft Auto V - Beta",
+    "titleId": "545407F2",
+    "artwork": "545407F2",
+    "public": "working",
+    "comments": "`protect_zero = false` or use patches.",
+    "others": "[TU 13 Patch](https://github.com/AdrianCassar/Xenia-WebServices/blob/main/patches/545408A7%20-%20Grand%20Theft%20Auto%20V%20(TU13).patch.toml)\n \n[TU 10 Patch](https://github.com/AdrianCassar/Xenia-WebServices/blob/main/patches/545408A7%20-%20Grand%20Theft%20Auto%20V%20(TU10).patch.toml)\n\n[Beta Showcase](https://www.youtube.com/watch?v=nIjZ7sRGZlo), [Beta Showcase](https://www.youtube.com/watch?v=YIBjy5ZJcq4)"
+  },
+  {
+    "name": "Grand Theft Auto V (TU 2-13)",
+    "titleId": "545408A7",
+    "artwork": "545408A7",
+    "public": "working",
+    "comments": "Must complete prologue, download gamesave in xenia discord server in `game-saves-only`.\n\nUnstable and often crashes.",
+    "others": "[Solo Session](https://www.youtube.com/watch?v=lap7liW6pco)"
+  },
+  {
+    "name": "Great Battles Medieval",
+    "titleId": "535607D1",
+    "artwork": "535607D1",
+    "local": "working"
+  },
+  {
+    "name": "GRID 2",
+    "titleId": "434D0844",
+    "artwork": "434D0844",
+    "local": "working",
+    "others": "VIP Pass required for Xbox Live"
+  },
+  {
+    "name": "GRID Autosport",
+    "titleId": "434D0851",
+    "artwork": "434D0851",
+    "local": "working"
+  },
+  {
+    "name": "GripShift",
+    "titleId": "5841089E",
+    "artwork": "5841089E",
+    "public": "working"
+  },
+  {
+    "name": "Guardian Heroes",
+    "titleId": "58410B2B",
+    "artwork": "58410B2B",
+    "local": "working",
+    "systemlink": "working"
+  },
+  {
+    "name": "Guilty Gear 2: Overture",
+    "titleId": "415707D1",
+    "artwork": "415707D1",
+    "public": "working"
+  },
+  {
+    "name": "Guitar Hero III",
+    "titleId": "415607F7",
+    "artwork": "415607F7",
+    "public": "working"
+  },
+  {
+    "name": "Guitar Hero: Aerosmith",
+    "titleId": "41560819",
+    "artwork": "41560819",
+    "local": "working"
+  },
+  {
+    "name": "Gundam Operation Troy",
+    "titleId": "424107D6",
+    "artwork": "424107D6",
+    "public": "working",
+    "comments": "`render_target_path_d3d12 = \"rov\"`",
+    "others": "[English Patch](https://github.com/Eight-Mansions/MSGOT/releases)"
+  },
+  {
+    "name": "Gunstar Heroes",
+    "titleId": "584109A6",
+    "artwork": "584109A6",
+    "local": "working"
+  },
+  {
+    "name": "Guwange",
+    "titleId": "58410A78",
+    "artwork": "58410A78",
+    "local": "working"
+  },
+  {
+    "name": "Gyruss",
+    "titleId": "58410817",
+    "artwork": "58410817",
+    "public": "working"
+  },
+  {
+    "name": "Hail to the Chimp",
+    "titleId": "475007D2",
+    "artwork": "475007D2",
+    "local": "working"
+  },
+  {
+    "name": "Half-Minute Hero: Super Mega Neo Climax",
+    "titleId": "58410B3D",
+    "artwork": "58410B3D",
+    "local": "working"
+  },
+  {
+    "name": "Halo 3: Mythic",
+    "titleId": "4D5307E6",
+    "artwork": "4D5307E6",
+    "public": "working",
+    "systemlink": "partial",
+    "comments": "Patch required for systemlink.\n\nSystemlink requires a server (MAC).",
+    "others": "[Halo 3 Mythic Patch](https://github.com/AdrianCassar/Xenia-WebServices/blob/main/patches/4D5307E6%20-%20Halo%203%20Mythic.patch.toml)\n\n[Halo 3 Patch](https://github.com/AdrianCassar/Xenia-WebServices/blob/main/patches/4D5307E6%20-%20Halo%203.patch.toml)\n\n[Head to Head - Video](https://www.youtube.com/watch?v=amS8OxH3exs)\n\nv13.2 using [Sunrise Server](https://github.com/ahnewark/Sunrise-Halo3-WebServices)"
+  },
+  {
+    "name": "Halo 3: ODST",
+    "titleId": "4D530877",
+    "artwork": "4D530877",
+    "public": "partial",
+    "systemlink": "partial",
+    "comments": "Patch required for Xbox Live and systemlink.\n\nSystemlink requires a server.",
+    "others": "[Halo 3 ODST Patch](https://github.com/AdrianCassar/Xenia-WebServices/blob/main/patches/4D530877%20-%20Halo%203%20ODST.patch.toml)"
+  },
+  {
+    "name": "Halo 4",
+    "titleId": "4D530919",
+    "artwork": "4D530919",
+    "public": "partial",
+    "systemlink": "partial",
+    "comments": "`readback_resolve = true` used to fix lighting.\n\nPatch required for Xbox Live and systemlink.\n\nSystemlink requires a server.\n\nJoin Xbox Live sessions via friends.",
+    "others": "[Halo 4 (TU10) Patch](https://github.com/AdrianCassar/Xenia-WebServices/blob/c24a62e475d5ecdeb55823f1d5c0d720e63a9f2e/patches/4D530919%20-%20Halo%204%20(TU10).patch.toml)\n\n[Halo 4 Patch](https://github.com/AdrianCassar/Xenia-WebServices/blob/c24a62e475d5ecdeb55823f1d5c0d720e63a9f2e/patches/4D530919%20-%20Halo%204.patch.toml)"
+  },
+  {
+    "name": "Halo Reach",
+    "titleId": "4D53085B",
+    "artwork": "4D53085B",
+    "public": "partial",
+    "systemlink": "partial",
+    "comments": "Patch required for systemlink & Xbox Live.\n\nSystemlink requires a server.\n\nJoin public sessions works via friends list.",
+    "others": "[Halo Reach Patch](https://github.com/AdrianCassar/Xenia-WebServices/blob/main/patches/4D53085B%20-%20Halo%20Reach.patch.toml)\n\n[Halo Reach Patch TU1](https://github.com/AdrianCassar/Xenia-WebServices/blob/main/patches/4D53085B%20-%20Halo%20Reach%20(TU1).patch.toml)"
+  },
+  {
+    "name": "Halo Wars",
+    "titleId": "4D530808",
+    "artwork": "4D530808",
+    "local": "working"
+  },
+  {
+    "name": "Halo: Combat Evolved Anniversary",
+    "titleId": "4D5309B1",
+    "artwork": "4D5309B1",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server\n\nCO-OP joining public sessions works via friends list.\n\n`query_occlusion_querybatch_range = 256` to fix graphical issues.",
+    "others": "[Halo Reach Patch TU1](https://github.com/AdrianCassar/Xenia-WebServices/blob/main/patches/4D53085B%20-%20Halo%20Reach%20(TU1).patch.toml)"
+  },
+  {
+    "name": "Halo: Spartan Assault",
+    "titleId": "4D531B7D",
+    "local": "working"
+  },
+  {
+    "name": "Hard Corps: Uprising",
+    "titleId": "58410A18",
+    "artwork": "58410A18",
+    "local": "working"
+  },
+  {
+    "name": "Hardwood Backgammon",
+    "titleId": "584107E2",
+    "artwork": "584107E2",
+    "local": "working"
+  },
+  {
+    "name": "Hardwood Hearts",
+    "titleId": "584107D3",
+    "artwork": "584107D3",
+    "local": "working"
+  },
+  {
+    "name": "Hardwood Spades",
+    "titleId": "584107E4",
+    "artwork": "584107E4",
+    "local": "working"
+  },
+  {
+    "name": "Harm's Way",
+    "titleId": "58410A70",
+    "artwork": "58410A70",
+    "local": "working",
+    "systemlink": "working"
+  },
+  {
+    "name": "Heavy Weapon",
+    "titleId": "58410810",
+    "artwork": "58410810",
+    "public": "working"
+  },
+  {
+    "name": "Hellboy: The Science of Evil",
+    "titleId": "4B4E07D3",
+    "artwork": "4B4E07D3",
+    "public": "working"
+  },
+  {
+    "name": "Heroes Over Europe",
+    "titleId": "55530841",
+    "artwork": "55530841",
+    "public": "broken",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Hexic 2",
+    "titleId": "58410826",
+    "artwork": "58410826",
+    "public": "working"
+  },
+  {
+    "name": "History Channel: Battle for the Pacific",
+    "titleId": "41560805",
+    "artwork": "41560805",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Homefront",
+    "titleId": "54510846",
+    "artwork": "54510846",
+    "public": "partial",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\nJoining private Xbox Live sessions work."
+  },
+  {
+    "name": "Hour of Victory",
+    "titleId": "4D5707D9",
+    "artwork": "4D5707D9",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\nPlayer & Ranked works"
+  },
+  {
+    "name": "How to Survive",
+    "titleId": "584113E8",
+    "artwork": "584113E8",
+    "local": "working"
+  },
+  {
+    "name": "Hunted: Demon's Forge",
+    "titleId": "425307D7",
+    "artwork": "425307D7",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Hydro Thunder Hurricane",
+    "titleId": "5841096A",
+    "artwork": "5841096A",
+    "local": "working"
+  },
+  {
+    "name": "Ikaruga",
+    "titleId": "58410878",
+    "artwork": "58410878",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink requires `network_mode = 2`"
+  },
+  {
+    "name": "IL-2: Birds of Prey",
+    "titleId": "464F07D1",
+    "artwork": "464F07D1",
+    "local": "working"
+  },
+  {
+    "name": "Import Tuner Challenge",
+    "titleId": "555307EE",
+    "artwork": "555307EE",
+    "local": "working"
+  },
+  {
+    "name": "Indianapolis 500 Evolution",
+    "titleId": "444507D2",
+    "artwork": "444507D2",
+    "local": "working"
+  },
+  {
+    "name": "Inferno Pool",
+    "titleId": "584109CF",
+    "artwork": "584109CF",
+    "local": "working"
+  },
+  {
+    "name": "Injustice: Gods Among Us",
+    "titleId": "57528837",
+    "artwork": "57528837",
+    "local": "working",
+    "comments": "Unstable"
+  },
+  {
+    "name": "Insanely Twisted Shadow Planet",
+    "titleId": "58410B1C",
+    "artwork": "58410B1C",
+    "local": "working"
+  },
+  {
+    "name": "Interpol",
+    "titleId": "58410977",
+    "artwork": "58410977",
+    "local": "working"
+  },
+  {
+    "name": "Inversion",
+    "titleId": "4E4D0801",
+    "artwork": "4E4D0801",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\n`query_occlusion_querybatch_range = 64` to fix graphics."
+  },
+  {
+    "name": "Invincible Tiger The Legend of Han Tao",
+    "titleId": "58410982",
+    "artwork": "58410982",
+    "local": "working"
+  },
+  {
+    "name": "Ion Assault",
+    "titleId": "5841096B",
+    "artwork": "5841096B",
+    "local": "working"
+  },
+  {
+    "name": "Iron Brigade",
+    "titleId": "58410A95",
+    "artwork": "58410A95",
+    "public": "working",
+    "comments": "Multiplayer available after completing 2nd tutorial mission."
+  },
+  {
+    "name": "James Bond 007: Blood Stone",
+    "titleId": "4156081F",
+    "artwork": "4156081F",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "`readback_resolve = true`\n\nSystemlink works without a server."
+  },
+  {
+    "name": "Jane's Advanced Strike Fighters",
+    "titleId": "455607D6",
+    "artwork": "455607D6",
+    "local": "working"
+  },
+  {
+    "name": "Jeopardy",
+    "titleId": "545108AE",
+    "artwork": "545108AE",
+    "local": "working"
+  },
+  {
+    "name": "Jeremy McGrath's Offroad",
+    "titleId": "584111DA",
+    "artwork": "584111DA",
+    "local": "working"
+  },
+  {
+    "name": "Jetpac Refuelled",
+    "titleId": "584107FB",
+    "artwork": "584107FB",
+    "public": "working"
+  },
+  {
+    "name": "Jimmie Johnson's Anything with an Engine",
+    "titleId": "4B4E0841",
+    "artwork": "4B4E0841",
+    "local": "working",
+    "systemlink": "working"
+  },
+  {
+    "name": "JoJo's Bizarre Adventure",
+    "titleId": "5841124E",
+    "artwork": "5841124E",
+    "public": "working"
+  },
+  {
+    "name": "Joust",
+    "titleId": "584107D8",
+    "artwork": "584107D8",
+    "public": "working"
+  },
+  {
+    "name": "Juiced 2: Hot Import Nights",
+    "titleId": "545107D5",
+    "artwork": "545107D5",
+    "public": "working",
+    "comments": "`vsync_interval = 16`, `vsync = true`"
+  },
+  {
+    "name": "Kameo: Elements of Power",
+    "titleId": "4D5307D2",
+    "artwork": "4D5307D2",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\nTU & COOP Pack, Power Pack to play the other modes."
+  },
+  {
+    "name": "Kane & Lynch 2: Dog Days",
+    "titleId": "534307F8",
+    "artwork": "534307F8",
+    "local": "working"
+  },
+  {
+    "name": "Kane & Lynch: Dead Men",
+    "titleId": "534307E0",
+    "artwork": "534307E0",
+    "local": "working"
+  },
+  {
+    "name": "Killer Instinct",
+    "titleId": "584113F4",
+    "local": "working",
+    "comments": "Crashes frequently"
+  },
+  {
+    "name": "Kingdom Under Fire: Circle of Doom",
+    "titleId": "424507D1",
+    "artwork": "424507D1",
+    "public": "working"
+  },
+  {
+    "name": "Kingdom Under Fire: Circle of Doom - Beta",
+    "titleId": "424507D1",
+    "artwork": "424507D1",
+    "public": "working",
+    "comments": "07/09/2007"
+  },
+  {
+    "name": "Kung Fu Panda: Showdown of Legendary Legends",
+    "titleId": "373407D7",
+    "artwork": "373407D7",
+    "public": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "Lara Croft and the Guardian of Light",
+    "titleId": "58410A59",
+    "artwork": "58410A59",
+    "local": "working"
+  },
+  {
+    "name": "Left 4 Dead",
+    "titleId": "45410830",
+    "artwork": "45410830",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Xbox Live compatible with GOTY on TU 7.\n\nSystemlink works without a server."
+  },
+  {
+    "name": "Left 4 Dead - Demo",
+    "titleId": "45418897",
+    "local": "working"
+  },
+  {
+    "name": "Left 4 Dead - GOTY",
+    "titleId": "45410830",
+    "artwork": "45410830",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Left 4 Dead 2",
+    "titleId": "454108D4",
+    "artwork": "454108D4",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Left 4 Dead 2 Demo",
+    "titleId": "454188D6",
+    "public": "working"
+  },
+  {
+    "name": "Legendary",
+    "titleId": "475007D3",
+    "artwork": "475007D3",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "LEGO Harry Potter",
+    "titleId": "575207E6",
+    "artwork": "575207E6",
+    "local": "working",
+    "comments": "TU 1 required for Xbox Live."
+  },
+  {
+    "name": "LEGO Indiana Jones 2",
+    "titleId": "4C4107ED",
+    "artwork": "4C4107ED",
+    "local": "partial",
+    "comments": "Only works via joining friends session directly. Session search fails to join session."
+  },
+  {
+    "name": "LEGO Star Wars: The Complete Saga",
+    "titleId": "4C4107D7",
+    "artwork": "4C4107D7",
+    "local": "working"
+  },
+  {
+    "name": "Lode Runner",
+    "titleId": "5841085B",
+    "artwork": "5841085B",
+    "local": "working"
+  },
+  {
+    "name": "Looney Tunes: Acme Arsenal",
+    "titleId": "575207D2",
+    "artwork": "575207D2",
+    "local": "working"
+  },
+  {
+    "name": "Lost Cities",
+    "titleId": "584108FB",
+    "artwork": "584108FB",
+    "local": "working"
+  },
+  {
+    "name": "Lost Planet",
+    "titleId": "434307D3",
+    "artwork": "434307D3",
+    "local": "working",
+    "comments": "`mount_cache = false`"
+  },
+  {
+    "name": "Lost Planet 2",
+    "titleId": "434307ED",
+    "artwork": "434307ED",
+    "public": "working",
+    "systemlink": "partial",
+    "comments": "Systemlink requires a server (QoS)."
+  },
+  {
+    "name": "Lost Planet 3",
+    "titleId": "43430830",
+    "artwork": "43430830",
+    "local": "working"
+  },
+  {
+    "name": "Lost Planet: Extreme Condition Colonies Edition",
+    "titleId": "434307DE",
+    "artwork": "434307DE",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\n`mount_cache = false`"
+  },
+  {
+    "name": "Lucha Libre AAA",
+    "titleId": "475807D1",
+    "artwork": "475807D1",
+    "local": "working"
+  },
+  {
+    "name": "Lumines Live",
+    "titleId": "584107F8",
+    "artwork": "584107F8",
+    "public": "working"
+  },
+  {
+    "name": "Mad Riders",
+    "titleId": "58411240",
+    "artwork": "58411240",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Mad Tracks",
+    "titleId": "584107F7",
+    "artwork": "584107F7",
+    "local": "working"
+  },
+  {
+    "name": "Madballs Babo: Invasion",
+    "titleId": "584109C8",
+    "artwork": "584109C8",
+    "local": "working"
+  },
+  {
+    "name": "Marathon 2: Durandal",
+    "titleId": "5841085E",
+    "artwork": "5841085E",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Marble Blast Ultra",
+    "titleId": "584107D7",
+    "artwork": "584107D7",
+    "public": "working"
+  },
+  {
+    "name": "Marvel Puzzle Quest",
+    "titleId": "584113DB",
+    "artwork": "584113DB",
+    "local": "working",
+    "comments": "Complete first level to access multiplayer menus.\n\nConnecting unstable."
+  },
+  {
+    "name": "Marvel vs. Capcom 2: New Age of Heroes",
+    "titleId": "58410976",
+    "artwork": "58410976",
+    "public": "working"
+  },
+  {
+    "name": "Marvel vs. Capcom 3",
+    "titleId": "43430806",
+    "artwork": "43430806",
+    "public": "working",
+    "comments": "Player and Ranked works"
+  },
+  {
+    "name": "Marvel vs. Capcom: Origins",
+    "titleId": "58411223",
+    "artwork": "58411223",
+    "local": "working"
+  },
+  {
+    "name": "Marvel: Ultimate Alliance",
+    "titleId": "415607DA",
+    "artwork": "415607DA",
+    "public": "working"
+  },
+  {
+    "name": "Marvel: Ultimate Alliance 2",
+    "titleId": "4156082F",
+    "artwork": "4156082F",
+    "public": "working"
+  },
+  {
+    "name": "Mayhem",
+    "titleId": "455607D8",
+    "artwork": "455607D8",
+    "local": "working"
+  },
+  {
+    "name": "Mega Man 10 (Oct 30, 2009 Prototype)",
+    "titleId": "584109EE",
+    "artwork": "584109EE",
+    "onlyLocal": "working"
+  },
+  {
+    "name": "Metal Gear Solid Peace Walker HD Edition",
+    "titleId": "4B4E083C",
+    "artwork": "4B4E083C",
+    "local": "working"
+  },
+  {
+    "name": "Metal Slug 3",
+    "titleId": "584108CF",
+    "artwork": "584108CF",
+    "local": "working"
+  },
+  {
+    "name": "Metal Slug XX",
+    "titleId": "58410972",
+    "artwork": "58410972",
+    "local": "working"
+  },
+  {
+    "name": "Meteos Wars",
+    "titleId": "5841091C",
+    "artwork": "5841091C",
+    "local": "working"
+  },
+  {
+    "name": "Midnight Club: Los Angeles - Complete Edition",
+    "titleId": "545407F8",
+    "artwork": "545407F8",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\nRanked matches are unstable."
+  },
+  {
+    "name": "Might & Magic Clash of Heroes",
+    "titleId": "58410A19",
+    "artwork": "58410A19",
+    "onlyLocal": "working"
+  },
+  {
+    "name": "Military Madness",
+    "titleId": "58410898",
+    "artwork": "58410898",
+    "local": "working"
+  },
+  {
+    "name": "Millennium European Paintball Series: Championship Paintball 2009",
+    "titleId": "41560827",
+    "artwork": "41560827",
+    "local": "working",
+    "systemlink": "working"
+  },
+  {
+    "name": "Mindjack",
+    "titleId": "535107F1",
+    "artwork": "535107F1",
+    "local": "working"
+  },
+  {
+    "name": "Minecraft: Xbox 360 Edition",
+    "titleId": "584111F7",
+    "artwork": "584111F7",
+    "local": "working"
+  },
+  {
+    "name": "Minesweeper Flags!",
+    "titleId": "584108DC",
+    "artwork": "584108DC",
+    "local": "working"
+  },
+  {
+    "name": "MLB 2K6",
+    "titleId": "545407D3",
+    "artwork": "545407D3",
+    "local": "working"
+  },
+  {
+    "name": "MLB 2K7",
+    "titleId": "545407FA",
+    "artwork": "545407FA",
+    "local": "working"
+  },
+  {
+    "name": "MLB 2K8",
+    "titleId": "54540817",
+    "artwork": "54540817",
+    "local": "partial",
+    "comments": "Only works via joining friends session directly."
+  },
+  {
+    "name": "MLB 2K9",
+    "titleId": "54540842",
+    "artwork": "54540842",
+    "local": "working"
+  },
+  {
+    "name": "MLB Bobblehead Pros",
+    "titleId": "58410B7B",
+    "artwork": "58410B7B",
+    "local": "working"
+  },
+  {
+    "name": "MLB Stickball",
+    "titleId": "584108B4",
+    "artwork": "584108B4",
+    "local": "working"
+  },
+  {
+    "name": "Monaco: What's Yours is Mine",
+    "titleId": "58411297",
+    "artwork": "58411297",
+    "local": "working"
+  },
+  {
+    "name": "Monday Night Combat",
+    "titleId": "58410A3D",
+    "artwork": "58410A3D",
+    "public": "working"
+  },
+  {
+    "name": "Monopoly Plus",
+    "titleId": "58411457",
+    "artwork": "58411457",
+    "local": "working"
+  },
+  {
+    "name": "Monster Madness",
+    "titleId": "535007D1",
+    "artwork": "535007D1",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Moon Diver",
+    "titleId": "58410A2D",
+    "artwork": "58410A2D",
+    "local": "working"
+  },
+  {
+    "name": "Mortal Kombat",
+    "titleId": "575207FD",
+    "artwork": "575207FD",
+    "local": "working",
+    "comments": "Player & Ranked work.\nOnline Pass needed to remove trial. \nCompatible with complete edition with latest TU.\n\nRanked sessions disconnect."
+  },
+  {
+    "name": "Mortal Kombat Arcade",
+    "titleId": "58410B62",
+    "artwork": "58410B62",
+    "local": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "Mortal Kombat vs. DC Universe",
+    "titleId": "4D5707E9",
+    "artwork": "4D5707E9",
+    "public": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "Motocross Madness",
+    "titleId": "58410B0F",
+    "artwork": "58410B0F",
+    "local": "working"
+  },
+  {
+    "name": "MotoGP '06",
+    "titleId": "545107D4",
+    "artwork": "545107D4",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "MotoGP '07",
+    "titleId": "545107F6",
+    "artwork": "545107F6",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "MotoGP 08",
+    "titleId": "434307E6",
+    "artwork": "434307E6",
+    "local": "working"
+  },
+  {
+    "name": "MotoGP 09/10",
+    "titleId": "434307F0",
+    "artwork": "434307F0",
+    "local": "working"
+  },
+  {
+    "name": "MotoGP 10/11",
+    "titleId": "4343080B",
+    "local": "working"
+  },
+  {
+    "name": "MotoGP 13",
+    "titleId": "513107D1",
+    "artwork": "513107D1",
+    "local": "working"
+  },
+  {
+    "name": "MotoGP 14",
+    "titleId": "513107D5",
+    "artwork": "513107D5",
+    "public": "working"
+  },
+  {
+    "name": "MotoGP 15",
+    "titleId": "513107D9",
+    "artwork": "513107D9",
+    "public": "working"
+  },
+  {
+    "name": "Motorcycle Club",
+    "titleId": "573607E0",
+    "artwork": "573607E0",
+    "local": "working",
+    "comments": "`render_target_path_d3d12 = \"rov\"` to fix graphics."
+  },
+  {
+    "name": "Mr. Driller Online",
+    "titleId": "584108BC",
+    "artwork": "584108BC",
+    "local": "working"
+  },
+  {
+    "name": "Ms. Splosion Man",
+    "titleId": "58410B19",
+    "artwork": "58410B19",
+    "local": "working",
+    "comments": "`gpu_allow_invalid_fetch_constants = false`"
+  },
+  {
+    "name": "MUD - FIM Motocross World Championship",
+    "titleId": "4C5307EC",
+    "artwork": "4C5307EC",
+    "local": "working"
+  },
+  {
+    "name": "Mutant Storm: Empire",
+    "titleId": "5841081E",
+    "artwork": "5841081E",
+    "local": "working"
+  },
+  {
+    "name": "MX vs ATV Alive",
+    "titleId": "5451087B",
+    "artwork": "5451087B",
+    "local": "working"
+  },
+  {
+    "name": "MX vs ATV Reflex",
+    "titleId": "54510829",
+    "artwork": "54510829",
+    "local": "working",
+    "systemlink": "working"
+  },
+  {
+    "name": "MX vs ATV Untamed",
+    "titleId": "545107DE",
+    "artwork": "545107DE",
+    "local": "working"
+  },
+  {
+    "name": "MXGP",
+    "titleId": "513107D4",
+    "artwork": "513107D4",
+    "local": "working"
+  },
+  {
+    "name": "N+",
+    "titleId": "5841085C",
+    "artwork": "5841085C",
+    "local": "working"
+  },
+  {
+    "name": "Nail'd",
+    "titleId": "4B4D07E0",
+    "artwork": "4B4D07E0",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Naruto Shippuden: Ultimate Ninja Storm 2",
+    "titleId": "4E4D0819",
+    "artwork": "4E4D0819",
+    "local": "working"
+  },
+  {
+    "name": "Naruto Shippuden: Ultimate Ninja Storm 3",
+    "titleId": "4E4D085C",
+    "artwork": "4E4D085C",
+    "local": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "Naruto Shippuden: Ultimate Ninja Storm Generations",
+    "titleId": "4E4D0842",
+    "artwork": "4E4D0842",
+    "local": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "Naruto Shippuden: Ultimate Ninja Storm Revolution",
+    "titleId": "4E4D0868",
+    "artwork": "4E4D0868",
+    "local": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "Naughty Bear",
+    "titleId": "464F07D8",
+    "artwork": "464F07D8",
+    "local": "working",
+    "comments": "`readback_resolve = \"fast\"` to fix gamertags."
+  },
+  {
+    "name": "Naval Assault: The Killing Tide",
+    "titleId": "464F07D9",
+    "artwork": "464F07D9",
+    "local": "working"
+  },
+  {
+    "name": "NBA 2K10 Draft Combine",
+    "titleId": "584109D8",
+    "artwork": "584109D8",
+    "local": "working"
+  },
+  {
+    "name": "NBA 2K6",
+    "titleId": "545407E2",
+    "artwork": "545407E2",
+    "local": "working"
+  },
+  {
+    "name": "NBA 2K7",
+    "titleId": "545407EF",
+    "artwork": "545407EF",
+    "local": "working"
+  },
+  {
+    "name": "NBA 2K8",
+    "titleId": "5454080C",
+    "artwork": "5454080C",
+    "local": "working",
+    "comments": "Performance is terrible."
+  },
+  {
+    "name": "NBA Unrivaled",
+    "titleId": "584109D4",
+    "artwork": "584109D4",
+    "local": "working"
+  },
+  {
+    "name": "NeoGeo Battle Coliseum",
+    "titleId": "58410A1F",
+    "artwork": "58410A1F",
+    "local": "working",
+    "comments": "Runs slow."
+  },
+  {
+    "name": "NeverDead",
+    "titleId": "4B4E081F",
+    "artwork": "4B4E081F",
+    "local": "working"
+  },
+  {
+    "name": "NHL 2K10",
+    "titleId": "54540853",
+    "artwork": "54540853",
+    "local": "working"
+  },
+  {
+    "name": "NHL 2K6",
+    "titleId": "545407E3",
+    "artwork": "545407E3",
+    "local": "working"
+  },
+  {
+    "name": "NHL 2K7",
+    "titleId": "545407EB",
+    "artwork": "545407EB",
+    "local": "working"
+  },
+  {
+    "name": "NHl 2K8",
+    "titleId": "54540809",
+    "artwork": "54540809",
+    "local": "working"
+  },
+  {
+    "name": "NHL 2K9",
+    "titleId": "5454082E",
+    "artwork": "5454082E",
+    "local": "working"
+  },
+  {
+    "name": "Ninety-Nine Nights II",
+    "titleId": "4B4E0816",
+    "artwork": "4B4E0816",
+    "local": "working"
+  },
+  {
+    "name": "Ninja Gaiden 3",
+    "titleId": "4B5607D4",
+    "artwork": "4B5607D4",
+    "local": "working"
+  },
+  {
+    "name": "Ninja Gaiden 3: Razor's Edge",
+    "titleId": "4B5607E4",
+    "artwork": "4B5607E4",
+    "local": "working"
+  },
+  {
+    "name": "Novadrome",
+    "titleId": "584107E9",
+    "artwork": "584107E9",
+    "local": "working"
+  },
+  {
+    "name": "Omerta: City of Gangsters",
+    "titleId": "4B5907E5",
+    "artwork": "4B5907E5",
+    "local": "working"
+  },
+  {
+    "name": "Operation Darkness",
+    "titleId": "415407D2",
+    "artwork": "415407D2",
+    "local": "working",
+    "comments": "Complete 1st mission to create a game save for Xbox Live.\n\nUse custom search and change max slots to find sessions."
+  },
+  {
+    "name": "Operation Flashpoint: Dragon Rising",
+    "titleId": "434D0811",
+    "artwork": "434D0811",
+    "local": "working"
+  },
+  {
+    "name": "Operation Flashpoint: Red River",
+    "titleId": "434D0838",
+    "artwork": "434D0838",
+    "local": "working"
+  },
+  {
+    "name": "Orange Box (Team Fortress 2)",
+    "titleId": "4541080F",
+    "artwork": "4541080F",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Orc Attack",
+    "titleId": "584113C4",
+    "artwork": "584113C4",
+    "local": "working"
+  },
+  {
+    "name": "Outland",
+    "titleId": "58410A05",
+    "artwork": "58410A05",
+    "local": "working"
+  },
+  {
+    "name": "OutRun Online Arcade",
+    "titleId": "58410968",
+    "artwork": "58410968",
+    "public": "working",
+    "others": "[Race](https://www.youtube.com/watch?v=-UqxjFgGvhk)"
+  },
+  {
+    "name": "Over-G Fighters",
+    "titleId": "544907D1",
+    "artwork": "544907D1",
+    "local": "working"
+  },
+  {
+    "name": "Overlord",
+    "titleId": "434D07D5",
+    "artwork": "434D07D5",
+    "local": "working",
+    "comments": "Audio is broken"
+  },
+  {
+    "name": "Overlord II",
+    "titleId": "434D0809",
+    "artwork": "434D0809",
+    "local": "working"
+  },
+  {
+    "name": "Pacific Rim",
+    "titleId": "584112C1",
+    "artwork": "584112C1",
+    "onlyLocal": "working"
+  },
+  {
+    "name": "Painkiller Hell & Damnation",
+    "titleId": "354807D1",
+    "artwork": "354807D1",
+    "local": "working"
+  },
+  {
+    "name": "Panzer General",
+    "titleId": "584109B4",
+    "artwork": "584109B4",
+    "local": "working"
+  },
+  {
+    "name": "Paperboy",
+    "titleId": "58410829",
+    "artwork": "58410829",
+    "public": "working"
+  },
+  {
+    "name": "Payday 2",
+    "titleId": "464F0800",
+    "artwork": "464F0800",
+    "local": "working"
+  },
+  {
+    "name": "PDC World Championship Darts",
+    "titleId": "4F5807D1",
+    "artwork": "4F5807D1",
+    "local": "working"
+  },
+  {
+    "name": "PDC World Championship Darts: Pro Tour",
+    "titleId": "4F4707D1",
+    "artwork": "4F4707D1",
+    "local": "working"
+  },
+  {
+    "name": "Peggle",
+    "titleId": "58410889",
+    "artwork": "58410889",
+    "local": "working"
+  },
+  {
+    "name": "Peggle 2",
+    "titleId": "58411436",
+    "artwork": "58411436",
+    "local": "working"
+  },
+  {
+    "name": "Perfect Dark",
+    "titleId": "584109C2",
+    "artwork": "584109C2",
+    "public": "working"
+  },
+  {
+    "name": "Perfect Dark Zero",
+    "titleId": "4D5307D3",
+    "artwork": "4D5307D3",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Persona 4 Arena",
+    "titleId": "453907D2",
+    "artwork": "453907D2",
+    "local": "working"
+  },
+  {
+    "name": "PES2008 (US)",
+    "titleId": "4B4E07E9",
+    "artwork": "4B4E07E9",
+    "public": "working"
+  },
+  {
+    "name": "Phantom Breaker",
+    "titleId": "465607DE",
+    "artwork": "465607DE",
+    "local": "working"
+  },
+  {
+    "name": "Phantom Breaker: Battle Grounds",
+    "titleId": "5841125D",
+    "artwork": "5841125D",
+    "local": "working"
+  },
+  {
+    "name": "Pinball FX",
+    "titleId": "58410834",
+    "artwork": "58410834",
+    "local": "working"
+  },
+  {
+    "name": "Pinball FX2",
+    "titleId": "58410A23",
+    "artwork": "58410A23",
+    "local": "working",
+    "comments": "Title update required."
+  },
+  {
+    "name": "Pirates vs Ninjas Dodgeball",
+    "titleId": "584108DD",
+    "local": "working"
+  },
+  {
+    "name": "Poker Smash",
+    "titleId": "5841089C",
+    "artwork": "5841089C",
+    "local": "working"
+  },
+  {
+    "name": "Pool Nation",
+    "titleId": "5841127A",
+    "artwork": "5841127A",
+    "local": "working"
+  },
+  {
+    "name": "Portal 2",
+    "titleId": "45410912",
+    "artwork": "45410912",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Prey",
+    "titleId": "545407E0",
+    "artwork": "545407E0",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Pro Evolution Soccer 6",
+    "titleId": "4B4E07DA",
+    "artwork": "4B4E07DA",
+    "public": "working"
+  },
+  {
+    "name": "Project Gotham Racing 3",
+    "titleId": "4D5307D1",
+    "artwork": "4D5307D1",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Project Gotham Racing 4",
+    "titleId": "4D5307F9",
+    "artwork": "4D5307F9",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\nPlayer & Ranked works\n\n**Regression**:\nRequires Xbox-Live game mode for systemlink."
+  },
+  {
+    "name": "Pure",
+    "titleId": "425607D9",
+    "artwork": "425607D9",
+    "local": "working"
+  },
+  {
+    "name": "Puzzle Bobble Live!",
+    "titleId": "584109C1",
+    "artwork": "584109C1",
+    "local": "working"
+  },
+  {
+    "name": "Puzzle Chronicles",
+    "titleId": "58410952",
+    "artwork": "58410952",
+    "local": "working"
+  },
+  {
+    "name": "Puzzle Fighter HD",
+    "titleId": "5841086E",
+    "artwork": "5841086E",
+    "local": "working"
+  },
+  {
+    "name": "Puzzle Quest 2",
+    "titleId": "58410A3C",
+    "artwork": "58410A3C",
+    "local": "working"
+  },
+  {
+    "name": "Puzzle Quest: Challenge of the Warlords",
+    "titleId": "58410896",
+    "artwork": "58410896",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Puzzle Quest: Galactrix",
+    "titleId": "5841091B",
+    "artwork": "5841091B",
+    "local": "working"
+  },
+  {
+    "name": "QIX++",
+    "titleId": "584109E4",
+    "artwork": "584109E4",
+    "local": "working"
+  },
+  {
+    "name": "Quake 2",
+    "titleId": "415607D6",
+    "artwork": "415607D6",
+    "local": "working"
+  },
+  {
+    "name": "Quake 4",
+    "titleId": "415607D2",
+    "artwork": "415607D2",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Player & Ranked works.\nSystemlink is stable.\nSystemlink works without a server.\n\nClient loses connection to host when Xbox Live session ends."
+  },
+  {
+    "name": "Quake Arena Arcade",
+    "titleId": "584108C8",
+    "artwork": "584108C8",
+    "local": "working"
+  },
+  {
+    "name": "Quantum Theory",
+    "titleId": "544307DC",
+    "artwork": "544307DC",
+    "local": "working"
+  },
+  {
+    "name": "Quarrel",
+    "titleId": "584111EA",
+    "artwork": "584111EA",
+    "local": "working"
+  },
+  {
+    "name": "R.I.P.D. The Game",
+    "titleId": "584113EE",
+    "artwork": "584113EE",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Unplayable due to broken graphics.\n\nSystemlink works without a server."
+  },
+  {
+    "name": "R.U.S.E.",
+    "titleId": "555307F6",
+    "artwork": "555307F6",
+    "local": "working"
+  },
+  {
+    "name": "Race Driver: GRID",
+    "titleId": "434D07FF",
+    "artwork": "434D07FF",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Radiant Silvergun",
+    "titleId": "58410A54",
+    "artwork": "58410A54",
+    "local": "working"
+  },
+  {
+    "name": "Rainbow Islands: Towering Adventure!",
+    "titleId": "584109C3",
+    "artwork": "584109C3",
+    "local": "working"
+  },
+  {
+    "name": "Raskulls",
+    "titleId": "58410920",
+    "artwork": "58410920",
+    "local": "working"
+  },
+  {
+    "name": "Raven Squad: Operation Hidden Dagger",
+    "titleId": "455607D3",
+    "artwork": "455607D3",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Real Steel",
+    "titleId": "584111E0",
+    "artwork": "584111E0",
+    "public": "working",
+    "comments": "Player & Ranked works.\nSometimes runs in slow-mo.",
+    "others": "[Gameplay](https://www.youtube.com/watch?v=-QMdTpxTaBs)"
+  },
+  {
+    "name": "Red Dead Redemption",
+    "titleId": "5454082B",
+    "artwork": "5454082B",
+    "public": "working",
+    "systemlink": "partial",
+    "comments": "Systemlink requires a server (QoS)."
+  },
+  {
+    "name": "Red Dead Redemption GOTY",
+    "titleId": "5454082B",
+    "artwork": "5454082B",
+    "public": "working",
+    "systemlink": "partial",
+    "comments": "Systemlink requires a server (QoS).",
+    "others": "[CO-OP](https://www.youtube.com/watch?v=RjIjEoNnB8E)\n\n[Undead Overrun](https://www.youtube.com/watch?v=9YumX5-41wA)"
+  },
+  {
+    "name": "Red Faction: Armageddon",
+    "titleId": "5451085F",
+    "artwork": "5451085F",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\n`readback_resolve` needed. Player match works, ranked does not"
+  },
+  {
+    "name": "Red Faction: Guerrilla",
+    "titleId": "5451080D",
+    "artwork": "5451080D",
+    "public": "broken",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\nUnplayable"
+  },
+  {
+    "name": "Rekoil: Liberator",
+    "titleId": "58411420",
+    "artwork": "58411420",
+    "local": "working"
+  },
+  {
+    "name": "Resident Evil 5",
+    "titleId": "434307D4",
+    "artwork": "434307D4",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink can be buggy.",
+    "others": "[Chapter 1](https://www.youtube.com/watch?v=SKgnUVairqs)"
+  },
+  {
+    "name": "Resident Evil 6",
+    "titleId": "43430819",
+    "artwork": "43430819",
+    "public": "working",
+    "systemlink": "partial",
+    "comments": "Systemlink requires a server."
+  },
+  {
+    "name": "Resident Evil Revelations",
+    "titleId": "43430833",
+    "artwork": "43430833",
+    "public": "working",
+    "systemlink": "partial",
+    "comments": "Systemlink requires a server (QoS)."
+  },
+  {
+    "name": "Resident Evil Revelations 2",
+    "titleId": "584114C",
+    "local": "working"
+  },
+  {
+    "name": "Resident Evil: Operation Raccoon City",
+    "titleId": "4343081D",
+    "artwork": "4343081D",
+    "public": "working"
+  },
+  {
+    "name": "RIDE",
+    "titleId": "513107D8",
+    "artwork": "513107D8",
+    "local": "working"
+  },
+  {
+    "name": "Ridge Racer 6",
+    "titleId": "4E4D07D3",
+    "artwork": "4E4D07D3",
+    "public": "working"
+  },
+  {
+    "name": "Risk",
+    "titleId": "58411460",
+    "artwork": "58411460",
+    "local": "working"
+  },
+  {
+    "name": "Risk Urban Assault",
+    "titleId": "58411461",
+    "artwork": "58411461",
+    "local": "working"
+  },
+  {
+    "name": "Robotron: 2084",
+    "titleId": "584107E0",
+    "artwork": "584107E0",
+    "public": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "Rock of Ages",
+    "titleId": "58410A9A",
+    "artwork": "58410A9A",
+    "local": "working"
+  },
+  {
+    "name": "Rocketbowl",
+    "titleId": "58410875",
+    "artwork": "58410875",
+    "local": "working"
+  },
+  {
+    "name": "Rocketmen: Axis of Evil",
+    "titleId": "5841086F",
+    "artwork": "5841086F",
+    "local": "working"
+  },
+  {
+    "name": "Rockstar Table Tennis",
+    "titleId": "545407DF",
+    "artwork": "545407DF",
+    "local": "working"
+  },
+  {
+    "name": "Roogoo",
+    "titleId": "584108F3",
+    "artwork": "584108F3",
+    "local": "working"
+  },
+  {
+    "name": "Root Beer Tapper",
+    "titleId": "5841082D",
+    "artwork": "5841082D",
+    "public": "working"
+  },
+  {
+    "name": "R-Type Dimensions",
+    "titleId": "584108AD",
+    "artwork": "584108AD",
+    "local": "working"
+  },
+  {
+    "name": "Rugby Challenge",
+    "titleId": "484507D4",
+    "artwork": "484507D4",
+    "public": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "Rugby Challenge 2 - The Lions Tour Edition",
+    "titleId": "484507D7",
+    "artwork": "484507D7",
+    "local": "working",
+    "comments": "Apparently, you cannot create sessions on console."
+  },
+  {
+    "name": "Rugby Challenge 3",
+    "titleId": "484507DB",
+    "artwork": "484507DB",
+    "local": "working"
+  },
+  {
+    "name": "Rugby League Live",
+    "titleId": "484507D1",
+    "artwork": "484507D1",
+    "local": "working"
+  },
+  {
+    "name": "Rugby League Live 2",
+    "titleId": "484507D5",
+    "artwork": "484507D5",
+    "local": "working"
+  },
+  {
+    "name": "Rugby League Live 3",
+    "titleId": "484507DA",
+    "artwork": "484507DA",
+    "local": "working"
+  },
+  {
+    "name": "Rugby World Cup 2011",
+    "titleId": "464F07ED",
+    "artwork": "464F07ED",
+    "local": "working"
+  },
+  {
+    "name": "Rumble Roses XX",
+    "titleId": "4B4E07D1",
+    "artwork": "4B4E07D1",
+    "onlyLocal": "working"
+  },
+  {
+    "name": "Rush'n Attack",
+    "titleId": "58410819",
+    "artwork": "58410819",
+    "public": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "Sacred 2: Fallen Angel",
+    "titleId": "4B4D07D1",
+    "artwork": "4B4D07D1",
+    "local": "working"
+  },
+  {
+    "name": "Sacred Citadel",
+    "titleId": "58411236",
+    "artwork": "58411236",
+    "onlyLocal": "working",
+    "comments": "Host must ready up for session to become joinable."
+  },
+  {
+    "name": "Saints Row",
+    "titleId": "545107D1",
+    "artwork": "545107D1",
+    "public": "partial",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Saints Row 2",
+    "titleId": "545107FC",
+    "artwork": "545107FC",
+    "public": "partial",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\nCO-OP works. Multiplayer session joinable,  only the pre-game lobby works.",
+    "others": "[Co-op](https://www.youtube.com/watch?v=YTw84keeWfs)"
+  },
+  {
+    "name": "Saints Row IV",
+    "titleId": "4B4D07F6",
+    "artwork": "4B4D07F6",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Unplayable due to broken graphics. Requires Online Pass + license_mask\n\nSystemlink works without a server."
+  },
+  {
+    "name": "Saints Row: Gat out of Hell",
+    "titleId": "4B4D0800",
+    "artwork": "4B4D0800",
+    "systemlink": "partial"
+  },
+  {
+    "name": "Saints Row: The Third / The Full Package",
+    "titleId": "5451086D",
+    "artwork": "5451086D",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\nUnplayable due to broken graphics. Requires [Online Pass](https://www.xbox.com/en-GB/games/store/online-pass/BS7JTR0MN356) + license_mask"
+  },
+  {
+    "name": "Samurai Shodown II",
+    "titleId": "584108D0",
+    "artwork": "584108D0",
+    "local": "working"
+  },
+  {
+    "name": "Sanctum 2",
+    "titleId": "58411329",
+    "artwork": "58411329",
+    "local": "working"
+  },
+  {
+    "name": "SBK 08: Superbike World Championship",
+    "titleId": "4C5307D1",
+    "artwork": "4C5307D1",
+    "local": "working"
+  },
+  {
+    "name": "SBK 09: Superbike World Championship",
+    "titleId": "4C5307D4",
+    "artwork": "4C5307D4",
+    "local": "working"
+  },
+  {
+    "name": "SBK 2011",
+    "titleId": "4C5307E5",
+    "artwork": "4C5307E5",
+    "local": "working"
+  },
+  {
+    "name": "SBK Generations",
+    "titleId": "4C5307F1",
+    "artwork": "4C5307F1",
+    "local": "working"
+  },
+  {
+    "name": "SBK X: Superbike World Championship",
+    "titleId": "4C5307D7",
+    "artwork": "4C5307D7",
+    "local": "working"
+  },
+  {
+    "name": "Scene It? Box Office Smash",
+    "titleId": "4D530860",
+    "artwork": "4D530860",
+    "local": "working"
+  },
+  {
+    "name": "SCORE International Baja 1000",
+    "titleId": "41560823",
+    "artwork": "41560823",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Scott Pilgrim vs. the World: The Game",
+    "titleId": "58410A2C",
+    "artwork": "58410A2C",
+    "local": "working"
+  },
+  {
+    "name": "Scourge: Outbreak",
+    "titleId": "58411212",
+    "artwork": "58411212",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Scramble",
+    "titleId": "58410814",
+    "artwork": "58410814",
+    "public": "working"
+  },
+  {
+    "name": "Scrap Metal",
+    "titleId": "58410987",
+    "artwork": "58410987",
+    "local": "working",
+    "systemlink": "working"
+  },
+  {
+    "name": "Screwjumper!",
+    "titleId": "58410895",
+    "artwork": "58410895",
+    "public": "working"
+  },
+  {
+    "name": "Section 8",
+    "titleId": "475007D4",
+    "artwork": "475007D4",
+    "public": "working"
+  },
+  {
+    "name": "Section 8: Prejudice",
+    "titleId": "58410B45",
+    "artwork": "58410B45",
+    "public": "working"
+  },
+  {
+    "name": "SEGA Rally Online Arcade",
+    "titleId": "58410AC2",
+    "artwork": "58410AC2",
+    "public": "working"
+  },
+  {
+    "name": "SEGA Rally: Revo",
+    "titleId": "534507E6",
+    "artwork": "534507E6",
+    "public": "working"
+  },
+  {
+    "name": "SEGA Superstars Tennis",
+    "titleId": "534507F5",
+    "artwork": "534507F5",
+    "public": "working"
+  },
+  {
+    "name": "SEGA Vintage Collection: Golden Axe",
+    "titleId": "58410B6F",
+    "artwork": "58410B6F",
+    "local": "working"
+  },
+  {
+    "name": "SEGA Vintage Collection: Streets of Rage",
+    "titleId": "58410B71",
+    "artwork": "58410B71",
+    "local": "working"
+  },
+  {
+    "name": "SEGA Vintage Collection: ToeJam & Earl",
+    "titleId": "5841124C",
+    "artwork": "5841124C",
+    "local": "working"
+  },
+  {
+    "name": "Serious Sam 3: BFE",
+    "titleId": "5841127F",
+    "artwork": "5841127F",
+    "local": "working"
+  },
+  {
+    "name": "Serious Sam HD: TFE",
+    "titleId": "584109DA",
+    "artwork": "584109DA",
+    "public": "working"
+  },
+  {
+    "name": "Serious Sam HD: The Second Encounter",
+    "titleId": "58410A72",
+    "artwork": "58410A72",
+    "public": "working"
+  },
+  {
+    "name": "Shadow Assault Tenchu",
+    "titleId": "58410922",
+    "artwork": "58410922",
+    "local": "working"
+  },
+  {
+    "name": "Shadowrun",
+    "titleId": "4D5307D6",
+    "artwork": "4D5307D6",
+    "local": "working",
+    "systemlink": "working"
+  },
+  {
+    "name": "Shank 2",
+    "titleId": "5841120C",
+    "artwork": "5841120C",
+    "local": "working"
+  },
+  {
+    "name": "Shaun White Snowboarding",
+    "titleId": "5553081E",
+    "artwork": "5553081E",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Shoot Many Robots",
+    "titleId": "584111FB",
+    "artwork": "584111FB",
+    "local": "working"
+  },
+  {
+    "name": "Shotest Shogi",
+    "titleId": "5841087B",
+    "artwork": "5841087B",
+    "local": "working"
+  },
+  {
+    "name": "Shred Nebula",
+    "titleId": "58410879",
+    "artwork": "58410879",
+    "local": "working"
+  },
+  {
+    "name": "Singularity",
+    "titleId": "415607EF",
+    "artwork": "415607EF",
+    "local": "working"
+  },
+  {
+    "name": "Ski-Doo: Snowmobile Challenge",
+    "titleId": "564707D1",
+    "artwork": "564707D1",
+    "local": "working"
+  },
+  {
+    "name": "Skullgirls",
+    "titleId": "584111DB",
+    "artwork": "584111DB",
+    "local": "working"
+  },
+  {
+    "name": "SkyDrift",
+    "titleId": "58410B49",
+    "artwork": "58410B49",
+    "local": "working"
+  },
+  {
+    "name": "Smackdown vs RAW 2007",
+    "titleId": "545107E0",
+    "artwork": "545107E0",
+    "onlyLocal": "working"
+  },
+  {
+    "name": "SmackDown vs RAW 2008",
+    "titleId": "5451080B",
+    "artwork": "5451080B",
+    "local": "working"
+  },
+  {
+    "name": "SmackDown vs RAW 2009",
+    "titleId": "54510826",
+    "artwork": "54510826",
+    "local": "working"
+  },
+  {
+    "name": "Small Arms",
+    "titleId": "584107D5",
+    "artwork": "584107D5",
+    "public": "working"
+  },
+  {
+    "name": "Smash Court Tennis 3",
+    "titleId": "4E4D07ED",
+    "artwork": "4E4D07ED",
+    "local": "working"
+  },
+  {
+    "name": "Smash TV",
+    "titleId": "584107E1",
+    "artwork": "584107E1",
+    "public": "working"
+  },
+  {
+    "name": "Sniper Elite III",
+    "titleId": "464F0803",
+    "artwork": "464F0803",
+    "local": "working"
+  },
+  {
+    "name": "Sniper Elite V2",
+    "titleId": "464F07E8",
+    "artwork": "464F07E8",
+    "local": "working"
+  },
+  {
+    "name": "Sniper: Ghost Warrior",
+    "titleId": "435907D1",
+    "artwork": "435907D1",
+    "public": "working"
+  },
+  {
+    "name": "Sniper: Ghost Warrior 2",
+    "titleId": "435907D7",
+    "local": "working"
+  },
+  {
+    "name": "Snipers",
+    "titleId": "573607D2",
+    "artwork": "573607D2",
+    "local": "working"
+  },
+  {
+    "name": "Snoopy Flying Ace",
+    "titleId": "584109B5",
+    "artwork": "584109B5",
+    "local": "working"
+  },
+  {
+    "name": "Soldier of Fortune: Payback",
+    "titleId": "41560818",
+    "artwork": "41560818",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Soltrio Solitaire",
+    "titleId": "5841083D",
+    "artwork": "5841083D",
+    "local": "working"
+  },
+  {
+    "name": "Sonic & All-Stars Racing Transformed",
+    "titleId": "5345085D",
+    "artwork": "5345085D",
+    "public": "working",
+    "comments": "`render_target_path_d3d12 = \"rov\"`"
+  },
+  {
+    "name": "Sonic & SEGA Racing",
+    "titleId": "53450815",
+    "artwork": "53450815",
+    "public": "working"
+  },
+  {
+    "name": "Sonic Free Riders",
+    "titleId": "5345084D",
+    "artwork": "5345084D",
+    "public": "working",
+    "others": "[No Kinect Patch](https://gamebanana.com/mods/456720)"
+  },
+  {
+    "name": "Sonic the Fighters",
+    "titleId": "5841129E",
+    "artwork": "5841129E",
+    "local": "working"
+  },
+  {
+    "name": "Sonic The Hedgehog 2",
+    "titleId": "58410863",
+    "artwork": "58410863",
+    "public": "working"
+  },
+  {
+    "name": "Sonic The Hedgehog 3",
+    "titleId": "584109A3",
+    "artwork": "584109A3",
+    "onlyLocal": "working"
+  },
+  {
+    "name": "Sonic the Hedgehog 4: Episode II",
+    "titleId": "584111F2",
+    "artwork": "584111F2",
+    "local": "working"
+  },
+  {
+    "name": "Soulcalibur IV",
+    "titleId": "4E4D07E0",
+    "artwork": "4E4D07E0",
+    "local": "working"
+  },
+  {
+    "name": "Soulcalibur V",
+    "titleId": "4E4D083D",
+    "artwork": "4E4D083D",
+    "local": "working"
+  },
+  {
+    "name": "South Park Let's Go Tower Defense Play!",
+    "titleId": "58410931",
+    "artwork": "58410931",
+    "local": "working"
+  },
+  {
+    "name": "South Park: Tenorman's Revenge",
+    "titleId": "58410B80",
+    "artwork": "58410B80",
+    "local": "working"
+  },
+  {
+    "name": "Space Invaders Extreme",
+    "titleId": "58410996",
+    "artwork": "58410996",
+    "onlyLocal": "working"
+  },
+  {
+    "name": "Spec Ops: The Line",
+    "titleId": "54540843",
+    "artwork": "54540843",
+    "onlyLocal": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Special Forces: Team X",
+    "titleId": "584112AD",
+    "artwork": "584112AD",
+    "local": "working"
+  },
+  {
+    "name": "Speedball 2",
+    "titleId": "5841088D",
+    "artwork": "5841088D",
+    "local": "working"
+  },
+  {
+    "name": "Split/Second",
+    "titleId": "425607E7",
+    "artwork": "425607E7",
+    "local": "working"
+  },
+  {
+    "name": "SpongeBob SquarePants Underpants Slam!",
+    "titleId": "5841089F",
+    "artwork": "5841089F",
+    "local": "working"
+  },
+  {
+    "name": "Spyglass Board Games",
+    "titleId": "584107F5",
+    "artwork": "584107F5",
+    "public": "working",
+    "comments": "Kinect Game"
+  },
+  {
+    "name": "Star Trek",
+    "titleId": "4E4D085B",
+    "artwork": "4E4D085B",
+    "local": "working"
+  },
+  {
+    "name": "Star Trek Legacy",
+    "titleId": "425307D2",
+    "local": "working"
+  },
+  {
+    "name": "Star Trek: DAC",
+    "titleId": "5841098E",
+    "artwork": "5841098E",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Star Wars Battlefront III (Unreleased Game)",
+    "titleId": "4C4107D5",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Alpha, Mar 17 2008\n\nSystemlink works without a server.",
+    "others": "[Conquest Taoonie](https://www.youtube.com/watch?v=C54jCqFnCmQ)\n\n[MP Event Stream](https://www.youtube.com/watch?v=xSpTmsSvP4s)"
+  },
+  {
+    "name": "Star Wars The Clone Wars: Republic Heroes",
+    "titleId": "4C4107E2",
+    "artwork": "4C4107E2",
+    "local": "working"
+  },
+  {
+    "name": "Stoked",
+    "titleId": "444507D3",
+    "artwork": "444507D3",
+    "local": "working"
+  },
+  {
+    "name": "Stoked: Big Air Edition",
+    "titleId": "444507D5",
+    "artwork": "444507D5",
+    "local": "working"
+  },
+  {
+    "name": "Stormrise",
+    "titleId": "53450806",
+    "artwork": "53450806",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Player & Ranked works.\n\nSystemlink works without a server."
+  },
+  {
+    "name": "Stranglehold",
+    "titleId": "4D5707D2",
+    "artwork": "4D5707D2",
+    "local": "working"
+  },
+  {
+    "name": "Street Fighter II' HF",
+    "titleId": "584107F4",
+    "artwork": "584107F4",
+    "public": "working",
+    "local": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "Street Fighter III: Online Edition",
+    "titleId": "58410B16",
+    "artwork": "58410B16",
+    "local": "working"
+  },
+  {
+    "name": "Street Fighter IV",
+    "titleId": "434307E1",
+    "artwork": "434307E1",
+    "local": "working"
+  },
+  {
+    "name": "Street Fighter X Tekken",
+    "titleId": "4343080F",
+    "artwork": "4343080F",
+    "local": "working"
+  },
+  {
+    "name": "Street Trace: NYC",
+    "titleId": "584107F0",
+    "artwork": "584107F0",
+    "public": "working"
+  },
+  {
+    "name": "Streets of Rage 2",
+    "titleId": "5841086D",
+    "artwork": "5841086D",
+    "local": "working"
+  },
+  {
+    "name": "Stuntman: Ignition",
+    "titleId": "545107F4",
+    "artwork": "545107F4",
+    "public": "working",
+    "systemlink": "partial",
+    "comments": "Systemlink requires a server."
+  },
+  {
+    "name": "Super Contra",
+    "titleId": "5841081A",
+    "artwork": "5841081A",
+    "public": "working"
+  },
+  {
+    "name": "Super Street Fighter 2 THD",
+    "titleId": "584108A4",
+    "artwork": "584108A4",
+    "onlyLocal": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "Super Street Fighter IV",
+    "titleId": "434307FC",
+    "artwork": "434307FC",
+    "public": "working"
+  },
+  {
+    "name": "Superstars V8 Next Challenge",
+    "titleId": "4C5307D8",
+    "artwork": "4C5307D8",
+    "local": "working"
+  },
+  {
+    "name": "Superstars V8 Racing",
+    "titleId": "4C5307D3",
+    "artwork": "4C5307D3",
+    "local": "working"
+  },
+  {
+    "name": "Supremacy MMA",
+    "titleId": "464F07E4",
+    "artwork": "464F07E4",
+    "local": "working",
+    "comments": "Input issues."
+  },
+  {
+    "name": "Supreme Commander",
+    "titleId": "415907D5",
+    "artwork": "415907D5",
+    "local": "working",
+    "comments": "`readback_resolve = true`"
+  },
+  {
+    "name": "Supreme Commander 2",
+    "titleId": "535107E3",
+    "artwork": "535107E3",
+    "local": "working"
+  },
+  {
+    "name": "Switchball",
+    "titleId": "58410830",
+    "artwork": "58410830",
+    "local": "working"
+  },
+  {
+    "name": "Takedown: Red Sabre",
+    "titleId": "584113E7",
+    "artwork": "584113E7",
+    "local": "working"
+  },
+  {
+    "name": "Tecmo Bowl Throwback",
+    "titleId": "58410A60",
+    "artwork": "58410A60",
+    "local": "working"
+  },
+  {
+    "name": "Teenage Mutant Ninja Turtles: Mutants in Manhattan",
+    "titleId": "4156091E",
+    "artwork": "4156091E",
+    "local": "working"
+  },
+  {
+    "name": "Teenage Mutant Ninja Turtles: Out of the Shadows",
+    "titleId": "584113C2",
+    "artwork": "584113C2",
+    "local": "working"
+  },
+  {
+    "name": "Teenage Mutant Ninja Turtles: Turtles in Time Re-Shelled",
+    "titleId": "584109D2",
+    "artwork": "584109D2",
+    "local": "working"
+  },
+  {
+    "name": "Tekken 6",
+    "titleId": "4E4D07FC",
+    "artwork": "4E4D07FC",
+    "public": "partial",
+    "comments": "Latest TU for COOP & PVP. Player & COOP go in-game.\n\nRanked requires a file from xbox live.\n\nPVP works on public.\nCO-OP often disconnects mid-match."
+  },
+  {
+    "name": "Tekken Tag Tournament 2",
+    "titleId": "4E4D0859",
+    "artwork": "4E4D0859",
+    "local": "working",
+    "comments": "Requires online pass installed.\n\n`framerate_limit = 120` to fix slow-mo.\nStart game at 4x time scalar."
+  },
+  {
+    "name": "Tenchu Z",
+    "titleId": "465307D7",
+    "artwork": "465307D7",
+    "local": "partial",
+    "systemlink": "partial",
+    "comments": "Systemlink works without a server.\n\nExisting session causes a black screen."
+  },
+  {
+    "name": "Terraria",
+    "titleId": "5841128F",
+    "artwork": "5841128F",
+    "local": "working"
+  },
+  {
+    "name": "Test Drive Unlimited",
+    "titleId": "494707D4",
+    "artwork": "494707D4",
+    "public": "working",
+    "comments": "Player & Ranked works\n\nFree roam needs a dedicated game server."
+  },
+  {
+    "name": "Test Drive: Ferrari Racing Legends",
+    "titleId": "455607DB",
+    "artwork": "455607DB",
+    "local": "working",
+    "comments": "Unplayable due to graphics issues"
+  },
+  {
+    "name": "Tetris Evolution",
+    "titleId": "545107D7",
+    "artwork": "545107D7",
+    "local": "working"
+  },
+  {
+    "name": "Tetris Splash",
+    "titleId": "5841083B",
+    "artwork": "5841083B",
+    "local": "working"
+  },
+  {
+    "name": "Texas Cheat'em",
+    "titleId": "5841096D",
+    "artwork": "5841096D",
+    "local": "working"
+  },
+  {
+    "name": "Texas Hold'em",
+    "titleId": "584107F6",
+    "artwork": "584107F6",
+    "public": "working"
+  },
+  {
+    "name": "The Chronicles of Riddick: Assault on Dark Athena",
+    "titleId": "494707EE",
+    "artwork": "494707EE",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "The Club",
+    "titleId": "534507DD",
+    "artwork": "534507DD",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "The Cursed Crusade",
+    "titleId": "415407D6",
+    "artwork": "415407D6",
+    "public": "working"
+  },
+  {
+    "name": "The Darkness",
+    "titleId": "545407EE",
+    "artwork": "545407EE",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "The Darkness 2",
+    "titleId": "5454088D",
+    "artwork": "5454088D",
+    "onlyLocal": "working"
+  },
+  {
+    "name": "The Expendables 2",
+    "titleId": "5841124B",
+    "artwork": "5841124B",
+    "local": "working"
+  },
+  {
+    "name": "The Fancy Pants Adventures",
+    "titleId": "58410A9F",
+    "artwork": "58410A9F",
+    "local": "working"
+  },
+  {
+    "name": "The First Templar",
+    "titleId": "4B5907D8",
+    "artwork": "4B5907D8",
+    "local": "working"
+  },
+  {
+    "name": "The Incredible Hulk",
+    "titleId": "534507F1",
+    "artwork": "534507F1",
+    "local": "working",
+    "comments": "Requires TU 1. Player & Ranked works."
+  },
+  {
+    "name": "The King of Fighters 2002 Unlimited Match",
+    "titleId": "584109AD",
+    "artwork": "584109AD",
+    "local": "working",
+    "comments": "Runs slow."
+  },
+  {
+    "name": "The King of Fighters '98 Ultimate Match",
+    "titleId": "584108D1",
+    "artwork": "584108D1",
+    "local": "working"
+  },
+  {
+    "name": "The King of Fighters XIII",
+    "titleId": "534E87DD",
+    "artwork": "534E87DD",
+    "local": "working"
+  },
+  {
+    "name": "The King of Fighters: Sky Stage",
+    "titleId": "584109AE",
+    "artwork": "584109AE",
+    "local": "working"
+  },
+  {
+    "name": "The Lord of the Rings: War in the North",
+    "titleId": "575207EF",
+    "artwork": "575207EF",
+    "public": "broken",
+    "systemlink": "partial"
+  },
+  {
+    "name": "The Outfit",
+    "titleId": "545107D2",
+    "artwork": "545107D2",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\nPlayers have stuttered walking."
+  },
+  {
+    "name": "The Price Is Right: Decades",
+    "titleId": "55530880",
+    "artwork": "55530880",
+    "local": "working"
+  },
+  {
+    "name": "The Simpsons Arcade",
+    "titleId": "584111FA",
+    "artwork": "584111FA",
+    "onlyLocal": "working",
+    "comments": "Stuck starting session public connection."
+  },
+  {
+    "name": "The Warriors: Street Brawl",
+    "titleId": "58410930",
+    "artwork": "58410930",
+    "local": "working"
+  },
+  {
+    "name": "Things on Wheels",
+    "titleId": "58410A36",
+    "artwork": "58410A36",
+    "public": "working"
+  },
+  {
+    "name": "Time Pilot",
+    "titleId": "58410815",
+    "artwork": "58410815",
+    "public": "working"
+  },
+  {
+    "name": "TimeShift",
+    "titleId": "565507DA",
+    "artwork": "565507DA",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "TimeShift - Beta",
+    "titleId": "565507DA",
+    "artwork": "565507DA",
+    "public": "working"
+  },
+  {
+    "name": "TiQal",
+    "titleId": "584108D9",
+    "artwork": "584108D9",
+    "local": "working"
+  },
+  {
+    "name": "TMNT 1989 Arcade",
+    "titleId": "58410870",
+    "artwork": "58410870",
+    "public": "working"
+  },
+  {
+    "name": "TNA Impact!",
+    "titleId": "4D5707DF",
+    "artwork": "4D5707DF",
+    "local": "working"
+  },
+  {
+    "name": "TNT Racers",
+    "titleId": "58410A58",
+    "artwork": "58410A58",
+    "local": "working"
+  },
+  {
+    "name": "Tom Clancy's Ghost Recon Advanced Warfighter",
+    "titleId": "555307D5",
+    "artwork": "555307D5",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Tom Clancy's Ghost Recon Advanced Warfighter 2",
+    "titleId": "555307F0",
+    "artwork": "555307F0",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\nAll TUs work"
+  },
+  {
+    "name": "Tom Clancy's Ghost Recon: Future Soldier",
+    "titleId": "55530833",
+    "artwork": "55530833",
+    "public": "broken",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Tom Clancy's H.A.W.X",
+    "titleId": "55530816",
+    "artwork": "55530816",
+    "onlyLocal": "partial",
+    "systemlink": "working",
+    "comments": "Fails to create Xbox Live session on Heroku.\n\nSystemlink works without a server."
+  },
+  {
+    "name": "Tom Clancy's H.A.W.X 2",
+    "titleId": "55530848",
+    "artwork": "55530848",
+    "onlyLocal": "partial",
+    "systemlink": "working",
+    "comments": "Fails to create Xbox Live session on Heroku.\n\nSystemlink works without a server."
+  },
+  {
+    "name": "Tom Clancy's Rainbow Six: Vegas",
+    "titleId": "555307D6",
+    "artwork": "555307D6",
+    "public": "partial",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server.\n\nUsually crashes before accessing main menu."
+  },
+  {
+    "name": "Tom Clancy's Rainbow Six: Vegas 2",
+    "titleId": "55530807",
+    "artwork": "55530807",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Tom Clancy's Splinter Cell: Conviction",
+    "titleId": "5553080B",
+    "artwork": "5553080B",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink may require a server."
+  },
+  {
+    "name": "Tom Clancy's Splinter Cell: Double Agent",
+    "titleId": "555308DD",
+    "artwork": "555308DD",
+    "public": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Tomb Raider",
+    "titleId": "53510802",
+    "artwork": "53510802",
+    "local": "working"
+  },
+  {
+    "name": "Tony Hawk American Wasteland",
+    "titleId": "415607D4",
+    "artwork": "415607D4",
+    "public": "working"
+  },
+  {
+    "name": "Tony Hawk's Pro Skater HD",
+    "titleId": "5841124A",
+    "artwork": "5841124A",
+    "public": "working"
+  },
+  {
+    "name": "Tony Hawk's Project 8",
+    "titleId": "415607DD",
+    "artwork": "415607DD",
+    "local": "working"
+  },
+  {
+    "name": "Tony Hawk's Proving Ground",
+    "titleId": "415607F0",
+    "artwork": "415607F0",
+    "local": "working"
+  },
+  {
+    "name": "Too Human",
+    "titleId": "4D5307DE",
+    "artwork": "4D5307DE",
+    "local": "working"
+  },
+  {
+    "name": "Top Gun: Hard Lock",
+    "titleId": "464F07EC",
+    "artwork": "464F07EC",
+    "local": "working"
+  },
+  {
+    "name": "Top Spin 2",
+    "titleId": "545407D5",
+    "artwork": "545407D5",
+    "public": "working"
+  },
+  {
+    "name": "Top Spin 3",
+    "titleId": "545407FF",
+    "artwork": "545407FF",
+    "public": "working"
+  },
+  {
+    "name": "Top Spin 4",
+    "titleId": "54540859",
+    "artwork": "54540859",
+    "public": "working"
+  },
+  {
+    "name": "Tour de France 2009",
+    "titleId": "5841092F",
+    "artwork": "5841092F",
+    "local": "working"
+  },
+  {
+    "name": "Tour de France 2012",
+    "titleId": "464507DA",
+    "artwork": "464507DA",
+    "local": "working"
+  },
+  {
+    "name": "Toy Soldiers",
+    "titleId": "5841099E",
+    "artwork": "5841099E",
+    "local": "working"
+  },
+  {
+    "name": "Toy Soldiers: Cold War",
+    "titleId": "58410AAC",
+    "artwork": "58410AAC",
+    "local": "working"
+  },
+  {
+    "name": "Toybox Turbos",
+    "titleId": "58411463",
+    "artwork": "58411463",
+    "local": "working"
+  },
+  {
+    "name": "Track & Field",
+    "titleId": "5841081B",
+    "artwork": "5841081B",
+    "public": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "Transformers: Revenge of the Fallen",
+    "titleId": "41560834",
+    "artwork": "41560834",
+    "local": "working"
+  },
+  {
+    "name": "Trials Evolution",
+    "titleId": "58410AAD",
+    "artwork": "58410AAD",
+    "local": "working",
+    "comments": "Unplayable due to graphical issues, and very unstable."
+  },
+  {
+    "name": "Trine 2",
+    "titleId": "58410A9B",
+    "artwork": "58410A9B",
+    "local": "working"
+  },
+  {
+    "name": "Tron",
+    "titleId": "5841088E",
+    "artwork": "5841088E",
+    "public": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "Tron: Evolution",
+    "titleId": "425607ED",
+    "artwork": "425607ED",
+    "local": "working"
+  },
+  {
+    "name": "Truck Racer",
+    "titleId": "573607DB",
+    "artwork": "573607DB",
+    "public": "working"
+  },
+  {
+    "name": "Turning Point: Fall of Liberty",
+    "titleId": "434D07E0",
+    "artwork": "434D07E0",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Turok",
+    "titleId": "425607D3",
+    "artwork": "425607D3",
+    "public": "working"
+  },
+  {
+    "name": "Two Worlds",
+    "titleId": "535007D4",
+    "artwork": "535007D4",
+    "local": "working"
+  },
+  {
+    "name": "Two Worlds II",
+    "titleId": "5A4507DA",
+    "artwork": "5A4507DA",
+    "local": "working",
+    "comments": "`readback_memexport = true` + vkd3d to fix graphics."
+  },
+  {
+    "name": "UFC 2009 Undisputed",
+    "titleId": "5451082A",
+    "artwork": "5451082A",
+    "public": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "UFC Undisputed 3",
+    "titleId": "585709A1",
+    "local": "partial",
+    "comments": "Requires online pass installed to access Xbox Live menus.\n\nDisconnects frequently."
+  },
+  {
+    "name": "Ugly Americans: Apocalypsegeddon",
+    "titleId": "58410B63",
+    "artwork": "58410B63",
+    "public": "working"
+  },
+  {
+    "name": "Ultimate Marvel vs. Capcom 3",
+    "titleId": "43430821",
+    "artwork": "43430821",
+    "public": "working",
+    "comments": "Player and Ranked works"
+  },
+  {
+    "name": "Ultimate Mortal Kombat 3",
+    "titleId": "58410833",
+    "artwork": "58410833",
+    "public": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "Ultra Street Fighter IV",
+    "titleId": "434307FC",
+    "artwork": "434307FC",
+    "local": "working"
+  },
+  {
+    "name": "Unbound Saga",
+    "titleId": "58410A11",
+    "artwork": "58410A11",
+    "local": "working"
+  },
+  {
+    "name": "Undertow",
+    "titleId": "58410873",
+    "artwork": "58410873",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Universe at War: Earth Assault",
+    "titleId": "534507F0",
+    "artwork": "534507F0",
+    "local": "working"
+  },
+  {
+    "name": "UNO",
+    "titleId": "584107F3",
+    "artwork": "584107F3",
+    "public": "working"
+  },
+  {
+    "name": "UNO Rush",
+    "titleId": "5841089A",
+    "artwork": "5841089A",
+    "local": "working"
+  },
+  {
+    "name": "Unreal Tournament 3",
+    "titleId": "4D5707DB",
+    "artwork": "4D5707DB",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Vampire Rain",
+    "titleId": "434107D3",
+    "artwork": "434107D3",
+    "local": "working"
+  },
+  {
+    "name": "Vampire Rain Demo",
+    "titleId": "434187D6",
+    "local": "working"
+  },
+  {
+    "name": "Vancouver 2010",
+    "titleId": "5345081A",
+    "artwork": "5345081A",
+    "local": "broken",
+    "systemlink": "partial",
+    "comments": "Fails joining sessions over Xbox Live.\n\nSystemlink requires a server."
+  },
+  {
+    "name": "Vigilante 8 Arcade",
+    "titleId": "584108A8",
+    "artwork": "584108A8",
+    "local": "working"
+  },
+  {
+    "name": "Virtua Fighter 2",
+    "titleId": "5841129C",
+    "artwork": "5841129C",
+    "local": "working",
+    "comments": "Gameplay is slow-mo."
+  },
+  {
+    "name": "Virtua Fighter 5 Final Showdown",
+    "titleId": "584111FE",
+    "artwork": "584111FE",
+    "local": "working"
+  },
+  {
+    "name": "Virtua Striker",
+    "titleId": "584113CD",
+    "artwork": "584113CD",
+    "local": "working"
+  },
+  {
+    "name": "Virtua Tennis 2009",
+    "titleId": "53450814",
+    "artwork": "53450814",
+    "local": "working"
+  },
+  {
+    "name": "Virtua Tennis 3",
+    "titleId": "534507E1",
+    "artwork": "534507E1",
+    "public": "working"
+  },
+  {
+    "name": "Virtua Tennis 4",
+    "titleId": "53450857",
+    "artwork": "53450857",
+    "local": "working"
+  },
+  {
+    "name": "Virtual-On Oratorio Tangram",
+    "titleId": "58410985",
+    "artwork": "58410985",
+    "local": "working",
+    "systemlink": "broken",
+    "comments": "Systemlink is broken."
+  },
+  {
+    "name": "Viva Piñata: Party Animals",
+    "titleId": "4D530819",
+    "artwork": "4D530819",
+    "public": "working"
+  },
+  {
+    "name": "Viva Piñata: Trouble in Paradise",
+    "titleId": "4D53085F",
+    "artwork": "4D53085F",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "Voltron",
+    "titleId": "58410B8F",
+    "artwork": "58410B8F",
+    "local": "working"
+  },
+  {
+    "name": "War World",
+    "titleId": "58410857",
+    "artwork": "58410857",
+    "local": "working"
+  },
+  {
+    "name": "Warhammer 40,000: Space Marine",
+    "titleId": "54510C2C",
+    "local": "working"
+  },
+  {
+    "name": "Warhammer: Battle March",
+    "titleId": "4E4D07DF",
+    "artwork": "4E4D07DF",
+    "local": "working"
+  },
+  {
+    "name": "Warlords",
+    "titleId": "58410851",
+    "artwork": "58410851",
+    "local": "working"
+  },
+  {
+    "name": "Warlords",
+    "titleId": "58410B27",
+    "artwork": "58410B27",
+    "local": "working"
+  },
+  {
+    "name": "Warriors Orochi 3",
+    "titleId": "4B5607DF",
+    "artwork": "4B5607DF",
+    "local": "working",
+    "comments": "Appears laggy."
+  },
+  {
+    "name": "WarTech: Senko no Ronde",
+    "titleId": "475207D1",
+    "artwork": "475207D1",
+    "local": "working"
+  },
+  {
+    "name": "Wheel of Fortune",
+    "titleId": "545108AF",
+    "artwork": "545108AF",
+    "local": "working"
+  },
+  {
+    "name": "Wing Commander Arena",
+    "titleId": "58410868",
+    "artwork": "58410868",
+    "local": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "Winter Sports 2010",
+    "titleId": "524C07D8",
+    "artwork": "524C07D8",
+    "local": "working"
+  },
+  {
+    "name": "Winter Sports 2011",
+    "titleId": "445407DA",
+    "artwork": "445407DA",
+    "local": "working"
+  },
+  {
+    "name": "Wolf of the Battlefield: Commando 3",
+    "titleId": "584108AB",
+    "artwork": "584108AB",
+    "local": "working"
+  },
+  {
+    "name": "Wolfenstein",
+    "titleId": "415607DE",
+    "artwork": "415607DE",
+    "local": "working"
+  },
+  {
+    "name": "Word Puzzle",
+    "titleId": "58410874",
+    "artwork": "58410874",
+    "public": "working"
+  },
+  {
+    "name": "World Championship Poker featuring Howard Lederer: All In",
+    "titleId": "435607D1",
+    "artwork": "435607D1",
+    "local": "working"
+  },
+  {
+    "name": "World of Outlaws: Sprint Cars",
+    "titleId": "54510835",
+    "artwork": "54510835",
+    "local": "working"
+  },
+  {
+    "name": "World Series of Poker 2007: Tournament of Champions",
+    "titleId": "415607D9",
+    "artwork": "415607D9",
+    "local": "working",
+    "systemlink": "partial",
+    "comments": "Systemlink requires a server."
+  },
+  {
+    "name": "World Series of Poker 2008: Battle for the Bracelets",
+    "titleId": "41560806",
+    "artwork": "41560806",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "World Snooker Championship 2007",
+    "titleId": "534507DF",
+    "artwork": "534507DF",
+    "local": "working"
+  },
+  {
+    "name": "Worms",
+    "titleId": "584107DE",
+    "artwork": "584107DE",
+    "local": "working"
+  },
+  {
+    "name": "Worms 2: Armageddon",
+    "titleId": "58410912",
+    "artwork": "58410912",
+    "local": "working"
+  },
+  {
+    "name": "Worms: Revolution",
+    "titleId": "58411290",
+    "artwork": "58411290",
+    "local": "working"
+  },
+  {
+    "name": "WRC 2: FIA World Rally Championship",
+    "titleId": "4C5307EB",
+    "artwork": "4C5307EB",
+    "local": "working"
+  },
+  {
+    "name": "WRC 2010",
+    "titleId": "4C5307DD",
+    "artwork": "4C5307DD",
+    "local": "working",
+    "comments": "Connecting unstable."
+  },
+  {
+    "name": "WRC 3: FIA World Rally Championship",
+    "titleId": "4C5307F3",
+    "artwork": "4C5307F3",
+    "local": "working"
+  },
+  {
+    "name": "WRC 4: FIA World Rally Championship",
+    "titleId": "573607DD",
+    "artwork": "573607DD",
+    "public": "working",
+    "comments": "Connecting unstable."
+  },
+  {
+    "name": "WRC 5",
+    "titleId": "573607E2",
+    "artwork": "573607E2",
+    "public": "working"
+  },
+  {
+    "name": "WRC Powerslide",
+    "titleId": "584113D1",
+    "artwork": "584113D1",
+    "local": "working"
+  },
+  {
+    "name": "Wrecked",
+    "titleId": "58410B0B",
+    "artwork": "58410B0B",
+    "local": "working"
+  },
+  {
+    "name": "Wrestle Kingdom",
+    "titleId": "594B07D1",
+    "artwork": "594B07D1",
+    "local": "working"
+  },
+  {
+    "name": "WSC Real 09: World Snooker Championship",
+    "titleId": "424907D1",
+    "artwork": "424907D1",
+    "local": "working"
+  },
+  {
+    "name": "WSC Real 11: World Snooker Championship",
+    "titleId": "424907D4",
+    "artwork": "424907D4",
+    "local": "working"
+  },
+  {
+    "name": "WWE Legends of Wrestlemania",
+    "titleId": "54510838",
+    "artwork": "54510838",
+    "local": "working",
+    "comments": "Gameplay is slow-mo."
+  },
+  {
+    "name": "WWE SmackDown vs. Raw 2010",
+    "titleId": "54510844",
+    "artwork": "54510844",
+    "public": "working"
+  },
+  {
+    "name": "WWE SmackDown vs. Raw 2011",
+    "titleId": "5451085D",
+    "artwork": "5451085D",
+    "public": "working"
+  },
+  {
+    "name": "WWE WrestleFest",
+    "titleId": "5841123D",
+    "local": "working",
+    "comments": "Unreleased prototype."
+  },
+  {
+    "name": "XCOM: Enemy Unknown",
+    "titleId": "54540882",
+    "artwork": "54540882",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "XCOM: Enemy Within",
+    "titleId": "545408AE",
+    "artwork": "545408AE",
+    "local": "working",
+    "systemlink": "working",
+    "comments": "Systemlink works without a server."
+  },
+  {
+    "name": "X-MEN",
+    "titleId": "58410B11",
+    "artwork": "58410B11",
+    "onlyLocal": "working",
+    "comments": "Stuck starting session public connection."
+  },
+  {
+    "name": "Yie Ar Kung-Fu",
+    "titleId": "58410816",
+    "artwork": "58410816",
+    "public": "working",
+    "comments": "Player & Ranked works"
+  },
+  {
+    "name": "Yosumin! Live",
+    "titleId": "5841098B",
+    "artwork": "5841098B",
+    "local": "working"
+  },
+  {
+    "name": "Young Justice: Legacy",
+    "titleId": "373407D1",
+    "artwork": "373407D1",
+    "local": "working"
+  },
+  {
+    "name": "Yu-Gi-Oh! 5D's Decade Duels Plus",
+    "titleId": "58410A03",
+    "artwork": "58410A03",
+    "local": "working"
+  },
+  {
+    "name": "Yu-Gi-Oh! Millennium Duels",
+    "titleId": "58411442",
+    "artwork": "58411442",
+    "local": "working"
+  },
+  {
+    "name": "Zegapain NOR",
+    "titleId": "424187DB",
+    "local": "working"
+  },
+  {
+    "name": "Zegapain XOR",
+    "titleId": "424107D1",
+    "artwork": "424107D1",
+    "local": "working"
+  },
+  {
+    "name": "Zeno Clash",
+    "titleId": "584109DC",
+    "artwork": "584109DC",
+    "local": "working"
+  },
+  {
+    "name": "Zeno Clash 2",
+    "titleId": "58411277",
+    "artwork": "58411277",
+    "local": "working"
+  },
+  {
+    "name": "Zombie Apocalaypse: NDA",
+    "titleId": "58410B76",
+    "artwork": "58410B76",
+    "local": "working"
+  },
+  {
+    "name": "Zombie Wrangler",
+    "titleId": "584108D8",
+    "artwork": "584108D8",
+    "local": "working"
+  }
+]

@@ -50,6 +50,7 @@ async function bootstrap() {
           "'unsafe-inline'",
           "'sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo='",
         ],
+        'img-src': ["'self'", 'data:', 'https://xenia-manager.github.io'],
         upgradeInsecureRequests: SSL_enabled ? [] : null,
       },
     },
@@ -57,7 +58,7 @@ async function bootstrap() {
 
   // Only apply helmet to the static frontend, not the API.
   const frontendPaths =
-    /^\/(index\.html|50x\.html|assets\/.*|css\/.*|js\/.*)?$/;
+    /^\/(index\.html|50x\.html|compatibility\.html|assets\/.*|css\/.*|js\/.*|data\/.*)?$/;
 
   app.use((req: Request, res: Response, next: NextFunction) => {
     if (frontendPaths.test(req.path)) {
