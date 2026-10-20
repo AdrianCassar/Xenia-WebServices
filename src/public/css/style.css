@@ -104,6 +104,11 @@ h1 {
     text-decoration: none;
 }
 
+.nav a[aria-current="page"] {
+    border-color: var(--accent);
+    background-color: var(--surface);
+}
+
 /* Status bar */
 
 .status-bar {
@@ -479,9 +484,34 @@ h1 {
 
 /* Compatibility list */
 
+/* Total on the left, then one tile per column. */
 .stats.compat-stats {
-    flex-wrap: wrap;
-    gap: 16px 48px;
+    display: grid;
+    grid-template-columns: auto repeat(4, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+}
+
+.compat-stats .stat {
+    justify-content: center;
+    padding: 12px 8px;
+    border-radius: 8px;
+    background: var(--surface-2);
+    text-align: center;
+}
+
+.compat-stats .stat:first-child {
+    padding: 4px 24px 4px 8px;
+    margin-right: 6px;
+    border-right: 1px solid var(--border);
+    border-radius: 0;
+    background: none;
+}
+
+.compat-stats .stat:first-child .stat-value {
+    color: var(--accent-bright);
+    font-size: 30px;
 }
 
 .compat-intro {
@@ -731,8 +761,21 @@ h1 {
 }
 
 @media only screen and (max-width: 720px) {
+    /* Total across the top, then the four columns as a 2x2 grid. */
     .stats.compat-stats {
-        gap: 12px 24px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .compat-stats .stat {
+        padding: 10px 8px;
+    }
+
+    .compat-stats .stat:first-child {
+        grid-column: 1 / -1;
+        padding: 0 0 4px;
+        margin-right: 0;
+        border-right: none;
     }
 
     .compat-table thead {
@@ -832,5 +875,17 @@ h1 {
 
     .stats {
         gap: 32px;
+    }
+
+    /* Reserve two lines so the nav sits at the same height on every page. */
+    .tagline {
+        min-height: calc(2 * 1.45em);
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    /* Keep page titles on one line. */
+    h1 {
+        font-size: 20px;
     }
 }
