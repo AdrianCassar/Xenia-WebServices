@@ -441,34 +441,28 @@ export default class SessionRepository implements ISessionRepository {
   }
 
   public async findAllAdvertisedSessions() {
-    const sessions = await this.SessionModel.find(
-      {
-        context: { $exists: true },
-        $expr: { $gt: [{ $size: { $objectToArray: '$context' } }, 0] },
-        'properties.0': { $exists: true },
-        advertised: true,
-        deleted: false,
-        migration: undefined,
-      },
-      undefined,
-    );
+    const sessions = await this.SessionModel.find({
+      context: { $exists: true },
+      $expr: { $gt: [{ $size: { $objectToArray: '$context' } }, 0] },
+      'properties.0': { $exists: true },
+      advertised: true,
+      deleted: false,
+      migration: undefined,
+    });
 
     return sessions.map(this.sessionDomainMapper.mapToDomainModel);
   }
 
   public async findTitleSessions(titleId: TitleId): Promise<Session[]> {
-    const sessions = await this.SessionModel.find(
-      {
-        titleId: titleId.toString(),
-        context: { $exists: true },
-        $expr: { $gt: [{ $size: { $objectToArray: '$context' } }, 0] },
-        'properties.0': { $exists: true },
-        advertised: true,
-        deleted: false,
-        migration: undefined,
-      },
-      undefined,
-    );
+    const sessions = await this.SessionModel.find({
+      titleId: titleId.toString(),
+      context: { $exists: true },
+      $expr: { $gt: [{ $size: { $objectToArray: '$context' } }, 0] },
+      'properties.0': { $exists: true },
+      advertised: true,
+      deleted: false,
+      migration: undefined,
+    });
 
     return sessions.map(this.sessionDomainMapper.mapToDomainModel);
   }
