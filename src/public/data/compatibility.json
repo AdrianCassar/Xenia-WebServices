@@ -3181,6 +3181,13 @@
     "comments": "Systemlink works without a server."
   },
   {
+    "name": "Race Pro",
+    "titleId": "494707E4",
+    "artwork": "494707E4",
+    "local": "working",
+    "systemlink": "working"
+  },
+  {
     "name": "Radiant Silvergun",
     "titleId": "58410A54",
     "artwork": "58410A54",
