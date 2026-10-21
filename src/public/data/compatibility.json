@@ -2164,13 +2164,15 @@
     "name": "Kane & Lynch 2: Dog Days",
     "titleId": "534307F8",
     "artwork": "534307F8",
-    "local": "working"
+    "local": "working",
+    "systemlink": "working"
   },
   {
     "name": "Kane & Lynch: Dead Men",
     "titleId": "534307E0",
     "artwork": "534307E0",
-    "local": "working"
+    "local": "working",
+    "systemlink": "working"
   },
   {
     "name": "Killer Instinct (Prototype)",
@@ -2852,13 +2854,15 @@
     "name": "Operation Flashpoint: Dragon Rising",
     "titleId": "434D0811",
     "artwork": "434D0811",
-    "local": "working"
+    "local": "working",
+    "systemlink": "working"
   },
   {
     "name": "Operation Flashpoint: Red River",
     "titleId": "434D0838",
     "artwork": "434D0838",
-    "local": "working"
+    "local": "working",
+    "systemlink": "working"
   },
   {
     "name": "Orange Box (Team Fortress 2)",
@@ -3395,7 +3399,8 @@
     "name": "Rugby World Cup 2011",
     "titleId": "464F07ED",
     "artwork": "464F07ED",
-    "local": "working"
+    "local": "working",
+    "comments": "Enter code `3edcvfr47ujmnhy6` in game to unlock multiplayer."
   },
   {
     "name": "Rumble Roses XX",
