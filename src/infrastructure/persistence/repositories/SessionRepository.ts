@@ -122,7 +122,6 @@ export default class SessionRepository implements ISessionRepository {
     query_id: number,
     filters: Array<string>,
   ) {
-    // Technically limit should be applied after filtering sessions.
     const sessionsDocs = await this.SessionModel.find({
       titleId: titleId.toString(),
       xuid: { $ne: searcher_xuid.value },
@@ -132,7 +131,7 @@ export default class SessionRepository implements ISessionRepository {
       advertised: true,
       deleted: false,
       migration: undefined,
-    }).limit(resultsCount);
+    });
 
     let sessions: Session[] = sessionsDocs.map(
       this.sessionDomainMapper.mapToDomainModel,
@@ -437,7 +436,8 @@ export default class SessionRepository implements ISessionRepository {
       return !evaluations.includes(false);
     });
 
-    return sessions;
+    // Limit is applied after filtering sessions.
+    return sessions.slice(0, resultsCount);
   }
 
   public async findAllAdvertisedSessions() {

@@ -677,8 +677,6 @@ export class SessionController {
     @Param('sessionId') sessionId: string,
     @Body() request: GetSessionPropertyRequest,
   ) {
-    this.logger.verbose(JSON.stringify(request, null, 2));
-
     // Extract properties and exclude contexts
     const properties: Array<Property> = request.properties
       .filter((base64: string) => {
