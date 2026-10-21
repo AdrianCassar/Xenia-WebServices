@@ -2,58 +2,73 @@
 
 # Xenia Web Services
 
-This is a Web API designed to support the Xenia Xbox 360 emulator in providing Online and Multiplayer functionality. A fork [Xenia Canary Netplay](https://github.com/AdrianCassar/xenia-canary) has been created for use with this Web API.
+Xenia Web Services is a REST API that provides online and multiplayer functionality for the [Xenia](https://xenia.jp/) Xbox 360 emulator. It is used by [Xenia Canary Netplay](https://github.com/AdrianCassar/xenia-canary), a fork of Xenia Canary built to work with this API.
+
 It has been designed and developed specifically for Xenia, and does not represent or resemble any first-party Xbox API.
 
-If you'd like to help improve this project, you may report issues or contribute by submitting PRs.
+Contributions are welcome - feel free to report issues or submit pull requests.
 
-## Project architecture
+## Features
 
-This project uses [NestJS](https://nestjs.com/) a Node.js framework using Typescript which follows the [CQRS](https://docs.nestjs.com/recipes/cqrs) model. In addition, [MongoDB](https://www.mongodb.com/) a document-oriented database (NoSQL database).
+- **Sessions & matchmaking**: create, search and join multiplayer sessions.
+- **XNet**: player and network address lookup for peer-to-peer connections.
+- **Leaderboards**: read and write title leaderboard stats.
+- **Title & user storage (XStorage)**: serve title-managed storage and store per-user data.
+- **Web frontend**: view active sessions and the game compatibility list at the server root.
+- **Swagger docs**: interactive API documentation at `/api`.
 
-## Project Setup
+## Getting started
 
-1. Install [NodeJS](https://nodejs.org/).
+### Prerequisites
 
-2. Install MongoDB Compass, details below.
+- [Node.js](https://nodejs.org/) 22 or 24
+- A MongoDB instance, either:
+  - [MongoDB Community Server](https://www.mongodb.com/try/download/community) installed locally **as a network service** (optionally with [MongoDB Compass](https://www.mongodb.com/products/tools/compass) to browse the database), or
+  - a free cloud database on [MongoDB Atlas](https://www.mongodb.com/atlas/database)
 
-2. Copy the provided [.env.template](/.env.template) and rename it to `.env`.
+### Setup
 
-3. Configure the `.env` file if needed.
+1. Clone the repository, including submodules (required for title storage):
 
-4. Run [setup.bat](/setup.bat) script to automatically install and build the project.
+   ```bash
+   git clone --recurse-submodules https://github.com/AdrianCassar/Xenia-WebServices.git
+   ```
 
-5. Check the server is running by accessing the frontend at http://127.0.0.1:36000/.
+2. Copy [.env.template](.env.template) to `.env` and adjust it if needed (see [Configuration](#configuration)).
 
-### MongoDB Compass
-Install [MongoDB Community Server](https://www.mongodb.com/try/download/community) to manage your database ([tutorial](https://www.youtube.com/watch?v=gDOKSgqM-bQ)).
+3. Install and build:
 
-If you plan to create a local database using MongoDB Compass it must be installed as a **network service** or use [MongoDB Atlas](https://www.mongodb.com/atlas/database) a cloud database for free.
+   ```bash
+   npm install
+   npm run build
+   ```
 
-## Hosting Services
+   On Windows you can instead run [setup.bat](setup.bat) and choose **Setup Server**, which installs, builds and creates `.env` for you.
 
-**Heroku**\
-You can easily setup and host this REST API on [Heroku](https://www.heroku.com/), however they do not offer a free tier.
+4. Start the server:
 
-**Vercel**\
-[Vercel](https://vercel.com/) is another option and it offers a free tier. However, i don't know how easy it will be to setup and configure.
+   ```bash
+   npm start
+   ```
 
-## Adding Title Support
+5. Open http://127.0.0.1:36000/ to check the server is running. If Swagger is enabled, the API docs are at http://127.0.0.1:36000/api.
 
-<details>
-  <summary>Expand for details</summary>
+For development with auto-reload, use `npm run start:dev`.
 
-If you would like to add a title to this API, check out the `titles` folder for examples!
+## Configuration
 
-Titles can provide a 'title server' address, which is basically an IP address the game will try to connect to and use as a game-server. Not all games use the 'title server' system.
+Settings are read from environment variables or the `.env` file:
 
-Titles can also provide 'port mappings', wherein you can reroute game ports for title servers or player communication. We recommend using ports 3600X for players and 3601X for title servers. If a title uses a random port, this can be captured as port 0, and mapped accordingly.
+| Variable       | Default                        | Description                                                         |
+| -------------- | ------------------------------ | ------------------------------------------------------------------- |
+| `API_PORT`     | `36000`                        | Port the server listens on (`PORT` takes precedence if set).        |
+| `MONGO_URI`    | `mongodb://127.0.0.1:27017/`   | MongoDB connection string.                                          |
+| `SWAGGER_API`  | `true`                         | Serve Swagger API docs at `/api`.                                   |
+| `SSL`          | `false`                        | Upgrade insecure requests on the frontend when served over HTTPS.  |
+| `nginx`        | `false`                        | Trust proxy headers when running behind Nginx.                      |
+| `heroku_nginx` | `false`                        | Listen on the Heroku Nginx buildpack socket instead of a port.      |
+| `xstorage`     | `false`                        | Enable the `/xstorage` title and user storage endpoints.            |
 
-Port mappings are not a requirement it's an optional feature. It may be useful to map ports which conflict with Windows or Linux. Some titles may fail to work if ports are changed for example Source Engine games.
+## License
 
-To find the ports the title opens you can use [cports](https://www.nirsoft.net/utils/cports.html) and filter by process or you can search through ```xenia.log``` with ```logging = true```.
-
-Titles must provide leaderboard configuration to push statistics to the API. This is more complicated and takes trial and error. I'd recommend self-hosting the API to debug this.
-
-Finally, you can also throw any title-specific netplay related patches in the `patches` folder!
-</details>
+This project is licensed under the [MIT License](LICENSE).
