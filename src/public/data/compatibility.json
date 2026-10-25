@@ -3,19 +3,19 @@
     "name": "0 Day Attack on Earth",
     "titleId": "584109B7",
     "artwork": "584109B7",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "0-D Beat Drop",
     "titleId": "584109A8",
     "artwork": "584109A8",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "007: Quantum of Solace",
     "titleId": "415607FF",
     "artwork": "415607FF",
-    "public": "partial",
+    "public": "working",
     "systemlink": "partial",
     "comments": "Patch required for systemlink.\n\nSystemlink requires a server.",
     "others": "[Systemlink Patch](https://github.com/AdrianCassar/Xenia-WebServices/blob/main/patches/415607FF%20-%20Quantum%20of%20Solace.patch.toml)"
@@ -36,7 +36,7 @@
     "name": "3D Ultra Minigolf Adventures 2",
     "titleId": "58410A3B",
     "artwork": "58410A3B",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "50 Cent: Blood on the Sand",
@@ -79,7 +79,8 @@
     "name": "Aces of the Galaxy",
     "titleId": "58410886",
     "artwork": "58410886",
-    "local": "working"
+    "local": "working",
+    "comments": "Connects but doesn't reach gameplay."
   },
   {
     "name": "Aegis Wing",
@@ -140,7 +141,7 @@
     "name": "Alien Hominid HD",
     "titleId": "58410846",
     "artwork": "58410846",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Aliens vs. Predator",
@@ -217,7 +218,7 @@
     "name": "Arkanoid Live!",
     "titleId": "58410991",
     "artwork": "58410991",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Armored Core 4",
@@ -259,13 +260,13 @@
     "name": "Assault Heroes",
     "titleId": "584107FE",
     "artwork": "584107FE",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Awesomenauts",
     "titleId": "58410B5A",
     "artwork": "58410B5A",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Backbreaker",
@@ -278,7 +279,7 @@
     "name": "Backbreaker Vengeance",
     "titleId": "58410B39",
     "artwork": "58410B39",
-    "onlyLocal": "working"
+    "public": "working"
   },
   {
     "name": "Baja: Edge of Control",
@@ -297,7 +298,7 @@
     "name": "Bangai-O HD: Missile Fury",
     "titleId": "58410AF2",
     "artwork": "58410AF2",
-    "local": "working",
+    "public": "working",
     "systemlink": "working"
   },
   {
@@ -332,28 +333,28 @@
     "local": "working"
   },
   {
-    "name": "Battlestations Pacific",
-    "titleId": "534307E9",
-    "artwork": "534307E9",
-    "local": "working"
-  },
-  {
     "name": "Battlestations: Midway",
     "titleId": "534307D9",
     "artwork": "534307D9",
-    "local": "working"
+    "public": "working"
+  },
+  {
+    "name": "Battlestations: Pacific",
+    "titleId": "534307E9",
+    "artwork": "534307E9",
+    "public": "working"
   },
   {
     "name": "Battlezone",
     "titleId": "58410850",
     "artwork": "58410850",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Beat'n Groovy",
     "titleId": "5841087E",
     "artwork": "5841087E",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Beautiful Katamari",
@@ -379,8 +380,8 @@
     "name": "Bellator: MMA Onslaught",
     "titleId": "58411203",
     "artwork": "58411203",
-    "local": "working",
-    "comments": "Ranked doesn't work."
+    "public": "working",
+    "comments": "Player & Ranked works."
   },
   {
     "name": "Binary Domain",
@@ -392,7 +393,7 @@
     "name": "Bionic Commando",
     "titleId": "434307DD",
     "artwork": "434307DD",
-    "local": "working",
+    "public": "working",
     "systemlink": "working",
     "comments": "Systemlink works without a server."
   },
@@ -424,19 +425,19 @@
     "name": "BlazBlue: Calamity Trigger",
     "titleId": "415807D5",
     "artwork": "415807D5",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "BlazBlue: Continuum Shift",
     "titleId": "415707DA",
     "artwork": "415707DA",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "BlazBlue: Continuum Shift Extend",
     "titleId": "415707DD",
     "artwork": "415707DD",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Blazing Angels 2: Secret Missions of WWII",
@@ -502,7 +503,7 @@
     "name": "Bomberman Battlefest",
     "titleId": "584109B2",
     "artwork": "584109B2",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Bomberman Live",
@@ -543,7 +544,7 @@
     "name": "Brain Challenge",
     "titleId": "584108AE",
     "artwork": "584108AE",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Breach",
@@ -568,7 +569,7 @@
     "name": "Buku Sudoku",
     "titleId": "58410820",
     "artwork": "58410820",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Bulletstorm",
@@ -690,7 +691,7 @@
     "name": "Call of Juarez: Bound in Blood",
     "titleId": "5553081C",
     "artwork": "5553081C",
-    "local": "working",
+    "public": "working",
     "systemlink": "working",
     "comments": "Systemlink works without a server."
   },
@@ -716,19 +717,19 @@
     "name": "Castle Crashers",
     "titleId": "584108B7",
     "artwork": "584108B7",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "CastleStorm",
     "titleId": "5841129A",
     "artwork": "5841129A",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Castlevania: Harmony of Despair",
     "titleId": "58410A7A",
     "artwork": "58410A7A",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Catan",
@@ -804,7 +805,7 @@
     "name": "Condemned 2: Bloodshot",
     "titleId": "534507EF",
     "artwork": "534507EF",
-    "local": "working",
+    "public": "working",
     "systemlink": "working",
     "comments": "Systemlink works without a server.\n\nPlayer works, ranked untested."
   },
@@ -845,7 +846,7 @@
     "name": "Crackdown 2",
     "titleId": "4D5308BC",
     "artwork": "4D5308BC",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Crash Time 4: The Syndicate",
@@ -889,7 +890,7 @@
     "name": "Cyberball 2072",
     "titleId": "58410842",
     "artwork": "58410842",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Damage Inc.: Pacific Squadron WWII",
@@ -967,7 +968,7 @@
     "name": "Dead Island: Riptide",
     "titleId": "4B4D07F2",
     "artwork": "4B4D07F2",
-    "local": "working",
+    "public": "working",
     "systemlink": "working",
     "comments": "Systemlink works without a server."
   },
@@ -1247,6 +1248,12 @@
     "name": "Dungeon Defenders",
     "titleId": "58410B6D",
     "artwork": "58410B6D",
+    "local": "working"
+  },
+  {
+    "name": "Dungeon Fighter LIVE: Fall of Hendon Myre",
+    "titleId": "58410B7F",
+    "artwork": "58410B7F",
     "local": "working"
   },
   {
@@ -1555,8 +1562,7 @@
     "name": "Forza Motorsport 3",
     "titleId": "4D53084D",
     "artwork": "4D53084D",
-    "local": "working",
-    "comments": "Desync"
+    "local": "working"
   },
   {
     "name": "Forza Motorsport 4",
@@ -2062,6 +2068,12 @@
     "local": "working"
   },
   {
+    "name": "International Cricket 2010",
+    "titleId": "434D0836",
+    "artwork": "434D0836",
+    "local": "working"
+  },
+  {
     "name": "Interpol",
     "titleId": "58410977",
     "artwork": "58410977",
@@ -2098,7 +2110,7 @@
     "name": "James Bond 007: Blood Stone",
     "titleId": "4156081F",
     "artwork": "4156081F",
-    "local": "working",
+    "public": "working",
     "systemlink": "working",
     "comments": "`readback_resolve = true`\n\nSystemlink works without a server."
   },
@@ -2144,6 +2156,12 @@
     "titleId": "584107D8",
     "artwork": "584107D8",
     "public": "working"
+  },
+  {
+    "name": "Joy Ride Turbo",
+    "titleId": "5841125E",
+    "artwork": "5841125E",
+    "local": "working"
   },
   {
     "name": "Juiced 2: Hot Import Nights",
@@ -4294,6 +4312,12 @@
     "public": "working"
   },
   {
+    "name": "Ticket to Ride",
+    "titleId": "584108EC",
+    "artwork": "584108EC",
+    "local": "working"
+  },
+  {
     "name": "Time Pilot",
     "titleId": "58410815",
     "artwork": "58410815",
@@ -4677,6 +4701,12 @@
     "artwork": "5841129C",
     "local": "working",
     "comments": "Gameplay is slow-mo."
+  },
+  {
+    "name": "Virtua Fighter 5",
+    "titleId": "534507EE",
+    "artwork": "534507EE",
+    "public": "working"
   },
   {
     "name": "Virtua Fighter 5 Final Showdown",
