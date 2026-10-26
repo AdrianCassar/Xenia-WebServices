@@ -191,6 +191,10 @@ h1 {
     transition: transform 1s linear;
 }
 
+.refresh-bar.no-transition {
+    transition: none;
+}
+
 @keyframes pulse {
     70% {
         box-shadow: 0 0 0 8px rgba(61, 187, 61, 0);

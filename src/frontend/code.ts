@@ -253,9 +253,20 @@ function refreshTimer(): void {
 
   if (document.readyState === 'complete') {
     setText('countdown', `Refreshing in ${time}s`);
-    document
-      .getElementById('refresh_bar')
-      ?.style.setProperty('--progress', String(time / REFRESH_INTERVAL));
+
+    const bar = document.getElementById('refresh_bar');
+
+    if (bar) {
+      // Snap back to full on reset instead of animating backwards
+      const reset = time === REFRESH_INTERVAL;
+      bar.classList.toggle('no-transition', reset);
+      bar.style.setProperty('--progress', String(time / REFRESH_INTERVAL));
+
+      if (reset) {
+        void bar.offsetWidth;
+        bar.classList.remove('no-transition');
+      }
+    }
     updateUptime();
 
     time -= 1;
