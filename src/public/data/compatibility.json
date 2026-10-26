@@ -200,7 +200,7 @@
     "name": "Arcana Heart 3",
     "titleId": "415707DC",
     "artwork": "415707DC",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Are You Smarter Than a 5th Grader",
@@ -705,7 +705,7 @@
     "name": "Capcom Arcade Cabinet",
     "titleId": "58411259",
     "artwork": "58411259",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Carcassonne",
@@ -878,7 +878,7 @@
     "name": "Crysis 2",
     "titleId": "454108E3",
     "artwork": "454108E3",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Culdcept Saga",
@@ -896,7 +896,7 @@
     "name": "Damage Inc.: Pacific Squadron WWII",
     "titleId": "4D5907D3",
     "artwork": "4D5907D3",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Damnation",
@@ -954,7 +954,7 @@
     "name": "Daytona USA",
     "titleId": "58410B1D",
     "artwork": "58410B1D",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Dead Island",
@@ -1026,7 +1026,7 @@
     "name": "Deadliest Warrior",
     "titleId": "58410A69",
     "artwork": "58410A69",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Deadliest Warrior: Battlegrounds",
@@ -1038,7 +1038,7 @@
     "name": "Deadliest Warrior: Legends",
     "titleId": "58410B5C",
     "artwork": "58410B5C",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Death By Cube",
@@ -1063,7 +1063,7 @@
     "name": "Deep Black: Episode 1",
     "titleId": "584111E2",
     "artwork": "584111E2",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Defender",
@@ -1153,7 +1153,7 @@
     "name": "Domino Master",
     "titleId": "58410899",
     "artwork": "58410899",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Don Bradman Cricket 14",
@@ -1235,14 +1235,15 @@
     "name": "Duke Nukem 3D",
     "titleId": "58410901",
     "artwork": "58410901",
-    "local": "working",
+    "public": "working",
     "systemlink": "working"
   },
   {
     "name": "Duke Nukem Forever",
     "titleId": "5454084E",
     "artwork": "5454084E",
-    "local": "working"
+    "public": "working",
+    "comments": "Requires a mutator to be selected."
   },
   {
     "name": "Dungeon Defenders",
@@ -1266,7 +1267,7 @@
     "name": "Dungeons & Dragons: Chronicles of Mystara",
     "titleId": "584113C3",
     "artwork": "584113C3",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Dungeons & Dragons: Daggerdale",
@@ -1296,13 +1297,13 @@
     "name": "E4: Every Extend Extra Extreme",
     "titleId": "58410872",
     "artwork": "58410872",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Earth Defense Force 2025",
     "titleId": "44500805",
     "artwork": "44500805",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Earth Defense Force: Insect Armageddon",
@@ -1314,7 +1315,7 @@
     "name": "Earthworm Jim HD",
     "titleId": "584109E2",
     "artwork": "584109E2",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Elements of Destruction",
@@ -1466,7 +1467,7 @@
     "name": "Fatal Fury Special",
     "titleId": "5841083A",
     "artwork": "5841083A",
-    "local": "working",
+    "public": "working",
     "comments": "Player & Ranked works"
   },
   {
@@ -1488,15 +1489,14 @@
     "name": "Fighting Vipers",
     "titleId": "5841129D",
     "artwork": "5841129D",
-    "local": "working",
-    "comments": "Gameplay is slow-mo."
+    "public": "working"
   },
   {
     "name": "Final Exam",
     "titleId": "584113F3",
     "artwork": "584113F3",
     "local": "working",
-    "comments": "Requires a save passed the tutorial."
+    "comments": "Selecting Quick Match crashes the game."
   },
   {
     "name": "Final Fight: Double Impact",
@@ -1520,13 +1520,14 @@
     "name": "FlatOut: Ultimate Carnage",
     "titleId": "454D07D2",
     "artwork": "454D07D2",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Football Genius: The Ultimate Quiz",
     "titleId": "584109B1",
     "artwork": "584109B1",
-    "local": "working"
+    "public": "working",
+    "comments": "Triggers a Xenia relaunch at the end of a game."
   },
   {
     "name": "Football Manager 2006",
@@ -1562,13 +1563,13 @@
     "name": "Forza Motorsport 3",
     "titleId": "4D53084D",
     "artwork": "4D53084D",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Forza Motorsport 4",
     "titleId": "4D530910",
     "artwork": "4D530910",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Foul Play",
@@ -1598,7 +1599,7 @@
     "name": "Front Mission Evolved",
     "titleId": "535107E9",
     "artwork": "535107E9",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Frontlines: Fuel of War",
@@ -1631,26 +1632,26 @@
     "name": "FunTown Mahjong",
     "titleId": "58410932",
     "artwork": "58410932",
-    "local": "working",
+    "public": "working",
     "comments": "`protect_zero = false`"
   },
   {
     "name": "Fuzion Frenzy 2",
     "titleId": "485507D4",
     "artwork": "485507D4",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Garou: Mark of the Wolves",
     "titleId": "58410971",
     "artwork": "58410971",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Gatling Gears",
     "titleId": "58410B32",
     "artwork": "58410B32",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Gauntlet",
@@ -1691,29 +1692,35 @@
     "comments": "Systemlink works without a server."
   },
   {
+    "name": "Gel",
+    "titleId": "58410908",
+    "artwork": "58410908",
+    "public": "working"
+  },
+  {
     "name": "Geon: Emotions",
     "titleId": "58410844",
     "artwork": "58410844",
-    "local": "working",
+    "public": "working",
     "comments": "Player & Ranked works"
   },
   {
     "name": "Ghostbusters: Sanctum of Slime",
     "titleId": "58410A89",
     "artwork": "58410A89",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Ghostbusters: The Video Game",
     "titleId": "494707F4",
     "artwork": "494707F4",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Gin Rummy",
     "titleId": "5841090F",
     "artwork": "5841090F",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Girl Fight",
@@ -1725,7 +1732,7 @@
     "name": "Go! Go! Break Steady",
     "titleId": "584108B8",
     "artwork": "584108B8",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "God Mode",
@@ -1782,7 +1789,7 @@
     "name": "Great Battles Medieval",
     "titleId": "535607D1",
     "artwork": "535607D1",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "GRID 2",
@@ -1807,7 +1814,7 @@
     "name": "Guardian Heroes",
     "titleId": "58410B2B",
     "artwork": "58410B2B",
-    "local": "working",
+    "public": "working",
     "systemlink": "working"
   },
   {
@@ -1920,7 +1927,7 @@
   {
     "name": "Halo: Spartan Assault",
     "titleId": "4D531B7D",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Hard Corps: Uprising",
@@ -1950,7 +1957,7 @@
     "name": "Harm's Way",
     "titleId": "58410A70",
     "artwork": "58410A70",
-    "local": "working",
+    "public": "working",
     "systemlink": "working"
   },
   {
@@ -2020,13 +2027,13 @@
     "name": "Hydro Thunder Hurricane",
     "titleId": "5841096A",
     "artwork": "5841096A",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Ikaruga",
     "titleId": "58410878",
     "artwork": "58410878",
-    "local": "working",
+    "public": "working",
     "systemlink": "working",
     "comments": "Systemlink requires `network_mode = 2`"
   },
@@ -2034,7 +2041,7 @@
     "name": "IL-2: Birds of Prey",
     "titleId": "464F07D1",
     "artwork": "464F07D1",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Import Tuner Challenge",
@@ -2058,8 +2065,7 @@
     "name": "Injustice: Gods Among Us",
     "titleId": "57528837",
     "artwork": "57528837",
-    "local": "working",
-    "comments": "Unstable"
+    "public": "working"
   },
   {
     "name": "Insanely Twisted Shadow Planet",
@@ -2077,7 +2083,7 @@
     "name": "Interpol",
     "titleId": "58410977",
     "artwork": "58410977",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Inversion",
@@ -2085,19 +2091,20 @@
     "artwork": "4E4D0801",
     "local": "working",
     "systemlink": "working",
-    "comments": "Systemlink works without a server."
+    "comments": "Systemlink works without a server.\n\nReaches gameplay but disconnects and forces offline mode."
   },
   {
     "name": "Invincible Tiger: The Legend of Han Tao",
     "titleId": "58410982",
     "artwork": "58410982",
-    "local": "working"
+    "local": "working",
+    "comments": "Searching for sessions crashes the game."
   },
   {
     "name": "Ion Assault",
     "titleId": "5841096B",
     "artwork": "5841096B",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Iron Brigade",
@@ -2130,7 +2137,7 @@
     "name": "Jeremy McGrath's Offroad",
     "titleId": "584111DA",
     "artwork": "584111DA",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Jetpac Refuelled",
@@ -2142,7 +2149,7 @@
     "name": "Jimmie Johnson's Anything with an Engine",
     "titleId": "4B4E0841",
     "artwork": "4B4E0841",
-    "local": "working",
+    "public": "working",
     "systemlink": "working"
   },
   {
@@ -2161,7 +2168,7 @@
     "name": "Joy Ride Turbo",
     "titleId": "5841125E",
     "artwork": "5841125E",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Juiced 2: Hot Import Nights",
