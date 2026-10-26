@@ -624,31 +624,45 @@ h1 {
 
 .filters {
     display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
+    gap: 2px;
+    padding: 4px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
 }
 
 .filter {
-    padding: 6px 12px;
-    border: 1px solid var(--border);
+    flex: 1 1 auto;
+    padding: 6px 14px;
+    border: 0;
     border-radius: 999px;
     background: transparent;
     color: var(--muted);
     font: inherit;
     font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
     cursor: pointer;
-    transition: border-color 0.15s, color 0.15s;
+    transition: color 0.15s, background-color 0.15s;
 }
 
 .filter:hover {
-    border-color: var(--muted);
+    background: var(--surface-2);
     color: var(--text);
 }
 
+.filter:focus-visible {
+    outline: 2px solid var(--accent-bright);
+    outline-offset: 1px;
+}
+
 .filter.is-active {
-    border-color: var(--accent-bright);
-    background: var(--surface);
-    color: var(--text);
+    background: var(--accent);
+    color: #fff;
+}
+
+.filter .label-short {
+    display: none;
 }
 
 .result-count {
@@ -958,6 +972,24 @@ h1 {
     .server-details div {
         flex-direction: column;
         gap: 2px;
+    }
+
+    /* Stretch the filter bar across the screen with shorter labels. */
+    .filters {
+        flex: 1 1 100%;
+    }
+
+    .filter {
+        padding: 6px 4px;
+        font-size: 12px;
+    }
+
+    .filter .label-long {
+        display: none;
+    }
+
+    .filter .label-short {
+        display: inline;
     }
 
     /* Keep the nav on one row, stretched across the screen. */
