@@ -493,6 +493,14 @@ h1 {
     width: 100%;
 }
 
+.stats.session-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+}
+
+.session-stats .stat,
 .compat-stats .stat {
     justify-content: center;
     padding: 12px 8px;
