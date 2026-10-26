@@ -947,6 +947,19 @@ h1 {
         gap: 32px;
     }
 
+    /* Stack each label over its value in three even columns. */
+    .server-details {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        text-align: center;
+    }
+
+    .server-details div {
+        flex-direction: column;
+        gap: 2px;
+    }
+
     /* Keep the nav on one row, stretched across the screen. */
     .nav {
         flex-wrap: nowrap;
