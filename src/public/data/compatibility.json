@@ -1495,8 +1495,8 @@
     "name": "Final Exam",
     "titleId": "584113F3",
     "artwork": "584113F3",
-    "local": "working",
-    "comments": "Selecting Quick Match crashes the game."
+    "public": "working",
+    "comments": "Tutorial needs completing to access online features."
   },
   {
     "name": "Final Fight: Double Impact",
@@ -2097,8 +2097,7 @@
     "name": "Invincible Tiger: The Legend of Han Tao",
     "titleId": "58410982",
     "artwork": "58410982",
-    "local": "working",
-    "comments": "Searching for sessions crashes the game."
+    "public": "working"
   },
   {
     "name": "Ion Assault",
