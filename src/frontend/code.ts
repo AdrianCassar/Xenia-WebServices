@@ -4,6 +4,9 @@ let time = REFRESH_INTERVAL;
 let serverStartTime: Date | null = null;
 let table_loaded = false;
 
+const ARTWORK_URL = 'https://xenia-manager.github.io/x360db/titles';
+const PLACEHOLDER_ICON = 'assets/xbox.svg';
+
 function escapeHtml(value: unknown): string {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -81,8 +84,7 @@ function renderSession(titleInfo: TitleSessions, session: SessionInfo): string {
       ? session.mediaId
       : 'N/A';
 
-  const icon_asset = titleInfo.icon || 'assets/xbox.svg';
-  const icon_class = titleInfo.icon ? 'game-icon' : 'game-icon placeholder';
+  const icon_asset = `${ARTWORK_URL}/${titleInfo.titleId}/artwork/icon.png`;
   const compatibility_url = `https://github.com/xenia-project/game-compatibility/issues?q=${encodeURIComponent(`is:issue is:open ${titleInfo.titleId}`)}`;
 
   const HOST_GAMERTAG = session.host_gamertag;
@@ -109,7 +111,7 @@ function renderSession(titleInfo: TitleSessions, session: SessionInfo): string {
 
   return `<article class="session-card">
     <div class="game">
-      <img class="${icon_class}" src="${escapeHtml(icon_asset)}" width="64" height="64" alt="${escapeHtml(title)}" title="${escapeHtml(title)}">
+      <img class="game-icon" src="${escapeHtml(icon_asset)}" width="64" height="64" alt="${escapeHtml(title)}" title="${escapeHtml(title)}">
       <div class="game-info">
         <h2 class="game-title"><a href="${compatibility_url}" target="_blank" rel="noopener">${escapeHtml(title)}</a></h2>
         ${HOST_GAMERTAG ? `<div class="host">${escapeHtml(HOST_GAMERTAG)}</div>` : ''}
@@ -282,6 +284,26 @@ document.addEventListener('DOMContentLoaded', () => {
   setIntervalImmediately(refreshTimer, 1000);
   void refreshSessionTable();
 });
+
+// Fall back to the placeholder when x360db has no icon for a title.
+document.addEventListener(
+  'error',
+  (event) => {
+    const img = event.target;
+
+    if (
+      !(img instanceof HTMLImageElement) ||
+      !img.classList.contains('game-icon') ||
+      img.classList.contains('placeholder')
+    ) {
+      return;
+    }
+
+    img.classList.add('placeholder');
+    img.src = PLACEHOLDER_ICON;
+  },
+  true,
+);
 
 document.addEventListener('click', (event) => {
   if (!(event.target instanceof Element)) {

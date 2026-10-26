@@ -24,7 +24,6 @@ interface SessionInfo {
 interface TitleSessions {
   titleId: string;
   name: string;
-  icon: string;
   sessions: SessionInfo[];
 }
 
