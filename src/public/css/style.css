@@ -322,20 +322,52 @@ h1 {
 }
 
 .copy-xuid-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     margin-top: 10px;
-    padding: 4px 12px;
+    padding: 5px 12px 5px 10px;
     border: 1px solid var(--border);
-    border-radius: 6px;
+    border-radius: 999px;
     background: transparent;
     color: var(--text);
     font: inherit;
-    font-size: 13px;
+    font-size: 12px;
+    font-weight: 500;
     cursor: pointer;
-    transition: border-color 0.15s, color 0.15s;
+    transition: border-color 0.15s, color 0.15s, background-color 0.15s, transform 0.1s;
+}
+
+.copy-xuid-btn svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.copy-xuid-btn .icon-check,
+.copy-xuid-btn.copied .icon-copy {
+    display: none;
+}
+
+.copy-xuid-btn.copied .icon-check {
+    display: block;
 }
 
 .copy-xuid-btn:hover {
     border-color: var(--muted);
+}
+
+.copy-xuid-btn:active {
+    transform: scale(0.97);
+}
+
+.copy-xuid-btn:focus-visible {
+    outline: 2px solid var(--accent-bright);
+    outline-offset: 2px;
 }
 
 .copy-xuid-btn.copied {

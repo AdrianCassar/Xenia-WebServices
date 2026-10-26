@@ -121,7 +121,11 @@ function renderSession(titleInfo: TitleSessions, session: SessionInfo): string {
           <span class="chip">Media ID <b>${escapeHtml(MediaID_Text)}</b></span>
           <span class="chip">Version <b>${escapeHtml(Version_Text)}</b></span>
         </div>
-        ${HOST_XUID ? `<button class="copy-xuid-btn" data-xuid="${escapeHtml(HOST_XUID)}">Copy host XUID</button>` : ''}
+        ${HOST_XUID ? `<button class="copy-xuid-btn" data-xuid="${escapeHtml(HOST_XUID)}">
+          <svg class="icon-copy" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>
+          <svg class="icon-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          <span class="label">Copy XUID</span>
+        </button>` : ''}
       </div>
     </div>
     <div class="players">
@@ -317,15 +321,16 @@ document.addEventListener('click', (event) => {
   }
 
   const xuid = btn.dataset.xuid ?? '';
-  const label = btn.textContent;
+  const labelEl = btn.querySelector<HTMLElement>('.label')!;
+  const label = labelEl.textContent;
 
   const flash = (className: string, text: string) => {
     btn.classList.add(className);
-    btn.textContent = text;
+    labelEl.textContent = text;
 
     setTimeout(() => {
       btn.classList.remove(className);
-      btn.textContent = label;
+      labelEl.textContent = label;
     }, 2000);
   };
 
