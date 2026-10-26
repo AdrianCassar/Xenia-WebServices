@@ -399,6 +399,13 @@ h1 {
     color: var(--danger);
 }
 
+/* Copying an XUID is only useful on desktop, where Xenia runs. */
+@media only screen and (max-width: 1024px) {
+    .copy-xuid-btn {
+        display: none;
+    }
+}
+
 .players-header {
     display: flex;
     align-items: baseline;
