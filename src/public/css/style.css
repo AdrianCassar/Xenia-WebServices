@@ -86,27 +86,46 @@ h1 {
 .nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 2px;
+    padding: 4px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background-color: var(--surface);
 }
 
 .nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
     padding: 6px 14px;
-    border: 1px solid var(--border);
     border-radius: 999px;
-    color: var(--text);
+    color: var(--muted);
     font-size: 14px;
-    transition: border-color 0.15s, background-color 0.15s;
+    font-weight: 500;
+    transition: color 0.15s, background-color 0.15s;
 }
 
 .nav a:hover {
-    border-color: var(--accent-bright);
-    background-color: var(--surface);
+    background-color: var(--surface-2);
+    color: var(--text);
     text-decoration: none;
 }
 
+.nav a:focus-visible {
+    outline: 2px solid var(--accent-bright);
+    outline-offset: 1px;
+}
+
 .nav a[aria-current="page"] {
-    border-color: var(--accent);
-    background-color: var(--surface);
+    background-color: var(--accent);
+    color: #fff;
+}
+
+/* Mark links that leave the site. */
+.nav a[target="_blank"]::after {
+    content: '↗';
+    font-size: 11px;
+    opacity: 0.6;
 }
 
 /* Status bar */
@@ -921,6 +940,20 @@ h1 {
         gap: 32px;
     }
 
+    /* Keep the nav on one row, stretched across the screen. */
+    .nav {
+        flex-wrap: nowrap;
+        width: 100%;
+    }
+
+    .nav a {
+        flex: 1 1 auto;
+        justify-content: center;
+        padding: 6px 6px;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
     /* Reserve two lines so the nav sits at the same height on every page. */
     .tagline {
         min-height: calc(2 * 1.45em);
@@ -931,5 +964,10 @@ h1 {
     /* Keep page titles on one line. */
     h1 {
         font-size: 20px;
+    }
+
+    /* Drop the external link arrows so the nav still fits on one row. */
+    .nav a[target="_blank"]::after {
+        content: none;
     }
 }
