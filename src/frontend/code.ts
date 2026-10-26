@@ -71,7 +71,7 @@ function updateStats(sessionsData: SessionsResponse): void {
 }
 
 function renderSession(titleInfo: TitleSessions, session: SessionInfo): string {
-  const title = titleInfo?.name || 'N/A';
+  const title = titleInfo?.name || 'Unknown Title';
 
   const Version_Text =
     session.version && isValidVersion(session.version)
