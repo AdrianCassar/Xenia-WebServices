@@ -24,8 +24,7 @@ const title_name_cache = new Map<string, string>();
 
 const X360DB_URL = 'https://xenia-manager.github.io/x360db/titles';
 
-// Title ID -> Tile ID -> Base64 Icon
-const gamerpics_cache = new Map<string, Map<string, string>>();
+const GAMERPICS_URL = 'https://assets.xboxgamer.pics/titles';
 
 const config = new PersistenceSettings().get();
 
@@ -44,17 +43,6 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
     private readonly logger: ConsoleLogger,
   ) {
     logger.setContext(AggregateSessionCommand.name);
-  }
-
-  async downloadImageAsBase64(url: string): Promise<string> {
-    const response: string = await this.downloadContent(url, 'arraybuffer');
-
-    if (response) {
-      const base64 = Buffer.from(response, 'binary').toString('base64');
-      return `data:image/png;base64,${base64}`;
-    }
-
-    return '';
   }
 
   async downloadContent(
@@ -112,40 +100,14 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
     return title;
   }
 
-  async getPlayerGamerpicIcon(
-    gamerpic_key: string,
-    small: boolean = false,
-  ): Promise<string> {
-    const title_id = gamerpic_key.substring(0, 8);
+  getPlayerGamerpicIcon(gamerpic_key: string, small: boolean = false): string {
+    const title_id = gamerpic_key.substring(0, 8).toLowerCase();
     const big_tile_id = gamerpic_key.substring(8, 16).replace(/^0+/, '');
     const small_tile_id = gamerpic_key.substring(16, 24).replace(/^0+/, '');
 
-    let tile_id: string = small ? small_tile_id : big_tile_id;
+    const tile_id: string = small ? small_tile_id : big_tile_id;
 
-    // Check if tile icon is cached
-    if (gamerpics_cache.has(title_id)) {
-      if (small) {
-        if (gamerpics_cache.get(title_id).has(small_tile_id)) {
-          return gamerpics_cache.get(title_id).get(small_tile_id);
-        }
-      }
-
-      if (gamerpics_cache.get(title_id).has(big_tile_id)) {
-        return gamerpics_cache.get(title_id).get(big_tile_id);
-      }
-    }
-
-    const tile_icon: string = await this.downloadImageAsBase64(
-      `https://assets.xboxgamer.pics/titles/${title_id}/${tile_id}.png`,
-    );
-
-    if (gamerpics_cache.has(title_id)) {
-      gamerpics_cache.get(title_id).set(tile_id, tile_icon);
-    } else {
-      gamerpics_cache.set(title_id, new Map([[tile_id, tile_icon]]));
-    }
-
-    return tile_icon;
+    return `${GAMERPICS_URL}/${title_id}/${tile_id}.png`;
   }
 
   async getHostGamertag(session: Session): Promise<string> {
@@ -327,7 +289,7 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
 
       const host_info: PlayerInfo = {
         gamertag: HOST_GAMERTAG,
-        gamerpic: await this.getPlayerGamerpicIcon(HOST_GAMERPIC_KEY),
+        gamerpic: this.getPlayerGamerpicIcon(HOST_GAMERPIC_KEY),
       };
 
       PlayersInfo.push(host_info);
@@ -359,8 +321,7 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
             local_defaulting_gamertags++;
 
             peer_info.gamertag = `Local Player ${local_defaulting_gamertags}`;
-            peer_info.gamerpic =
-              await this.getPlayerGamerpicIcon(DefaultGamerpicKey);
+            peer_info.gamerpic = this.getPlayerGamerpicIcon(DefaultGamerpicKey);
 
             PlayersInfo.push(peer_info);
 
@@ -376,7 +337,7 @@ export class AggregateSessionCommandHandler implements ICommandHandler<Aggregate
             ? gamerpic_key_setting.getParsedData()
             : DefaultGamerpicKey;
 
-          peer_info.gamerpic = await this.getPlayerGamerpicIcon(gamerpic_key);
+          peer_info.gamerpic = this.getPlayerGamerpicIcon(gamerpic_key);
 
           // Skip Host since they're already added to PlayerGamertags
           if (HOST_XUID) {

@@ -6,6 +6,7 @@ let table_loaded = false;
 
 const ARTWORK_URL = 'https://xenia-manager.github.io/x360db/titles';
 const PLACEHOLDER_ICON = 'assets/xbox.svg';
+const PLACEHOLDER_GAMERPIC = 'assets/gamerpic.svg';
 
 function escapeHtml(value: unknown): string {
   return String(value ?? '')
@@ -102,7 +103,7 @@ function renderSession(titleInfo: TitleSessions, session: SessionInfo): string {
         .map(
           (player, index) =>
             `<li class="player${index == 0 ? ' is-host' : ''}">
-              <img src="${escapeHtml(player.gamerpic)}" alt="" width="32" height="32">
+              <img class="gamerpic" src="${escapeHtml(player.gamerpic)}" alt="" width="32" height="32">
               <span title="${escapeHtml(player.gamertag)}${index == 0 ? ' (host)' : ''}">${escapeHtml(player.gamertag)}</span>
             </li>`,
         )
@@ -289,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
   void refreshSessionTable();
 });
 
-// Fall back to the placeholder when x360db has no icon for a title.
+// Fall back to a placeholder when a title icon or gamerpic fails to load.
 document.addEventListener(
   'error',
   (event) => {
@@ -297,14 +298,23 @@ document.addEventListener(
 
     if (
       !(img instanceof HTMLImageElement) ||
-      !img.classList.contains('game-icon') ||
       img.classList.contains('placeholder')
     ) {
       return;
     }
 
+    let placeholder: string;
+
+    if (img.classList.contains('game-icon')) {
+      placeholder = PLACEHOLDER_ICON;
+    } else if (img.classList.contains('gamerpic')) {
+      placeholder = PLACEHOLDER_GAMERPIC;
+    } else {
+      return;
+    }
+
     img.classList.add('placeholder');
-    img.src = PLACEHOLDER_ICON;
+    img.src = placeholder;
   },
   true,
 );
