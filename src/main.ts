@@ -46,11 +46,6 @@ async function bootstrap() {
   const frontendHelmet = helmet({
     contentSecurityPolicy: {
       directives: {
-        'script-src': [
-          "'self'",
-          "'unsafe-inline'",
-          "'sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo='",
-        ],
         'img-src': ["'self'", 'data:', 'https://xenia-manager.github.io'],
         upgradeInsecureRequests: SSL_enabled ? [] : null,
       },
