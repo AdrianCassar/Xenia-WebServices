@@ -17,6 +17,7 @@ import { join } from 'path';
       rootPath: join(__dirname, '..', 'src/public'),
       serveRoot: '/',
       exclude: ['/title/{*splat}', '/xstorage/{*splat}'],
+      serveStaticOptions: { extensions: ['html'] },
       // exclude:, ['/api/{*splat}'],
     }),
   ],

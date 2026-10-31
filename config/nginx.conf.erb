@@ -97,7 +97,7 @@ http {
             expires 30d;
 
             # Check if endpoint is a file otherwise change to named location.
-            try_files $uri $uri/ @backend;
+            try_files $uri $uri.html $uri/ @backend;
         }
 
         location @backend {

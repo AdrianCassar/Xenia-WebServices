@@ -10,6 +10,7 @@ import helmet from 'helmet';
 import { Request, Response, NextFunction } from 'express';
 import { ConsoleLogger } from '@nestjs/common';
 import fs from 'fs';
+import { join } from 'path';
 
 async function bootstrap() {
   const logger = new ConsoleLogger('Main');
@@ -57,8 +58,18 @@ async function bootstrap() {
   });
 
   // Only apply helmet to the static frontend, not the API.
-  const frontendPaths =
-    /^\/(index\.html|50x\.html|compatibility\.html|assets\/.*|css\/.*|js\/.*|data\/.*)?$/;
+  // Pages are read from the public folder so new ones match with or without .html.
+  const pages = fs
+    .readdirSync(join(__dirname, '..', 'src/public'))
+    .filter((file) => file.endsWith('.html'))
+    .map((file) =>
+      file.slice(0, -'.html'.length).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),
+    )
+    .join('|');
+
+  const frontendPaths = new RegExp(
+    `^/((${pages})(\\.html)?|assets/.*|css/.*|js/.*|data/.*)?$`,
+  );
 
   app.use((req: Request, res: Response, next: NextFunction) => {
     if (frontendPaths.test(req.path)) {
