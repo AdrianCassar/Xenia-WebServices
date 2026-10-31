@@ -206,12 +206,6 @@ h1 {
     width: 100%;
     background: var(--accent-bright);
     transform-origin: left;
-    transform: scaleX(var(--progress, 1));
-    transition: transform 1s linear;
-}
-
-.refresh-bar.no-transition {
-    transition: none;
 }
 
 @keyframes pulse {
@@ -941,10 +935,6 @@ h1 {
     .sk,
     .live-dot {
         animation: none;
-    }
-
-    .refresh-bar {
-        transition: none;
     }
 }
 

@@ -1,6 +1,8 @@
 const REFRESH_INTERVAL = 30;
+const REFRESH_MS = REFRESH_INTERVAL * 1000;
 
-let time = REFRESH_INTERVAL;
+let nextRefresh = 0;
+let refreshBarAnimation: Animation | null = null;
 let serverStartTime: Date | null = null;
 let table_loaded = false;
 
@@ -252,43 +254,54 @@ function updateUptime(): void {
   }
 }
 
+// The bar runs as a single animation on the document timeline rather than a
+// transition retargeted every tick. Transitions stall while the page isn't
+// rendering (background tab, minimised window) and then visibly catch up.
+function updateRefreshBar(remaining: number): void {
+  const bar = document.getElementById('refresh_bar');
+
+  if (!bar) {
+    return;
+  }
+
+  if (!refreshBarAnimation) {
+    const reduce_motion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+
+    refreshBarAnimation = bar.animate(
+      [{ transform: 'scaleX(1)' }, { transform: 'scaleX(0)' }],
+      {
+        duration: REFRESH_MS,
+        easing: reduce_motion ? `steps(${REFRESH_INTERVAL})` : 'linear',
+        fill: 'forwards',
+      },
+    );
+  }
+
+  // Keep the animation in step with the deadline, snapping back to full on reset
+  refreshBarAnimation.currentTime = REFRESH_MS - remaining;
+}
+
 function refreshTimer(): void {
-  if (time <= 0) {
-    time = REFRESH_INTERVAL;
+  if (Date.now() >= nextRefresh) {
+    nextRefresh = Date.now() + REFRESH_MS;
     void refreshSessionTable();
   }
 
+  const remaining = nextRefresh - Date.now();
+
   if (document.readyState === 'complete') {
-    setText('countdown', `Refreshing in ${time}s`);
-
-    const bar = document.getElementById('refresh_bar');
-
-    if (bar) {
-      // Snap back to full on reset instead of animating backwards
-      const reset = time === REFRESH_INTERVAL;
-      bar.classList.toggle('no-transition', reset);
-      bar.style.setProperty('--progress', String(time / REFRESH_INTERVAL));
-
-      if (reset) {
-        void bar.offsetWidth;
-        bar.classList.remove('no-transition');
-      }
-    }
+    setText('countdown', `Refreshing in ${Math.ceil(remaining / 1000)}s`);
+    updateRefreshBar(remaining);
     updateUptime();
-
-    time -= 1;
   }
+
+  // Tick on the deadline's second boundaries so the text changes with the bar
+  window.setTimeout(refreshTimer, remaining % 1000 || 1000);
 }
 
-function setIntervalImmediately(func: () => void, interval: number): number {
-  func();
-  return window.setInterval(func, interval);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  setIntervalImmediately(refreshTimer, 1000);
-  void refreshSessionTable();
-});
+document.addEventListener('DOMContentLoaded', refreshTimer);
 
 // Fall back to a placeholder when a title icon or gamerpic fails to load.
 document.addEventListener(
