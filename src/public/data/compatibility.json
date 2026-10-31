@@ -2188,14 +2188,14 @@
     "name": "Kane & Lynch 2: Dog Days",
     "titleId": "534307F8",
     "artwork": "534307F8",
-    "local": "working",
+    "public": "working",
     "systemlink": "working"
   },
   {
     "name": "Kane & Lynch: Dead Men",
     "titleId": "534307E0",
     "artwork": "534307E0",
-    "local": "working",
+    "public": "working",
     "systemlink": "working"
   },
   {
@@ -2228,7 +2228,7 @@
     "name": "Lara Croft and the Guardian of Light",
     "titleId": "58410A59",
     "artwork": "58410A59",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Left 4 Dead",
@@ -2296,25 +2296,33 @@
     "name": "Lode Runner",
     "titleId": "5841085B",
     "artwork": "5841085B",
-    "local": "working"
+    "public": "working"
+  },
+  {
+    "name": "London 2012",
+    "titleId": "53450843",
+    "artwork": "53450843",
+    "public": "working",
+    "comments": "Unplayable due to input issues."
   },
   {
     "name": "Looney Tunes: Acme Arsenal",
     "titleId": "575207D2",
     "artwork": "575207D2",
-    "local": "working"
+    "local": "working",
+    "comments": "Disconnects on public servers after a minute or so."
   },
   {
     "name": "Lost Cities",
     "titleId": "584108FB",
     "artwork": "584108FB",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Lost Planet",
     "titleId": "434307D3",
     "artwork": "434307D3",
-    "local": "working",
+    "public": "working",
     "comments": "`mount_cache = false`"
   },
   {
@@ -2409,7 +2417,7 @@
     "name": "Marvel vs. Capcom: Origins",
     "titleId": "58411223",
     "artwork": "58411223",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Marvel: Ultimate Alliance",
@@ -2427,7 +2435,7 @@
     "name": "Mayhem",
     "titleId": "455607D8",
     "artwork": "455607D8",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Mega Man 10 (Oct 30, 2009 Prototype)",
@@ -2439,19 +2447,19 @@
     "name": "Metal Gear Solid Peace Walker HD Edition",
     "titleId": "4B4E083C",
     "artwork": "4B4E083C",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Metal Slug 3",
     "titleId": "584108CF",
     "artwork": "584108CF",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Metal Slug XX",
     "titleId": "58410972",
     "artwork": "58410972",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Meteos Wars",
@@ -2502,25 +2510,25 @@
     "name": "Minesweeper Flags!",
     "titleId": "584108DC",
     "artwork": "584108DC",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "MLB 2K6",
     "titleId": "545407D3",
     "artwork": "545407D3",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "MLB 2K7",
     "titleId": "545407FA",
     "artwork": "545407FA",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "MLB 2K8",
     "titleId": "54540817",
     "artwork": "54540817",
-    "local": "partial",
+    "public": "working",
     "comments": "Only works via joining friends session directly."
   },
   {
@@ -2539,7 +2547,7 @@
     "name": "MLB Stickball",
     "titleId": "584108B4",
     "artwork": "584108B4",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Monaco: What's Yours is Mine",
@@ -2571,7 +2579,7 @@
     "name": "Moon Diver",
     "titleId": "58410A2D",
     "artwork": "58410A2D",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Mortal Kombat",
@@ -2626,18 +2634,18 @@
     "name": "MotoGP 09/10",
     "titleId": "434307F0",
     "artwork": "434307F0",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "MotoGP 10/11",
     "titleId": "4343080B",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "MotoGP 13",
     "titleId": "513107D1",
     "artwork": "513107D1",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "MotoGP 14",
@@ -2655,7 +2663,7 @@
     "name": "Motorcycle Club",
     "titleId": "573607E0",
     "artwork": "573607E0",
-    "local": "working",
+    "public": "working",
     "comments": "`render_target_path_d3d12 = \"rov\"` to fix graphics."
   },
   {
@@ -2675,7 +2683,7 @@
     "name": "MUD - FIM Motocross World Championship",
     "titleId": "4C5307EC",
     "artwork": "4C5307EC",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Mutant Storm: Empire",
@@ -2687,7 +2695,7 @@
     "name": "MX vs ATV Alive",
     "titleId": "5451087B",
     "artwork": "5451087B",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "MX vs ATV Reflex",
@@ -2711,7 +2719,7 @@
     "name": "N+",
     "titleId": "5841085C",
     "artwork": "5841085C",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Nail'd",
@@ -2752,7 +2760,7 @@
     "name": "Naughty Bear",
     "titleId": "464F07D8",
     "artwork": "464F07D8",
-    "local": "working",
+    "public": "working",
     "comments": "`readback_resolve = \"fast\"` to fix gamertags."
   },
   {
@@ -2771,7 +2779,7 @@
     "name": "NBA 2K6",
     "titleId": "545407E2",
     "artwork": "545407E2",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "NBA 2K7",
@@ -2796,8 +2804,7 @@
     "name": "NeoGeo Battle Coliseum",
     "titleId": "58410A1F",
     "artwork": "58410A1F",
-    "local": "working",
-    "comments": "Runs slow."
+    "public": "working"
   },
   {
     "name": "NeverDead",
@@ -2878,15 +2885,16 @@
     "name": "Operation Flashpoint: Dragon Rising",
     "titleId": "434D0811",
     "artwork": "434D0811",
-    "local": "working",
+    "public": "working",
     "systemlink": "working"
   },
   {
     "name": "Operation Flashpoint: Red River",
     "titleId": "434D0838",
     "artwork": "434D0838",
-    "local": "working",
-    "systemlink": "working"
+    "public": "working",
+    "systemlink": "working",
+    "comments": "`gpu = \"vulkan\"` for AMD cards to prevent crashes."
   },
   {
     "name": "Orange Box (Team Fortress 2)",
@@ -2900,13 +2908,13 @@
     "name": "Orc Attack: Flatulent Rebellion",
     "titleId": "584113C4",
     "artwork": "584113C4",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "Outland",
     "titleId": "58410A05",
     "artwork": "58410A05",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "OutRun Online Arcade",
@@ -4256,13 +4264,13 @@
     "name": "The King of Fighters '98 Ultimate Match",
     "titleId": "584108D1",
     "artwork": "584108D1",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "The King of Fighters 2002 Unlimited Match",
     "titleId": "584109AD",
     "artwork": "584109AD",
-    "local": "working",
+    "public": "working",
     "comments": "Runs slow."
   },
   {
@@ -4275,7 +4283,7 @@
     "name": "The King of Fighters: Sky Stage",
     "titleId": "584109AE",
     "artwork": "584109AE",
-    "local": "working"
+    "public": "working"
   },
   {
     "name": "The Lord of the Rings: War in the North",
