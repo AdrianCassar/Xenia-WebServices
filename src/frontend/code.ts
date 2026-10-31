@@ -104,7 +104,7 @@ function renderSession(titleInfo: TitleSessions, session: SessionInfo): string {
           (player, index) =>
             `<li class="player${index == 0 ? ' is-host' : ''}">
               <img class="gamerpic" src="${escapeHtml(player.gamerpic)}" alt="" width="32" height="32">
-              <span title="${escapeHtml(player.gamertag)}${index == 0 ? ' (host)' : ''}">${escapeHtml(player.gamertag)}</span>
+              <span>${escapeHtml(player.gamertag)}</span>
             </li>`,
         )
         .join('')
@@ -112,7 +112,7 @@ function renderSession(titleInfo: TitleSessions, session: SessionInfo): string {
 
   return `<article class="session-card">
     <div class="game">
-      <img class="game-icon" src="${escapeHtml(icon_asset)}" width="64" height="64" alt="${escapeHtml(title)}" title="${escapeHtml(title)}">
+      <img class="game-icon" src="${escapeHtml(icon_asset)}" width="64" height="64" alt="${escapeHtml(title)}">
       <div class="game-info">
         <h2 class="game-title"><a href="${compatibility_url}" target="_blank" rel="noopener">${escapeHtml(title)}</a></h2>
         ${HOST_GAMERTAG ? `<div class="host">${escapeHtml(HOST_GAMERTAG)}</div>` : ''}
