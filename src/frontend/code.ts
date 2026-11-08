@@ -88,7 +88,7 @@ function renderSession(titleInfo: TitleSessions, session: SessionInfo): string {
       : 'N/A';
 
   const icon_asset = `${ARTWORK_URL}/${titleInfo.titleId}/artwork/icon.png`;
-  const compatibility_url = `https://github.com/xenia-project/game-compatibility/issues?q=${encodeURIComponent(`is:issue is:open ${titleInfo.titleId}`)}`;
+  const compatibility_url = `https://github.com/xenia-canary/game-compatibility/issues?q=${encodeURIComponent(`is:issue is:open ${titleInfo.titleId}`)}`;
 
   const HOST_GAMERTAG = session.host_gamertag;
   const HOST_PRESENCE = session.host_presence;
