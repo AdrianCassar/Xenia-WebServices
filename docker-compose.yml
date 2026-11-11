@@ -3,7 +3,7 @@ services:
     build:
       context: .
       args:
-        NODE_VERSION: '${NODE_VERSION:-lts-slim}'
+        NODE_VERSION: '${NODE_VERSION:-26-slim}'
     environment:
       API_PORT: 36000
       MONGO_URI: 'mongodb://database:27017/'

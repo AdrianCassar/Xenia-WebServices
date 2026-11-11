@@ -21,7 +21,7 @@ Contributions are welcome - feel free to report issues or submit pull requests.
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) 22 or 24
+- [Node.js](https://nodejs.org/) 24 or 26
 - A MongoDB instance, either:
   - [MongoDB Community Server](https://www.mongodb.com/try/download/community) installed locally **as a network service** (optionally with [MongoDB Compass](https://www.mongodb.com/products/tools/compass) to browse the database), or
   - a free cloud database on [MongoDB Atlas](https://www.mongodb.com/atlas/database)

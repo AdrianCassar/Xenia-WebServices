@@ -1,4 +1,4 @@
-ARG NODE_VERSION=lts-slim
+ARG NODE_VERSION=26-slim
 
 FROM node:${NODE_VERSION}
 
