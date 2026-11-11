@@ -4,13 +4,11 @@ on:
   push:
     paths-ignore:
       - '.gitignore'
-      - 'appveyor.yml'
       - 'hero.jpg'
       - 'README.md'
   pull_request:
     paths-ignore:
       - '.gitignore'
-      - 'appveyor.yml'
       - 'hero.jpg'
       - 'README.md'
 
